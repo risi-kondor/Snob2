@@ -5,6 +5,7 @@
 #include "SnBank.hpp"
 
 #include "Sn.hpp"
+#include "SnOverSm.hpp"
 
 
 namespace Snob2{

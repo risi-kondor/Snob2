@@ -26,8 +26,6 @@ namespace Snob2{
 
     SnElement element(int e) const{
       SnElement p(n,cnine::fill_identity());
-      vector<int> r(n);
-      for(int i=0; i<n; i++) r[i]=i+1;
 
       vector<int> s(n);
       for(int i=n; i>0; i--){

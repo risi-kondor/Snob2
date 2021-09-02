@@ -3,7 +3,7 @@ include $(ROOTDIR)/common.txt
 
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
-TESTS= testSn testSnFunction testSnOverSm
+TESTS= testSn testSnFunction testSnOverSm testSnIrrep
 
 ifdef WITH_CUDA
 endif 
@@ -47,6 +47,14 @@ ifdef WITH_CUDA
 	$(NVCC) $(NVCCFLAGS) -o testSnOverSm testSnOverSm.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
 	$(CC) -o testSnOverSm testSnOverSm.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
+
+testSnIrrep: testSnIrrep.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testSnIrrep testSnIrrep.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testSnIrrep testSnIrrep.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
 
 

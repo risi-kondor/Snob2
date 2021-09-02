@@ -3,6 +3,7 @@
 
 #include "SnBank.hpp"
 #include "SnElement.hpp"
+#include "SnIrrep.hpp"
 
 
 namespace Snob2{
@@ -41,6 +42,30 @@ namespace Snob2{
     int index(const SnElement& sigma) const{
       return obj->index(sigma);
     }
+
+    SnIrrep irrep(const IntegerPartition& lambda){
+      return SnIrrep(obj->get_irrep(lambda));
+    }
+
+    vector<SnIrrep> all_irreps() const{
+      vector<SnIrrepObj*> objs=obj->get_all_irreps();
+      vector<SnIrrep> R(objs.size());
+      for(int i=0; i<objs.size(); i++)
+	R[i]=SnIrrep(objs[i]);
+      return R;
+    }
+
+    
+  public:
+
+    string str(const string indent="") const{
+      return "Sn("+to_string(n)+")";
+    }
+
+    friend ostream& operator<<(ostream& stream, const Sn& x){
+      stream<<x.str(); return stream;
+    }
+
 
   };
 

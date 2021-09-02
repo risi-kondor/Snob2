@@ -140,6 +140,14 @@ namespace Snob2{
       return *this;
     }
 
+
+  public: 
+
+    //Permutation& apply_inv_cyclic_shift(const int i, const int j){
+    //p[j-1]
+    //}
+
+
   public: // I/O 
 
     string str(const string indent="") const{

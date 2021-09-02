@@ -44,6 +44,12 @@ namespace Snob2{
   
     int k() const {return rows.size();}
 
+    IntegerPartition shape() const{
+      IntegerPartition r(k(),cnine::fill_zero());
+      for(int i=0; i<r.k; i++) r.add(i,rows[i].size());
+      return r;
+    }
+
     vector<int> at(const int r) const{
       return rows.at(r);
     }
@@ -52,11 +58,22 @@ namespace Snob2{
       return rows.at(r).at(c);
     }
 
-    IntegerPartition shape() const{
-      IntegerPartition r(k(),cnine::fill_zero());
-      for(int i=0; i<r.k; i++) r.add(i,rows[i].size());
-      return r;
+    int operator()(const int r, const int c) const{
+      return rows.at(r).at(c);
     }
+
+    pair<int,int> index(const int m) const{
+      for(int i=0; i<=k()-1; i++) {
+	for(int j=0; j<rows.at(i).size(); j++)
+	  if(at(i,j)==m) return pair<int,int>(i,j);
+      }
+      return pair<int,int>(0,0); // should never happen
+    }
+
+    bool operator==(const YoungTableau& x) {return rows == x.rows;}
+
+
+  public:
 
     YoungTableau& add(const int r, const int j){
       if(r<k()){
@@ -77,7 +94,17 @@ namespace Snob2{
       rows.pop_back(); return *this;
     }
 
-    bool operator==(const YoungTableau& x) {return rows == x.rows;}
+    int apply_transp(const int i){
+      return apply_transp(i,i+1);
+    } 
+
+    int apply_transp(const int i, const int j){
+      pair<int,int> rc1=index(i);
+      pair<int,int> rc2=index(j);
+      rows.at(rc1.first).at(rc1.second)=j;
+      rows.at(rc2.first).at(rc2.second)=i;
+      return (rc2.second-rc2.first)-(rc1.second-rc1.first);
+    }
 
 
   public: // I/O

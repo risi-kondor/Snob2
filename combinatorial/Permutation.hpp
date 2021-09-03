@@ -34,6 +34,7 @@ namespace Snob2{
     Permutation(const initializer_list<int> list): 
       Permutation(list.size(), cnine::fill_raw()){
       int i=0; for(auto v:list) p[i++]=v;
+      if(!check_valid()){cerr<<"Invalid permutation"<<endl;}
     }	
 
     Permutation(const vector<int> x): n(x.size()){
@@ -138,6 +139,15 @@ namespace Snob2{
     Permutation& operator*=(const Permutation& x){
       for(int i=0; i<n; i++) p[i]=x(p[i]);
       return *this;
+    }
+
+    bool check_valid() const{
+      vector<bool> a(n,false);
+      for(int i=0; i<n; i++){
+	if(p[i]<1 || p[i]>n || a[p[i]-1]) return false;
+	a[p[i]-1]=true;
+      }
+      return true;
     }
 
 

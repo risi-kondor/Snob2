@@ -57,6 +57,7 @@ namespace Snob2{
       }
       for(int i=2; i<=n; i++){
 	//cout<<i<<" "<<shifts[i-1]<<endl;
+	//cout<<A<<endl;
 	for(int a=i-1; a>=shifts[i-1]; a--)
 	  apply_left(A,a);
       }
@@ -66,13 +67,24 @@ namespace Snob2{
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       const int J=A.get_dim(1);
       computeYOR();
+      bool done[d]; 
+      for(int i=0; i<d; i++) done[i]=false;
       for(int i=0; i<d; i++){
+	if(done[i]) continue; 
 	double c1,c2;
 	const int i2=YOR(tau,i,c1,c2);
-	for(int j=0; j<J; j++){
-	  float t=A.get_value(i,j);
-	  A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
-	  A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);
+	if(i2==-1){
+	  //cout<<"c1="<<c1<<endl;
+	  for(int j=0; j<J; j++)
+	    A.set_value(i,j,c1*A.get_value(i,j));
+	}else{
+	  //cout<<"c1="<<c1<<" c2="<<c2<<endl;
+	  for(int j=0; j<J; j++){
+	    float t=A.get_value(i,j);
+	    A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
+	    A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);
+	    done[i2]=true;
+	  }
 	}
       }
     }
@@ -89,6 +101,7 @@ namespace Snob2{
   
     void computeYOR() const{
       if (YORt) return;
+      cout<<"Computing YOR"<<endl;
       YORt=new int[d*(n-1)];
       YOR1=new double[d*(n-1)];
       YOR2=new double[d*(n-1)];

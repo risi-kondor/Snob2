@@ -19,7 +19,7 @@ namespace Snob2{
     SnObj* get_Sn(const int n){
       if(n-1<sn.size()) return sn[n-1];
       const int _n=sn.size();
-      sn.resize(n-1);
+      sn.resize(n);
       for(int i=_n+1; i<=n; i++){
 	sn[i-1]=new SnObj(i);
 	if(i>1) sn[i-1]->Snminus1=sn[i-2];

@@ -2,7 +2,8 @@
 #include "Snob2_session.hpp"
 #include "CombinatorialClasses.hpp"
 #include "SnClasses.hpp"
-#include "RtensorObj_funs.hpp"
+#include "SnPart.hpp"
+
 
 using namespace cnine;
 using namespace Snob2;
@@ -20,28 +21,18 @@ int main(int argc, char** argv){
   cout<<endl;
 
   int n=4;
+  Sn G(n);
   IntegerPartition lambda({n-1,1});
   SnIrrep rho(lambda); 
-  cout<<endl;
+  SnElement sigma({1,2,4,3}); 
 
-  SnElement sigma1({1,2,4,3});
-  SnElement sigma2({1,3,2,4});
-  SnElement sigma3=sigma1*sigma2;
+  SnPart A=SnPart::identity(rho,3);
+  cout<<A<<endl;
 
-  auto R1=rho(sigma1);
-  print("s1",sigma1);
-  printl("rho(s1)",R1);
+  SnPart B=SnPart::identity(lambda,3);
+  cout<<B<<endl;
 
-  auto R2=rho(sigma2);
-  print("s2",sigma2);
-  printl("rho(s2)",R2);
-
-  auto R3=rho(sigma3);
-  print("s3",sigma3);
-  printl("rho(s3)",R3);
-
-  auto R3d=R1*R2;
-  cout<<R3d<<endl;
-
+  SnPart C=B.apply(sigma);
+  printl("C",C);
 
 }

@@ -40,6 +40,14 @@ namespace Snob2{
       delete[] YOR2;
     }
 
+
+  public:
+
+    SnIrrepObj(const SnIrrepObj& x)=delete;
+
+    SnIrrepObj& operator=(const SnIrrepObj& x)=delete;
+
+
   public:
 
     rtensor operator()(const SnElement& sigma) const{
@@ -49,6 +57,7 @@ namespace Snob2{
     }
 
     void apply_left(rtensor& A, const SnElement sigma) const{
+      SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
       vector<int> shifts(n);
       for(int i=n; i>0; i--){
 	int a=sigma(i);
@@ -67,7 +76,8 @@ namespace Snob2{
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       const int J=A.get_dim(1);
       computeYOR();
-      bool done[d]; 
+      bool done[d];
+      //cout<<"---"<<lambda<<endl<<endl;
       for(int i=0; i<d; i++) done[i]=false;
       for(int i=0; i<d; i++){
 	if(done[i]) continue; 
@@ -101,7 +111,7 @@ namespace Snob2{
   
     void computeYOR() const{
       if (YORt) return;
-      cout<<"Computing YOR"<<endl;
+      cout<<"Computing YOR for "<<lambda<<endl;
       YORt=new int[d*(n-1)];
       YOR1=new double[d*(n-1)];
       YOR2=new double[d*(n-1)];
@@ -123,6 +133,16 @@ namespace Snob2{
 
     }
 
+
+  public:
+
+    string str(const string indent="") const{
+      return "SnIrrepObj("+lambda.str()+")";
+    }
+
+    friend ostream& operator<<(ostream& stream, const SnIrrepObj& x){
+      stream<<x.str(); return stream;
+    }
 
   };
 

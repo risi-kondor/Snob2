@@ -99,6 +99,10 @@ namespace Snob2{
   
   public: // Access
 
+    int getn() const{
+      return n;
+    }
+
     int size() const{
       return n;
     }

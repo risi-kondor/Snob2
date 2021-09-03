@@ -51,7 +51,6 @@ namespace Snob2{
     
   public:
 
-
     SnPart apply(const SnElement& sigma) const{
       SnPart R(*this);
       irrep->apply_left(R,sigma);
@@ -62,6 +61,18 @@ namespace Snob2{
       irrep->apply_left(*this,sigma);
       return *this;
     }
+
+
+  public:
+
+    string str(string indent="") const{
+      return "SnPart("+irrep->lambda.str()+")\n"+rtensor::str();
+    }
+
+    friend ostream& operator<<(ostream& stream, const SnPart& x){
+      stream<<x.str(); return stream;
+    }
+
 
   };
 

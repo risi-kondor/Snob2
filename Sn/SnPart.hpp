@@ -3,6 +3,7 @@
 
 #include "SnIrrep.hpp"
 
+
 namespace Snob2{
 
   typedef cnine::RtensorObj rtensor;
@@ -59,6 +60,17 @@ namespace Snob2{
 
     SnPart& apply_inplace(const SnElement& sigma){
       irrep->apply_left(*this,sigma);
+      return *this;
+    }
+
+    SnPart apply(const ContiguousCycle& cyc) const{
+      SnPart R(*this);
+      irrep->apply_left(R,cyc);
+      return R;
+    }
+
+    SnPart& apply_inplace(const ContiguousCycle& cyc){
+      irrep->apply_left(*this,cyc);
       return *this;
     }
 

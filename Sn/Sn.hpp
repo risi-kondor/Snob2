@@ -23,6 +23,10 @@ namespace Snob2{
 
   public: // Access
 
+    int getn() const{
+      return n;
+    }
+
     int size() const{
       return obj->order;
     }
@@ -43,7 +47,7 @@ namespace Snob2{
       return obj->index(sigma);
     }
 
-    SnIrrep irrep(const IntegerPartition& lambda){
+    SnIrrep irrep(const IntegerPartition& lambda) const{
       return SnIrrep(obj->get_irrep(lambda));
     }
 

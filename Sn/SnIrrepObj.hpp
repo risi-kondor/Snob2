@@ -2,6 +2,7 @@
 #define _SnIrrepObj
 
 #include "IntegerPartition.hpp"
+#include "ContiguousCycle.hpp"
 #include "RtensorObj.hpp"
 
 
@@ -72,6 +73,32 @@ namespace Snob2{
       }
     }
 
+    void apply_left(rtensor& A, const SnElement sigma, int beg, int end) const{
+      SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
+      vector<int> shifts(n);
+      for(int i=n; i>0; i--){
+	int a=sigma(i);
+	shifts[i-1]=a;
+	for(int j=1; j<i; j++) if(sigma.p[j-1]>a) sigma.p[j-1]--;
+      }
+      for(int i=2; i<=n; i++){
+	//cout<<i<<" "<<shifts[i-1]<<endl;
+	//cout<<A<<endl;
+	for(int a=i-1; a>=shifts[i-1]; a--)
+	  apply_left(A,a,beg,end);
+      }
+    }
+
+    void apply_left(rtensor& A, const ContiguousCycle& cyc) const{
+      for(int i=cyc.b-1; i>=cyc.a; i--)
+	apply_left(A,i);
+    }
+
+    void apply_left(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end) const{
+      for(int i=cyc.b-1; i>=cyc.a; i--)
+	apply_left(A,i,beg,end);
+    }
+
     void apply_left(rtensor& A, const int tau) const{
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       const int J=A.get_dim(1);
@@ -90,6 +117,30 @@ namespace Snob2{
 	}else{
 	  //cout<<"c1="<<c1<<" c2="<<c2<<endl;
 	  for(int j=0; j<J; j++){
+	    float t=A.get_value(i,j);
+	    A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
+	    A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);
+	    done[i2]=true;
+	  }
+	}
+      }
+    }
+
+    void apply_left(rtensor& A, const int tau, int beg, int end) const{
+      SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
+      //const int J=A.get_dim(1);
+      computeYOR();
+      bool done[d];
+      for(int i=0; i<d; i++) done[i]=false;
+      for(int i=0; i<d; i++){
+	if(done[i]) continue; 
+	double c1,c2;
+	const int i2=YOR(tau,i,c1,c2);
+	if(i2==-1){
+	  for(int j=beg; j<end; j++)
+	    A.set_value(i,j,c1*A.get_value(i,j));
+	}else{
+	  for(int j=beg; j<end; j++){
 	    float t=A.get_value(i,j);
 	    A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
 	    A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);

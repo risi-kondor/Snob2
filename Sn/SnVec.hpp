@@ -3,6 +3,7 @@
 
 #include "SnPart.hpp"
 #include "SnType.hpp"
+#include "SnMultiVec.hpp"
 
 namespace Snob2{
 
@@ -59,6 +60,20 @@ namespace Snob2{
       for(auto p:parts)
 	p->apply_inplace(sigma);
       return *this;
+    }
+
+
+  public: // ---- Fourier transforms ------------------
+
+
+    static SnVec::Fourier(const FunctionOnGroup<Sn,rtensor>& f){
+      const int n=f.G.getn();
+      vector<SnMultiVec*> levels(n);
+      levels[1]=new SnMultiVec(f);
+      for(int l=2; l<n; l++){
+	levels[l]=levels[l-1]->uptransform();
+	delete levels[l-1];
+      }
     }
 
 

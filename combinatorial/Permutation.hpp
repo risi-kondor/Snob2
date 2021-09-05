@@ -145,6 +145,13 @@ namespace Snob2{
       return *this;
     }
 
+    Permutation inverse() const{
+      Permutation r(n,cnine::fill_raw());
+      for(int i=1; i<=n; i++)
+	r.p[p[i-1]-1]=i;
+      return r;
+    }
+
     bool check_valid() const{
       vector<bool> a(n,false);
       for(int i=0; i<n; i++){

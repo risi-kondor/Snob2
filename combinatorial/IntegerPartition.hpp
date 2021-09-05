@@ -8,7 +8,7 @@ namespace Snob2{
   public: 
 
     int k;
-    int* p;
+    int* p=nullptr;
 
     
   public:
@@ -151,13 +151,24 @@ namespace Snob2{
       return true;
     }
 
+    bool operator<(const IntegerPartition&  y) const{
+      SNOB2_ASSERT(getn()==y.getn(),"Comparing partition of n with partition of m<>n.");
+      for(int i=0; i<std::min(k,y.k); i++)
+	if(p[i]>y.p[i]) return true;
+	else if(p[i]<y.p[i]) return false; 
+      //if(k<y.k) return true;
+      return false;
+    }
 
   public: // I/O
 
     string str(const string indent="") const{
       ostringstream oss;
-      oss<<"[ "; 
-      for(int i=0; i<k; i++) oss<<p[i]<<" ";
+      oss<<"["; 
+      for(int i=0; i<k; i++){
+	oss<<p[i];
+	if(i<k-1) oss<<",";
+      }
       oss<<"]"; 
       return oss.str();
     }

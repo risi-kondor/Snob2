@@ -14,11 +14,12 @@ namespace Snob2{
 
     Snob2_session(){
       cnine_session=new cnine::cnine_session();
+      cout<<"Snob2 initialized."<<endl<<endl;
     }
 
 
     ~Snob2_session(){
-      cout<<endl<<"Shutting down Snob2."<<endl;
+      cout<<"Shutting down Snob2."<<endl;
       delete cnine_session;
     }
     

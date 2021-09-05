@@ -162,7 +162,7 @@ namespace Snob2{
   
     void computeYOR() const{
       if (YORt) return;
-      cout<<"Computing YOR for "<<lambda<<endl;
+      //cout<<"Computing YOR for "<<lambda<<endl;
       YORt=new int[d*(n-1)];
       YOR1=new double[d*(n-1)];
       YOR2=new double[d*(n-1)];

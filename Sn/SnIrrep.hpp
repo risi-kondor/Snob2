@@ -28,10 +28,19 @@ namespace Snob2{
       obj=_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda);
     }
 
+    SnIrrep(const initializer_list<int> list): lambda(list){
+      obj=_snbank->get_Sn(lambda.getn())->get_irrep(lambda);
+    }
+
+
   public: // Access
 
     int dim() const{
       return obj->d;
+    }
+
+    bool operator<(const SnIrrep& y) const{
+      return (obj->lambda)<(y.obj->lambda);
     }
 
 

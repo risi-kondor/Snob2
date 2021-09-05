@@ -34,7 +34,7 @@ namespace Snob2{
       return lambda->size();
     }
 
-    IntegerPartition operator[](const int i){
+    IntegerPartition operator[](const int i) const{
       return *(*lambda)[i];
     }
 

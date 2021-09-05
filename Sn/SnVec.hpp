@@ -4,6 +4,8 @@
 #include "SnPart.hpp"
 #include "SnType.hpp"
 #include "SnMultiVec.hpp"
+#include "SnModule.hpp"
+#include "SnRepresentation.hpp"
 
 namespace Snob2{
 
@@ -24,6 +26,20 @@ namespace Snob2{
     template<typename FILLTYPE>
     SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0){
       for(auto& p:_type.map)
+	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+    }
+
+    template<typename FILLTYPE>
+    SnVec(const SnModule& M, const FILLTYPE& fill, const int _dev=0){
+      for(auto& p:M.map)
+	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+    }
+
+    template<typename FILLTYPE>
+    SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0){
+      for(auto& p:M.irreps)
 	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
       //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
     }
@@ -66,7 +82,8 @@ namespace Snob2{
   public: // ---- Fourier transforms ------------------
 
 
-    static SnVec::Fourier(const FunctionOnGroup<Sn,rtensor>& f){
+    /*
+    static SnVec Fourier(const FunctionOnGroup<Sn,rtensor>& f){
       const int n=f.G.getn();
       vector<SnMultiVec*> levels(n);
       levels[1]=new SnMultiVec(f);
@@ -74,7 +91,8 @@ namespace Snob2{
 	levels[l]=levels[l-1]->uptransform();
 	delete levels[l-1];
       }
-    }
+      }
+    */
 
 
   public:
@@ -92,6 +110,11 @@ namespace Snob2{
     }
 
   };
+
+
+  inline SnVec operator*(const SnElement& sigma, const SnVec& v){
+    return v.apply(sigma);
+  }
 
 }
 

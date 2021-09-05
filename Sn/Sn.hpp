@@ -4,6 +4,8 @@
 #include "SnBank.hpp"
 #include "SnElement.hpp"
 #include "SnIrrep.hpp"
+#include "SnModule.hpp"
+#include "SnRepresentation.hpp"
 
 
 namespace Snob2{
@@ -19,6 +21,7 @@ namespace Snob2{
     }
 
     static SnElement dummy_element(){return SnElement::Identity(1);}
+    static SnIrrep dummy_irrep(){return SnIrrep({1});}
 
 
   public: // Access
@@ -35,6 +38,9 @@ namespace Snob2{
       return obj->order;
     }
 
+
+  public: // Elements
+
     SnElement identity() const{
       return SnElement(n,cnine::fill_identity());
     }
@@ -46,6 +52,9 @@ namespace Snob2{
     int index(const SnElement& sigma) const{
       return obj->index(sigma);
     }
+
+
+  public: // Representations
 
     SnIrrep irrep(const IntegerPartition& lambda) const{
       return SnIrrep(obj->get_irrep(lambda));
@@ -59,7 +68,25 @@ namespace Snob2{
       return R;
     }
 
+    SnModule module() const{
+      return obj->get_module();
+    }
     
+    //SnModule rep() const{
+    //return obj->get_rep();
+    //}
+    
+    SnRepresentation repr() const{
+      obj->make_all_irreps();
+      SnRepresentation R;
+      for(auto p:obj->irreps){
+	cout<<p->lambda<<endl;
+	//R.set(p->lambda,p->d);
+      }
+      return R;
+    }
+
+
   public:
 
     string str(const string indent="") const{

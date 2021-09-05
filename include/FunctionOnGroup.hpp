@@ -12,6 +12,7 @@ namespace Snob2{
 
     typedef cnine::Gdims Gdims;
 
+    //typedef decltype(GROUP::identity()) ELEMENT; 
     typedef decltype(GROUP::dummy_element()) ELEMENT; 
     typedef decltype(TENSOR::dummy_scalar()) SCALAR; 
     //typedef decltype(TENSOR::value(0)) SCALAR; 

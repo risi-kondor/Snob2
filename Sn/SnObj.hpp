@@ -2,12 +2,14 @@
 #define _SnObj
 
 #include "Snob2_base.hpp"
+#include <map>
 
 #include "IntegerPartitions.hpp"
 
 #include "SnElement.hpp"
 #include "SnIrrepObj.hpp"
-//#include "SnIrrep.hpp"
+#include "SnModule.hpp"
+//#include "SnRepresentation.hpp"
 
 
 namespace Snob2{
@@ -15,13 +17,17 @@ namespace Snob2{
   class SnObj{
   public:
 
+    friend class Sn;
+
     const int n;
     int order;
 
     SnObj* Snminus1=nullptr;
 
     vector<SnIrrepObj*> irreps;
-    unordered_map<IntegerPartition,SnIrrepObj*> irrep_map;
+    map<IntegerPartition,SnIrrepObj*> irrep_map;
+    SnModule module;
+    //SnRepresentation repr;
     bool all_irreps=false;
 
 
@@ -30,7 +36,7 @@ namespace Snob2{
 
     SnObj(const int _n): n(_n){
       order=factorial(n);
-      cout<<"Creating Sn("<<n<<")"<<endl;
+      //cout<<"Creating Sn("<<n<<")"<<endl;
     }
 
     ~SnObj(){
@@ -99,6 +105,11 @@ namespace Snob2{
       return irreps;
     }
 
+    SnModule get_module(){
+      make_all_irreps();
+      return module;
+    }
+
 
   private:
 
@@ -108,6 +119,10 @@ namespace Snob2{
       for(int i=0; i<partitions.size(); i++){
 	get_irrep(partitions[i]);
       }
+      for(auto p:irreps)
+	module.set(p->lambda,p->d);
+      //for(auto p:irreps)
+      //repr.set(p->lambda,p->d);
       all_irreps=true;
     }
 

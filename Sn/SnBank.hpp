@@ -27,7 +27,10 @@ namespace Snob2{
       return sn[n-1];
     }
 
-   
+    SnIrrepObj* get_irrep(const IntegerPartition& lambda){
+      return get_Sn(lambda.getn())->get_irrep(lambda);
+    }
+    
   public: 
 
 

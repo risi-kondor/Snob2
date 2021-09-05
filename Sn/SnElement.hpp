@@ -25,6 +25,16 @@ namespace Snob2{
     }
 
 
+  public: // operations
+
+    SnElement operator*(const SnElement& y) const{
+      return SnElement(this->Permutation::operator*(y));
+    }
+
+    SnElement inverse() const{
+      return SnElement(Permutation::inverse());
+    }
+
   };
 
 }

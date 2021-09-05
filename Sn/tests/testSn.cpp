@@ -32,7 +32,12 @@ int main(int argc, char** argv){
     cout<<G.element(i)<<" "<<G.index(G.element(i))<<endl;
   }
 
-  auto irreps=G.all_irreps();
-  for(auto p:irreps) cout<<p<<" "<<p.dim()<<endl;
+  SnModule M=G.module();
+  cout<<M<<endl;
 
 }
+
+
+  //auto irreps=G.all_irreps();
+  //for(auto p:irreps) cout<<p<<" "<<p.dim()<<endl;
+

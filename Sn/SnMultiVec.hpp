@@ -32,6 +32,13 @@ namespace Snob2{
       //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
     }
 
+    template<typename FILLTYPE>
+    SnMultiVec(int _N, const SnRepresentation& _mu, const FILLTYPE& fill, const int _dev=0): N(_N){
+      for(auto& p:_mu.irreps)
+	parts.push_back(new SnMultiPart(_N,p.first,p.second,fill,_dev));
+      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+    }
+
 
   public:
 
@@ -70,11 +77,12 @@ namespace Snob2{
       parts.push_back(new SnMultiPart(f));
     }
 
-    SnMultiVec uptransform() const{
+    SnMultiVec* uptransform() const{
       assert(parts.size()>0);
       int n=parts[0]->irrep->n;
       int newN=N/n;
-      SnMultiVec R(newN,_combibank->get_Sn(n)->get_type,cnine::fill_zero);
+      Sn G(n);
+      SnMultiVec* R=new SnMultiVec(newN,Sn(n).repr(),cnine::fill_zero());
       return R;
     }
 

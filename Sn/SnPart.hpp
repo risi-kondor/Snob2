@@ -18,6 +18,11 @@ namespace Snob2{
   public:
 
     template<typename FILLTYPE>
+    SnPart(const initializer_list<int> list, const int n, const FILLTYPE& fill, const int _dev=0):
+      rtensor(cnine::dims(_snbank->get_irrep(list)->d,n),fill,dev), 
+      irrep(_snbank->get_irrep(list)){}
+    
+    template<typename FILLTYPE>
     SnPart(const SnIrrep& _irrep, const int n, const FILLTYPE& fill, const int _dev=0):
       rtensor(cnine::dims(_irrep.obj->d,n),fill,dev), irrep(_irrep.obj){}
     
@@ -28,6 +33,16 @@ namespace Snob2{
 
 
   public: // ---- named constructors ----
+
+
+    static SnPart zero(const initializer_list<int> list, const int n, const int _dev=0){
+      return SnPart(list,n,cnine::fill_zero(),_dev);}
+    
+    static SnPart identity(const initializer_list<int> list, const int n, const int _dev=0){
+      return SnPart(list,n,cnine::fill_identity(),_dev);}
+    
+    static SnPart gaussian(const initializer_list<int> list, const int n, const int _dev=0){
+      return SnPart(list,n,cnine::fill_gaussian(),_dev);}
 
 
     static SnPart zero(const IntegerPartition& _lambda, const int n, const int _dev=0){
@@ -78,7 +93,7 @@ namespace Snob2{
   public:
 
     string str(string indent="") const{
-      return "SnPart("+irrep->lambda.str()+")\n"+rtensor::str();
+      return "part"+irrep->lambda.str()+":\n"+rtensor::str();
     }
 
     friend ostream& operator<<(ostream& stream, const SnPart& x){

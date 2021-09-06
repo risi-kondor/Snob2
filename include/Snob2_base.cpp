@@ -23,7 +23,9 @@ namespace Snob2{
   class SnBank;
   SnBank* _snbank=nullptr;
 
-}
+  class SnRepresentationBank;
+  SnRepresentationBank* _snrepbank=nullptr;
 
+}
 
 

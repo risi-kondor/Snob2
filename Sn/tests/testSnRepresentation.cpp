@@ -13,16 +13,17 @@ int main(int argc, char** argv){
   Snob2_session session;
   CombinatorialClasses combi_classes;
   SnClasses Snclasses;
-  cout<<endl;
 
-  SnRepresentation mu;
-  mu.set(SnIrrep({4,2}),1);
-  mu.set(SnIrrep({5,1}),2);
-
+  SnType tau({{{4,2},1},{{3,3},4}});
+  SnRepresentation mu(tau);
   cout<<mu<<endl;
+
+  cout<<mu.induced()<<endl;
+
+
 
 
   Sn G(5);
-  cout<<G.repr()<<endl;
+  //cout<<G.repr()<<endl;
 
 }

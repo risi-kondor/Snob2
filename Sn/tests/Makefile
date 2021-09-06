@@ -3,8 +3,8 @@ include $(ROOTDIR)/common.txt
 
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
-TESTS= testSn testSnFunction testSnOverSm testSnIrrep testSnPart testSnType testSnModule testSnRepresentation \
-testSnVec testSnMultiVec testFourierTransform
+TESTS= testSn testSnFunction testSnOverSm testSnIrrep testSnType testSnRepresentation \
+#testSnPart testSnVec testSnMultiVec testFourierTransform
 
 ifdef WITH_CUDA
 endif 

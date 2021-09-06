@@ -32,8 +32,8 @@ int main(int argc, char** argv){
     cout<<G.element(i)<<" "<<G.index(G.element(i))<<endl;
   }
 
-  SnModule M=G.module();
-  cout<<M<<endl;
+  //SnModule M=G.module();
+  //cout<<M<<endl;
 
 }
 

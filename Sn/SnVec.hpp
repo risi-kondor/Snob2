@@ -3,7 +3,7 @@
 
 #include "SnPart.hpp"
 #include "SnType.hpp"
-#include "SnMultiVec.hpp"
+//#include "SnMultiVec.hpp"
 #include "SnModule.hpp"
 #include "SnRepresentation.hpp"
 
@@ -12,8 +12,8 @@ namespace Snob2{
   class SnVec{
   public:
 
+    SnRepresentationObj* repr;
     vector<SnPart*> parts;
-    //unordered_map<IntegerPartition,SnPart*> map;
 
     ~SnVec(){
       for(auto p:parts) delete p;
@@ -24,25 +24,18 @@ namespace Snob2{
     SnVec(){}
 
     template<typename FILLTYPE>
-    SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0){
-      for(auto& p:_type.map)
-	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
-      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
-    }
-
-    template<typename FILLTYPE>
-    SnVec(const SnModule& M, const FILLTYPE& fill, const int _dev=0){
-      for(auto& p:M.map)
-	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
-      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
-    }
-
-    template<typename FILLTYPE>
-    SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0){
+    SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0): repr(_repr){
       for(auto& p:M.irreps)
 	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
-      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
     }
+
+    template<typename FILLTYPE>
+    SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0):
+      SnVec(_snrepbank->get_rep(_type),fill,dev){}
+
+    template<typename FILLTYPE>
+    SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0):
+      SnVec(M.obj,fill,dev){}
 
 
   public:
@@ -87,6 +80,7 @@ namespace Snob2{
   public: // ---- Fourier transforms ------------------
 
 
+    /*
     static SnVec Fourier(const FunctionOnGroup<Sn,rtensor>& f){
       const int n=f.G.getn();
       vector<SnMultiVec*> levels(n);
@@ -111,6 +105,29 @@ namespace Snob2{
       for(auto p:x.parts)
 	parts.push_back(new SnPart(p.second->irrep,std::move(*p.second)));
       //parts.push_back(p->convert_to_part_destrictively());
+    }
+    */
+
+    SnVec induce() const{
+      SnRepresentationObj* induced_rep=repr->get_induced();
+      SnVec v(induced_rep,cnine::fill::zero);
+
+      int iso_ix=0;
+      for(auto& p:induced_rep.isotypics){
+	const SnIsotypicObj& iso=p.second;
+	SnPart& part=*v.parts[iso_ix];
+
+	int ioffs=0;
+	int joffs=0;
+	for(auto subp:iso.subs){
+	  const SnPart& sub
+	  const int I=
+	  for(int i=0; i<
+	}
+
+	iso_ix++;
+      }
+      return v;
     }
 
 
@@ -138,3 +155,11 @@ namespace Snob2{
 }
 
 #endif
+    /*
+    template<typename FILLTYPE>
+    SnVec(const SnModule& M, const FILLTYPE& fill, const int _dev=0){
+      for(auto& p:M.map)
+	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+      //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+    }
+    */

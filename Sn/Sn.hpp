@@ -4,8 +4,8 @@
 #include "SnBank.hpp"
 #include "SnElement.hpp"
 #include "SnIrrep.hpp"
-#include "SnModule.hpp"
-#include "SnRepresentation.hpp"
+//#include "SnModule.hpp"
+//#include "SnRepresentation.hpp"
 
 
 namespace Snob2{
@@ -68,14 +68,17 @@ namespace Snob2{
       return R;
     }
 
+    /*
     SnModule module() const{
       return obj->get_module();
     }
+    */
     
     //SnModule rep() const{
     //return obj->get_rep();
     //}
-    
+
+    /*
     SnRepresentation repr() const{
       obj->make_all_irreps();
       SnRepresentation R;
@@ -85,6 +88,7 @@ namespace Snob2{
       }
       return R;
     }
+    */
 
 
   public:

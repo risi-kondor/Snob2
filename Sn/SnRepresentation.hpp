@@ -3,35 +3,44 @@
 
 #include <map>
 
-#include "IntegerPartition.hpp"
-#include "SnIrrep.hpp"
+//#include "IntegerPartition.hpp"
+//#include "SnIrrep.hpp"
+//#include "SnType.hpp"
+#include "SnBank.hpp"
+#include "SnRepresentationBank.hpp"
+#include "SnRepresentationObj.hpp"
+
 
 namespace Snob2{
 
   class SnRepresentation{
   public:
 
-    //map<IntegerPartition,int> map;
-    map<SnIrrep,int> irreps;
-    
+    SnRepresentationObj* obj;
+
 
   public:
 
     SnRepresentation(){}
 
-    SnRepresentation(const SnIrrep& rho, const int n){
-      irreps[rho]=n;
+    SnRepresentation(SnRepresentationObj* _obj): obj(_obj){};
+
+    SnRepresentation(const SnType& _type){
+      obj=_snrepbank->get_rep(_type);
     }
 
-    SnRepresentation(const IntegerPartition& lambda, const int n){
-      irreps[SnIrrep(lambda)]=n; //_snbank->get_irrep(lambda);
+
+  public: // ---- Access -----------------------------------------------------------------------------------
+
+    
+    //int n_isotypics
+
+    SnRepresentation induced(){
+      return SnRepresentation(obj->get_induced());
     }
 
-
-  public:
-
-    void set(const SnIrrep& rho, const int n){
-      irreps[rho]=n;
+    SnRepresentation restricted(){
+      return SnRepresentation(obj->get_restricted());
     }
 
 
@@ -39,11 +48,11 @@ namespace Snob2{
 
     string str(const string indent="") const{
       ostringstream oss;
-      oss<<"SnRepresentation(";
+      oss<<"SnRep(";
       int i=0; 
-      for(auto& p:irreps){
-	oss<<"("<<p.first.lambda.str()<<":"<<p.second<<")";
-	if(++i<irreps.size()) oss<<",";
+      for(auto& p:obj->isotypics){
+	oss<<p.second;
+	if(++i<obj->isotypics.size()) oss<<",";
       }
       oss<<")"<<endl;
       return oss.str();

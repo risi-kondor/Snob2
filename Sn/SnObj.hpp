@@ -8,7 +8,7 @@
 
 #include "SnElement.hpp"
 #include "SnIrrepObj.hpp"
-#include "SnModule.hpp"
+//#include "SnModule.hpp"
 //#include "SnRepresentation.hpp"
 
 
@@ -26,7 +26,7 @@ namespace Snob2{
 
     vector<SnIrrepObj*> irreps;
     map<IntegerPartition,SnIrrepObj*> irrep_map;
-    SnModule module;
+    //SnModule module;
     //SnRepresentation repr;
     bool all_irreps=false;
 
@@ -121,12 +121,12 @@ namespace Snob2{
 	irrep.ancestors.push_back(Snminus1->get_irrep(lamb));
     }
 
-
+    /*
     SnModule get_module(){
       make_all_irreps();
       return module;
     }
-
+    */
 
   private:
 
@@ -136,11 +136,13 @@ namespace Snob2{
       for(int i=0; i<partitions.size(); i++){
 	get_irrep(partitions[i]);
       }
+      /*
       for(auto p:irreps)
 	module.set(p->lambda,p->d);
       //for(auto p:irreps)
       //repr.set(p->lambda,p->d);
       all_irreps=true;
+      */
     }
 
   };

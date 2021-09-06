@@ -20,6 +20,7 @@ namespace Snob2{
     IntegerPartition lambda;
     vector<YoungTableau*> tableaux;
     vector<SnIrrepObj*> ancestors;
+    vector<SnIrrepObj*> descendents;
 
     mutable int* YORt=nullptr;
     mutable double* YOR1;

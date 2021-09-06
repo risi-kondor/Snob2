@@ -3,7 +3,7 @@
 
 #include "SnIrrep.hpp"
 #include "FunctionOnGroup.hpp"
-
+#include "SnPart.hpp"
 
 namespace Snob2{
 
@@ -63,14 +63,51 @@ namespace Snob2{
       return SnMultiPart(N,_rho,n,cnine::fill_gaussian(),_dev);}
 
 
+  public: // ---- Conversions --------------------------------------------------------------------------------
+
+
+    SnMultiPart(const int _N, const SnIrrep& _irrep, const rtensor& x): 
+      rtensor(x), irrep(_irrep.obj), N(_N), n(x.dim(1)/_N){}
+
+    SnMultiPart(const int _N, const SnIrrep& _irrep, rtensor&& x): 
+      rtensor(std::move(x)), irrep(_irrep.obj), N(_N), n(x.dim(1)/_N){}
+
+    SnMultiPart(const int _N, const SnIrrepObj* _irrep, const rtensor& x): 
+      rtensor(x), irrep(_irrep), N(_N), n(x.dim(1)/_N){}
+
+    SnMultiPart(const int _N, const SnIrrepObj* _irrep, rtensor&& x): 
+      rtensor(std::move(x)), irrep(_irrep), N(_N), n(x.dim(1)/_N){}
+
+
+  public: // ---- Operations ---------------------------------------------------------------------------------
+
+
+    void add_to_block_multi(const int ioffs, const int joffs, const SnMultiPart& x){
+      cout<<x.N<<" "<<N<<endl;
+      SNOB2_ASSERT(x.N==N,"Mismatch in multi dimension");
+      int I=x.dim(0);
+      int J=x.n;
+      for(int c=0; c<N; c++)
+	for(int i=0; i<I; i++)
+	  for(int j=0; j<J; j++){}
+	    //inc(ioffs+i,c*n+joffs*j,x(i,c*x.n+j));
+    }
+
+
   public: // ---- Fourier transforms ------------------
 
 
-    SnMultiPart(const FunctionOnGroup<Sn,rtensor>& f): 
-      rtensor(f), irrep(f.G.irrep(IntegerPartition({1})).obj){
-      reshape(cnine::dims(1,dim(0)));
+    SnMultiPart(const FunctionOnGroup<Sn,rtensor>& f): // TODO: eliminate copying
+      rtensor(f), irrep(_snbank->get_irrep(IntegerPartition({1}))){
+      N=f.dim(0);
+      n=1;
+      reshape({1,N});
     }
-    
+
+    operator SnPart() const{
+      return SnPart(SnIrrep(irrep),*this);
+    }
+
 
   public:
 

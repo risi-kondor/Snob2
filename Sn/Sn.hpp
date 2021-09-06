@@ -80,8 +80,8 @@ namespace Snob2{
       obj->make_all_irreps();
       SnRepresentation R;
       for(auto p:obj->irreps){
-	cout<<p->lambda<<endl;
-	//R.set(p->lambda,p->d);
+	//cout<<p->lambda<<endl;
+	R.set(p->lambda,p->d);
       }
       return R;
     }

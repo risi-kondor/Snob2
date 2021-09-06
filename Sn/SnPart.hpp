@@ -2,7 +2,7 @@
 #define _SnPart
 
 #include "SnIrrep.hpp"
-
+//#include "SnMultiPart.hpp"
 
 namespace Snob2{
 
@@ -63,6 +63,18 @@ namespace Snob2{
     
     static SnPart gaussian(const SnIrrep& _rho, const int n, const int _dev=0){
       return SnPart(_rho,n,cnine::fill_gaussian(),_dev);}
+
+
+  public: // ---- conversions ----
+
+    SnPart(const SnIrrep& _irrep, const rtensor& x): 
+      rtensor(x), irrep(_irrep.obj){}
+
+    SnPart(const SnIrrep& _irrep, rtensor&& x): 
+      rtensor(std::move(x)), irrep(_irrep.obj){}
+
+    SnPart(const SnIrrepObj* _irrep, rtensor&& x): 
+      rtensor(std::move(x)), irrep(_irrep){}
 
     
   public:

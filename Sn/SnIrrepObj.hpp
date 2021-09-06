@@ -19,7 +19,7 @@ namespace Snob2{
     int d;
     IntegerPartition lambda;
     vector<YoungTableau*> tableaux;
-
+    vector<SnIrrepObj*> ancestors;
 
     mutable int* YORt=nullptr;
     mutable double* YOR1;
@@ -49,13 +49,29 @@ namespace Snob2{
     SnIrrepObj& operator=(const SnIrrepObj& x)=delete;
 
 
-  public:
+  public: // ---- Access ------------------------------------------------------------------------------------ 
+
+    
+    int index(const YoungTableau& t) const {
+      int i=0; for(auto p: tableaux) if(*p==t) return i; else i++; return -1;}
+
+
+  public: // ---- Operations --------------------------------------------------------------------------------
+
 
     rtensor operator()(const SnElement& sigma) const{
       rtensor R(cnine::dims(d,d),cnine::fill::identity);
       apply_left(R,sigma);
       return R;
     }
+
+  public: // ---- Ancestors ---------------------------------------------------------------------------------
+
+
+
+
+  public: // ---- apply_left to whole matrix ----------------------------------------------------------------
+
 
     void apply_left(rtensor& A, const SnElement sigma) const{
       SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
@@ -73,30 +89,9 @@ namespace Snob2{
       }
     }
 
-    void apply_left(rtensor& A, const SnElement sigma, int beg, int end) const{
-      SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
-      vector<int> shifts(n);
-      for(int i=n; i>0; i--){
-	int a=sigma(i);
-	shifts[i-1]=a;
-	for(int j=1; j<i; j++) if(sigma.p[j-1]>a) sigma.p[j-1]--;
-      }
-      for(int i=2; i<=n; i++){
-	//cout<<i<<" "<<shifts[i-1]<<endl;
-	//cout<<A<<endl;
-	for(int a=i-1; a>=shifts[i-1]; a--)
-	  apply_left(A,a,beg,end);
-      }
-    }
-
     void apply_left(rtensor& A, const ContiguousCycle& cyc) const{
       for(int i=cyc.b-1; i>=cyc.a; i--)
 	apply_left(A,i);
-    }
-
-    void apply_left(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end) const{
-      for(int i=cyc.b-1; i>=cyc.a; i--)
-	apply_left(A,i,beg,end);
     }
 
     void apply_left(rtensor& A, const int tau) const{
@@ -126,6 +121,31 @@ namespace Snob2{
       }
     }
 
+
+  public: // ---- apply_left to block ------------------------------------------------------------------------
+
+
+    void apply_left(rtensor& A, const SnElement sigma, int beg, int end) const{
+      SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
+      vector<int> shifts(n);
+      for(int i=n; i>0; i--){
+	int a=sigma(i);
+	shifts[i-1]=a;
+	for(int j=1; j<i; j++) if(sigma.p[j-1]>a) sigma.p[j-1]--;
+      }
+      for(int i=2; i<=n; i++){
+	//cout<<i<<" "<<shifts[i-1]<<endl;
+	//cout<<A<<endl;
+	for(int a=i-1; a>=shifts[i-1]; a--)
+	  apply_left(A,a,beg,end);
+      }
+    }
+
+    void apply_left(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end) const{
+      for(int i=cyc.b-1; i>=cyc.a; i--)
+	apply_left(A,i,beg,end);
+    }
+
     void apply_left(rtensor& A, const int tau, int beg, int end) const{
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       //const int J=A.get_dim(1);
@@ -150,11 +170,32 @@ namespace Snob2{
       }
     }
 
-    int index(const YoungTableau& t) const {
-      int i=0; for(auto p: tableaux) if(*p==t) return i; else i++; return -1;}
+
+  public: // ---- apply_left to multiple blocks --------------------------------------------------------------
 
 
-  private: // YOR 
+    void apply_left(rtensor& A, const SnElement sigma, const int beg, const int end, const int stride) const{
+      SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
+      vector<int> shifts(n);
+      for(int i=n; i>0; i--){
+	int a=sigma(i);
+	shifts[i-1]=a;
+	for(int j=1; j<i; j++) if(sigma.p[j-1]>a) sigma.p[j-1]--;
+      }
+      for(int i=2; i<=n; i++){
+	apply_left(A,ContiguousCycle(shifts[i-1],i),beg,end,stride);
+      }
+    }
+
+    void apply_left(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end, const int stride) const{
+      for(int j=0; j<A.dim(1)/stride; j++)
+	for(int i=cyc.b-1; i>=cyc.a; i--)
+	  apply_left(A,i,beg+j*stride,end+j*stride);
+    }
+
+
+  private: // ---- YOR ---------------------------------------------------------------------------------------
+
     
     int YOR(const int tau, const int t, double& c1, double& c2) const {
       int index=t*(n-1)+tau-1; c1=YOR1[index]; c2=YOR2[index]; return YORt[index];

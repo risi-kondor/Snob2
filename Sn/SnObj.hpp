@@ -105,6 +105,23 @@ namespace Snob2{
       return irreps;
     }
 
+    void make_ancestors(SnIrrepObj& irrep){
+      if(irrep.ancestors.size()>0) return;
+      assert(Snminus1);
+      IntegerPartition lamb(irrep.lambda);
+      for(int i=0; i<lamb.k-1; i++){
+	if(lamb.p[i+1]==lamb.p[i]) continue;
+	lamb.p[i]--;
+	irrep.ancestors.push_back(Snminus1->get_irrep(lamb));
+	lamb.p[i]++;
+      }
+      lamb.p[lamb.k-1]--;
+      if(lamb.p[lamb.k-1]==0) lamb.k--;
+      if(lamb.k>0)
+	irrep.ancestors.push_back(Snminus1->get_irrep(lamb));
+    }
+
+
     SnModule get_module(){
       make_all_irreps();
       return module;

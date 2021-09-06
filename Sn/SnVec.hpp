@@ -13,7 +13,7 @@ namespace Snob2{
   public:
 
     vector<SnPart*> parts;
-    //map<IntegerPartition,SnPart*> parts;
+    //unordered_map<IntegerPartition,SnPart*> map;
 
     ~SnVec(){
       for(auto p:parts) delete p;
@@ -60,6 +60,11 @@ namespace Snob2{
     }
 
 
+  public: // ---- Access -------------------------------------------------------------
+
+    
+    
+
   public:
 
     SnVec apply(const SnElement& sigma) const{
@@ -82,17 +87,31 @@ namespace Snob2{
   public: // ---- Fourier transforms ------------------
 
 
-    /*
     static SnVec Fourier(const FunctionOnGroup<Sn,rtensor>& f){
       const int n=f.G.getn();
       vector<SnMultiVec*> levels(n);
-      levels[1]=new SnMultiVec(f);
-      for(int l=2; l<n; l++){
-	levels[l]=levels[l-1]->uptransform();
+      cout<<0<<endl;
+      levels[0]=new SnMultiVec(f);
+      for(int l=1; l<n; l++){
+	cout<<l<<endl;
+	levels[l]=new SnMultiVec(levels[l-1]->uptransform());
 	delete levels[l-1];
       }
-      }
-    */
+      return SnVec(std::move(*levels[n-1]));
+    }
+
+    SnVec(const SnMultiVec& x){
+      assert(x.N==1);
+      for(auto p:x.parts)
+	parts.push_back(new SnPart(*p.second));
+    }
+
+    SnVec(SnMultiVec&& x){
+      assert(x.N==1);
+      for(auto p:x.parts)
+	parts.push_back(new SnPart(p.second->irrep,std::move(*p.second)));
+      //parts.push_back(p->convert_to_part_destrictively());
+    }
 
 
   public:

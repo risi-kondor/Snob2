@@ -4,7 +4,7 @@ include $(ROOTDIR)/common.txt
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
 TESTS= testSn testSnFunction testSnOverSm testSnIrrep testSnPart testSnType testSnModule testSnRepresentation \
-testSnVec testSnMultiVec 
+testSnVec testSnMultiVec testFourierTransform
 
 ifdef WITH_CUDA
 endif 
@@ -104,6 +104,14 @@ ifdef WITH_CUDA
 	$(NVCC) $(NVCCFLAGS) -o testSnMultiVec testSnMultiVec.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
 	$(CC) -o testSnMultiVec testSnMultiVec.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
+
+testFourierTransform: testFourierTransform.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testFourierTransform testFourierTransform.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testFourierTransform testFourierTransform.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
 
 

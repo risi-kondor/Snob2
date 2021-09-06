@@ -17,7 +17,7 @@ namespace Snob2{
   public:
 
     CombinatorialClasses(){
-      if(_snbank){cout<<"Only one CombinatorialClasses object can be defined."<<endl; return;}
+      if(_combibank){cout<<"Only one CombinatorialClasses object can be defined."<<endl; return;}
       _combibank=new CombinatorialBank();
     }
     

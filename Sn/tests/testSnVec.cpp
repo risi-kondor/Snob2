@@ -22,6 +22,7 @@ int main(int argc, char** argv){
   //SnType type0(IntegerPartition({3,1}),1);
   //type0.set(IntegerPartition({2,2}),2);
 
+  /*
   SnRepresentation mu;
   mu.set(SnIrrep({4,2}),1);
   mu.set(SnIrrep({5,1}),2);
@@ -33,5 +34,6 @@ int main(int argc, char** argv){
 
   SnVec V1=V.apply(sigma);
   printl("V1",V1);
+  */
 
 }

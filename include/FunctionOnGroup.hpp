@@ -32,6 +32,10 @@ namespace Snob2{
 
   public: // Access 
 
+    int size() const{
+      return N;
+    }
+
     
     SCALAR operator()(const int i) const{
       return TENSOR::value(i);

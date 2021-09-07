@@ -4,15 +4,15 @@
 #include "SnPart.hpp"
 #include "SnType.hpp"
 //#include "SnMultiVec.hpp"
-#include "SnModule.hpp"
-#include "SnRepresentation.hpp"
+//#include "SnModule.hpp"
+//#include "SnRepresentation.hpp"
 
 namespace Snob2{
 
   class SnVec{
   public:
 
-    SnRepresentationObj* repr;
+    //SnRepresentationObj* repr;
     vector<SnPart*> parts;
 
     ~SnVec(){
@@ -23,23 +23,35 @@ namespace Snob2{
 
     SnVec(){}
 
+    /*
     template<typename FILLTYPE>
     SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0): repr(_repr){
       for(auto& p:M.irreps)
 	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
     }
+    */
 
+    /*
     template<typename FILLTYPE>
     SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0):
       SnVec(_snrepbank->get_rep(_type),fill,dev){}
+    */
 
+    /*
     template<typename FILLTYPE>
     SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0):
       SnVec(M.obj,fill,dev){}
+    */
+
+    SnVec(SnPart* part){
+      parts.push_back(part);
+    }
+
 
 
   public:
 
+    /*
     static SnVec zero(const SnType& _type, const int _dev=0){
       return SnVec(_type,cnine::fill::zero,_dev);
     }
@@ -51,6 +63,7 @@ namespace Snob2{
     static SnVec gaussian(const SnType& _type, const int _dev=0){
       return SnVec(_type,cnine::fill::gaussian,_dev);
     }
+    */
 
 
   public: // ---- Access -------------------------------------------------------------
@@ -74,6 +87,22 @@ namespace Snob2{
       for(auto p:parts)
 	p->apply_inplace(sigma);
       return *this;
+    }
+
+    SnVec& apply_inplace(const ContiguousCycle& cyc){
+      for(auto p:parts)
+	p->apply_inplace(cyc);
+      return *this;
+    }
+
+
+  public: // ---- Cumulative operations ----------------------------------------------------------------------
+
+
+    void add(const SnVec& y){
+      assert(parts.size()==y.parts.size());
+      for(int i=0; i<parts.size(); i++)
+	parts[i]->add(*y.parts[i]);
     }
 
 
@@ -108,6 +137,7 @@ namespace Snob2{
     }
     */
 
+    /*
     SnVec induce() const{
       SnRepresentationObj* induced_rep=repr->get_induced();
       SnVec v(induced_rep,cnine::fill::zero);
@@ -129,7 +159,7 @@ namespace Snob2{
       }
       return v;
     }
-
+    */
 
   public:
 

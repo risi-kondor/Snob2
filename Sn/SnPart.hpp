@@ -24,7 +24,10 @@ namespace Snob2{
     
     template<typename FILLTYPE>
     SnPart(const SnIrrepObj* _irrep, const int n, const FILLTYPE& fill, const int _dev=0):
-      rtensor(cnine::dims(_irrep->d,n),fill,dev), irrep(_irrep){}
+      rtensor(cnine::dims(_irrep->d,n),fill,_dev), irrep(_irrep){
+      //cout<<"        "<<dims<<endl;
+      //cout<<rtensor::str()<<endl;
+    }
     
     template<typename FILLTYPE>
     SnPart(const SnIrrep& _irrep, const int n, const FILLTYPE& fill, const int _dev=0):
@@ -75,7 +78,30 @@ namespace Snob2{
       return SnPart(_rho,n,cnine::fill_gaussian(),_dev);}
 
 
-  public: // ---- conversions ----
+  public: // ---- Copying -----------------------------------------------------------------------------------
+
+
+    SnPart(const SnPart& x):
+      rtensor(x), irrep(x.irrep){}
+
+    SnPart(SnPart&& x):
+      rtensor(std::move(x)), irrep(x.irrep){}
+
+    SnPart& operator=(const SnPart& x){
+      rtensor::operator=(x);
+      irrep=x.irrep;
+      return *this;
+    }
+
+    SnPart& operator=(SnPart&& x){
+      rtensor::operator=(std::move(x));
+      irrep=x.irrep;
+      return *this;
+    }
+
+
+  public: // ---- Conversions --------------------------------------------------------------------------------
+
 
     SnPart(const SnIrrep& _irrep, const rtensor& x): 
       rtensor(x), irrep(_irrep.obj){}
@@ -128,7 +154,7 @@ namespace Snob2{
   public:
 
     string str(string indent="") const{
-      return "part"+irrep->lambda.str()+":\n"+rtensor::str();
+      return "Part "+irrep->lambda.str()+":\n"+rtensor::str();
     }
 
     friend ostream& operator<<(ostream& stream, const SnPart& x){

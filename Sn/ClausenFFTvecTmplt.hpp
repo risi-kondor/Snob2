@@ -13,7 +13,12 @@ namespace Snob2{
     map<IntegerPartition,int> parts_map;
 
 
-  public:
+  public: // ---- Constructors -------------------------------------------------------------------------------
+
+
+    ClausenFFTvecTmplt(const ClausenFFTvecTmplt& x)=delete;
+    ClausenFFTvecTmplt& operator=(const ClausenFFTvecTmplt& x)=delete;
+
 
   public: // ---- Access -------------------------------------------------------------------------------------
 
@@ -30,6 +35,15 @@ namespace Snob2{
     }
 
 
+    void add(ClausenFFTpartTmplt* part){
+      const IntegerPartition& lambda=part->irrep->lambda;
+      if(parts_map.find(lambda)!=parts_map.end()){cerr<<"Part already present"<<endl; exit(1);}
+      int ix=parts.size(); 
+      parts.push_back(part);
+      parts_map[lambda]=ix;
+    }
+
+
   public: // ---- Creating the transform ---------------------------------------------------------------------
 
 
@@ -43,7 +57,7 @@ namespace Snob2{
     }
     
     
-    ClausenFFTvecTmplt(const ClausenFFTvecTmplt& prev){
+    ClausenFFTvecTmplt(int s, const ClausenFFTvecTmplt& prev){
       n=prev.n+1;
 
       for(int i=0; i<prev.parts.size(); i++){
@@ -86,8 +100,10 @@ namespace Snob2{
       for(int c=0; c<newN; c++){
 
 	SnVec* w=new SnVec();
-	for(int i=0; i<parts.size(); i++)
-	  w->parts.push_back(new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero));
+	for(int i=0; i<parts.size(); i++){
+	  //cout<<*parts[i]->irrep<<endl;
+	  w->parts.push_back(new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+	}
   
 	for(int i=0; i<n; i++){
 	  SnVec u=uptransform(*V->vecs[c*n+i]);
@@ -117,7 +133,6 @@ namespace Snob2{
       ostringstream oss;
       oss<<indent<<"Level "<<n<<":"<<endl;
       for(int i=0; i<parts.size(); i++){
-	//cout<<indent<<"Part "<<i<<" ("<< parts[i]->irrep->lambda<<":"<<endl;
 	oss<<parts[i]->str(indent+"  ");
       }
       return oss.str();

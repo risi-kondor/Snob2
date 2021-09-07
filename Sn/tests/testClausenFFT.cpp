@@ -32,5 +32,8 @@ int main(int argc, char** argv){
   SnVec v=FFT(f);
   printl("v",v);
 
+  auto fd=FFT.inv(v);
+  printl("fd",fd);
+
 }
 

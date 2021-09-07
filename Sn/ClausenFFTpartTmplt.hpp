@@ -22,8 +22,11 @@ namespace Snob2{
     ClausenFFTpartTmplt(const IntegerPartition& lambda, const int _index):
       index(_index), irrep(_snbank->get_irrep(lambda)){}
 
+    ClausenFFTpartTmplt(const ClausenFFTpartTmplt& x)=delete;
+    ClausenFFTpartTmplt& operator=(const ClausenFFTpartTmplt& x)=delete;
 
-  public:
+
+  public: // ---- Access -------------------------------------------------------------------------------------
 
 
     void add(const ClausenFFTpartTmplt& sub){
@@ -33,19 +36,21 @@ namespace Snob2{
     }
 
 
-  public:
+  public: // ---- Fourier tranforms --------------------------------------------------------------------------
 
 
     SnPart uptransform(const SnVec& v) const{
       SnPart P(irrep,m,cnine::fill::zero);
       for(auto p:blocks){
 	ClausenFFTblockTmplt& b=*p;
-	//P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
+	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
       }
       return P;
     }
 
-  public:
+
+  public: // ---- I/O ----------------------------------------------------------------------------------------
+
 
     string str(const string indent="") const{
       ostringstream oss;
@@ -61,7 +66,6 @@ namespace Snob2{
     friend ostream& operator<<(ostream& stream, const ClausenFFTpartTmplt& x){
       stream<<x.str(); return stream;
     }
-
 
   };
 

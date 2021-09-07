@@ -30,6 +30,11 @@ namespace Snob2{
       N(_G.size()){}
 
 
+  public:
+
+    FunctionOnGroup(const FunctionOnGroup& x):
+      TENSOR(x), G(x.G), N(x.N){}
+
   public: // Access 
 
     int size() const{
@@ -84,8 +89,10 @@ namespace Snob2{
 
     string str(const string indent="") const{
       ostringstream oss;
-      for(int i=0; i<N; i++)
-	oss<<G.element(i)<<" : "<<TENSOR::get_value(i)<<endl;
+      for(int i=0; i<N; i++){
+	//oss<<G.element(i)<<" : ";  // Fix this!
+	oss<<TENSOR::get_value(i)<<endl;
+      }
       return oss.str();
     }
 

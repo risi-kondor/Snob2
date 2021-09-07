@@ -47,6 +47,8 @@ namespace Snob2{
       parts.push_back(part);
     }
 
+    //SnVec(const SnVec& x)=delete;
+    //SnVec& operator=(const SnVec& x)=delete;
 
 
   public:
@@ -65,8 +67,37 @@ namespace Snob2{
     }
     */
 
+  public: // ---- Copying ------------------------------------------------------------------------------------
 
-  public: // ---- Access -------------------------------------------------------------
+
+    SnVec(const SnVec& x){
+      for(auto p: x.parts)
+	parts.push_back(new SnPart(*p));
+    }
+
+    SnVec(SnVec&& x){
+      parts=x.parts;
+      x.parts.clear();
+    }
+
+    SnVec& operator=(const SnVec& x){
+      for(auto p: parts) delete p;
+      parts.clear();
+      for(auto p: x.parts)
+	parts.push_back(new SnPart(*p));
+      return *this;
+    }
+
+    SnVec& operator=(SnVec&& x){
+      for(auto p: parts) delete p;
+      parts=x.parts;
+      x.parts.clear();
+      return *this;
+    }
+
+
+
+  public: // ---- Access -------------------------------------------------------------------------------------
 
     
     

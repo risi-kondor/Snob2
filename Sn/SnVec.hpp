@@ -126,6 +126,13 @@ namespace Snob2{
       return *this;
     }
 
+    SnVec& apply_inplace_inv(const ContiguousCycle& cyc){
+      for(auto p:parts)
+	p->apply_inplace_inv(cyc);
+      return *this;
+    }
+
+    
 
   public: // ---- Cumulative operations ----------------------------------------------------------------------
 

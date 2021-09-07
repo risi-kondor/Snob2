@@ -124,6 +124,15 @@ namespace Snob2{
 	  inc(i+ioffs,j+joffs,M.get_value(i,j));
     }
     
+    void add_block_to(const int ioffs, const int joffs, rtensor& M) const{ // normalized!
+      int n=irrep->lambda.getn();
+      int I=M.dim(0);
+      int J=M.dim(1);
+      for(int i=0; i<I; i++)
+	for(int j=0; j<J; j++)
+	  M.inc(i,j,get_value(i+ioffs,j+joffs)/n);
+    }
+    
 
   public:
 
@@ -147,6 +156,11 @@ namespace Snob2{
 
     SnPart& apply_inplace(const ContiguousCycle& cyc){
       irrep->apply_left(*this,cyc);
+      return *this;
+    }
+
+    SnPart& apply_inplace_inv(const ContiguousCycle& cyc){
+      irrep->apply_left_inv(*this,cyc);
       return *this;
     }
 

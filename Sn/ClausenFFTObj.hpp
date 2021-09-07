@@ -46,26 +46,25 @@ namespace Snob2{
     }
 
 
-    FunctionOnGroup<Sn,rtensor> inv(const SnVec& v){
+    FunctionOnGroup<Sn,rtensor> inv(const SnVec& w){
       int n=levels.size();
       auto& final_parts=levels[n-1]->parts;
-      assert(v.parts.size()==final_parts.size());
-      for(int i=0; i<v.parts.size(); i++){
-	assert(v.parts[i]->dim(0)==final_parts[i]->d);
-	assert(v.parts[i]->dim(1)==final_parts[i]->m);
+      assert(w.parts.size()==final_parts.size());
+      for(int i=0; i<w.parts.size(); i++){
+	assert(w.parts[i]->dim(0)==final_parts[i]->d);
+	assert(w.parts[i]->dim(1)==final_parts[i]->m);
       }
       
-      SnVecPack* prev_v=levels[n-1]->pack(v);
+      SnVecPack* prev_v=levels[n-1]->pack(w);
       SnVecPack* v=nullptr;
       for(int l=n-1; l>0; l--){
+	cout<<"l="<<l<<endl;
 	v=levels[l-1]->downtransform(prev_v);
 	delete prev_v;
 	prev_v=v;
       }
 
-      Sn G(n);
-      FunctionOnGroup<Sn,rtensor> R(G,cnine::fill::zero);
-      return R;
+      return levels[n-1]->unpack(v);
     }
 
 

@@ -48,6 +48,18 @@ namespace Snob2{
       return P;
     }
 
+    /*
+    SnPart downtransform(const SnVec& v) const{
+      SnPart P(irrep,m,cnine::fill::zero);
+      
+      for(auto p:blocks){
+	ClausenFFTblockTmplt& b=*p;
+	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
+      }
+      return P;
+    }
+    */
+
 
   public: // ---- I/O ----------------------------------------------------------------------------------------
 

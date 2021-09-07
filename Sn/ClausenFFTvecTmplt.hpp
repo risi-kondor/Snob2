@@ -9,6 +9,8 @@ namespace Snob2{
   public:
 
     int n;
+    ClausenFFTvecTmplt* next=nullptr;
+
     vector<ClausenFFTpartTmplt*> parts;
     map<IntegerPartition,int> parts_map;
 
@@ -57,7 +59,7 @@ namespace Snob2{
     }
     
     
-    ClausenFFTvecTmplt(int s, const ClausenFFTvecTmplt& prev){
+    ClausenFFTvecTmplt(int s, const ClausenFFTvecTmplt& prev){ // s is a dummy here
       n=prev.n+1;
 
       for(int i=0; i<prev.parts.size(); i++){
@@ -74,6 +76,7 @@ namespace Snob2{
 	lambda.add(k);
 	get_part(lambda)->add(part);
       }
+      const_cast<ClausenFFTvecTmplt&>(prev).next=this;
     }
 
 
@@ -89,6 +92,23 @@ namespace Snob2{
 	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
       return R;
     }
+
+    SnVecPack* pack(const SnVec& v){
+      SnVecPack* R=new SnVecPack();
+      R->vecs.push_back(new SnVec(v)); // eliminate copying here
+      return R;
+    }
+
+    FunctionOnGroup<Sn,rtensor> unpack(SnVecPack* V){
+      int N=V->vecs.size();
+      Sn G(n);
+      FunctionOnGroup<Sn,rtensor> R(G,cnine::fill::ones);
+      assert(R.size()==N);
+      for(int i=0; i<N; i++)
+	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
+      return R;
+    }
+
 
 
     SnVecPack* uptransform(const SnVecPack* V) const{
@@ -117,12 +137,63 @@ namespace Snob2{
       return W;
     }
 
-
     SnVec uptransform(const SnVec& v) const{
       SnVec w;
       for(auto p:parts){
 	w.parts.push_back(new SnPart(p->uptransform(v)));
       }
+      return w;
+    }
+
+
+    SnVecPack* downtransform(const SnVecPack* V) const{
+      int N=V->vecs.size();
+      int newN=N*(n+1);
+      SnVecPack* W=new SnVecPack();
+      W->vecs.resize(newN);
+
+      for(int c=0; c<N; c++){
+	//cout<<"c="<<c<<endl;
+
+	for(int i=0; i<n+1; i++){
+	  //cout<<"i="<<i<<endl;
+
+	  SnVec* w=new SnVec();
+	  for(int i=0; i<parts.size(); i++){
+	    w->parts.push_back(new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+	  }
+  
+	  SnVec u(*V->vecs[c]);
+	  u.apply_inplace_inv(ContiguousCycle(n+1-i,n+1));
+	  SnVec ud=downtransform(u);
+	  (*w).add(ud);
+
+	  W->vecs[c*(n+1)+i]=w;
+
+	}
+      }
+
+      return W;
+    }
+
+
+    SnVec downtransform(const SnVec& v) const{
+
+      SnVec w;
+      for(int i=0; i<parts.size(); i++){
+	w.parts.push_back(new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+      }
+
+      assert(next);
+      int i=0; 
+      for(auto p:next->parts){
+	const SnPart& part=*v.parts[i];
+	for(auto q:p->blocks){
+	  part.add_block_to(q->ioffs,q->joffs,*w.parts[q->subix]);
+	}
+	i++;
+      }
+
       return w;
     }
 

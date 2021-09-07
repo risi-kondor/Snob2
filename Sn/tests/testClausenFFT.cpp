@@ -21,11 +21,12 @@ int main(int argc, char** argv){
   SnClasses Snclasses;
   CombinatorialClasses combi_classes;
   cout<<endl;
+  int n=4;
 
-  ClausenFFTObj FFT(4);
+  ClausenFFTObj FFT(n);
   cout<<FFT<<endl;
 
-  Sn G(4);
+  Sn G(n);
   FunctionOnGroup<Sn,cnine::RtensorObj> f(G,cnine::fill::gaussian);
   cout<<f<<endl;
 

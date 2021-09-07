@@ -144,6 +144,19 @@ namespace Snob2{
     }
 
 
+  public: // ---- Operations ---------------------------------------------------------------------------------
+
+
+    /*
+    SnVec operator*(const float c) const{
+      SnVec v;
+      for(auto p: parts)
+	v.parts.push_back(new SnPart((*p)*c));
+      return v;
+    }
+    */
+
+
   public: // ---- Fourier transforms ------------------
 
 

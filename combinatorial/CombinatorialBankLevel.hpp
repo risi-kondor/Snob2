@@ -59,7 +59,8 @@ namespace Snob2{
       IntegerPartitionObj* r=new IntegerPartitionObj(lambda);
       if(n>1){
 	//cout<<string(8-n,' ')<<lambda<<endl;
-	for(int i=0; i<lambda.k; i++)
+	//for(int i=0; i<lambda.k; i++)
+	for(int i=lambda.k-1; i>=0; i--)
 	  if(lambda.shortenable(i)){
 	    IntegerPartition mu(lambda);
 	    mu.remove(i);

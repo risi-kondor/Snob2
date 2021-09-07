@@ -32,6 +32,7 @@ namespace Snob2{
     SnIrrepObj(const IntegerPartition& _lambda):
       lambda(_lambda){
       tableaux=_combibank->get_YoungTableaux(lambda);
+      //for(auto p:tableaux) cout<<*p<<endl;
       d=tableaux.size();
       n=_lambda.getn();
     }
@@ -121,8 +122,8 @@ namespace Snob2{
 	    float t=A.get_value(i,j);
 	    A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
 	    A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);
-	    done[i2]=true;
 	  }
+	  done[i2]=true;
 	}
       }
     }
@@ -170,8 +171,8 @@ namespace Snob2{
 	    float t=A.get_value(i,j);
 	    A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
 	    A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);
-	    done[i2]=true;
 	  }
+	  done[i2]=true;
 	}
       }
     }
@@ -224,7 +225,7 @@ namespace Snob2{
 	    YORt[ix]=index(tableau);
 	    //cout<<shape<<" "<<i<<" "<<tau<<" "<<YORt[index]<<endl;
 	    YOR1[ix]=1.0/delta;
-	    YOR2[ix]=sqrt(1-1.0/(delta*delta));
+	    YOR2[ix]=sqrt(1.0-1.0/(delta*delta));
 	  }
 	}
       }

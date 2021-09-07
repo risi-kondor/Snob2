@@ -17,6 +17,7 @@ namespace Snob2{
 
   public:
 
+
     template<typename FILLTYPE>
     SnPart(const initializer_list<int> list, const int n, const FILLTYPE& fill, const int _dev=0):
       rtensor(cnine::dims(_snbank->get_irrep(list)->d,n),fill,dev), 
@@ -113,7 +114,7 @@ namespace Snob2{
       rtensor(std::move(x)), irrep(_irrep){}
 
 
-  public:
+  public: // ---- Operations ---------------------------------------------------------------------------------
 
 
     void add_to_block(const int ioffs, const int joffs, const rtensor& M){
@@ -124,15 +125,23 @@ namespace Snob2{
 	  inc(i+ioffs,j+joffs,M.get_value(i,j));
     }
     
-    void add_block_to(const int ioffs, const int joffs, rtensor& M) const{ // normalized!
-      int n=irrep->lambda.getn();
+    void add_block_to(const int ioffs, const int joffs, rtensor& M, float c) const{ // normalized!
+      //int n=irrep->lambda.getn();
       int I=M.dim(0);
       int J=M.dim(1);
       for(int i=0; i<I; i++)
 	for(int j=0; j<J; j++)
-	  M.inc(i,j,get_value(i+ioffs,j+joffs)/n);
+	  M.inc(i,j,get_value(i+ioffs,j+joffs)*c);
     }
-    
+ 
+    /*
+    SnPart operator*(const float c) const{
+      rtensor M(dims,cnine::fill::zero,dev);
+      M.add(*this,c);
+      return SnPart(irrep,std::move(M));
+    }
+    */
+
 
   public:
 

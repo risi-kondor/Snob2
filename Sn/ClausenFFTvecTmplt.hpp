@@ -95,7 +95,15 @@ namespace Snob2{
 
     SnVecPack* pack(const SnVec& v){
       SnVecPack* R=new SnVecPack();
-      R->vecs.push_back(new SnVec(v)); // eliminate copying here
+      /*
+      SnVec* w=new SnVec();
+      for(auto p: v.parts){
+	rtensor M(p->dims,cnine::fill::zero,p->dev);
+	M.add(*p,p->irrep->d);
+	w->parts.push_back(new SnPart(p->irrep,M));
+      }
+      */
+      R->vecs.push_back(new SnVec(v));
       return R;
     }
 
@@ -118,7 +126,8 @@ namespace Snob2{
       W->vecs.resize(newN);
 
       for(int c=0; c<newN; c++){
-
+	//cout<<"----------- c="<<c<<endl;
+	    
 	SnVec* w=new SnVec();
 	for(int i=0; i<parts.size(); i++){
 	  //cout<<*parts[i]->irrep<<endl;
@@ -126,8 +135,10 @@ namespace Snob2{
 	}
   
 	for(int i=0; i<n; i++){
+	  //cout<<"----- i="<<i<<endl;
 	  SnVec u=uptransform(*V->vecs[c*n+i]);
 	  u.apply_inplace(ContiguousCycle(n-i,n));
+	  //cout<<"*"<<u<<endl;
 	  (*w).add(u);
 	}
 
@@ -158,17 +169,19 @@ namespace Snob2{
 	for(int i=0; i<n+1; i++){
 	  //cout<<"i="<<i<<endl;
 
+	  /*
 	  SnVec* w=new SnVec();
-	  for(int i=0; i<parts.size(); i++){
-	    w->parts.push_back(new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+	  for(int j=0; j<parts.size(); j++){
+	    w->parts.push_back(new SnPart(parts[j]->irrep,parts[j]->m,cnine::fill::zero,0));
 	  }
-  
+	  */
+
 	  SnVec u(*V->vecs[c]);
 	  u.apply_inplace_inv(ContiguousCycle(n+1-i,n+1));
-	  SnVec ud=downtransform(u);
-	  (*w).add(ud);
+	  //SnVec ud=downtransform(u);
+	  //(*w).add(ud);
 
-	  W->vecs[c*(n+1)+i]=w;
+	  W->vecs[c*(n+1)+i]=new SnVec(downtransform(u));
 
 	}
       }
@@ -189,7 +202,8 @@ namespace Snob2{
       for(auto p:next->parts){
 	const SnPart& part=*v.parts[i];
 	for(auto q:p->blocks){
-	  part.add_block_to(q->ioffs,q->joffs,*w.parts[q->subix]);
+	  float c=((float)part.irrep->d)/(w.parts[q->subix]->irrep->d*(n+1));
+	  part.add_block_to(q->ioffs,q->joffs,*w.parts[q->subix],c);
 	}
 	i++;
       }

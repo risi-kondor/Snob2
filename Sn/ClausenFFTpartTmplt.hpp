@@ -45,6 +45,7 @@ namespace Snob2{
 	ClausenFFTblockTmplt& b=*p;
 	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
       }
+      //cout<<P<<endl;
       return P;
     }
 

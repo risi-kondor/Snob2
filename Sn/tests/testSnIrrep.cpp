@@ -26,7 +26,9 @@ int main(int argc, char** argv){
 
   SnElement sigma1({1,2,4,3});
   SnElement sigma2({1,3,2,4});
-  SnElement sigma3=sigma1*sigma2;
+  SnElement sigma3({2,1,3,4});
+  SnElement sigma4=sigma1*sigma2;
+  SnElement sigma5=sigma3*sigma1*sigma2;
 
   auto R1=rho(sigma1);
   print("s1",sigma1);
@@ -40,8 +42,20 @@ int main(int argc, char** argv){
   print("s3",sigma3);
   printl("rho(s3)",R3);
 
-  auto R3d=R1*R2;
-  cout<<R3d<<endl;
+  auto R4=rho(sigma4);
+  print("s4",sigma3);
+  printl("rho(s4)",R4);
+
+  auto R5=rho(sigma5);
+  print("s5",sigma5);
+  printl("rho(s5)",R5);
+
+  auto R4d=(R1*R2);//*R2;
+  cout<<endl;
+  cout<<R4d<<endl;
+
+  auto R5d=R1*R2;
+  cout<<R5d<<endl;
 
 
 }

@@ -8,8 +8,10 @@ using namespace std;
 
 
 #define SNOB2_ASSERT(condition, message) if (!(condition)) {cout<<message<<endl; assert ((condition)); exit(-1); }
+
 #define SNOB2_UNIMPL() printf("Snob2 error: function \"%s\" not implemented.\n",__PRETTY_FUNCTION__);
-#define SNOB2_ERROR(cmd) {CoutLock lk; cerr<<"GEnet error in function '"<<__PRETTY_FUNCTION__<<"' : "<<cmd<<endl;} exit(1);
+
+#define SNOB2_ERROR(cmd) {CoutLock lk; cerr<<"Snob2 error in function '"<<__PRETTY_FUNCTION__<<"' : "<<cmd<<endl;} exit(1);
 
 
 

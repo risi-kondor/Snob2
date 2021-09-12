@@ -15,9 +15,6 @@ using namespace Snob2;
 int main(int argc, char** argv){
 
   Snob2_session session;
-  CombinatorialClasses combi_classes;
-  SnClasses Snclasses;
-  cout<<endl;
 
   Sn G(4);
   cout<<G.get_order()<<endl;

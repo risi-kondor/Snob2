@@ -11,8 +11,8 @@ using namespace Snob2;
 int main(int argc, char** argv){
 
   Snob2_session session;
-  CombinatorialClasses combi_classes;
-  SnClasses Snclasses;
+  //CombinatorialClasses combi_classes;
+  //SnClasses Snclasses;
 
   SnType tau({{{4,2},1},{{3,3},4}});
   SnRepresentation mu(tau);

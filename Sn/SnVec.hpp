@@ -5,7 +5,7 @@
 #include "SnType.hpp"
 //#include "SnMultiVec.hpp"
 //#include "SnModule.hpp"
-//#include "SnRepresentation.hpp"
+#include "SnRepresentation.hpp"
 
 namespace Snob2{
 
@@ -23,25 +23,23 @@ namespace Snob2{
 
     SnVec(){}
 
-    /*
     template<typename FILLTYPE>
-    SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0): repr(_repr){
-      for(auto& p:M.irreps)
-	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+    SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0)//: repr(_repr)
+    {
+      for(auto& p:_repr->isotypics){
+	const SnIsotypicObj& iso=p.second;
+	parts.push_back(new SnPart(iso.irrep,iso.m,fill,_dev));
+      }
     }
-    */
 
-    /*
     template<typename FILLTYPE>
     SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0):
-      SnVec(_snrepbank->get_rep(_type),fill,dev){}
-    */
+      SnVec(_snrepbank->get_rep(_type),fill,_dev){}
 
-    /*
+    
     template<typename FILLTYPE>
     SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0):
-      SnVec(M.obj,fill,dev){}
-    */
+      SnVec(M.obj,fill,_dev){}
 
     SnVec(SnPart* part){
       parts.push_back(part);

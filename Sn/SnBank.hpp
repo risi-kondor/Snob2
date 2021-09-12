@@ -3,6 +3,7 @@
 
 #include "Snob2_base.hpp"
 #include "SnObj.hpp"
+//#include "SnOverSmObj.hpp"
 //#include "IntegerPartitionsObj.hpp"
 
 namespace Snob2{
@@ -30,7 +31,12 @@ namespace Snob2{
     SnIrrepObj* get_irrep(const IntegerPartition& lambda){
       return get_Sn(lambda.getn())->get_irrep(lambda);
     }
-    
+  
+    SnOverSmObj* get_SnOverSm(const int n, const int m){
+      return getSn(n)->get_SnOverSm(m);
+    }
+
+  
   public: 
 
 

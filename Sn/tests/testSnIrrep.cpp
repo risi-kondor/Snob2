@@ -15,9 +15,6 @@ using namespace Snob2;
 int main(int argc, char** argv){
 
   Snob2_session session;
-  CombinatorialClasses combi_classes;
-  SnClasses Snclasses;
-  cout<<endl;
 
   int n=4;
   IntegerPartition lambda({n-1,1});

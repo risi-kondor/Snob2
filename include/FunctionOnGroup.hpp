@@ -17,17 +17,24 @@ namespace Snob2{
     typedef decltype(TENSOR::dummy_scalar()) SCALAR; 
     //typedef decltype(TENSOR::value(0)) SCALAR; 
 
-    const GROUP& G; 
+    const GROUP* G; 
     const int N;
 
 
-  public:
+  public: // ---- Constructors -------------------------------------------------------------------------------
+
+
+    FunctionOnGroup(const GROUP* _G): 
+      TENSOR(Gdims({_G->size()}),cnine::fill_raw()),
+      G(_G), 
+      N(_G->size()){}
+
 
     template<typename FILLTYPE>
-    FunctionOnGroup(const GROUP& _G, const FILLTYPE& dummy): 
-      TENSOR(Gdims({_G.size()}),dummy),
+    FunctionOnGroup(const GROUP* _G, const FILLTYPE& dummy): 
+      TENSOR(Gdims({_G->size()}),dummy),
       G(_G), 
-      N(_G.size()){}
+      N(_G->size()){}
 
 
   public:
@@ -52,11 +59,11 @@ namespace Snob2{
     }
 
     SCALAR operator()(const ELEMENT& x) const{
-      return TENSOR::value(G.index(x));
+      return TENSOR::value(G->index(x));
     }
 
     FunctionOnGroup& set_value(const ELEMENT& x, const SCALAR v){
-      TENSOR::set_value(G.index(x),v);
+      TENSOR::set_value(G->index(x),v);
       return *this;
     }
 
@@ -66,21 +73,21 @@ namespace Snob2{
     FunctionOnGroup left_translate(const ELEMENT& t) const{
       FunctionOnGroup R(G,cnine::fill_raw());
       for(int i=0; i<N; i++)
-	R.set_value(t*G.element(i),TENSOR::value(i));
+	R.set_value(t*G->element(i),TENSOR::value(i));
       return R;
     }
 
     FunctionOnGroup right_translate(const ELEMENT& t) const{
       FunctionOnGroup R(G,cnine::fill_raw());
       for(int i=0; i<N; i++)
-	R.set_value(G.element(i)*t,TENSOR::value(i));
+	R.set_value(G->element(i)*t,TENSOR::value(i));
       return R;
     }
 
     FunctionOnGroup inv() const{
       FunctionOnGroup R(G,cnine::fill_raw());
       for(int i=0; i<N; i++)
-	R.set_value(G.element(i).inverse(),TENSOR::value(i));
+	R.set_value(G->element(i).inverse(),TENSOR::value(i));
       return R;
     }
 

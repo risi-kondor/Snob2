@@ -13,8 +13,6 @@ using namespace Snob2;
 
 int main(int argc, char** argv){
   Snob2_session session;
-  SnClasses Snclasses;
-  cout<<endl;
 
   SnOverSm Q(5,3);
   cout<<Q.get_order()<<endl;

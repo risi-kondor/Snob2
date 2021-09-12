@@ -83,7 +83,18 @@ namespace Snob2{
   public: // ---- Applying the transform ---------------------------------------------------------------------
 
 
+    // Deprecated
     SnVecPack* pack(const FunctionOnGroup<Sn,rtensor>& f){
+      SnVecPack* R=new SnVecPack();
+      int N=f.size();
+      R->vecs.resize(N);
+      SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({1}));
+      for(int i=0; i<N; i++)
+	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
+      return R;
+    }
+
+    SnVecPack* pack(const FunctionOnGroup<SnObj,rtensor>& f){
       SnVecPack* R=new SnVecPack();
       int N=f.size();
       R->vecs.resize(N);
@@ -107,6 +118,8 @@ namespace Snob2{
       return R;
     }
 
+    // Deprecated
+    /*
     FunctionOnGroup<Sn,rtensor> unpack(SnVecPack* V){
       int N=V->vecs.size();
       Sn G(n);
@@ -116,7 +129,16 @@ namespace Snob2{
 	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
       return R;
     }
+    */
 
+    FunctionOnGroup<SnObj,rtensor> unpack(SnVecPack* V){
+      int N=V->vecs.size();
+      FunctionOnGroup<SnObj,rtensor> R(_snbank->get_Sn(n),cnine::fill::ones);
+      assert(R.size()==N);
+      for(int i=0; i<N; i++)
+	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
+      return R;
+    }
 
 
     SnVecPack* uptransform(const SnVecPack* V) const{

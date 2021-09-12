@@ -8,6 +8,7 @@
 
 #include "SnElement.hpp"
 #include "SnIrrepObj.hpp"
+#include "SnOverSmObj.hpp"
 //#include "SnModule.hpp"
 //#include "SnRepresentation.hpp"
 
@@ -26,6 +27,7 @@ namespace Snob2{
 
     vector<SnIrrepObj*> irreps;
     map<IntegerPartition,SnIrrepObj*> irrep_map;
+    map<int,SnOverSmObj*> snsm_map;
     //SnModule module;
     //SnRepresentation repr;
     bool all_irreps=false;
@@ -43,8 +45,15 @@ namespace Snob2{
       for(auto p:irreps) delete p;
     }
 
+    static SnElement dummy_element(){return SnElement::Identity(1);}
 
-  public:
+
+  public: // ---- Access -------------------------------------------------------------------------------------
+
+
+    int size() const{
+      return order;
+    }
 
     SnElement element(int e) const{
       SnElement p(n,cnine::fill_identity());
@@ -82,7 +91,7 @@ namespace Snob2{
     }
 
 
-  public:
+  public: // --- Irreps ----
 
     /*
     SnIrrep irrep(const IntegerPartition& lambda){
@@ -136,14 +145,20 @@ namespace Snob2{
       for(int i=0; i<partitions.size(); i++){
 	get_irrep(partitions[i]);
       }
-      /*
-      for(auto p:irreps)
-	module.set(p->lambda,p->d);
-      //for(auto p:irreps)
-      //repr.set(p->lambda,p->d);
-      all_irreps=true;
-      */
     }
+
+
+  public: // ---- SnOverSm -----------------------------------------------------------------------------------
+
+
+    SnOverSmObj* get_SnOverSm(const int m){
+      auto it=snsm_map.find(m);
+      if(it!=snsm_map.end()) return it->second;
+      SnOverSmObj* t=new SnOverSm(n,m);
+      snsm_map[m]=t;
+      return t;
+    }
+
 
   };
 

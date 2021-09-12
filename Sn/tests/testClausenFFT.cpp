@@ -7,6 +7,7 @@
 #include "SnVec.hpp" 
 #include "CombinatorialClasses.hpp"
 #include "ClausenFFTObj.hpp"
+#include "SnFunction.hpp"
 
 using namespace cnine;
 using namespace Snob2;
@@ -18,16 +19,15 @@ using namespace Snob2;
 
 int main(int argc, char** argv){
   Snob2_session session;
-  SnClasses Snclasses;
-  CombinatorialClasses combi_classes;
-  cout<<endl;
+
   int n=4;
 
   ClausenFFTObj FFT(n);
   cout<<FFT<<endl;
 
   Sn G(n);
-  FunctionOnGroup<Sn,cnine::RtensorObj> f(G,cnine::fill::gaussian);
+  //FunctionOnGroup<Sn,cnine::RtensorObj> f(G,cnine::fill::gaussian);
+  SnFunction f(G,cnine::fill::gaussian);
   cout<<f<<endl;
 
   SnVec v=FFT(f);

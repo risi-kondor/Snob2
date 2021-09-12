@@ -6,9 +6,11 @@
 
 #include "IntegerPartition.hpp"
 #include "YoungTableau.hpp"
+//#include "StandardYoungTableau.hpp"
 
 #include "IntegerPartitions.hpp"
 #include "YoungTableaux.hpp"
+#include "StandardYoungTableaux.hpp"
 
 
 namespace Snob2{

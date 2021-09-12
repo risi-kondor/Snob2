@@ -15,9 +15,6 @@ using namespace Snob2;
 int main(int argc, char** argv){
 
   Snob2_session session;
-  CombinatorialClasses combi_classes;
-  SnClasses Snclasses;
-  cout<<endl;
 
   SnType type0(IntegerPartition({4,2}),1);
   type0.set(IntegerPartition({5,1}),2);

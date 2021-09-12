@@ -10,13 +10,26 @@ namespace Snob2{
 
     using FunctionOnGroup::FunctionOnGroup;
 
-    template<typename FILLTYPE>
-    SnFunction(int n, const FILLTYPE& fill):
-      FunctionOnGroup<SnObj,cnine::RtensorObj>(_snbank->get_Sn(n),fill){}
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    SnFunction(int n, const FILLTYPE& fill, const int _dev):
+      FunctionOnGroup<SnObj,cnine::RtensorObj>(_snbank->get_Sn(n),fill,_dev){}
 
-    template<typename FILLTYPE>
-    SnFunction(const Sn& _G, const FILLTYPE& fill):
-      FunctionOnGroup<SnObj,cnine::RtensorObj>(_G.obj,fill){}
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    SnFunction(const Sn& _G, const FILLTYPE& fill, const int _dev):
+      FunctionOnGroup<SnObj,cnine::RtensorObj>(_G.obj,fill,_dev){}
+
+
+  public: // ---- Named constructors ------------------------------------------------------------------------
+
+
+    SnFunction static raw(const int n, const int _dev=0){
+      return SnFunction(n,cnine::fill_raw(),_dev);}
+
+    SnFunction static zero(const int n, const int _dev=0){
+      return SnFunction(n,cnine::fill_zero(),_dev);}
+
+    SnFunction static gaussian(const int n, const int _dev=0){
+      return SnFunction(n,cnine::fill_gaussian(),_dev);}
 
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 

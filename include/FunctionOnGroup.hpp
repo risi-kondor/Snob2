@@ -24,15 +24,15 @@ namespace Snob2{
   public: // ---- Constructors -------------------------------------------------------------------------------
 
 
-    FunctionOnGroup(const GROUP* _G): 
-      TENSOR(Gdims({_G->size()}),cnine::fill_raw()),
+    FunctionOnGroup(const GROUP* _G, const int _dev=0): 
+      TENSOR(Gdims({_G->size()},cnine::fill_raw(),_dev),cnine::fill_raw()),
       G(_G), 
       N(_G->size()){}
 
 
-    template<typename FILLTYPE>
-    FunctionOnGroup(const GROUP* _G, const FILLTYPE& dummy): 
-      TENSOR(Gdims({_G->size()}),dummy),
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    FunctionOnGroup(const GROUP* _G, const FILLTYPE& dummy, const int _dev=0): 
+      TENSOR(Gdims({_G->size()}),dummy,_dev),
       G(_G), 
       N(_G->size()){}
 

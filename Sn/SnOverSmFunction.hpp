@@ -11,12 +11,26 @@ namespace Snob2{
     using FunctionOnGroup::FunctionOnGroup;
 
     template<typename FILLTYPE>
-    SnOverSmFunction(int n, const FILLTYPE& fill):
-      FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_snbank->get_Sn(n),fill){}
+    SnOverSmFunction(int n, int m, const FILLTYPE& fill, const int _dev=0):
+      FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_snbank->get_SnOverSm(n,m),fill,_dev){}
 
     template<typename FILLTYPE>
-    SnOverSmFunction(const SnOverSm& _G, const FILLTYPE& fill):
-      FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_G.obj,fill){}
+    SnOverSmFunction(const SnOverSm& _G, const FILLTYPE& fill, const int _dev=0):
+      FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_G.obj,fill,_dev){}
+
+
+  public: // ---- Named constructors ------------------------------------------------------------------------
+
+
+    SnOverSmFunction static raw(const int n, const int m, const int _dev=0){
+      return SnOverSmFunction(n,m,cnine::fill_raw(),_dev);}
+
+    SnOverSmFunction static zero(const int n, const int m, const int _dev=0){
+      return SnOverSmFunction(n,m,cnine::fill_zero(),_dev);}
+
+    SnOverSmFunction static gaussian(const int n, const int m, const int _dev=0){
+      return SnOverSmFunction(n,m,cnine::fill_gaussian(),_dev);}
+
 
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 

@@ -2,6 +2,8 @@
 #define _ClausenFFTvecTmplt
 
 #include "ClausenFFTpartTmplt.hpp"
+#include "FunctionOnGroup.hpp"
+
 
 namespace Snob2{
 

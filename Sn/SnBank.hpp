@@ -6,6 +6,7 @@
 //#include "SnOverSmObj.hpp"
 //#include "IntegerPartitionsObj.hpp"
 
+
 namespace Snob2{
 
 
@@ -13,8 +14,7 @@ namespace Snob2{
   public:
     
     vector<SnObj*> sn;
-    
-
+  
   public: 
 
     SnObj* get_Sn(const int n){

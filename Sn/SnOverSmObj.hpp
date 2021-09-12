@@ -7,6 +7,7 @@
 
 namespace Snob2{
 
+
   class SnOverSmObj{
   public:
 
@@ -75,6 +76,7 @@ namespace Snob2{
     }
 
   };
+
 
 }
 

@@ -10,7 +10,6 @@ using namespace cnine;
 using namespace Snob2;
 
 
-
 int main(int argc, char** argv){
   Snob2_session session;
 

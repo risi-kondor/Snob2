@@ -4,7 +4,12 @@
 #include "CnineSession.hpp"
 #include "Snob2_base.hpp"
 #include "CombinatorialClasses.hpp"
-#include "SnClasses.hpp"
+
+#include "SnBank.hpp"
+#include "SnRepresentationBank.hpp"
+#include "Sn.hpp" // eliminate this
+#include "SnFFTbank.hpp"
+//#include "SnClasses.hpp"
 
 
 namespace Snob2{
@@ -26,6 +31,8 @@ namespace Snob2{
       _snbank=new SnBank();
 
       _snrepbank=new SnRepresentationBank();
+
+      _snfftbank=new SnFFTbank();
 
       cout<<"Snob2 initialized."<<endl<<endl;
 

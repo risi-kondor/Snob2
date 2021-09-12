@@ -23,6 +23,14 @@ namespace Snob2{
 
   public: // Access
 
+    int getn() const{
+      return n;
+    }
+
+    int getm() const{
+      return m;
+    }
+
     int size() const{
       return obj->size();
       //return factorial(n)/factorial(m);

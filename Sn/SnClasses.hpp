@@ -4,6 +4,7 @@
 #include "Snob2_base.hpp"
 #include "SnBank.hpp"
 #include "SnRepresentationBank.hpp"
+#include "SnFFTbank.hpp"
 
 #include "Sn.hpp"
 #include "SnOverSm.hpp"

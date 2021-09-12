@@ -1,5 +1,5 @@
-#ifndef _SnOverSm
-#define _SnOverSm
+#ifndef _SnOverSmObj
+#define _SnOverSmObj
 
 #include "SnBank.hpp"
 #include "SnElement.hpp"

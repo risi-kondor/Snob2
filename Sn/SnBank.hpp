@@ -33,7 +33,7 @@ namespace Snob2{
     }
   
     SnOverSmObj* get_SnOverSm(const int n, const int m){
-      return getSn(n)->get_SnOverSm(m);
+      return get_Sn(n)->get_SnOverSm(m);
     }
 
   

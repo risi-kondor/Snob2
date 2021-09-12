@@ -12,10 +12,10 @@ namespace Snob2{
 
     const int n;
     const int m;
-    //SnObj* obj;
+    SnOverSmObj* obj;
 
     SnOverSm(const int _n, const int _m): n(_n), m(_m){
-      //obj=_snbank->get_Sn(n);
+      obj=_snbank->get_SnOverSm(n,m);
     }
 
     static SnElement dummy_element(){return SnElement::Identity(1);}
@@ -24,7 +24,8 @@ namespace Snob2{
   public: // Access
 
     int size() const{
-      return factorial(n)/factorial(m);
+      return obj->size();
+      //return factorial(n)/factorial(m);
     }
 
     int get_order() const{
@@ -36,6 +37,7 @@ namespace Snob2{
     }
 
     SnElement element(int e) const{
+      return obj->element(e);
       SnElement p(n,cnine::fill_identity());
 
       e*=factorial(m);

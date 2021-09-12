@@ -154,7 +154,7 @@ namespace Snob2{
     SnOverSmObj* get_SnOverSm(const int m){
       auto it=snsm_map.find(m);
       if(it!=snsm_map.end()) return it->second;
-      SnOverSmObj* t=new SnOverSm(n,m);
+      SnOverSmObj* t=new SnOverSmObj(n,m);
       snsm_map[m]=t;
       return t;
     }

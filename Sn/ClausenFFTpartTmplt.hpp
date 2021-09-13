@@ -12,6 +12,7 @@ namespace Snob2{
     int index=0;
     int d=0;
     int m=0;
+    int ioffs=0;
     SnIrrepObj* irrep;
     vector<ClausenFFTblockTmplt*> blocks;
 
@@ -20,7 +21,9 @@ namespace Snob2{
 
 
     ClausenFFTpartTmplt(const IntegerPartition& lambda, const int _index):
-      index(_index), irrep(_snbank->get_irrep(lambda)){}
+      index(_index), irrep(_snbank->get_irrep(lambda)){
+      d=irrep->d;
+    }
 
     ClausenFFTpartTmplt(const ClausenFFTpartTmplt& x)=delete;
     ClausenFFTpartTmplt& operator=(const ClausenFFTpartTmplt& x)=delete;
@@ -30,8 +33,8 @@ namespace Snob2{
 
 
     void add(const ClausenFFTpartTmplt& sub){
-      blocks.push_back(new ClausenFFTblockTmplt(d,m,sub.index));
-      d+=sub.d;
+      blocks.push_back(new ClausenFFTblockTmplt(ioffs,m,sub.index));
+      ioffs+=sub.d;
       m+=sub.m;
     }
 

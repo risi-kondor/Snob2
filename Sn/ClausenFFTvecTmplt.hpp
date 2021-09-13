@@ -51,10 +51,8 @@ namespace Snob2{
   public: // ---- Creating the transform ---------------------------------------------------------------------
 
 
-    ClausenFFTvecTmplt(const int _n){
-      assert(_n==1);
-      n=1;
-      auto seed=get_part(IntegerPartition({1}));
+    ClausenFFTvecTmplt(const int _n): n(_n){
+      auto seed=get_part(IntegerPartition({n}));
       seed->blocks.push_back(new ClausenFFTblockTmplt(0,0,0));
       seed->d=1;
       seed->m=1;
@@ -86,6 +84,7 @@ namespace Snob2{
 
 
     // Deprecated
+    /*
     SnVecPack* pack(const FunctionOnGroup<Sn,rtensor>& f){
       SnVecPack* R=new SnVecPack();
       int N=f.size();
@@ -95,12 +94,23 @@ namespace Snob2{
 	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
       return R;
     }
+    */
 
     SnVecPack* pack(const FunctionOnGroup<SnObj,rtensor>& f){
       SnVecPack* R=new SnVecPack();
       int N=f.size();
       R->vecs.resize(N);
       SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({1}));
+      for(int i=0; i<N; i++)
+	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
+      return R;
+    }
+
+    SnVecPack* pack(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
+      SnVecPack* R=new SnVecPack();
+      int N=f.size();
+      R->vecs.resize(N);
+      SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({f.G->m}));
       for(int i=0; i<N; i++)
 	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
       return R;
@@ -136,6 +146,16 @@ namespace Snob2{
     FunctionOnGroup<SnObj,rtensor> unpack(SnVecPack* V){
       int N=V->vecs.size();
       FunctionOnGroup<SnObj,rtensor> R(_snbank->get_Sn(n),cnine::fill::ones);
+      assert(R.size()==N);
+      for(int i=0; i<N; i++)
+	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
+      return R;
+    }
+
+
+    FunctionOnGroup<SnOverSmObj,rtensor> unpack(int m, SnVecPack* V){
+      int N=V->vecs.size();
+      FunctionOnGroup<SnOverSmObj,rtensor> R(_snbank->get_SnOverSm(n,m),cnine::fill::ones);
       assert(R.size()==N);
       for(int i=0; i<N; i++)
 	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));

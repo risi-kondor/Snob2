@@ -11,11 +11,11 @@ namespace Snob2{
     using FunctionOnGroup::FunctionOnGroup;
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnFunction(int n, const FILLTYPE& fill, const int _dev):
+    SnFunction(int n, const FILLTYPE& fill, const int _dev=0):
       FunctionOnGroup<SnObj,cnine::RtensorObj>(_snbank->get_Sn(n),fill,_dev){}
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnFunction(const Sn& _G, const FILLTYPE& fill, const int _dev):
+    SnFunction(const Sn& _G, const FILLTYPE& fill, const int _dev=0):
       FunctionOnGroup<SnObj,cnine::RtensorObj>(_G.obj,fill,_dev){}
 
 

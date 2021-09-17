@@ -6,6 +6,7 @@
 #include "SnIrrep.hpp"
 //#include "SnModule.hpp"
 //#include "SnRepresentation.hpp"
+#include "SnCharBank.hpp"
 
 
 namespace Snob2{
@@ -83,6 +84,31 @@ namespace Snob2{
       return R;
     }
 
+
+  public: // Characters 
+
+
+    SnClassFunction character(const IntegerPartition& lambda) const{
+      return SnClassFunction(*_sncharbank->get_character(lambda));
+    }
+
+
+  public:
+
+    string str(const string indent="") const{
+      return "Sn("+to_string(n)+")";
+    }
+
+    friend ostream& operator<<(ostream& stream, const Sn& x){
+      stream<<x.str(); return stream;
+    }
+
+
+  };
+
+}
+
+#endif 
     /*
     SnModule module() const{
       return obj->get_module();
@@ -105,20 +131,3 @@ namespace Snob2{
     }
     */
 
-
-  public:
-
-    string str(const string indent="") const{
-      return "Sn("+to_string(n)+")";
-    }
-
-    friend ostream& operator<<(ostream& stream, const Sn& x){
-      stream<<x.str(); return stream;
-    }
-
-
-  };
-
-}
-
-#endif 

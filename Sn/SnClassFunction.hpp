@@ -13,38 +13,54 @@ namespace Snob2{
 
     using rtensor::rtensor;
 
+    int n;
+
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnFunction(int n, const FILLTYPE& fill, const int _dev=0):
-      FunctionOnGroup<SnObj,cnine::RtensorObj>({_snbank->get_Sn(n)->ncclasses()},fill,_dev){}
+    SnClassFunction(int _n, const FILLTYPE& fill, const int _dev=0):
+      rtensor({_snbank->get_Sn(_n)->ncclasses()},fill,_dev), n(_n){}
 
 
     
   public: // ---- Named constructors ------------------------------------------------------------------------
 
 
-    SnFunction static raw(const int n, const int _dev=0){
+    SnClassFunction static raw(const int n, const int _dev=0){
       return SnClassFunction(n,cnine::fill_raw(),_dev);}
 
-    SnFunction static zero(const int n, const int _dev=0){
+    SnClassFunction static zero(const int n, const int _dev=0){
       return SnClassFunction(n,cnine::fill_zero(),_dev);}
 
-    SnFunction static gaussian(const int n, const int _dev=0){
+    SnClassFunction static gaussian(const int n, const int _dev=0){
       return SnClassFunction(n,cnine::fill_gaussian(),_dev);}
 
+
+
+  public: // ---- Access ------------------------------------------------------------------------------------
+
+
+    float operator()(const IntegerPartition& lambda){
+      return rtensor::get_value(_snbank->get_Sn(lambda.getn())->index(lambda));
+    }
+
+    void set_value(const IntegerPartition& lambda, const float v){
+      rtensor::set_value(_snbank->get_Sn(lambda.getn())->index(lambda),v);
+    }
+    
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 
 
 
     string str(const string indent="") const{
       ostringstream oss;
+      SnObj* Gobj=_snbank->get_Sn(n);
       for(int i=0; i<dims(0); i++){
-	//oss<<G.element(i)<<" : ";  // Fix this!
+	oss<<Gobj->cclass(i)<<" : ";
 	oss<<RtensorObj::get_value(i)<<endl;
       }
       return oss.str();
     }
 
-    friend ostream& operator<<(ostream& stream, const SnFunction& x){
+    friend ostream& operator<<(ostream& stream, const SnClassFunction& x){
       stream<<x.str(); return stream;
     }
 

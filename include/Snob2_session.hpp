@@ -35,6 +35,8 @@ namespace Snob2{
 
       _snfftbank=new SnFFTbank();
 
+      _sncharbank=new SnCharBank();
+
       _sncgbank=new SnCGbank();
 
       cout<<"Snob2 initialized."<<endl<<endl;

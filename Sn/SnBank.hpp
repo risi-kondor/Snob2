@@ -14,6 +14,11 @@ namespace Snob2{
   public:
     
     vector<SnObj*> sn;
+
+    ~SnBank(){
+      for(auto p:sn) delete p;
+    }
+
   
   public: 
 

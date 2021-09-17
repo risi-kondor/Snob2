@@ -32,11 +32,8 @@ namespace Snob2{
   class SnFFTbank;
   SnFFTbank* _snfftbank=nullptr;
 
-}
-
-//#include "SnCGbank.hpp"
-
-namespace Snob2{
+  class SnCharBank;
+  SnCharBank* _sncharbank=nullptr;
 
   class SnCGbank;
   SnCGbank* _sncgbank=nullptr;

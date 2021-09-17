@@ -11,7 +11,7 @@ COMBINATORIALDIR=$(ROOTDIR)/combinatorial
 GROUPSDIR=$(ROOTDIR)/groups
 SNDIR=$(ROOTDIR)/Sn
 
-CFLAGS= -std=c++11 -O3 #-ferror-limit=1  
+CFLAGS= -std=c++11 -O3 -ferror-limit=1  
 INCLUDE= -I $(ROOTDIR)/include 
 LIBS= -lstdc++ -lm -lpthread 
 

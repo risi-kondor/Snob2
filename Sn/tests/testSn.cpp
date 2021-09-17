@@ -29,6 +29,9 @@ int main(int argc, char** argv){
     cout<<G.element(i)<<" "<<G.index(G.element(i))<<endl;
   }
 
+  for(int i=0; i<G.ncclasses(); i++)
+    cout<<G.cclass(i)<<endl;
+
   //SnModule M=G.module();
   //cout<<M<<endl;
 

@@ -114,6 +114,18 @@ namespace Snob2{
       rtensor(std::move(x)), irrep(_irrep){}
 
 
+  public: // ---- Access -------------------------------------------------------------------------------------
+
+
+    int getn() const{
+      return irrep->lambda.getn();
+    }
+
+    IntegerPartition get_lambda() const{
+      return irrep->lambda;
+    }
+
+      
   public: // ---- Operations ---------------------------------------------------------------------------------
 
 

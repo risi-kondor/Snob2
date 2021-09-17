@@ -4,7 +4,7 @@ include $(ROOTDIR)/common.txt
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
 TESTS= testSn testSnFunction testSnOverSm testSnOverSmFunction testSnIrrep testSnType testSnRepresentation \
-testSnPart testSnVec testClausenFFT testClausenFFT2 #testSnMultiVec testFourierTransform
+testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter #testSnCG #testSnMultiVec testFourierTransform
 
 ifdef WITH_CUDA
 endif 
@@ -136,6 +136,30 @@ ifdef WITH_CUDA
 	$(NVCC) $(NVCCFLAGS) -o testClausenFFT2 testClausenFFT2.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
 	$(CC) -o testClausenFFT2 testClausenFFT2.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
+
+testSnCG: testSnCG.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testSnCG testSnCG.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testSnCG testSnCG.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
+
+testSnClassFunction: testSnClassFunction.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testSnClassFunction testSnClassFunction.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testSnClassFunction testSnClassFunction.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
+
+testSnCharacter: testSnCharacter.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testSnCharacter testSnCharacter.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testSnCharacter testSnCharacter.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
 
 

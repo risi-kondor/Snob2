@@ -12,6 +12,9 @@
 #include "SO3vec_CGproduct_ops.hpp"
 */
 
+//#include "SnCGbank.hpp"
+
+
 vector<int> Snob2::factorial::fact;
 
 
@@ -28,6 +31,15 @@ namespace Snob2{
 
   class SnFFTbank;
   SnFFTbank* _snfftbank=nullptr;
+
+}
+
+//#include "SnCGbank.hpp"
+
+namespace Snob2{
+
+  class SnCGbank;
+  SnCGbank* _sncgbank=nullptr;
 
 }
 

@@ -97,7 +97,11 @@ namespace Snob2{
 
   public: // ---- Access -------------------------------------------------------------------------------------
 
-    
+
+    int getn() const{
+      assert(parts.size()>0);
+      return parts[0]->getn();
+    }
     
 
   public:
@@ -145,6 +149,21 @@ namespace Snob2{
   public: // ---- Operations ---------------------------------------------------------------------------------
 
 
+    SnVec down() const{ // TODO 
+      SNOB2_UNIMPL();
+      return *this;
+    }
+
+    SnVec static down(const SnPart& v){ // TODO 
+      SNOB2_UNIMPL();
+      return new SnPart(v);
+    }
+
+    SnVec static concat(const vector<SnVec> v){
+      SNOB2_UNIMPL();
+      return SnVec();
+    }
+
     /*
     SnVec operator*(const float c) const{
       SnVec v;
@@ -153,6 +172,8 @@ namespace Snob2{
       return v;
     }
     */
+
+    //SnType CGtype(const IntegerPartition& x, IntegerPartition& y){}
 
 
   public: // ---- Fourier transforms ------------------

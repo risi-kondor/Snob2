@@ -4,7 +4,9 @@
 #include "IntegerPartition.hpp"
 #include "ContiguousCycle.hpp"
 #include "RtensorObj.hpp"
-
+#include "YoungTableau.hpp"
+#include "SnElement.hpp"
+//#include "SnClassFunction"
 
 namespace Snob2{
 
@@ -21,6 +23,7 @@ namespace Snob2{
     vector<YoungTableau*> tableaux;
     vector<SnIrrepObj*> ancestors;
     vector<SnIrrepObj*> descendents;
+    //SnClassFunction chi;
 
     mutable int* YORt=nullptr;
     mutable double* YOR1;

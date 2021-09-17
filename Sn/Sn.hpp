@@ -54,6 +54,21 @@ namespace Snob2{
     }
 
 
+  public: // Classes
+
+    int ncclasses() const{
+      return obj->ncclasses(); 
+    }
+
+    IntegerPartition cclass(const int i) const{
+      return obj->cclass(i);
+    }
+
+    int index(const IntegerPartition& lambda) const{
+      return obj->index(lambda);
+    }
+
+
   public: // Representations
 
     SnIrrep irrep(const IntegerPartition& lambda) const{

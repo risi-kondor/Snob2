@@ -9,6 +9,7 @@
 #include "SnRepresentationBank.hpp"
 #include "Sn.hpp" // eliminate this
 #include "SnFFTbank.hpp"
+#include "SnCGbank.hpp"
 //#include "SnClasses.hpp"
 
 
@@ -33,6 +34,8 @@ namespace Snob2{
       _snrepbank=new SnRepresentationBank();
 
       _snfftbank=new SnFFTbank();
+
+      _sncgbank=new SnCGbank();
 
       cout<<"Snob2 initialized."<<endl<<endl;
 

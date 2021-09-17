@@ -196,4 +196,16 @@ namespace std{
 }
 
 
+namespace std{
+  template<>
+  struct hash<std::pair<Snob2::IntegerPartition,Snob2::IntegerPartition> >{
+  public:
+    size_t operator()(const pair<Snob2::IntegerPartition,Snob2::IntegerPartition>& lambdas) const{
+      return (hash<Snob2::IntegerPartition>()(lambdas.first)<<1)^
+	(hash<Snob2::IntegerPartition>()(lambdas.second));
+    }
+  };
+}
+
+
 #endif

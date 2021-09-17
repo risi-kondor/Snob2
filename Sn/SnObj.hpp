@@ -15,6 +15,9 @@
 
 namespace Snob2{
 
+  //class SnClassFunction;
+
+
   class SnObj{
   public:
 
@@ -27,6 +30,10 @@ namespace Snob2{
 
     vector<SnIrrepObj*> irreps;
     map<IntegerPartition,SnIrrepObj*> irrep_map;
+
+    mutable vector<IntegerPartition*> cclasses;
+    mutable map<IntegerPartition,int> cclass_map;
+
     map<int,SnOverSmObj*> snsm_map;
     //SnModule module;
     //SnRepresentation repr;
@@ -43,6 +50,8 @@ namespace Snob2{
 
     ~SnObj(){
       for(auto p:irreps) delete p;
+      for(auto p:cclasses) delete p;
+      for(auto& p:snsm_map) delete p.second;
     }
 
     static SnElement dummy_element(){return SnElement::Identity(1);}
@@ -91,7 +100,39 @@ namespace Snob2{
     }
 
 
-  public: // --- Irreps ----
+  public: // ---- Conjugacy classes -------------------------------------------------------------------------
+
+
+    const int ncclasses() const{
+      make_cclasses();
+      return cclasses.size();
+    }
+
+    IntegerPartition cclass(const int i) const{
+      make_cclasses();
+      return *cclasses[i];
+    }
+
+    const int index(const IntegerPartition& lambda) const{
+      make_cclasses();
+      return cclass_map[lambda];
+    }
+    
+
+  private:
+
+    void make_cclasses() const{
+      if (cclasses.size()>0) return;
+      IntegerPartitions Lambda(n);
+      for(int i=0; i<Lambda.size(); i++){
+	IntegerPartition lambda=Lambda[i];
+	cclasses.push_back(new IntegerPartition(lambda));
+	cclass_map[lambda]=i;
+      }
+
+    }
+
+  public: // ---- Irreps -------------------------------------------------------------------------------------
 
     /*
     SnIrrep irrep(const IntegerPartition& lambda){
@@ -147,6 +188,18 @@ namespace Snob2{
       }
     }
 
+  public: // ---- Characters ---------------------------------------------------------------------------------
+
+    /*
+    SnClassFunction* get_character(const IntegerPartition& lambda){
+      auto it=character_map.find(lambda);
+      if(it!=character_map.end()) return it->second;
+      SnIrrepObj* chi=get_irrep(lambda)->get_character(); //=new SnIrrepObj(lambda); TODO 
+      character_map.push_back(chi);
+      character_map[lambda]=chi;
+      return chi;
+    }
+    */
 
   public: // ---- SnOverSm -----------------------------------------------------------------------------------
 

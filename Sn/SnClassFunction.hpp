@@ -12,6 +12,8 @@ namespace Snob2{
     typedef cnine::RtensorObj rtensor;
 
     using rtensor::rtensor;
+    using rtensor::get_value;
+    using rtensor::set_value;
 
     int n;
 
@@ -37,6 +39,10 @@ namespace Snob2{
 
   public: // ---- Access ------------------------------------------------------------------------------------
 
+
+    int size() const{
+      return dim(0);
+    }
 
     float operator()(const IntegerPartition& lambda){
       return rtensor::get_value(_snbank->get_Sn(lambda.getn())->index(lambda));

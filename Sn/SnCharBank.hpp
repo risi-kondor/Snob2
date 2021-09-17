@@ -2,6 +2,7 @@
 #define _SnCharBank
 
 #include "SnClassFunction.hpp"
+#include "SnObj.hpp"
 
 
 namespace Snob2{
@@ -9,16 +10,24 @@ namespace Snob2{
   class SnCharBankLevel{
   public:
 
+    int n;
+
     unordered_map<IntegerPartition,SnClassFunction*> characters;
 
   public:
 
-    SnCharBankLevel(const int _n){}
+    SnCharBankLevel(const int _n): n(_n){}
 
     SnClassFunction* get_character(const IntegerPartition& lambda){
+      assert(lambda.getn()==n);
       auto it=characters.find(lambda);
       if(it!=characters.end()) return it->second;
-      SnClassFunction* chi=new SnClassFunction(lambda.getn(),cnine::fill::zero); //T
+
+      SnClassFunction* chi=new SnClassFunction(n,cnine::fill_raw()); //T
+      SnObj* G=_snbank->get_Sn(n);
+      SnIrrepObj* rho=_snbank->get_irrep(lambda);
+      for(int i=0; i<chi->size(); i++)
+	chi->set_value(i,rho->character(G->cclass(i)));
       characters[lambda]=chi;
       return chi;
     }

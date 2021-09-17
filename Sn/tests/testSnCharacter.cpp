@@ -17,9 +17,9 @@ using namespace Snob2;
 int main(int argc, char** argv){
   Snob2_session session;
 
-  Sn G(4);
+  Sn G(5);
 
-  cout<<G.character({3,1})<<endl;
+  cout<<G.character({4,1})<<endl;
 
 
 }

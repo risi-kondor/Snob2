@@ -70,6 +70,25 @@ namespace Snob2{
       return R;
     }
 
+    float character(const IntegerPartition& mu){
+      rtensor R(cnine::dims(d,d),cnine::fill::identity);
+      int a=1;
+      for(int i=0; i<mu.k; i++){
+	apply_left(R,ContiguousCycle(a,a+mu.p[i]-1));
+	a+=mu.p[i];
+	//cout<<R<<endl;
+      }
+      float t=0;
+      for(int i=0; i<d; i++){
+	t+=R.get_value(i,i);
+	//cout<<"t="<<t<<" "<<R.get_value(i,i)<<endl;
+      }
+      //cout<<" "<<t<<endl;
+      return t;
+    }
+
+
+
   public: // ---- Ancestors ---------------------------------------------------------------------------------
 
 
@@ -95,6 +114,7 @@ namespace Snob2{
     }
 
     void apply_left(rtensor& A, const ContiguousCycle& cyc) const{
+      //cout<<cyc.a<<cyc.b<<endl;
       for(int i=cyc.b-1; i>=cyc.a; i--)
 	apply_left(A,i);
     }
@@ -226,7 +246,7 @@ namespace Snob2{
 	    YORt[ix]=-1; YOR1[ix]=delta; YOR2[ix]=0;
 	  }else{
 	    YORt[ix]=index(tableau);
-	    //cout<<shape<<" "<<i<<" "<<tau<<" "<<YORt[index]<<endl;
+	    //cout<<tableau.shape()<<" "<<i<<" "<<tau<<" "<<YORt[ix]<<" "<<delta<<endl;
 	    YOR1[ix]=1.0/delta;
 	    YOR2[ix]=sqrt(1.0-1.0/(delta*delta));
 	  }

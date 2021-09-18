@@ -12,6 +12,9 @@ namespace Snob2{
 
     typedef cnine::RtensorObj rtensor;
 
+    using SnClassFunction::get_value;
+
+
     IntegerPartition lambda;
 
     SnCharacter(const IntegerPartition& _lambda):
@@ -34,6 +37,7 @@ namespace Snob2{
     //rtensor::set_value(_snbank->get_Sn(lambda.getn())->index(lambda),v);
     //}
     
+
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 
 

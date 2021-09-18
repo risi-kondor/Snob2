@@ -125,6 +125,14 @@ namespace Snob2{
       return irrep->lambda;
     }
 
+    int getm() const{
+      return dims(1);
+    }
+
+   int getd() const{
+      return dims(0);
+    }
+
       
   public: // ---- Operations ---------------------------------------------------------------------------------
 
@@ -137,8 +145,7 @@ namespace Snob2{
 	  inc(i+ioffs,j+joffs,M.get_value(i,j));
     }
     
-    void add_block_to(const int ioffs, const int joffs, rtensor& M, float c) const{ // normalized!
-      //int n=irrep->lambda.getn();
+    void add_block_to(const int ioffs, const int joffs, rtensor& M, float c=1.0) const{
       int I=M.dim(0);
       int J=M.dim(1);
       for(int i=0; i<I; i++)

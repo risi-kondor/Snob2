@@ -39,7 +39,7 @@ namespace Snob2{
       for(auto p:xsub.parts)
 	for(auto q:ysub.parts)
 	  subs.push_back(SnVec(SnPartProduct(*p,*q)));
-      SnVec sub=SnVec::concat(subs);
+      SnVec sub=SnVec::cat(subs);
       SnWeights* W=_sncgbank->get(x.get_lambda(),y.get_lambda());
       return (*W)*sub;
     }

@@ -69,6 +69,27 @@ namespace Snob2{
       return obj->index(lambda);
     }
 
+    int class_size(const IntegerPartition& lambda) const{
+      if(lambda.k==0) return 0;
+      int prev=lambda.p[0];
+      int count=1;
+      int t=1;
+      for(int i=1; i<lambda.k; i++){
+	if(lambda.p[i]==prev) count++;
+	else{
+	  t*=pow(prev,count)*factorial(count);
+	  prev=lambda.p[i];
+	  count=1;
+	}
+      }
+      t*=pow(prev,count)*factorial(count);
+      return factorial(getn())/t;
+    }
+
+    int class_size(const int i) const{
+      return class_size(cclass(i));
+    }
+
 
   public: // Representations
 

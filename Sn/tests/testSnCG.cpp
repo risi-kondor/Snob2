@@ -5,9 +5,9 @@
 #include "SnPart.hpp"
 
 #include "SnCGbank.hpp"
+#include "SnCGcoefficient.hpp"
 //class SnCGbank
 //SnCGbank* _sncgbank=nullptr;
-
 
 #include "SnPartProduct.hpp"
 
@@ -27,6 +27,8 @@ int main(int argc, char** argv){
   int n=4;
   IntegerPartition lambda({n-1,1});
 
+  cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl;;
+
   SnPart A=SnPart::gaussian(lambda,1);
   cout<<A<<endl;
 
@@ -35,6 +37,5 @@ int main(int argc, char** argv){
 
   SnVec C=SnPartProduct(A,B);
   cout<<C<<endl;
-
 
 }

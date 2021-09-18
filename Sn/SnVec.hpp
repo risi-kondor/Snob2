@@ -154,14 +154,25 @@ namespace Snob2{
       return *this;
     }
 
-    SnVec static down(const SnPart& v){ // TODO 
-      SNOB2_UNIMPL();
+    SnVec static down(const SnPart& v){ // TODO
+      SnVec R;
+      int offs=0;
+      v.get_lambda().foreach_sub([](const IntegerPartition& lambda){
+	  auto P=new SO3part(lambda,1,cnine::fill::zero);
+	  v.add_block_to(offs,0,*P)
+	  R.parts.push_back(P);
+	  offs.P->getd();
+	});
       return new SnPart(v);
     }
 
-    SnVec static concat(const vector<SnVec> v){
-      SNOB2_UNIMPL();
-      return SnVec();
+    SnVec static cat(const vector<SnVec> v){
+      SnType tau;
+      for(int i=0; i<v.size(); i++)
+	for(auto p: v[i].parts)
+	  tau.add(p->get_lambda(),p->getm());
+      SnVec R(tau,cnine::fill::zero);
+      return R;
     }
 
     /*

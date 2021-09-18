@@ -44,12 +44,28 @@ namespace Snob2{
       return dim(0);
     }
 
-    float operator()(const IntegerPartition& lambda){
+    float operator()(const IntegerPartition& lambda) const{
       return rtensor::get_value(_snbank->get_Sn(lambda.getn())->index(lambda));
+    }
+
+    float operator()(const int i) const{
+      return rtensor::get_value(i);
+    }
+
+    float get_value(const IntegerPartition& lambda) const{
+      return rtensor::get_value(_snbank->get_Sn(lambda.getn())->index(lambda));
+    }
+
+    float get_value(const int i) const{
+      return rtensor::get_value(i);
     }
 
     void set_value(const IntegerPartition& lambda, const float v){
       rtensor::set_value(_snbank->get_Sn(lambda.getn())->index(lambda),v);
+    }
+    
+    void set_value(const int i, const float v){
+      rtensor::set_value(i,v);
     }
     
 

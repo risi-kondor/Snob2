@@ -4,7 +4,7 @@ include $(ROOTDIR)/common.txt
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
 TESTS= testSn testSnFunction testSnOverSm testSnOverSmFunction testSnIrrep testSnType testSnRepresentation \
-testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter #testSnCG #testSnMultiVec testFourierTransform
+testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter testSnCG #testSnMultiVec testFourierTransform
 
 ifdef WITH_CUDA
 endif 

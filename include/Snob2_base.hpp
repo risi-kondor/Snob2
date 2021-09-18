@@ -26,6 +26,24 @@ namespace Snob2{
   }
 
 
+  template<typename TYPE>
+  tuple<TYPE,TYPE,TYPE> order(const TYPE& x0, const TYPE& x1, const TYPE& x2){
+    if(x0<x1){
+      if(x1<x2) return tuple<TYPE,TYPE,TYPE>(x0,x1,x2);
+      else{
+	if(x0<x2) return tuple<TYPE,TYPE,TYPE>(x0,x2,x1);
+	else return tuple<TYPE,TYPE,TYPE>(x2,x0,x1);
+      }
+    }else{
+      if(x0<x2) return tuple<TYPE,TYPE,TYPE>(x1,x0,x2);
+      else{
+	if(x1<x2) return tuple<TYPE,TYPE,TYPE>(x1,x2,x0);
+	else return tuple<TYPE,TYPE,TYPE>(x2,x0,x1);
+      }
+    }
+    return tuple<TYPE,TYPE,TYPE>(x0,x1,x2);
+  }
+
 }
 
 

@@ -144,6 +144,19 @@ namespace Snob2{
       return* this; 
     }
 
+    void foreach_sub(std::function<void(const IntegerPartition&)> fun){
+      IntegerPartition lambda(*this);
+      int k=lambda.k;
+      for(int i=0; i<k-1; i++)
+	if(lambda.p[i+1]<lambda.p[i]){
+	  lambda.p[i]--;
+	  fun(lambda);
+	  lambda.p[i]++;
+	}
+      lambda.remove(k);
+      fun(lambda);
+    }
+
     bool operator==(const IntegerPartition& x) const{
       int i=0; for(; i<k && i<x.k; i++) if (p[i]!=x.p[i]) return false;
       for(;i<k; i++) if (p[i]!=0) return false;
@@ -203,6 +216,19 @@ namespace std{
     size_t operator()(const pair<Snob2::IntegerPartition,Snob2::IntegerPartition>& lambdas) const{
       return (hash<Snob2::IntegerPartition>()(lambdas.first)<<1)^
 	(hash<Snob2::IntegerPartition>()(lambdas.second));
+    }
+  };
+}
+
+
+namespace std{
+  template<>
+  struct hash<std::tuple<Snob2::IntegerPartition,Snob2::IntegerPartition,Snob2::IntegerPartition> >{
+  public:
+    size_t operator()(const tuple<Snob2::IntegerPartition,Snob2::IntegerPartition,Snob2::IntegerPartition>& lambdas) const{
+      return ((hash<Snob2::IntegerPartition>()(std::get<0>(lambdas))<<1)^
+	(hash<Snob2::IntegerPartition>()(std::get<1>(lambdas))<<1))^
+	(hash<Snob2::IntegerPartition>()(std::get<2>(lambdas)));
     }
   };
 }

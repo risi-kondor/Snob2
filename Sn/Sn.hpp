@@ -41,7 +41,7 @@ namespace Snob2{
 
 
   public: // Elements
-
+   
     SnElement identity() const{
       return SnElement(n,cnine::fill_identity());
     }

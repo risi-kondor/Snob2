@@ -60,7 +60,7 @@ namespace Snob2{
       ostringstream oss;
       SnObj* Gobj=_snbank->get_Sn(n);
       for(int i=0; i<dims(0); i++){
-	oss<<Gobj->cclass(i)<<" : ";
+	oss<<indent<<Gobj->cclass(i)<<" : ";
 	oss<<RtensorObj::get_value(i)<<endl;
       }
       return oss.str();

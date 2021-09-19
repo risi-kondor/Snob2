@@ -23,7 +23,7 @@ namespace Snob2{
 
     SnVec(){}
 
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0)//: repr(_repr)
     {
       for(auto& p:_repr->isotypics){
@@ -32,12 +32,15 @@ namespace Snob2{
       }
     }
 
-    template<typename FILLTYPE>
-    SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0):
-      SnVec(_snrepbank->get_rep(_type),fill,_dev){}
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0){
+      for(auto& p:_type.map)
+	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+    }
+    //SnVec(_snrepbank->get_rep(_type),fill,_dev){}
 
     
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0):
       SnVec(M.obj,fill,_dev){}
 
@@ -49,9 +52,9 @@ namespace Snob2{
     //SnVec& operator=(const SnVec& x)=delete;
 
 
-  public:
+  public: // ---- Named constructors -------------------------------------------------------------------------
 
-    /*
+
     static SnVec zero(const SnType& _type, const int _dev=0){
       return SnVec(_type,cnine::fill::zero,_dev);
     }
@@ -63,7 +66,6 @@ namespace Snob2{
     static SnVec gaussian(const SnType& _type, const int _dev=0){
       return SnVec(_type,cnine::fill::gaussian,_dev);
     }
-    */
 
   public: // ---- Copying ------------------------------------------------------------------------------------
 
@@ -103,8 +105,15 @@ namespace Snob2{
       return parts[0]->getn();
     }
     
+    int index(const IntegerPartition& lambda) const{
+      for(int i=0; i<parts.size(); i++)
+	if(parts[i]->irrep->lambda==lambda) return i;
+      return -1;
+    }
 
-  public:
+
+  public: // ---- Operations ---------------------------------------------------------------------------------
+
 
     SnVec apply(const SnElement& sigma) const{
       SnVec R;
@@ -149,29 +158,56 @@ namespace Snob2{
   public: // ---- Operations ---------------------------------------------------------------------------------
 
 
-    SnVec down() const{ // TODO 
-      SNOB2_UNIMPL();
-      return *this;
-    }
+    //SnVec down() const{ // TODO 
+    //SNOB2_UNIMPL();
+    //return *this;
+    //}
 
-    SnVec static down(const SnPart& v){ // TODO
+    SnVec static down(const SnPart& v){
       SnVec R;
       int offs=0;
-      v.get_lambda().foreach_sub([](const IntegerPartition& lambda){
-	  auto P=new SO3part(lambda,1,cnine::fill::zero);
-	  v.add_block_to(offs,0,*P)
+      v.get_lambda().foreach_sub([&](const IntegerPartition& lambda){
+	  auto P=new SnPart(lambda,1,cnine::fill::zero);
+	  v.add_block_to(offs,0,*P);
 	  R.parts.push_back(P);
-	  offs.P->getd();
+	  offs+=P->getd();
 	});
-      return new SnPart(v);
+      //cout<<R<<endl;
+      return R;
     }
 
-    SnVec static cat(const vector<SnVec> v){
+    SnVec static up(const SnType& tau, const SnVec& v){
+      SnVec R(tau,cnine::fill_zero());
+      vector<int> offs(v.parts.size(),0);
+      //cout<<tau<<endl;
+      for(auto& p:tau.map){
+	SnPart& dest=*R.parts[R.index(p.first)];
+	int m=dest.dims(1);
+	int voffs=0;
+	p.first.foreach_sub([&](const IntegerPartition& mu){
+	    int ix=v.index(mu);
+	    assert(ix>=0);
+	    dest.add_to_block_block(voffs,0,*v.parts[ix],0,offs[ix],v.parts[ix]->dims(0),m);
+	    voffs+=v.parts[ix]->dims(0);
+	    offs[ix]+=m;
+	  });
+      }
+      return R;
+    }
+
+    SnVec static cat(const vector<SnVec>& v){
       SnType tau;
       for(int i=0; i<v.size(); i++)
 	for(auto p: v[i].parts)
 	  tau.add(p->get_lambda(),p->getm());
       SnVec R(tau,cnine::fill::zero);
+      vector<int> offs(R.parts.size(),0);
+      for(int i=0; i<v.size(); i++)
+	for(auto p: v[i].parts){
+	  int ix=R.index(p->irrep->lambda);
+	  R.parts[ix]->add_to_block(0,offs[ix],*p);
+	  offs[ix]+=p->dims(1);
+	}
       return R;
     }
 

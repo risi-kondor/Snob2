@@ -8,7 +8,7 @@ namespace Snob2{
   class SnType{
   public:
 
-    map<IntegerPartition,int> map;
+    mutable map<IntegerPartition,int> map;
     
 
   public:
@@ -24,7 +24,8 @@ namespace Snob2{
     }
 
 
-  public:
+  public: // ---- Access ------------------------------------------------------------------------------------
+
 
     void set(const IntegerPartition& lambda, const int m){
       map[lambda]=m;
@@ -38,6 +39,7 @@ namespace Snob2{
 
   public:
 
+
     bool operator==(const SnType& x) const{
       return map==x.map;
     }
@@ -46,9 +48,29 @@ namespace Snob2{
       return map<x.map;
     }
 
-    
 
-  public:
+  public:  // ---- Operations -------------------------------------------------------------------------------
+
+
+    SnType static down(const IntegerPartition& lambda){
+      SnType tau;
+      lambda.foreach_sub([&](const IntegerPartition& mu){
+	  tau.map[mu]++;
+	});
+      return tau;
+    }
+
+    SnType static cat(const vector<SnType*>& v){
+      SnType tau;
+      for(auto q:v)
+	for(auto& p:q->map)
+	  tau.add(p.first,p.second);
+      return tau;
+   }
+
+
+  public: // ---- I/O ---------------------------------------------------------------------------------------
+
 
     string str(const string indent="") const{
       ostringstream oss;

@@ -144,17 +144,32 @@ namespace Snob2{
       return* this; 
     }
 
-    void foreach_sub(std::function<void(const IntegerPartition&)> fun){
+    void foreach_sub(std::function<void(const IntegerPartition&)> fun) const{
       IntegerPartition lambda(*this);
       int k=lambda.k;
-      for(int i=0; i<k-1; i++)
+      //cout<<"  "<<lambda<<endl;
+      assert(lambda.k>0);
+
+      lambda.p[k-1]--;
+      if(lambda.p[k-1]==0){
+	lambda.k--;
+	fun(lambda);
+	lambda.k++;
+      }else{
+	fun(lambda);
+      }
+      lambda.p[k-1]++;
+
+      for(int i=k-2; i>=0; i--){
+	//cout<<"i="<<i<<endl;
 	if(lambda.p[i+1]<lambda.p[i]){
 	  lambda.p[i]--;
+	  //cout<<lambda.p[i]<<endl;
 	  fun(lambda);
 	  lambda.p[i]++;
 	}
-      lambda.remove(k);
-      fun(lambda);
+      }
+
     }
 
     bool operator==(const IntegerPartition& x) const{

@@ -10,10 +10,12 @@ namespace Snob2{
   public:
 
     unordered_map<tuple<IntegerPartition,IntegerPartition,IntegerPartition>,int> coeffs;
-
+    unordered_map<pair<IntegerPartition,IntegerPartition>,SnType*> taus;
     unordered_map<pair<IntegerPartition,IntegerPartition>,SnWeights*> tables;
 
     ~SnCGbank(){
+      for(auto& p:taus)
+	delete p.second;
       for(auto& p:tables)
 	delete p.second;
       }
@@ -46,11 +48,43 @@ namespace Snob2{
       return t;
     }
 
-    SnWeights* get(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+    SnType* get_type(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+      pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
+      auto it=taus.find(lambdas);
+      if(it!=taus.end()) return it->second;
+
+      int n=lambda1.getn();
+      int limit=2*n-lambda1[0]-lambda2[0];
+      SnType* tau=new SnType();
+      IntegerPartitions all_lambdas(n);
+      for(auto p:*all_lambdas.lambda)
+	if((*p)[0]>=n-limit){
+	  int m=coeff(lambda1,lambda2,*p);
+	  if(m>0) tau->add(*p,m);
+	}
+      
+      taus[lambdas]=tau;
+      return tau;
+    }
+
+    SnWeights* getW(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
       auto it=tables.find(lambdas);
       if(it!=tables.end()) return it->second;
-      SnWeights* table=nullptr; //new SnWeights(lambdas); // TODO
+
+      SnType xsub=SnType::down(lambda1);
+      SnType ysub=SnType::down(lambda2);
+
+      vector<SnType*> subs;
+      for(auto p:xsub.map)
+	for(auto q:ysub.map){
+	  //cout<<"<"<<p->irrep->lambda<<","<<q->irrep->lambda<<">"<<endl;
+	  subs.push_back(get_type(p.first,q.first));
+	}
+      SnType sub=SnType::cat(subs);
+
+      //SnType* tau=get_type(lambda1,lambda2);
+      SnWeights* table=new SnWeights(sub,sub,cnine::fill::identity); // TODO 
       tables[lambdas]=table;
       return table;
     }

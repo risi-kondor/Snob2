@@ -23,7 +23,15 @@ namespace Snob2{
   public: // ---- Constructors -------------------------------------------------------------------------------
 
 
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    SnWeights(const SnType& x, const SnType& y, const FILLTYPE& fill){
+      for(auto& p: x.map){
+	rtensor* mx=new rtensor(cnine::dims(p.second,y.map[p.first]),fill);
+	weights[p.first]=mx;
+      }
+    }
+
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnWeights(const SnVec& x, const SnVec& y, const FILLTYPE& fill){
       assert(x.parts.size()==y.parts.size());
       for(int i=0; i<x.parts.size(); i++){
@@ -57,9 +65,26 @@ namespace Snob2{
     SnVec operator*(const SnVec& y) const{
       SnVec R;
       for(auto p:y.parts){
-	R.parts.push_back(new SnPart(p->irrep,get_matrix(p->get_lambda())*(*p)));
+	R.parts.push_back(new SnPart(p->irrep,(*p)*cnine::transp(get_matrix(p->get_lambda())))); 
       }
       return R;
+    }
+
+
+  public: // ---- I/O ----------------------------------------------------------------------------------------
+
+
+    string str(string indent="") const{
+      ostringstream oss;
+      oss<<"SnWeights"<<endl;
+      for(auto& p:weights){
+	oss<<*p.second<<endl;
+      }
+      return oss.str();
+    }
+
+    friend ostream& operator<<(ostream& stream, const SnWeights& x){
+      stream<<x.str(); return stream;
     }
 
 

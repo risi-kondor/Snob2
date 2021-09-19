@@ -27,15 +27,16 @@ int main(int argc, char** argv){
   int n=4;
   IntegerPartition lambda({n-1,1});
 
-  cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl;;
+  cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
 
   SnPart A=SnPart::gaussian(lambda,1);
-  cout<<A<<endl;
+  printl("A",A);
 
   SnPart B=SnPart::gaussian(lambda,3);
-  cout<<B<<endl;
+  printl("B",B);
+
 
   SnVec C=SnPartProduct(A,B);
-  cout<<C<<endl;
+  printl("C",C);
 
 }

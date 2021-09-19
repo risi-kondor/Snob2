@@ -18,26 +18,24 @@ namespace Snob2{
   public:
 
 
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnPart(const initializer_list<int> list, const int n, const FILLTYPE& fill, const int _dev=0):
-      rtensor(cnine::dims(_snbank->get_irrep(list)->d,n),fill,dev), 
+      rtensor(cnine::dims(_snbank->get_irrep(list)->d,n),fill,_dev), 
       irrep(_snbank->get_irrep(list)){}
     
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnPart(const SnIrrepObj* _irrep, const int n, const FILLTYPE& fill, const int _dev=0):
-      rtensor(cnine::dims(_irrep->d,n),fill,_dev), irrep(_irrep){
-      //cout<<"        "<<dims<<endl;
-      //cout<<rtensor::str()<<endl;
-    }
+      rtensor(cnine::dims(_irrep->d,n),fill,_dev), irrep(_irrep){}
     
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnPart(const SnIrrep& _irrep, const int n, const FILLTYPE& fill, const int _dev=0):
-      rtensor(cnine::dims(_irrep.obj->d,n),fill,dev), irrep(_irrep.obj){}
+      rtensor(cnine::dims(_irrep.obj->d,n),fill,_dev), irrep(_irrep.obj){}
     
-    template<typename FILLTYPE>
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnPart(const IntegerPartition& _lambda, const int n, const FILLTYPE& fill, const int _dev=0):
-      rtensor(cnine::dims(_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda)->d,n),fill,dev), 
-      irrep(_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda)){}
+      rtensor(cnine::dims(_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda)->d,n),fill,_dev), 
+      irrep(_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda)){
+    }
 
 
     SnPart(const SnIrrepObj* _irrep, const float val):
@@ -151,6 +149,13 @@ namespace Snob2{
       for(int i=0; i<I; i++)
 	for(int j=0; j<J; j++)
 	  M.inc(i,j,get_value(i+ioffs,j+joffs)*c);
+    }
+ 
+    void add_to_block_block(const int ioffs, const int joffs, const rtensor& M, 
+      const int io, const int jo, const int I, const int J){
+      for(int i=0; i<I; i++)
+	for(int j=0; j<J; j++)
+	  inc(i+ioffs,j+joffs,M.get_value(i+io,j+jo));
     }
  
     /*

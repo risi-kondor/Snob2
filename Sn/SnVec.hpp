@@ -44,6 +44,12 @@ namespace Snob2{
     SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0):
       SnVec(M.obj,fill,_dev){}
 
+    //template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    //SnVec(const Sn& G,const FILLTYPE& fill, const int _dev=0){
+    //IntegerPartitions Lambda(
+    //}
+
+
     SnVec(SnPart* part){
       parts.push_back(part);
     }

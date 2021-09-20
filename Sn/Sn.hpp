@@ -8,6 +8,7 @@
 //#include "SnRepresentation.hpp"
 #include "SnCharBank.hpp"
 
+#include "SnIrrepContainer.hpp"
 
 namespace Snob2{
 
@@ -17,7 +18,9 @@ namespace Snob2{
     const int n;
     SnObj* obj;
 
-    Sn(const int _n): n(_n){
+    SnIrrepContainer irreps;
+
+    Sn(const int _n): n(_n), irreps(_snbank->get_Sn(n)){
       obj=_snbank->get_Sn(n);
     }
 
@@ -40,7 +43,7 @@ namespace Snob2{
     }
 
 
-  public: // Elements
+  public: // ---- Elements -----------------------------------------------------------------------------------
    
     SnElement identity() const{
       return SnElement(n,cnine::fill_identity());
@@ -54,8 +57,13 @@ namespace Snob2{
       return obj->index(sigma);
     }
 
+    SnElement random() const{
+      return obj->random();
+    }
 
-  public: // Classes
+
+  public: // ---- Conjugacy classes --------------------------------------------------------------------------
+
 
     int ncclasses() const{
       return obj->ncclasses(); 
@@ -91,7 +99,8 @@ namespace Snob2{
     }
 
 
-  public: // Representations
+  public: // ---- Representations ----------------------------------------------------------------------------
+
 
     SnIrrep irrep(const IntegerPartition& lambda) const{
       return SnIrrep(obj->get_irrep(lambda));
@@ -105,8 +114,9 @@ namespace Snob2{
       return R;
     }
 
+    
 
-  public: // Characters 
+  public: // ---- Characters ---------------------------------------------------------------------------------
 
 
     SnClassFunction character(const IntegerPartition& lambda) const{

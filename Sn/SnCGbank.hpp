@@ -86,7 +86,46 @@ namespace Snob2{
       //SnType* tau=get_type(lambda1,lambda2);
       SnWeights* table=new SnWeights(sub,sub,cnine::fill::identity); // TODO 
       tables[lambdas]=table;
+
+      auto M=sequester(lambda1,lambda2);
       return table;
+    }
+
+
+    rtensor sequester(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+      SnType* tau=get_type(lambda1,lambda2);
+      for(auto& p:tau->map){
+	if(p.second>1){cerr<<"Error: output multiplicity >1"<<endl;}
+
+	
+
+      }
+
+      return rtensor(cnine::dims(1,1),cnine::fill::zero);
+
+    }
+
+
+    SnVec CGprod(const SnPart& x, const SnPart& y){
+      int n=x.getn();
+      if(n==1){
+	return SnVec(new SnPart(_snbank->get_irrep({1}),x(0,0)*y(0,0)));
+      }
+
+      SnVec xsub=SnVec::down(x);
+      SnVec ysub=SnVec::down(y);
+
+      vector<SnVec> subs;
+      for(auto p:xsub.parts)
+	for(auto q:ysub.parts){
+	  //cout<<"<"<<p->irrep->lambda<<","<<q->irrep->lambda<<">"<<endl;
+	  subs.push_back(SnVec(CGprod(*p,*q)));
+	}
+      SnVec sub=SnVec::cat(subs);
+      //cout<<sub<<endl<<"----"<<endl;
+      SnType* tau=get_type(x.get_lambda(),y.get_lambda());
+      SnWeights* W=getW(x.get_lambda(),y.get_lambda());
+      return SnVec::up(*tau,(*W)*sub);
     }
 
 

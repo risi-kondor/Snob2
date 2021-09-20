@@ -24,19 +24,30 @@ int main(int argc, char** argv){
 
   Snob2_session session;
 
-  int n=4;
+  int n=3;
+  Sn G(n);
   IntegerPartition lambda({n-1,1});
 
   cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
 
-  SnPart A=SnPart::gaussian(lambda,1);
+  SnPart A=SnPart::gaussian({n-1,1},1);
   printl("A",A);
 
-  SnPart B=SnPart::gaussian(lambda,3);
+  SnPart B=SnPart::gaussian({n-1,1},1);
   printl("B",B);
 
 
   SnVec C=SnPartProduct(A,B);
   printl("C",C);
+  cout<<"pppppppppppppp"<<endl;
+
+  SnElement sigma=G.random();
+  auto Ad=sigma*A;
+  auto Bd=sigma*B;
+  SnVec Cd=SnPartProduct(Ad,Bd);
+  printl("Cd",Cd);
+  
+  auto Cdd=sigma*C;
+  printl("Cdd",Cdd);
 
 }

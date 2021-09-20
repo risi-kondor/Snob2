@@ -211,6 +211,12 @@ namespace Snob2{
 
   };
 
+
+  inline SnPart operator*(const SnElement& sigma, const SnPart& A){
+    return A.apply(sigma);
+  }
+
+
 }
 
 #endif

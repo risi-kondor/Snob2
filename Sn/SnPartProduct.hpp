@@ -46,7 +46,7 @@ namespace Snob2{
 	  subs.push_back(SnVec(SnPartProduct(*p,*q)));
 	}
       SnVec sub=SnVec::cat(subs);
-      //cout<<sub<<endl;
+      cout<<sub<<endl<<"----"<<endl;
       SnType* tau=_sncgbank->get_type(x.get_lambda(),y.get_lambda());
       SnWeights* W=_sncgbank->getW(x.get_lambda(),y.get_lambda());
       return SnVec::up(*tau,(*W)*sub);

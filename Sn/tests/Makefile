@@ -4,7 +4,10 @@ include $(ROOTDIR)/common.txt
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
 TESTS= testSn testSnFunction testSnOverSm testSnOverSmFunction testSnIrrep testSnType testSnRepresentation \
-testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter testSnCG #testSnMultiVec testFourierTransform
+testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter testSnCG \
+testSnIrrepContainer
+
+#testSnMultiVec testFourierTransform
 
 ifdef WITH_CUDA
 endif 
@@ -160,6 +163,15 @@ ifdef WITH_CUDA
 	$(NVCC) $(NVCCFLAGS) -o testSnCharacter testSnCharacter.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
 	$(CC) -o testSnCharacter testSnCharacter.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
+
+
+testSnIrrepContainer: testSnIrrepContainer.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testSnIrrepContainer testSnIrrepContainer.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testSnIrrepContainer testSnIrrepContainer.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
 
 

@@ -28,8 +28,8 @@ namespace Snob2{
 
     SnObj* Snminus1=nullptr;
 
-    vector<SnIrrepObj*> irreps;
-    map<IntegerPartition,SnIrrepObj*> irrep_map;
+    mutable vector<SnIrrepObj*> irreps;
+    mutable map<IntegerPartition,SnIrrepObj*> irrep_map;
 
     mutable vector<IntegerPartition*> cclasses;
     mutable map<IntegerPartition,int> cclass_map;
@@ -99,6 +99,11 @@ namespace Snob2{
       return Snminus1->index(tau)+a*factorial(n-1);
     }
 
+    SnElement random() const{
+      uniform_int_distribution<int> distr(0,size()-1);
+      return element(distr(rndGen));
+    }
+
 
   public: // ---- Conjugacy classes -------------------------------------------------------------------------
 
@@ -141,7 +146,7 @@ namespace Snob2{
     }
     */
 
-    SnIrrepObj* get_irrep(const IntegerPartition& lambda){
+    SnIrrepObj* get_irrep(const IntegerPartition& lambda) const{
       auto it=irrep_map.find(lambda);
       if(it!=irrep_map.end()) return it->second;
       SnIrrepObj* irrep=new SnIrrepObj(lambda);
@@ -155,7 +160,7 @@ namespace Snob2{
       return irreps;
     }
 
-    void make_ancestors(SnIrrepObj& irrep){
+    void make_ancestors(SnIrrepObj& irrep) const{
       if(irrep.ancestors.size()>0) return;
       assert(Snminus1);
       IntegerPartition lamb(irrep.lambda);
@@ -178,9 +183,9 @@ namespace Snob2{
     }
     */
 
-  private:
+    //private:
 
-    void make_all_irreps(){
+    void make_all_irreps() const{
       if(all_irreps) return;
       IntegerPartitions partitions=IntegerPartitions(n);
       for(int i=0; i<partitions.size(); i++){

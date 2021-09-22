@@ -17,8 +17,9 @@ using namespace Snob2;
 int main(int argc, char** argv){
   Snob2_session session;
 
-  Sn sn(4);
-  SnFunction f(sn,cnine::fill::gaussian);
+  int n=4;
+  Sn sn(n);
+  SnFunction f(n,cnine::fill::gaussian);
 
   cout<<f<<endl;
 

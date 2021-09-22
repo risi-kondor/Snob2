@@ -4,7 +4,7 @@
 #include "SnClasses.hpp"
 #include "SnPart.hpp"
 
-#include "SnIrrepContainer.hpp"
+#include "Sn_IrrepHelper.hpp"
 
 using namespace cnine;
 using namespace Snob2;

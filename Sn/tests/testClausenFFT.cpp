@@ -27,7 +27,7 @@ int main(int argc, char** argv){
 
   Sn G(n);
   //FunctionOnGroup<Sn,cnine::RtensorObj> f(G,cnine::fill::gaussian);
-  SnFunction f(G,cnine::fill::gaussian);
+  SnFunction f(n,cnine::fill::gaussian);
   cout<<f<<endl;
 
   SnVec v=FFT(f);

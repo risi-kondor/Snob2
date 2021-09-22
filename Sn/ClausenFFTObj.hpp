@@ -3,6 +3,7 @@
 
 #include "SnVecPack.hpp"
 #include "ClausenFFTvecTmplt.hpp"
+#include "SnFunction.hpp"
 
 
 namespace Snob2{
@@ -38,7 +39,7 @@ namespace Snob2{
   public: // ---- Applying transform -------------------------------------------------------------------------
 
 
-    SnVec operator()(const FunctionOnGroup<SnObj,rtensor>& f){
+    SnVec operator()(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
       int n=levels.size();
 
       SnVecPack* prev_v=levels[0]->pack(f);
@@ -56,15 +57,14 @@ namespace Snob2{
     }
 
 
-    SnVec operator()(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
-      assert(f.G->n==n);
-      assert(f.G->m==m);
+    SnVec operator()(const SnFunction& f){
+      int n=levels.size();
 
       SnVecPack* prev_v=levels[0]->pack(f);
       SnVecPack* v=nullptr;
-      for(int l=m+1; l<=n; l++){
+      for(int l=2; l<=n; l++){
 	//cout<<"level" <<l<<endl;
-	v=levels[l-m]->uptransform(prev_v);
+	v=levels[l-1]->uptransform(prev_v);
 	delete prev_v;
 	prev_v=v;
       }
@@ -75,7 +75,7 @@ namespace Snob2{
     }
 
 
-    FunctionOnGroup<SnObj,rtensor> inv(const SnVec& w){
+    SnFunction inv(const SnVec& w){
       int n=levels.size();
       auto& final_parts=levels[n-1]->parts;
       assert(w.parts.size()==final_parts.size());

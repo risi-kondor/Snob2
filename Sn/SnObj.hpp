@@ -7,7 +7,10 @@
 #include "IntegerPartitions.hpp"
 
 #include "SnElement.hpp"
+#include "SnCClass.hpp"
 #include "SnIrrepObj.hpp"
+//#include "SnCharacter.hpp"
+
 #include "SnOverSmObj.hpp"
 //#include "SnModule.hpp"
 //#include "SnRepresentation.hpp"
@@ -31,8 +34,8 @@ namespace Snob2{
     mutable vector<SnIrrepObj*> irreps;
     mutable map<IntegerPartition,SnIrrepObj*> irrep_map;
 
-    mutable vector<IntegerPartition*> cclasses;
-    mutable map<IntegerPartition,int> cclass_map;
+    mutable vector<SnCClass*> cclasses;
+    mutable map<SnCClass,int> cclass_map;
 
     map<int,SnOverSmObj*> snsm_map;
     //SnModule module;
@@ -57,11 +60,15 @@ namespace Snob2{
     static SnElement dummy_element(){return SnElement::Identity(1);}
 
 
-  public: // ---- Access -------------------------------------------------------------------------------------
+  public: // ---- Elements -------------------------------------------------------------------------------------
 
 
     int size() const{
       return order;
+    }
+
+    SnElement identity() const{
+      return SnElement(n,cnine::fill_identity());
     }
 
     SnElement element(int e) const{
@@ -113,12 +120,12 @@ namespace Snob2{
       return cclasses.size();
     }
 
-    IntegerPartition cclass(const int i) const{
+    SnCClass cclass(const int i) const{
       make_cclasses();
       return *cclasses[i];
     }
 
-    const int index(const IntegerPartition& lambda) const{
+    const int index(const SnCClass& lambda) const{
       make_cclasses();
       return cclass_map[lambda];
     }
@@ -130,12 +137,13 @@ namespace Snob2{
       if (cclasses.size()>0) return;
       IntegerPartitions Lambda(n);
       for(int i=0; i<Lambda.size(); i++){
-	IntegerPartition lambda=Lambda[i];
-	cclasses.push_back(new IntegerPartition(lambda));
-	cclass_map[lambda]=i;
+	SnCClass c(Lambda[i]);
+	cclasses.push_back(new SnCClass(c));
+	cclass_map[c]=i;
       }
 
     }
+
 
   public: // ---- Irreps -------------------------------------------------------------------------------------
 
@@ -155,7 +163,7 @@ namespace Snob2{
       return irrep;
     }
 
-    vector<SnIrrepObj*> get_all_irreps(){
+    vector<SnIrrepObj*> get_all_irreps() const{
       make_all_irreps();
       return irreps;
     }

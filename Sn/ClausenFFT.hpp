@@ -25,7 +25,7 @@ namespace Snob2{
   public:
 
 
-    SnVec operator()(const FunctionOnGroup<SnObj,rtensor>& f){
+    SnVec operator()(const SnFunction& f){
       return (*obj)(f);
     }
 
@@ -33,7 +33,7 @@ namespace Snob2{
       return (*obj)(f);
     }
 
-    FunctionOnGroup<SnObj,rtensor> inv(const SnVec& w){
+    SnFunction inv(const SnVec& w){
       return obj->inv(w);
     }
 

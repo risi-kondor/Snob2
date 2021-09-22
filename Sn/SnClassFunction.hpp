@@ -2,6 +2,7 @@
 #define _SnClassFunction
 
 #include "RtensorObj.hpp"
+#include "SnObj.hpp"
 
 
 namespace Snob2{

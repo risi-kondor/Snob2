@@ -23,14 +23,22 @@ int main(int argc, char** argv){
   cout<<sigma<<endl;
   cout<<endl; 
 
-  int N=G.get_order();
-  for(int i=0; i<N; i++){
-    //cout<<sn.element(i)<<endl;
-    cout<<G.element(i)<<" "<<G.index(G.element(i))<<endl;
-  }
+  for(auto p:G.elements)
+    cout<<p<<endl;
+  cout<<endl;
 
-  for(int i=0; i<G.ncclasses(); i++)
-    cout<<G.cclass(i)<<endl;
+  for(auto p:G.cclasses)
+    cout<<p<<endl;
+  cout<<endl;
+
+  for(auto p:G.irreps)
+    cout<<p<<endl;
+  cout<<endl;
+
+  for(auto p:G.characters)
+    cout<<p<<endl;
+  cout<<endl;
+
 
   //SnModule M=G.module();
   //cout<<M<<endl;

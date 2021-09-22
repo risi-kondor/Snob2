@@ -2,12 +2,19 @@
 #define _IntegerPartitions
 
 #include "CombinatorialBank.hpp"
+#include "GenericIterator.hpp"
 
 
 namespace Snob2{
 
   class IntegerPartitions{
   public:
+
+    class iterator: public GenericIterator<IntegerPartitions,IntegerPartition>{
+    public:
+      using GenericIterator::GenericIterator;
+    };
+
 
     const int n;
     const vector<IntegerPartition*>* lambda;
@@ -37,6 +44,16 @@ namespace Snob2{
     IntegerPartition operator[](const int i) const{
       return *(*lambda)[i];
     }
+
+    iterator begin() const{
+      return iterator(this);
+    }
+
+    iterator end() const{
+      return iterator(this,size());
+    }
+    
+    
 
   };
 

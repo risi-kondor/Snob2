@@ -2,8 +2,8 @@
 #define _ClausenFFTvecTmplt
 
 #include "ClausenFFTpartTmplt.hpp"
+#include "SnFunction.hpp"
 #include "FunctionOnGroup.hpp"
-
 
 namespace Snob2{
 
@@ -96,7 +96,7 @@ namespace Snob2{
     }
     */
 
-    SnVecPack* pack(const FunctionOnGroup<SnObj,rtensor>& f){
+    SnVecPack* pack(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
       SnVecPack* R=new SnVecPack();
       int N=f.size();
       R->vecs.resize(N);
@@ -106,11 +106,11 @@ namespace Snob2{
       return R;
     }
 
-    SnVecPack* pack(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
+    SnVecPack* pack(const SnFunction& f){
       SnVecPack* R=new SnVecPack();
       int N=f.size();
       R->vecs.resize(N);
-      SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({f.G->m}));
+      SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({1}));
       for(int i=0; i<N; i++)
 	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
       return R;
@@ -143,15 +143,14 @@ namespace Snob2{
     }
     */
 
-    FunctionOnGroup<SnObj,rtensor> unpack(SnVecPack* V){
+    SnFunction unpack(SnVecPack* V){
       int N=V->vecs.size();
-      FunctionOnGroup<SnObj,rtensor> R(_snbank->get_Sn(n),cnine::fill::ones);
+      SnFunction R(n,cnine::fill::ones);
       assert(R.size()==N);
       for(int i=0; i<N; i++)
 	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
       return R;
     }
-
 
     FunctionOnGroup<SnOverSmObj,rtensor> unpack(int m, SnVecPack* V){
       int N=V->vecs.size();
@@ -161,7 +160,6 @@ namespace Snob2{
 	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
       return R;
     }
-
 
     SnVecPack* uptransform(const SnVecPack* V) const{
       int N=V->vecs.size();

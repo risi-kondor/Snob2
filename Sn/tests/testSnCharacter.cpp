@@ -17,7 +17,9 @@ int main(int argc, char** argv){
   Sn G(5);
 
   //cout<<G.character({4,1})<<endl;
-  cout<<SnCharacter({4,1})<<endl;
+  //cout<<SnCharacter({4,1})<<endl;
+
+  
 
 
 }

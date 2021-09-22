@@ -8,7 +8,10 @@
 //#include "SnRepresentation.hpp"
 #include "SnCharBank.hpp"
 
-#include "SnIrrepContainer.hpp"
+#include "Sn_ElementHelper.hpp"
+#include "Sn_CclassHelper.hpp"
+#include "Sn_IrrepHelper.hpp"
+#include "Sn_CharacterHelper.hpp"
 
 namespace Snob2{
 
@@ -16,13 +19,25 @@ namespace Snob2{
   public:
 
     const int n;
-    SnObj* obj;
+    const SnObj* obj;
 
-    SnIrrepContainer irreps;
+    Sn_ElementHelper elements;
+    Sn_CClassHelper cclasses;
+    Sn_IrrepHelper irreps;
+    Sn_CharacterHelper characters;
 
-    Sn(const int _n): n(_n), irreps(_snbank->get_Sn(n)){
-      obj=_snbank->get_Sn(n);
-    }
+  public:
+
+    Sn(const SnObj* _obj): 
+      n(_obj->n),
+      obj(_obj),
+      elements(_obj),
+      cclasses(_obj),
+      irreps(_obj),
+      characters(_obj){}
+
+    Sn(const int _n): 
+      Sn(_snbank->get_Sn(_n)){}
 
     static SnElement dummy_element(){return SnElement::Identity(1);}
     static SnIrrep dummy_irrep(){return SnIrrep({1});}
@@ -119,9 +134,20 @@ namespace Snob2{
   public: // ---- Characters ---------------------------------------------------------------------------------
 
 
+    int nchars() const{
+      return 0;
+    }
+    
+    SnClassFunction character(const int i) const{
+      return SnClassFunction(*_sncharbank->get_character({n}));
+    }
+
+
     SnClassFunction character(const IntegerPartition& lambda) const{
       return SnClassFunction(*_sncharbank->get_character(lambda));
     }
+
+    void make_all_chars(){}
 
 
   public:

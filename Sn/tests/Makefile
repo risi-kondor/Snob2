@@ -5,7 +5,7 @@ INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR
 
 TESTS= testSn testSnFunction testSnOverSm testSnOverSmFunction testSnIrrep testSnType testSnRepresentation \
 testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter testSnCG \
-testSnIrrepContainer
+testSn_IrrepHelper
 
 #testSnMultiVec testFourierTransform
 
@@ -167,11 +167,11 @@ endif
 
 
 
-testSnIrrepContainer: testSnIrrepContainer.cpp $(DEPS) 
+testSn_IrrepHelper: testSn_IrrepHelper.cpp $(DEPS) 
 ifdef WITH_CUDA
-	$(NVCC) $(NVCCFLAGS) -o testSnIrrepContainer testSnIrrepContainer.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+	$(NVCC) $(NVCCFLAGS) -o testSn_IrrepHelper testSn_IrrepHelper.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
-	$(CC) -o testSnIrrepContainer testSnIrrepContainer.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+	$(CC) -o testSn_IrrepHelper testSn_IrrepHelper.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
 
 

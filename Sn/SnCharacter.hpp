@@ -3,6 +3,7 @@
 
 #include "SnClassFunction.hpp"
 #include "SnCharBank.hpp"
+#include "SnCharacter.hpp"
 
 
 namespace Snob2{
@@ -20,7 +21,17 @@ namespace Snob2{
     SnCharacter(const IntegerPartition& _lambda):
       SnClassFunction(*_sncharbank->get_character(_lambda)), lambda(_lambda){} // make it view
 
-    
+
+
+  public: // ---- Conversions -------------------------------------------------------------------------------
+
+
+    SnCharacter(const SnClassFunction& x):
+      SnClassFunction(x){}
+
+    SnCharacter(SnClassFunction&& x):
+      SnClassFunction(std::move(x)){}
+
 
   public: // ---- Access ------------------------------------------------------------------------------------
 

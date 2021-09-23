@@ -152,6 +152,10 @@ namespace Snob2{
       return r;
     }
 
+    Permutation inv() const{
+      return inverse();
+    }
+
     bool check_valid() const{
       vector<bool> a(n,false);
       for(int i=0; i<n; i++){

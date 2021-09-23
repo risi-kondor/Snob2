@@ -26,4 +26,6 @@ int main(int argc, char** argv){
   cout<<sn.element(3)<<endl;
   cout<<f.left_translate(sn.element(3))<<endl;
   cout<<f.right_translate(sn.element(3))<<endl;
+
+  cout<<f.convolve(f)<<endl;
 }

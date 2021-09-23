@@ -35,6 +35,10 @@ namespace Snob2{
       return SnElement(Permutation::inverse());
     }
 
+    SnElement inv() const{
+      return inverse();
+    }
+
   };
 
 }

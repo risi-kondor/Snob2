@@ -6,7 +6,8 @@
 //#include "Gdims.hpp"
 #include "SnVec.hpp" 
 #include "CombinatorialClasses.hpp"
-#include "ClausenFFTObj.hpp"
+//#include "ClausenFFTObj.hpp"
+#include "ClausenFFT.hpp"
 #include "SnFunction.hpp"
 
 using namespace cnine;
@@ -22,11 +23,11 @@ int main(int argc, char** argv){
 
   int n=4;
 
-  ClausenFFTObj FFT(n);
-  cout<<FFT<<endl;
+  //ClausenFFTObj FFT(n);
+  //cout<<FFT<<endl;
 
-  Sn G(n);
-  //FunctionOnGroup<Sn,cnine::RtensorObj> f(G,cnine::fill::gaussian);
+  ClausenFFT FFT(n); 
+
   SnFunction f(n,cnine::fill::gaussian);
   cout<<f<<endl;
 

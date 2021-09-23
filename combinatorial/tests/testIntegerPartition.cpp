@@ -15,6 +15,8 @@ int main(int argc, char** argv){
   for(int i=0; i<IP.size(); i++)
     cout<<IP[i]<<endl;
 
+  for(auto p:IP)
+    cout<<p<<endl;
 
 }
 

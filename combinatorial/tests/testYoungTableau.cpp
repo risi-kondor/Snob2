@@ -16,5 +16,7 @@ int main(int argc, char** argv){
   for(int i=0; i<T.size(); i++) 
     cout<<T[i]<<endl;
 
+  for(auto p:T)
+    cout<<p<<endl;
 }
 

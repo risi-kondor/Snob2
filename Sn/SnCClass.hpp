@@ -29,7 +29,7 @@ namespace Snob2{
   public: // operations
 
     string str(const string indent="") const{
-      return indent+"SnConjugacyClass"+IntegerPartition::str();
+      return indent+"SnCClass"+IntegerPartition::str();
     }
 
     friend ostream& operator<<(ostream& stream, const SnCClass& x){

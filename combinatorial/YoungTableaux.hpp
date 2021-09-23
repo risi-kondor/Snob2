@@ -9,6 +9,12 @@ namespace Snob2{
   class YoungTableaux{
   public:
 
+    class iterator: public GenericIterator<YoungTableaux,YoungTableau>{
+    public:
+      using GenericIterator::GenericIterator;
+    };
+
+
     IntegerPartition p;
     const vector<YoungTableau*>* tableaux;
     bool is_view=false;
@@ -37,6 +43,15 @@ namespace Snob2{
     YoungTableau operator[](const int i){
       return *(*tableaux)[i];
     }
+
+    iterator begin() const{
+      return iterator(this);
+    }
+
+    iterator end() const{
+      return iterator(this,size());
+    }
+    
 
   };
 

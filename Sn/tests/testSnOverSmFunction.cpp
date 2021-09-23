@@ -15,7 +15,7 @@ int main(int argc, char** argv){
 
   Sn sn(4);
   SnOverSm X(4,3);
-  SnOverSmFunction f(X,cnine::fill::gaussian);
+  SnOverSmFunction f(4,3,cnine::fill::gaussian);
 
   cout<<f<<endl;
 

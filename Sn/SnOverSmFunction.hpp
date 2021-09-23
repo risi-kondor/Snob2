@@ -14,9 +14,9 @@ namespace Snob2{
     SnOverSmFunction(int n, int m, const FILLTYPE& fill, const int _dev=0):
       FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_snbank->get_SnOverSm(n,m),fill,_dev){}
 
-    template<typename FILLTYPE>
-    SnOverSmFunction(const SnOverSm& _G, const FILLTYPE& fill, const int _dev=0):
-      FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_G.obj,fill,_dev){}
+    //template<typename FILLTYPE>
+    //SnOverSmFunction(const SnOverSm& _G, const FILLTYPE& fill, const int _dev=0):
+    //FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_G.obj,fill,_dev){}
 
 
   public: // ---- Named constructors ------------------------------------------------------------------------

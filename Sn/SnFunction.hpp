@@ -19,7 +19,7 @@ namespace Snob2{
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnFunction(int _n, const FILLTYPE& fill, const int _dev=0):
-      rtensor({_snbank->get_Sn(n)->order},fill,_dev), n(_n){
+      rtensor({_snbank->get_Sn(_n)->order},fill,_dev), n(_n){
       G=_snbank->get_Sn(n);
       N=G->order;
     }
@@ -83,6 +83,20 @@ namespace Snob2{
       const SnObj& G=*_snbank->get_Sn(n);
       for(int i=0; i<N; i++)
 	R.set_value(G.element(i)*t,rtensor::value(i));
+      return R;
+    }
+
+    SnFunction convolve(const SnFunction& g) const{
+      assert(g.n==n);
+      SnFunction R(n,cnine::fill_raw());
+      const SnObj& G=*_snbank->get_Sn(n);
+      for(int i=0; i<N; i++){
+	float t=0;
+	auto sigma=G.element(i);
+	for(int j=0; j<N; j++)
+	  t+=(*this)(sigma*G.element(j).inv())*g(j);
+	R.set_value(i,t);
+      }
       return R;
     }
 

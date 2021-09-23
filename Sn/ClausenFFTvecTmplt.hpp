@@ -182,20 +182,16 @@ namespace Snob2{
       W->vecs.resize(newN);
 
       for(int c=0; c<newN; c++){
-	//cout<<"----------- c="<<c<<endl;
 	    
 	SnVec* w=new SnVec();
 	for(int i=0; i<parts.size(); i++){
-	  //cout<<*parts[i]->irrep<<endl;
 	  w->parts.insert(parts[i]->irrep->lambda,
 	    new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
 	}
   
 	for(int i=0; i<n; i++){
-	  //cout<<"----- i="<<i<<endl;
 	  SnVec u=uptransform(*V->vecs[c*n+i]);
 	  u.apply_inplace(ContiguousCycle(n-i,n));
-	  //cout<<"*"<<u<<endl;
 	  (*w).add(u);
 	}
 
@@ -206,14 +202,23 @@ namespace Snob2{
     }
 
     SnMultiVec* uptransform(const SnMultiVec* V) const{
-      int N=V->N;
+      int N=V->getN();
       int newN=N/n;
-      SnMultiVec* w=new SnMultiVec(newN);
-      for(int i=0; i<parts.size(); i++){
-	w->parts.insert(parts[i]->irrep->lambda,
-	  new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+
+      SnMultiVec* w=new SnMultiVec();
+      for(auto p: parts){
+	//cout<<p->get_lambda()<<endl;
+	auto q=new SnMultiPart(p->uptransform(*V));
+	//cout<<"before:"<<*q<<endl;
+	for(int i=0; i<newN; i++)
+	  for(int j=0; j<n; j++){
+	    //cout<<i<<j<<endl;
+	    q->apply_inplace(ContiguousCycle(n-j,n),i*n+j);
+	  }
+	//cout<<"after:"<<*q<<endl;
+	w->parts.push_back(q);
       }
-      return w;
+      return new SnMultiVec(w->reduce());
     }
 
     SnVec uptransform(const SnVec& v) const{

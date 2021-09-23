@@ -12,8 +12,6 @@ namespace Snob2{
   class SnMultiVec{
   public:
 
-    int N;
-
     indexed_mapB<IntegerPartition,SnMultiPart> parts;
 
     ~SnMultiVec(){
@@ -22,24 +20,21 @@ namespace Snob2{
 
   public:
 
-    SnMultiVec(): N(1){}
+
+    SnMultiVec(){}
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnMultiVec(const int _N, const SnType& _type, const FILLTYPE& fill, const int _dev=0): N(_N){
+    SnMultiVec(const int _N, const SnType& _type, const FILLTYPE& fill, const int _dev=0){
       for(auto& p:_type.map)
-	parts.insert(p.first,new SnMultiPart(N,p.first,p.second,fill,_dev));
+	parts.insert(p.first,new SnMultiPart(_N,p.first,p.second,fill,_dev));
     }
     
-    SnMultiVec(SnMultiPart* part): N(part->N){
+    SnMultiVec(SnMultiPart* part){
       parts.insert(part->get_lambda(),part);
-      //parts.push_back(part);
     }
 
 
-    //SnMultiVec(const SnMultiVec& x)=delete;
-    //SnMultiVec& operator=(const SnMultiVec& x)=delete;
-
-    SnMultiVec(const SnFunction& f): N(f.N){
+    SnMultiVec(const SnFunction& f){
       parts.push_back(new SnMultiPart(f));
     }
 
@@ -63,19 +58,17 @@ namespace Snob2{
   public: // ---- Copying ------------------------------------------------------------------------------------
 
 
-    SnMultiVec(const SnMultiVec& x): N(x.N){
+    SnMultiVec(const SnMultiVec& x){
       for(auto p: x.parts)
 	parts.insert(p->get_lambda(),new SnMultiPart(*p));
     }
 
-    SnMultiVec(SnMultiVec&& x): N(x.N){
+    SnMultiVec(SnMultiVec&& x){
       parts=x.parts;
       x.parts.clear();
     }
 
     SnMultiVec& operator=(const SnMultiVec& x){
-      //for(auto p: parts) delete p;
-      N=x.N;
       parts.wipe();
       for(auto p: x.parts)
 	parts.insert(p->get_lambda(),new SnMultiPart(*p));
@@ -83,13 +76,22 @@ namespace Snob2{
     }
 
     SnMultiVec& operator=(SnMultiVec&& x){
-      N=x.N;
       for(auto p: parts) delete p;
       parts=x.parts;
       x.parts.clear();
       return *this;
     }
 
+
+  public: // ---- Conversions --------------------------------------------------------------------------------
+
+
+    operator SnVec() const{
+      SnVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnPart(*p));
+      return R;
+    }
 
 
   public: // ---- Access -------------------------------------------------------------------------------------
@@ -100,11 +102,18 @@ namespace Snob2{
       return parts[0]->getn();
     }
     
+    int getN() const{
+      assert(parts.size()>0);
+      return parts[0]->getN();
+    }
+
+    /*
     int index(const IntegerPartition& lambda) const{
       for(int i=0; i<parts.size(); i++)
 	if(parts[i]->irrep->lambda==lambda) return i;
       return -1;
     }
+    */
 
 
   public: // ---- Operations ---------------------------------------------------------------------------------
@@ -154,6 +163,14 @@ namespace Snob2{
   public: // ---- Operations ---------------------------------------------------------------------------------
 
 
+    SnMultiVec reduce() const{
+      SnMultiVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnMultiPart(p->reduce()));
+      return R;
+    }
+
+    /*
     SnMultiVec static down(const SnMultiPart& v){
       SnMultiVec R;
       int offs=0;
@@ -168,7 +185,7 @@ namespace Snob2{
     }
 
     SnMultiVec static up(const SnType& tau, const SnMultiVec& v){
-      SnMultiVec R(v.N,tau,cnine::fill_zero());
+      SnMultiVec R(v.getN(),tau,cnine::fill_zero());
       vector<int> offs(v.parts.size(),0);
       //cout<<tau<<endl;
       for(auto& p:tau.map){
@@ -191,7 +208,7 @@ namespace Snob2{
       for(int i=0; i<v.size(); i++)
 	for(auto p: v[i].parts)
 	  tau.add(p->get_lambda(),p->getm());
-      SnMultiVec R(v[0].N,tau,cnine::fill::zero);
+      SnMultiVec R(v[0].getN(),tau,cnine::fill::zero);
       vector<int> offs(R.parts.size(),0);
       for(int i=0; i<v.size(); i++)
 	for(auto p: v[i].parts){
@@ -201,7 +218,7 @@ namespace Snob2{
 	}
       return R;
     }
-
+    */
 
 
   public:

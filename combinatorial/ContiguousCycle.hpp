@@ -16,6 +16,19 @@ namespace Snob2{
 
     ContiguousCycle(const int _a, const int _b): a(_a), b(_b){}
 
+
+  public: // I/O
+
+    string str(const string indent="") const{
+      return indent+"CCycle("+to_string(a)+","+to_string(b)+")";
+    }
+     
+    
+    friend ostream& operator<<(ostream& stream, const ContiguousCycle& x){
+      stream<<x.str(); return stream;
+    }
+
+
   };
 
 }

@@ -3,6 +3,7 @@
 
 #include "ClausenFFTblockTmplt.hpp"
 #include "SnVec.hpp"
+#include "SnMultiVec.hpp"
 
 namespace Snob2{
 
@@ -32,6 +33,11 @@ namespace Snob2{
   public: // ---- Access -------------------------------------------------------------------------------------
 
 
+    IntegerPartition get_lambda() const{
+      return irrep->lambda;
+    }
+
+
     void add(const ClausenFFTpartTmplt& sub){
       blocks.push_back(new ClausenFFTblockTmplt(ioffs,m,sub.index));
       ioffs+=sub.d;
@@ -49,6 +55,16 @@ namespace Snob2{
 	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
       }
       //cout<<P<<endl;
+      return P;
+    }
+
+    SnMultiPart uptransform(const SnMultiVec& v) const{
+      SnMultiPart P(v.getN(),irrep,m,cnine::fill::zero);
+      //cout<<"qqq"<<P<<endl;
+      for(auto p:blocks){
+	//cout<<*p<<endl;
+	P.add_to_block_multi(p->ioffs,p->joffs,*v.parts[p->subix]);
+      }
       return P;
     }
 

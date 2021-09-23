@@ -70,6 +70,7 @@ namespace Snob2{
 	delete prev_v;
 	prev_v=v;
       }
+      SnVec R(std::move(*v->vecs[0]));
       */
 
       SnMultiVec* prev_v=levels[0]->mpack(f);
@@ -81,7 +82,7 @@ namespace Snob2{
 	prev_v=v;
       }
 
-      SnVec R(std::move(*v->vecs[0]));
+      SnVec R(std::move(*v)); // move not implemented yet
       delete v;
       return R;
     }

@@ -12,15 +12,13 @@ namespace Snob2{
   class SnVec{
   public:
 
-    //SnRepresentationObj* repr;
-    //vector<SnPart*> parts;
     indexed_mapB<IntegerPartition,SnPart> parts;
 
-    ~SnVec(){
-      //for(auto p:parts) delete p;
-    }
+    ~SnVec(){}
 
-  public:
+
+  public: // ---- Constructors --------------------------------------------------------------------------------
+
 
     SnVec(){}
 
@@ -40,26 +38,17 @@ namespace Snob2{
       for(auto& p:_type.map)
 	parts.insert(p.first,new SnPart(p.first,p.second,fill,_dev));
     }
-    //SnVec(_snrepbank->get_rep(_type),fill,_dev){}
 
     
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnRepresentation& M, const FILLTYPE& fill, const int _dev=0):
       SnVec(M.obj,fill,_dev){}
 
-    //template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    //SnVec(const Sn& G,const FILLTYPE& fill, const int _dev=0){
-    //IntegerPartitions Lambda(
-    //}
-
 
     SnVec(SnPart* part){
       parts.insert(part->get_lambda(),part);
       //parts.push_back(part);
     }
-
-    //SnVec(const SnVec& x)=delete;
-    //SnVec& operator=(const SnVec& x)=delete;
 
 
   public: // ---- Named constructors -------------------------------------------------------------------------
@@ -322,3 +311,9 @@ namespace Snob2{
       //parts.push_back(new SnPart(p.first,p.second,fill,_dev));
     }
     */
+    //template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    //SnVec(const Sn& G,const FILLTYPE& fill, const int _dev=0){
+    //IntegerPartitions Lambda(
+    //}
+
+

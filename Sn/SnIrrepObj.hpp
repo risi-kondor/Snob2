@@ -176,6 +176,11 @@ namespace Snob2{
 	apply_left(A,i,beg,end);
     }
 
+    void apply_left_inv(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end) const{
+      for(int i=cyc.a; i<cyc.b; i++)
+	apply_left(A,i,beg,end);
+    }
+
     void apply_left(rtensor& A, const int tau, int beg, int end) const{
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       //const int J=A.get_dim(1);

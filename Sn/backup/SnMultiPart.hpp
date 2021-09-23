@@ -97,7 +97,7 @@ namespace Snob2{
   public: // ---- Fourier transforms ------------------
 
 
-    SnMultiPart(const FunctionOnGroup<Sn,rtensor>& f): // TODO: eliminate copying
+    SnMultiPart(const SnFunction& f): // TODO: eliminate copying
       rtensor(f), irrep(_snbank->get_irrep(IntegerPartition({1}))){
       N=f.dim(0);
       n=1;

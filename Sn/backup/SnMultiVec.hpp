@@ -15,7 +15,9 @@ namespace Snob2{
     int N;
 
     //vector<SnMultiPart*> parts;
-    mutable map<IntegerPartition,SnMultiPart*> parts;
+    //mutable map<IntegerPartition,SnMultiPart*> parts;
+    indexed_mapB<IntegerPartition,SnMultiPart> parts;
+
 
     ~SnMultiVec(){
       for(auto p:parts) delete p.second;
@@ -34,12 +36,14 @@ namespace Snob2{
       //parts.push_back(new SnMultiPart(_N,p.first,p.second,fill,_dev));
     }
 
+    /*
     template<typename FILLTYPE>
     SnMultiVec(int _N, const SnRepresentation& _mu, const FILLTYPE& fill, const int _dev=0): N(_N){
       for(auto& p:_mu.irreps)
 	parts[p.first.lambda]=new SnMultiPart(_N,p.first,p.second,fill,_dev);
       //parts.push_back(new SnMultiPart(_N,p.first,p.second,fill,_dev));
     }
+    */
 
 
   public: // ---- Named constructors -------------------------------------------------------------------------
@@ -86,7 +90,7 @@ namespace Snob2{
   public: // ---- Fourier transforms -------------------------------------------------------------------------
 
 
-    SnMultiVec(const FunctionOnGroup<Sn,rtensor>& f): N(f.G.get_order()){
+    SnMultiVec(const SnFunction& f): N(f.N){
       parts[IntegerPartition({1})]=new SnMultiPart(f);
     }
 

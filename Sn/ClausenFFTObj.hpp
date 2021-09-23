@@ -4,6 +4,7 @@
 #include "SnVecPack.hpp"
 #include "ClausenFFTvecTmplt.hpp"
 #include "SnFunction.hpp"
+#include "SnMultiVec.hpp"
 
 
 namespace Snob2{
@@ -60,8 +61,19 @@ namespace Snob2{
     SnVec operator()(const SnFunction& f){
       int n=levels.size();
 
+      /*
       SnVecPack* prev_v=levels[0]->pack(f);
       SnVecPack* v=nullptr;
+      for(int l=2; l<=n; l++){
+	//cout<<"level" <<l<<endl;
+	v=levels[l-1]->uptransform(prev_v);
+	delete prev_v;
+	prev_v=v;
+      }
+      */
+
+      SnMultiVec* prev_v=levels[0]->mpack(f);
+      SnMultiVec* v=nullptr;
       for(int l=2; l<=n; l++){
 	//cout<<"level" <<l<<endl;
 	v=levels[l-1]->uptransform(prev_v);

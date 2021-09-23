@@ -1,7 +1,7 @@
 #ifndef _GenericIterator
 #define _GenericIterator
 
-#include "Snob2_base.hpp"
+//#include "Snob2_base.hpp"
 
 namespace Snob2{
 

@@ -13,16 +13,18 @@ namespace Snob2{
   public:
 
     //SnRepresentationObj* repr;
-    vector<SnPart*> parts;
+    //vector<SnPart*> parts;
+    indexed_mapB<IntegerPartition,SnPart> parts;
 
     ~SnVec(){
-      for(auto p:parts) delete p;
+      //for(auto p:parts) delete p;
     }
 
   public:
 
     SnVec(){}
 
+    /*
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0)//: repr(_repr)
     {
@@ -31,11 +33,12 @@ namespace Snob2{
 	parts.push_back(new SnPart(iso.irrep,iso.m,fill,_dev));
       }
     }
+    */
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0){
       for(auto& p:_type.map)
-	parts.push_back(new SnPart(p.first,p.second,fill,_dev));
+	parts.insert(p.first,new SnPart(p.first,p.second,fill,_dev));
     }
     //SnVec(_snrepbank->get_rep(_type),fill,_dev){}
 
@@ -51,7 +54,8 @@ namespace Snob2{
 
 
     SnVec(SnPart* part){
-      parts.push_back(part);
+      parts.insert(part->get_lambda(),part);
+      //parts.push_back(part);
     }
 
     //SnVec(const SnVec& x)=delete;
@@ -77,8 +81,10 @@ namespace Snob2{
 
 
     SnVec(const SnVec& x){
+      //for(int i=0; i<parts.size(); i++)
+      //parts.insert(parts[i]->get_lambda(),new SnPart(*parts[i]));
       for(auto p: x.parts)
-	parts.push_back(new SnPart(*p));
+      parts.insert(p->get_lambda(),new SnPart(*p));
     }
 
     SnVec(SnVec&& x){
@@ -87,10 +93,10 @@ namespace Snob2{
     }
 
     SnVec& operator=(const SnVec& x){
-      for(auto p: parts) delete p;
-      parts.clear();
+      //for(auto p: parts) delete p;
+      parts.wipe();
       for(auto p: x.parts)
-	parts.push_back(new SnPart(*p));
+	parts.insert(p->get_lambda(),new SnPart(*p));
       return *this;
     }
 
@@ -126,7 +132,7 @@ namespace Snob2{
       for(auto p: parts){
 	SnPart* A=new SnPart(*p);
 	A->apply_inplace(sigma);
-	R.parts.push_back(A);
+	R.parts.insert(p->get_lambda(),A);
       }
       return R;
     }
@@ -175,7 +181,7 @@ namespace Snob2{
       v.get_lambda().foreach_sub([&](const IntegerPartition& lambda){
 	  auto P=new SnPart(lambda,1,cnine::fill::zero);
 	  v.add_block_to(offs,0,*P);
-	  R.parts.push_back(P);
+	  R.parts.insert(lambda,P);
 	  offs+=P->getd();
 	});
       //cout<<R<<endl;

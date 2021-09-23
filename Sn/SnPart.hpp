@@ -123,6 +123,10 @@ namespace Snob2{
       return irrep->lambda;
     }
 
+    IntegerPartition key() const{
+      return irrep->lambda;
+    }
+
     int getm() const{
       return dims(1);
     }

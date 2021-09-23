@@ -4,6 +4,8 @@
 #include "ClausenFFTpartTmplt.hpp"
 #include "SnFunction.hpp"
 #include "FunctionOnGroup.hpp"
+#include "SnMultiVec.hpp"
+
 
 namespace Snob2{
 
@@ -116,6 +118,18 @@ namespace Snob2{
       return R;
     }
 
+    SnMultiVec* mpack(const SnFunction& f){
+      return new SnMultiVec(f);
+    }
+
+    /*
+    SnMultiVec* mpack(const SnVec& v){
+      SnMultiVec* R=new SnMultiVec();
+      R->vecs.push_back(new SnVec(v));
+      return R;
+    }
+    */
+
     SnVecPack* pack(const SnVec& v){
       SnVecPack* R=new SnVecPack();
       /*
@@ -173,7 +187,8 @@ namespace Snob2{
 	SnVec* w=new SnVec();
 	for(int i=0; i<parts.size(); i++){
 	  //cout<<*parts[i]->irrep<<endl;
-	  w->parts.push_back(new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+	  w->parts.insert(parts[i]->irrep->lambda,
+	    new SnPart(parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
 	}
   
 	for(int i=0; i<n; i++){
@@ -188,6 +203,17 @@ namespace Snob2{
       }
 
       return W;
+    }
+
+    SnMultiVec* uptransform(const SnMultiVec* V) const{
+      int N=V->N;
+      int newN=N/n;
+      SnMultiVec* w=new SnMultiVec(newN);
+      for(int i=0; i<parts.size(); i++){
+	w->parts.insert(parts[i]->irrep->lambda,
+	  new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+      }
+      return w;
     }
 
     SnVec uptransform(const SnVec& v) const{

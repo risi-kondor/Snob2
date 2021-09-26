@@ -54,26 +54,26 @@ namespace Snob2{
 
 
     SnMultiVec(const SnMultiVec& x){
-      for(auto p: x.parts)
-	parts.insert(p->get_lambda(),new SnMultiPart(*p));
+      parts=x.parts;
+      //for(auto p: x.parts)
+      //parts.insert(p->get_lambda(),new SnMultiPart(*p));
     }
 
     SnMultiVec(SnMultiVec&& x){
-      parts=x.parts;
-      x.parts.clear();
+      parts=std::move(x.parts);
+      //x.parts.clear();
     }
 
     SnMultiVec& operator=(const SnMultiVec& x){
-      parts.wipe();
-      for(auto p: x.parts)
-	parts.insert(p->get_lambda(),new SnMultiPart(*p));
+      parts=std::move(x.parts);
+      //parts.wipe();
+      //for(auto p: x.parts)
+      //parts.insert(p->get_lambda(),new SnMultiPart(*p));
       return *this;
     }
 
     SnMultiVec& operator=(SnMultiVec&& x){
-      for(auto p: parts) delete p;
-      parts=x.parts;
-      x.parts.clear();
+      parts=std::move(x.parts);
       return *this;
     }
 
@@ -96,13 +96,25 @@ namespace Snob2{
     }
 
 
-    operator SnVec() const &{
+    SnVec as_vec(){
       SnVec R;
       for(auto p:parts)
-	R.parts.push_back(new SnPart(*p));
+	R.parts.push_back(new SnPart(std::move(*p)));
       return R;
     }
 
+    /*
+    operator SnVec() const &{
+      cout<<*this<<endl;
+      SnVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnPart(*p));
+      cout<<R<<endl;
+      return R;
+    }
+    */
+
+    /*
     operator SnVec()&&{
       SnVec R;
       for(auto p:parts)
@@ -110,7 +122,7 @@ namespace Snob2{
       parts.clear();
       return R;
     }
-
+    */
 
 
   public: // ---- Access -------------------------------------------------------------------------------------

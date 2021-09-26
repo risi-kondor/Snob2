@@ -85,19 +85,6 @@ namespace Snob2{
   public: // ---- Applying the transform ---------------------------------------------------------------------
 
 
-    // Deprecated
-    /*
-    SnVecPack* pack(const FunctionOnGroup<Sn,rtensor>& f){
-      SnVecPack* R=new SnVecPack();
-      int N=f.size();
-      R->vecs.resize(N);
-      SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({1}));
-      for(int i=0; i<N; i++)
-	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
-      return R;
-    }
-    */
-
     SnVecPack* pack(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
       SnVecPack* R=new SnVecPack();
       int N=f.size();
@@ -118,48 +105,15 @@ namespace Snob2{
       return R;
     }
 
-    SnMultiVec* mpack(const SnFunction& f){
-      return new SnMultiVec(f);
-    }
-
-    /*
-    SnMultiVec* mpack(const SnVec& v){
-      SnMultiVec* R=new SnMultiVec();
-      R->vecs.push_back(new SnVec(v));
-      return R;
-    }
-    */
+    //SnMultiVec* mpack(const SnFunction& f){
+    //return new SnMultiVec(f);
+    //}
 
     SnVecPack* pack(const SnVec& v){
       SnVecPack* R=new SnVecPack();
-      /*
-      SnVec* w=new SnVec();
-      for(auto p: v.parts){
-	rtensor M(p->dims,cnine::fill::zero,p->dev);
-	M.add(*p,p->irrep->d);
-	w->parts.push_back(new SnPart(p->irrep,M));
-      }
-      */
       R->vecs.push_back(new SnVec(v));
       return R;
     }
-
-    SnMultiVec* mpack(const SnVec& v){
-      return new SnMultiVec(v);
-    }
-
-    // Deprecated
-    /*
-    FunctionOnGroup<Sn,rtensor> unpack(SnVecPack* V){
-      int N=V->vecs.size();
-      Sn G(n);
-      FunctionOnGroup<Sn,rtensor> R(G,cnine::fill::ones);
-      assert(R.size()==N);
-      for(int i=0; i<N; i++)
-	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
-      return R;
-    }
-    */
 
     SnFunction unpack(SnVecPack* V){
       int N=V->vecs.size();
@@ -168,10 +122,6 @@ namespace Snob2{
       for(int i=0; i<N; i++)
 	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
       return R;
-    }
-
-    SnFunction unpack(SnMultiVec* V){
-      return V->as_function(n);
     }
 
     FunctionOnGroup<SnOverSmObj,rtensor> unpack(int m, SnVecPack* V){
@@ -229,6 +179,23 @@ namespace Snob2{
       return new SnMultiVec(w->reduce());
     }
 
+    SnMultiVec uptransform(const SnMultiVec& v) const{
+      int N=v.getN();
+      int newN=N/n;
+
+      SnMultiVec w;
+      for(auto p: parts){
+	auto q=new SnMultiPart(p->uptransform(v));
+	for(int i=0; i<newN; i++)
+	  for(int j=0; j<n; j++){
+	    //cout<<i<<j<<endl;
+	    q->apply_inplace(ContiguousCycle(n-j,n),i*n+j);
+	  }
+	w.parts.push_back(q);
+      }
+      return w.reduce();
+    }
+
     SnVec uptransform(const SnVec& v) const{
       SnVec w;
       for(auto p:parts){
@@ -245,22 +212,16 @@ namespace Snob2{
       W->vecs.resize(newN);
 
       for(int c=0; c<N; c++){
-	//cout<<"c="<<c<<endl;
-
 	for(int i=0; i<n+1; i++){
 	  //cout<<"i="<<i<<endl;
 
-	  /*
-	  SnVec* w=new SnVec();
-	  for(int j=0; j<parts.size(); j++){
-	    w->parts.push_back(new SnPart(parts[j]->irrep,parts[j]->m,cnine::fill::zero,0));
-	  }
-	  */
+	  //SnVec* w=new SnVec();
+	  //for(int j=0; j<parts.size(); j++){
+	  //w->parts.push_back(new SnPart(parts[j]->irrep,parts[j]->m,cnine::fill::zero,0));
+	  //}
 
 	  SnVec u(*V->vecs[c]);
 	  u.apply_inplace_inv(ContiguousCycle(n+1-i,n+1));
-	  //SnVec ud=downtransform(u);
-	  //(*w).add(ud);
 
 	  W->vecs[c*(n+1)+i]=new SnVec(downtransform(u));
 
@@ -271,30 +232,27 @@ namespace Snob2{
     }
 
 
-    SnMultiVec* downtransform(const SnMultiVec* V) const{
-      int N=V->getN();
+    SnMultiVec downtransform(const SnMultiVec& V) const{
+      int N=V.getN();
       int newN=N*(n+1);
 
-      SnMultiVec VV=V->broadcast(n+1);
+      SnMultiVec VV=V.broadcast(n+1);
 
-      for(int c=0; c<N; c++){
-	for(int i=0; i<n+1; i++){
+      for(int c=0; c<N; c++)
+	for(int i=0; i<n+1; i++)
 	  VV.apply_inplace_inv(ContiguousCycle(n+1-i,n+1),c*(n+1)+i);
-	}
-      }
       
-      SnMultiVec* R=new SnMultiVec();
-      for(int i=0; i<parts.size(); i++){
-	R->parts.push_back(new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
-      }
+      SnMultiVec R;
+      for(int i=0; i<parts.size(); i++)
+	R.parts.push_back(new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
 
       assert(next);
       int i=0; 
       for(auto p:next->parts){
 	const SnMultiPart& part=*VV.parts[i];
 	for(auto q:p->blocks){
-	  float c=((float)part.irrep->d)/(R->parts[q->subix]->irrep->d*(n+1));
-	  part.add_block_to_multi(q->ioffs,q->joffs,*R->parts[q->subix],c);
+	  float c=((float)part.irrep->d)/(R.parts[q->subix]->irrep->d*(n+1));
+	  part.add_block_to_multi(q->ioffs,q->joffs,*R.parts[q->subix],c);
 	}
 	i++;
       }
@@ -345,3 +303,78 @@ namespace Snob2{
 }
 
 #endif
+   /*
+    SnMultiVec* mpack(const SnVec& v){
+      SnMultiVec* R=new SnMultiVec();
+      R->vecs.push_back(new SnVec(v));
+      return R;
+    }
+    */
+
+    // Deprecated
+    /*
+    FunctionOnGroup<Sn,rtensor> unpack(SnVecPack* V){
+      int N=V->vecs.size();
+      Sn G(n);
+      FunctionOnGroup<Sn,rtensor> R(G,cnine::fill::ones);
+      assert(R.size()==N);
+      for(int i=0; i<N; i++)
+	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
+      return R;
+    }
+    */
+
+    /*
+    SnMultiVec* downtransform(const SnMultiVec* V) const{
+      int N=V->getN();
+      int newN=N*(n+1);
+
+      SnMultiVec VV=V->broadcast(n+1);
+
+      for(int c=0; c<N; c++){
+	for(int i=0; i<n+1; i++){
+	  VV.apply_inplace_inv(ContiguousCycle(n+1-i,n+1),c*(n+1)+i);
+	}
+      }
+      
+      SnMultiVec* R=new SnMultiVec();
+      for(int i=0; i<parts.size(); i++){
+	R->parts.push_back(new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+      }
+
+      assert(next);
+      int i=0; 
+      for(auto p:next->parts){
+	const SnMultiPart& part=*VV.parts[i];
+	for(auto q:p->blocks){
+	  float c=((float)part.irrep->d)/(R->parts[q->subix]->irrep->d*(n+1));
+	  part.add_block_to_multi(q->ioffs,q->joffs,*R->parts[q->subix],c);
+	}
+	i++;
+      }
+
+      return R;
+    }
+    */
+
+    // Deprecated
+    /*
+    SnVecPack* pack(const FunctionOnGroup<Sn,rtensor>& f){
+      SnVecPack* R=new SnVecPack();
+      int N=f.size();
+      R->vecs.resize(N);
+      SnIrrepObj* irrep=_snbank->get_irrep(IntegerPartition({1}));
+      for(int i=0; i<N; i++)
+	R->vecs[i]=new SnVec(new SnPart(irrep,f(i)));
+      return R;
+    }
+    */
+
+    //SnMultiVec* mpack(const SnVec& v){
+    //return new SnMultiVec(v);
+    //}
+
+    //SnFunction unpack(SnMultiVec* V){
+    //return V->as_function(n);
+    //}
+

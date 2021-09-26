@@ -25,7 +25,7 @@ namespace Snob2{
   public:
 
 
-    SnVec operator()(const SnFunction& f){
+    SnVec operator()(const SnFunction& f) const{
       return (*obj)(f);
     }
 

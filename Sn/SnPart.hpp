@@ -103,13 +103,22 @@ namespace Snob2{
 
 
     SnPart(const SnIrrep& _irrep, const rtensor& x): 
-      rtensor(x), irrep(_irrep.obj){}
+      rtensor(x), irrep(_irrep.obj){
+    }
 
     SnPart(const SnIrrep& _irrep, rtensor&& x): 
-      rtensor(std::move(x)), irrep(_irrep.obj){}
+      rtensor(std::move(x)), irrep(_irrep.obj){
+    }
+
+    SnPart(const SnIrrepObj* _irrep, const rtensor& x): 
+      rtensor(x), irrep(_irrep){
+      //cout<<"copy!"<<endl;
+   }
 
     SnPart(const SnIrrepObj* _irrep, rtensor&& x): 
-      rtensor(std::move(x)), irrep(_irrep){}
+      rtensor(std::move(x)), irrep(_irrep){
+      //cout<<"move!"<<endl;
+   }
 
 
   public: // ---- Access -------------------------------------------------------------------------------------

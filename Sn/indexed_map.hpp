@@ -101,19 +101,38 @@ namespace Snob2{
 	delete p;
     }
 
+    indexed_mapB(){}
+
+
   public: // ---- Copying ------------------------------------------------------------------------------------
 
 
-    indexed_mapB& operator=(const indexed_mapB& x){
+    indexed_mapB(const indexed_mapB& x){
+      for(auto p:x.v){
+	push_back(new OBJ(*p));
+      }
+    }
+
+    indexed_mapB(indexed_mapB&& x){
       v=x.v;
       map=x.map;
+      x.v.clear();
+      x.map.clear();
+    }
+
+    indexed_mapB& operator=(const indexed_mapB& x){
+      wipe();
+      for(auto p:x.v){
+	push_back(new OBJ(*p));
+      }
       return *this;
     }
 
     indexed_mapB& operator=(indexed_mapB&& x){
+      wipe();
       v=x.v;
-      x.v.clear();
       map=x.map;
+      x.v.clear();
       x.map.clear();
       return *this;
     }

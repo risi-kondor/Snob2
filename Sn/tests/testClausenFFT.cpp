@@ -28,6 +28,7 @@ int main(int argc, char** argv){
   SnFunction f(n,cnine::fill::gaussian);
   cout<<f<<endl;
 
+  //cout<<FFT(f)<<endl;
   SnVec v=FFT(f);
   printl("v",v);
 

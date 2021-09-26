@@ -60,25 +60,11 @@ namespace Snob2{
 
     SnMultiPart uptransform(const SnMultiVec& v) const{
       SnMultiPart P(v.getN(),irrep,m,cnine::fill::zero);
-      //cout<<"qqq"<<P<<endl;
       for(auto p:blocks){
-	//cout<<*p<<endl;
 	P.add_to_block_multi(p->ioffs,p->joffs,*v.parts[p->subix]);
       }
       return P;
     }
-
-    /*
-    SnPart downtransform(const SnVec& v) const{
-      SnPart P(irrep,m,cnine::fill::zero);
-      
-      for(auto p:blocks){
-	ClausenFFTblockTmplt& b=*p;
-	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
-      }
-      return P;
-    }
-    */
 
 
   public: // ---- I/O ----------------------------------------------------------------------------------------

@@ -98,6 +98,14 @@ namespace Snob2{
       return f;
     }
 
+    SnFunction as_functn(const int _n) const{
+      int m=getm();
+      const_cast<SnMultiPart&>(*this).reshape({dims(0)*N*getm()});
+      SnFunction f(_n,*this);
+      const_cast<SnMultiPart&>(*this).reshape({1,N,m});
+      return f;
+    }
+
     SnMultiPart(const SnPart& x): rtensor(x){
       N=1;
       irrep=x.irrep;
@@ -107,9 +115,9 @@ namespace Snob2{
 
     operator SnPart() const &{
       assert(N==1);
-      //reshape({dims(0),N*getm()});
-      return SnPart(irrep,as_shape({dims(0),N*getm()}));
-      //reshape({dims(0),N,m});
+      rtensor M(*this);
+      M.reshape({dims(0),N*getm()});
+      return SnPart(irrep,std::move(M));
     }
 
     operator SnPart() &&{

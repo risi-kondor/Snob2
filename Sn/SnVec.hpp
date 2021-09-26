@@ -22,17 +22,6 @@ namespace Snob2{
 
     SnVec(){}
 
-    /*
-    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0)//: repr(_repr)
-    {
-      for(auto& p:_repr->isotypics){
-	const SnIsotypicObj& iso=p.second;
-	parts.push_back(new SnPart(iso.irrep,iso.m,fill,_dev));
-      }
-    }
-    */
-
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0){
       for(auto& p:_type.map)
@@ -66,36 +55,29 @@ namespace Snob2{
       return SnVec(_type,cnine::fill::gaussian,_dev);
     }
 
+
   public: // ---- Copying ------------------------------------------------------------------------------------
 
 
     SnVec(const SnVec& x){
-      //for(int i=0; i<parts.size(); i++)
-      //parts.insert(parts[i]->get_lambda(),new SnPart(*parts[i]));
-      for(auto p: x.parts)
-      parts.insert(p->get_lambda(),new SnPart(*p));
-    }
-
-    SnVec(SnVec&& x){
+      //cout<<" copy vec"<<endl;
       parts=x.parts;
-      x.parts.clear();
+    }
+    
+    SnVec(SnVec&& x){
+      //cout<<" move vec"<<endl;
+      parts=std::move(x.parts);
     }
 
     SnVec& operator=(const SnVec& x){
-      //for(auto p: parts) delete p;
-      parts.wipe();
-      for(auto p: x.parts)
-	parts.insert(p->get_lambda(),new SnPart(*p));
+      parts=x.parts;
       return *this;
     }
 
     SnVec& operator=(SnVec&& x){
-      for(auto p: parts) delete p;
-      parts=x.parts;
-      x.parts.clear();
+      parts=std::move(x.parts);
       return *this;
     }
-
 
 
   public: // ---- Access -------------------------------------------------------------------------------------
@@ -316,4 +298,15 @@ namespace Snob2{
     //IntegerPartitions Lambda(
     //}
 
+
+    /*
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    SnVec(const SnRepresentationObj* _repr, const FILLTYPE& fill, const int _dev=0)//: repr(_repr)
+    {
+      for(auto& p:_repr->isotypics){
+	const SnIsotypicObj& iso=p.second;
+	parts.push_back(new SnPart(iso.irrep,iso.m,fill,_dev));
+      }
+    }
+    */
 

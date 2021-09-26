@@ -1,28 +1,23 @@
-#ifndef _SnOverSmFunction
-#define _SnOverSmFunction
-
 #include "SnOverSm.hpp"
+#include "FunctionOnGroup.hpp"
 #include "RtensorObj.hpp"
 
 
 namespace Snob2{
 
   class SnOverSmFunction: public cnine::RtensorObj{ 
+    //:public FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>{
   public:
 
-    typedef cnine::RtensorObj rtensor;
+    using FunctionOnGroup::FunctionOnGroup;
 
-    const int n;
-    const int m;
-    //int N;
-    //SnObj* G;
+    template<typename FILLTYPE>
+    SnOverSmFunction(int n, int m, const FILLTYPE& fill, const int _dev=0):
+      FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_snbank->get_SnOverSm(n,m),fill,_dev){}
 
-    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnOverSmFunction(int _n, int _m, const FILLTYPE& fill, const int _dev=0):
-      rtensor({_snbank->get_SnOverSm(_n,_m)->order()},fill,_dev), n(_n), m(_m){
-      //G=_snbank->get_Sn(n);
-      //N=G->order;
-    }
+    //template<typename FILLTYPE>
+    //SnOverSmFunction(const SnOverSm& _G, const FILLTYPE& fill, const int _dev=0):
+    //FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>(_G.obj,fill,_dev){}
 
 
   public: // ---- Named constructors ------------------------------------------------------------------------
@@ -38,29 +33,13 @@ namespace Snob2{
       return SnOverSmFunction(n,m,cnine::fill_gaussian(),_dev);}
 
 
-  public: // ---- Conversions --------------------------------------------------------------------------------
-
-
-    SnOverSmFunction(const int _n, const int _m, const rtensor& M): 
-      rtensor(M),
-      n(_n),
-      m(_m){}
-
-
-  public: // ---- Access ------------------------------------------------------------------------------------
-
-
-    int getN() const{
-      return dims(0);
-    }
-
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 
 
 
     string str(const string indent="") const{
       ostringstream oss;
-      for(int i=0; i<dims(0); i++){
+      for(int i=0; i<N; i++){
 	//oss<<G.element(i)<<" : ";  // Fix this!
 	oss<<RtensorObj::get_value(i)<<endl;
       }
@@ -76,7 +55,3 @@ namespace Snob2{
 
 
 }
-    //:public FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>{
-
-
-#endif 

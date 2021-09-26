@@ -29,7 +29,7 @@ namespace Snob2{
       return (*obj)(f);
     }
 
-    SnVec operator()(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
+    SnVec operator()(const SnOverSmFunction& f){
       return (*obj)(f);
     }
 
@@ -37,7 +37,7 @@ namespace Snob2{
       return obj->inv(w);
     }
 
-    FunctionOnGroup<SnOverSmObj,rtensor> inv_snsm(const SnVec& w){
+    SnOverSmFunction inv_snsm(const SnVec& w){
       return obj->inv_snsm(w);
     }
 
@@ -59,3 +59,13 @@ namespace Snob2{
 }
 
 #endif
+
+
+    //FunctionOnGroup<SnOverSmObj,rtensor> inv_snsm(const SnVec& w){
+    //return obj->inv_snsm(w);
+    //}
+
+    //SnVec operator()(const FunctionOnGroup<SnOverSmObj,rtensor>& f){
+    //return (*obj)(f);
+    //}
+

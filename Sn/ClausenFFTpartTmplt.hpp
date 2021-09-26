@@ -45,18 +45,8 @@ namespace Snob2{
     }
 
 
-  public: // ---- Fourier tranforms --------------------------------------------------------------------------
+  public: // ---- Fourier transforms -------------------------------------------------------------------------
 
-
-    SnPart uptransform(const SnVec& v) const{
-      SnPart P(irrep,m,cnine::fill::zero);
-      for(auto p:blocks){
-	ClausenFFTblockTmplt& b=*p;
-	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
-      }
-      //cout<<P<<endl;
-      return P;
-    }
 
     SnMultiPart uptransform(const SnMultiVec& v) const{
       SnMultiPart P(v.getN(),irrep,m,cnine::fill::zero);
@@ -90,3 +80,17 @@ namespace Snob2{
 }
 
 #endif
+
+
+    /*
+    SnPart uptransform(const SnVec& v) const{
+      SnPart P(irrep,m,cnine::fill::zero);
+      for(auto p:blocks){
+	ClausenFFTblockTmplt& b=*p;
+	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
+      }
+      //cout<<P<<endl;
+      return P;
+    }
+    */
+

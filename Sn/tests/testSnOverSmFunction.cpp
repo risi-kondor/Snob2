@@ -20,6 +20,6 @@ int main(int argc, char** argv){
   cout<<f<<endl;
 
   cout<<sn.element(3)<<endl;
-  cout<<f.left_translate(sn.element(3))<<endl;
-  cout<<f.right_translate(sn.element(3))<<endl;
+  //cout<<f.left_translate(sn.element(3))<<endl;
+  //cout<<f.right_translate(sn.element(3))<<endl;
 }

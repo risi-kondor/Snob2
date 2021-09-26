@@ -4,6 +4,7 @@
 #include "SnIrrep.hpp"
 #include "SnPart.hpp"
 #include "SnFunction.hpp"
+#include "SnOverSmFunction.hpp"
 
 
 namespace Snob2{
@@ -72,20 +73,16 @@ namespace Snob2{
   public: // ---- Conversions --------------------------------------------------------------------------------
 
 
-    /*
-    SnMultiPart(const SnIrrep& _irrep, const rtensor& x): 
-      rtensor(x), irrep(_irrep.obj){}
-
-    SnMultiPart(const SnIrrep& _irrep, rtensor&& x): 
-      rtensor(std::move(x)), irrep(_irrep.obj){}
-
-    SnMultiPart(const SnIrrepObj* _irrep, rtensor&& x): 
-      rtensor(std::move(x)), irrep(_irrep){}
-    */
-
     SnMultiPart(const SnFunction& f): 
       rtensor(f){
       N=f.N;
+      reshape({1,N,1});
+      irrep=_snbank->get_irrep({1});
+    }
+
+    SnMultiPart(const SnOverSmFunction& f): 
+      rtensor(f){
+      N=f.getN();
       reshape({1,N,1});
       irrep=_snbank->get_irrep({1});
     }
@@ -98,6 +95,16 @@ namespace Snob2{
       return f;
     }
 
+    SnOverSmFunction as_function(const int _n, const int _m) const{
+      int m=getm();
+      int N=getN();
+      const_cast<SnMultiPart&>(*this).reshape({dims(0)*N*m});
+      SnOverSmFunction f(_n,_m,*this);
+      const_cast<SnMultiPart&>(*this).reshape({1,N,m});
+      return f;
+    }
+
+    /*
     SnFunction as_functn(const int _n) const{
       int m=getm();
       const_cast<SnMultiPart&>(*this).reshape({dims(0)*N*getm()});
@@ -105,6 +112,7 @@ namespace Snob2{
       const_cast<SnMultiPart&>(*this).reshape({1,N,m});
       return f;
     }
+    */
 
     SnMultiPart(const SnPart& x): rtensor(x){
       N=1;
@@ -315,3 +323,14 @@ namespace Snob2{
     }
     */
     
+    /*
+    SnMultiPart(const SnIrrep& _irrep, const rtensor& x): 
+      rtensor(x), irrep(_irrep.obj){}
+
+    SnMultiPart(const SnIrrep& _irrep, rtensor&& x): 
+      rtensor(std::move(x)), irrep(_irrep.obj){}
+
+    SnMultiPart(const SnIrrepObj* _irrep, rtensor&& x): 
+      rtensor(std::move(x)), irrep(_irrep){}
+    */
+

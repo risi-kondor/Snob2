@@ -22,10 +22,15 @@ namespace Snob2{
     static SnElement dummy_element(){return SnElement::Identity(1);}
 
 
-  public: // Access
+  public: // ---- Access ------------------------------------------------------------------------------------
+
 
     int size() const{
       return factorial(n)/factorial(m);
+    }
+
+    int order() const{
+      return size();
     }
 
     int get_order() const{

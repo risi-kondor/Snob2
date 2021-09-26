@@ -55,20 +55,14 @@ namespace Snob2{
 
     SnMultiVec(const SnMultiVec& x){
       parts=x.parts;
-      //for(auto p: x.parts)
-      //parts.insert(p->get_lambda(),new SnMultiPart(*p));
     }
 
     SnMultiVec(SnMultiVec&& x){
       parts=std::move(x.parts);
-      //x.parts.clear();
     }
 
     SnMultiVec& operator=(const SnMultiVec& x){
       parts=std::move(x.parts);
-      //parts.wipe();
-      //for(auto p: x.parts)
-      //parts.insert(p->get_lambda(),new SnMultiPart(*p));
       return *this;
     }
 
@@ -85,16 +79,26 @@ namespace Snob2{
       parts.push_back(new SnMultiPart(f));
     }
 
+    SnMultiVec(const SnOverSmFunction& f){
+      parts.push_back(new SnMultiPart(f));
+    }
+
     SnFunction as_function(const int _n) const{
       assert(parts.size()==1);
       return parts[0]->as_function(_n);
     }
 
+    SnOverSmFunction as_function(const int _n, const int _m) const{
+      assert(parts.size()==1);
+      return parts[0]->as_function(_n,_m);
+    }
+
+
+
     SnMultiVec(const SnVec& x){
       for(auto p:x.parts)
 	parts.push_back(new SnMultiPart(*p));
     }
-
 
     SnVec as_vec(){
       SnVec R;
@@ -103,26 +107,8 @@ namespace Snob2{
       return R;
     }
 
-    /*
-    operator SnVec() const &{
-      cout<<*this<<endl;
-      SnVec R;
-      for(auto p:parts)
-	R.parts.push_back(new SnPart(*p));
-      cout<<R<<endl;
-      return R;
-    }
-    */
 
-    /*
-    operator SnVec()&&{
-      SnVec R;
-      for(auto p:parts)
-	R.parts.push_back(new SnPart(std::move(*p)));
-      parts.clear();
-      return R;
-    }
-    */
+
 
 
   public: // ---- Access -------------------------------------------------------------------------------------
@@ -285,3 +271,23 @@ namespace Snob2{
 }
 
 #endif
+    /*
+    operator SnVec() const &{
+      cout<<*this<<endl;
+      SnVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnPart(*p));
+      cout<<R<<endl;
+      return R;
+    }
+    */
+
+    /*
+    operator SnVec()&&{
+      SnVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnPart(std::move(*p)));
+      parts.clear();
+      return R;
+    }
+    */

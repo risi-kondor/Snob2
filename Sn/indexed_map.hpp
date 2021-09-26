@@ -25,7 +25,19 @@ namespace Snob2{
 	delete p;
     }
 
-  public:
+
+  public: // ---- Copying ------------------------------------------------------------------------------------
+
+
+    indexed_map& operator=(indexed_map&& x){
+      v=x.v;
+      x.v.clear();
+      map=x.map;
+      x.map.clear();
+    }
+
+
+  public: // ---- Access -------------------------------------------------------------------------------------
 
     int size() const{
       return v.size();
@@ -89,7 +101,26 @@ namespace Snob2{
 	delete p;
     }
 
-  public:
+  public: // ---- Copying ------------------------------------------------------------------------------------
+
+
+    indexed_mapB& operator=(const indexed_mapB& x){
+      v=x.v;
+      map=x.map;
+      return *this;
+    }
+
+    indexed_mapB& operator=(indexed_mapB&& x){
+      v=x.v;
+      x.v.clear();
+      map=x.map;
+      x.map.clear();
+      return *this;
+    }
+
+
+  public: // ---- Access -------------------------------------------------------------------------------------
+
 
     int size() const{
       return v.size();

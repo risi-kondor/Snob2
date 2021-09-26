@@ -11,7 +11,7 @@ namespace Snob2{
   typedef cnine::RtensorObj rtensor;
 
 
-  class SnMultiPart: public rtensor{
+  class SnMultiPart: private rtensor{
   public:
 
     int N;
@@ -22,49 +22,17 @@ namespace Snob2{
 
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnMultiPart(const int _N, const initializer_list<int> list, const int _m, const FILLTYPE& fill, const int _dev=0):
-      N(_N),
-      rtensor(cnine::dims(_snbank->get_irrep(list)->d,_m*_N),fill,_dev), 
-      irrep(_snbank->get_irrep(list)){}
+    SnMultiPart(const int _N, const SnIrrepObj* _irrep, const int _m, const FILLTYPE& fill, const int _dev=0): N(_N),
+      rtensor(cnine::dims(_irrep->d,_N,_m),fill,_dev), irrep(_irrep){}
     
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnMultiPart(const int _N, const SnIrrepObj* _irrep, const int _m, const FILLTYPE& fill, const int _dev=0):
+    SnMultiPart(const int _N, const IntegerPartition& _lambda, const int _m, const FILLTYPE& fill, const int _dev=0): 
       N(_N),
-      rtensor(cnine::dims(_irrep->d,_m*_N),fill,_dev), irrep(_irrep){}
-    
-    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnMultiPart(const int _N, const IntegerPartition& _lambda, const int _m, const FILLTYPE& fill, const int _dev=0):
-      N(_N),
-      rtensor(cnine::dims(_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda)->d,_m*_N),fill,_dev), 
-      irrep(_snbank->get_Sn(_lambda.getn())->get_irrep(_lambda)){
-    }
-
-
-    SnMultiPart(const int _N, const SnIrrepObj* _irrep, const float val):
-      N(_N),
-      rtensor(cnine::dims(1,1)), irrep(_irrep){
-      set_value(0,0,val);
-    }
-    
-    SnMultiPart(const SnFunction& f): 
-      rtensor(f){
-      N=f.N;
-      reshape({1,N});
-      irrep=_snbank->get_irrep({1});
-    }
+      rtensor(cnine::dims(_snbank->get_irrep(_lambda)->d,_N,_m),fill,_dev), 
+      irrep(_snbank->get_irrep(_lambda)){}
     
 
   public: // ---- Named constructors -------------------------------------------------------------------------
-
-
-    static SnMultiPart zero(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
-      return SnMultiPart(_N,list,n,cnine::fill_zero(),_dev);}
-    
-    static SnMultiPart identity(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
-      return SnMultiPart(_N,list,n,cnine::fill_identity(),_dev);}
-    
-    static SnMultiPart gaussian(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
-      return SnMultiPart(_N,list,n,cnine::fill_gaussian(),_dev);}
 
 
     static SnMultiPart zero(const int _N, const IntegerPartition& _lambda, const int n, const int _dev=0){
@@ -104,6 +72,7 @@ namespace Snob2{
   public: // ---- Conversions --------------------------------------------------------------------------------
 
 
+    /*
     SnMultiPart(const SnIrrep& _irrep, const rtensor& x): 
       rtensor(x), irrep(_irrep.obj){}
 
@@ -112,11 +81,41 @@ namespace Snob2{
 
     SnMultiPart(const SnIrrepObj* _irrep, rtensor&& x): 
       rtensor(std::move(x)), irrep(_irrep){}
+    */
+
+    SnMultiPart(const SnFunction& f): 
+      rtensor(f){
+      N=f.N;
+      reshape({1,N,1});
+      irrep=_snbank->get_irrep({1});
+    }
+
+    SnFunction as_function(const int _n) const{
+      int m=getm();
+      const_cast<SnMultiPart&>(*this).reshape({dims(0)*N*getm()});
+      SnFunction f(_n,*this);
+      const_cast<SnMultiPart&>(*this).reshape({1,N,m});
+      return f;
+    }
+
+    SnMultiPart(const SnPart& x): rtensor(x){
+      N=1;
+      irrep=x.irrep;
+      reshape({dims(0),1,dims(1)});
+    }
 
 
-    operator SnPart() const{
+    operator SnPart() const &{
       assert(N==1);
-      return SnPart(irrep,*this);
+      //reshape({dims(0),N*getm()});
+      return SnPart(irrep,as_shape({dims(0),N*getm()}));
+      //reshape({dims(0),N,m});
+    }
+
+    operator SnPart() &&{
+      assert(N==1);
+      reshape({dims(0),N*getm()});
+      return SnPart(irrep,std::move(*this));
     }
 
 
@@ -131,20 +130,20 @@ namespace Snob2{
       return N;
     }
 
+    int getm() const{
+      return dims(2);
+    }
+
+   int getd() const{
+      return dims(0);
+    }
+
     IntegerPartition get_lambda() const{
       return irrep->lambda;
     }
 
     IntegerPartition key() const{
       return irrep->lambda;
-    }
-
-    int getm() const{
-      return dims(1)/N;
-    }
-
-   int getd() const{
-      return dims(0);
     }
 
       
@@ -154,29 +153,32 @@ namespace Snob2{
     void add_to_block_multi(const int ioffs, const int joffs, const SnMultiPart& M){
       int m=getm();
       int subm=M.getm();
-      //cout<<"m="<<m<<endl;
-      //cout<<"add_to_block("<<ioffs<<joffs<<")"<<endl;
       int I=M.dim(0);
       for(int s=0; s<N; s++)
 	for(int i=0; i<I; i++)
 	  for(int j=0; j<subm; j++)
-	    inc(i+ioffs,s*m+j+joffs,M.get_value(i,s*subm+j));
+	    inc(i+ioffs,s,j+joffs,M.get_value(i,s,j));
+      //inc(i+ioffs,s*m+j+joffs,M.get_value(i,s*subm+j));
     }
-    
-    void add_block_to(const int ioffs, const int joffs, rtensor& M, float c=1.0) const{
+
+    void add_block_to_multi(const int ioffs, const int joffs, SnMultiPart& M, float c=1.0) const{
+      assert(getN()==M.getN());
       int I=M.dim(0);
-      int J=M.dim(1);
-      for(int i=0; i<I; i++)
-	for(int j=0; j<J; j++)
-	  M.inc(i,j,get_value(i+ioffs,j+joffs)*c);
+      int J=M.getm();
+      for(int s=0; s<N; s++)
+	for(int i=0; i<I; i++)
+	  for(int j=0; j<J; j++)
+	    M.inc(i,s,j,get_value(i+ioffs,s,j+joffs)*c);
     }
  
+    /*
     void add_to_block_block(const int ioffs, const int joffs, const rtensor& M, 
       const int io, const int jo, const int I, const int J){
       for(int i=0; i<I; i++)
 	for(int j=0; j<J; j++)
 	  inc(i+ioffs,j+joffs,M.get_value(i+io,j+jo));
     }
+    */
 
     SnMultiPart reduce(){
       int n=getn();
@@ -190,51 +192,73 @@ namespace Snob2{
 	for(int t=0; t<n; t++)
 	  for(int i=0; i<I; i++)
 	    for(int j=0; j<m; j++)
-	      R.inc(i,s*m+j,get_value(i,(s*n+t)*m+j));
+	      R.inc(i,s,j,get_value(i,(s*n+t),j));
       return R;
     }
 
 
-  public:
+    SnMultiPart broadcast(const int _N){
+      int newN=N*_N;
+      int m=getm();
+      int I=dim(0);
+      SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
+      for(int s=0; s<N; s++)
+	for(int t=0; t<_N; t++)
+	  for(int i=0; i<I; i++)
+	    for(int j=0; j<m; j++)
+	      R.inc(i,s*_N+t,j,get_value(i,s,j));
+      return R;
+    }
 
 
-    /*
-    SnMultiPart apply(const SnElement& sigma) const{
+  public: // ---- Group actions ------------------------------------------------------------------------------
+
+
+    SnMultiPart apply(const SnElement& sigma, const int o, const int s=1){
       SnMultiPart R(*this);
-      irrep->apply_left(R,sigma);
+      int m=getm();
+      reshape({dims(0),N*m});
+      irrep->apply_left(R,sigma,o*m,(o+s)*m);
+      reshape({dims(0),N,m});
       return R;
     }
-    */
 
     SnMultiPart& apply_inplace(const SnElement& sigma, const int o, const int s=1){
       int m=getm();
+      reshape({dims(0),N*m});
       irrep->apply_left(*this,sigma,o*m,(o+s)*m);
+      reshape({dims(0),N,m});
       return *this;
     }
 
-    /*
-    SnMultiPart apply(const ContiguousCycle& cyc) const{
+    SnMultiPart apply(const ContiguousCycle& cyc, const int o, const int s=1){
       SnMultiPart R(*this);
-      irrep->apply_left(R,cyc);
+      int m=getm();
+      reshape({dims(0),N*m});
+      irrep->apply_left(R,cyc,o*m,(o+s)*m);
+      reshape({dims(0),N,m});
       return R;
     }
-    */
 
     SnMultiPart& apply_inplace(const ContiguousCycle& cyc, const int o, const int s=1){
       int m=getm();
-      //cout<<" "<<irrep->lambda<<cyc<<endl;
+      reshape({dims(0),N*m});
       irrep->apply_left(*this,cyc,o*m,(o+s)*m);
+      reshape({dims(0),N,m});
       return *this;
     }
     
-    /*
-    SnMultiPart& apply_inplace_inv(const ContiguousCycle& cyc){
-      irrep->apply_left_inv(*this,cyc);
+    SnMultiPart& apply_inplace_inv(const ContiguousCycle& cyc, const int o, const int s=1){
+      int m=getm();
+      reshape({dims(0),N*m});
+      irrep->apply_left_inv(*this,cyc,o*m,(o+s)*m);
+      reshape({dims(0),N,m});
       return *this;
     }
-    */
 
-  public:
+
+  public: // ---- I/O ----------------------------------------------------------------------------------------
+
 
     string str(string indent="") const{
       return "MultiPart "+irrep->lambda.str()+":\n"+rtensor::str();
@@ -256,3 +280,30 @@ namespace Snob2{
 }
 
 #endif
+    /*
+    static SnMultiPart zero(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
+      return SnMultiPart(_N,list,n,cnine::fill_zero(),_dev);}
+    
+    static SnMultiPart identity(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
+      return SnMultiPart(_N,list,n,cnine::fill_identity(),_dev);}
+    
+    static SnMultiPart gaussian(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
+      return SnMultiPart(_N,list,n,cnine::fill_gaussian(),_dev);}
+    */
+      
+    /*
+    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
+    SnMultiPart(const int _N, const initializer_list<int> list, const int _m, const FILLTYPE& fill, const int _dev=0):
+      N(_N),
+      rtensor(cnine::dims(_snbank->get_irrep(list)->d,_m*_N),fill,_dev), 
+      irrep(_snbank->get_irrep(list)){}
+    */
+
+    /*
+    SnMultiPart(const int _N, const SnIrrepObj* _irrep, const float val):
+      N(_N),
+      rtensor(cnine::dims(1,1)), irrep(_irrep){
+      set_value(0,0,val);
+    }
+    */
+    

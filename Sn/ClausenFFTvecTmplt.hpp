@@ -144,6 +144,10 @@ namespace Snob2{
       return R;
     }
 
+    SnMultiVec* mpack(const SnVec& v){
+      return new SnMultiVec(v);
+    }
+
     // Deprecated
     /*
     FunctionOnGroup<Sn,rtensor> unpack(SnVecPack* V){
@@ -164,6 +168,10 @@ namespace Snob2{
       for(int i=0; i<N; i++)
 	R.set_value(i,V->vecs[i]->parts[0]->get_value(0,0));
       return R;
+    }
+
+    SnFunction unpack(SnMultiVec* V){
+      return V->as_function(n);
     }
 
     FunctionOnGroup<SnOverSmObj,rtensor> unpack(int m, SnVecPack* V){
@@ -205,7 +213,7 @@ namespace Snob2{
       int N=V->getN();
       int newN=N/n;
 
-      SnMultiVec* w=new SnMultiVec();
+      SnMultiVec* w=new SnMultiVec(); // memory leak???
       for(auto p: parts){
 	//cout<<p->get_lambda()<<endl;
 	auto q=new SnMultiPart(p->uptransform(*V));
@@ -260,6 +268,38 @@ namespace Snob2{
       }
 
       return W;
+    }
+
+
+    SnMultiVec* downtransform(const SnMultiVec* V) const{
+      int N=V->getN();
+      int newN=N*(n+1);
+
+      SnMultiVec VV=V->broadcast(n+1);
+
+      for(int c=0; c<N; c++){
+	for(int i=0; i<n+1; i++){
+	  VV.apply_inplace_inv(ContiguousCycle(n+1-i,n+1),c*(n+1)+i);
+	}
+      }
+      
+      SnMultiVec* R=new SnMultiVec();
+      for(int i=0; i<parts.size(); i++){
+	R->parts.push_back(new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));
+      }
+
+      assert(next);
+      int i=0; 
+      for(auto p:next->parts){
+	const SnMultiPart& part=*VV.parts[i];
+	for(auto q:p->blocks){
+	  float c=((float)part.irrep->d)/(R->parts[q->subix]->irrep->d*(n+1));
+	  part.add_block_to_multi(q->ioffs,q->joffs,*R->parts[q->subix],c);
+	}
+	i++;
+      }
+
+      return R;
     }
 
 

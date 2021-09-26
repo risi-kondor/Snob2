@@ -96,7 +96,16 @@ namespace Snob2{
 	assert(w.parts[i]->dim(0)==final_parts[i]->d);
 	assert(w.parts[i]->dim(1)==final_parts[i]->m);
       }
-      
+
+      SnMultiVec* prev_v=levels[n-1]->mpack(w);
+      SnMultiVec* v=nullptr;
+      for(int l=n-1; l>0; l--){
+	v=levels[l-1]->downtransform(prev_v);
+	delete prev_v;
+	prev_v=v;
+      }
+
+      /*
       SnVecPack* prev_v=levels[n-1]->pack(w);
       SnVecPack* v=nullptr;
       for(int l=n-1; l>0; l--){
@@ -105,8 +114,9 @@ namespace Snob2{
 	delete prev_v;
 	prev_v=v;
       }
+      */
 
-      return levels[n-1]->unpack(v);
+      return levels[n-1]->unpack(v); // leak??
     }
 
 

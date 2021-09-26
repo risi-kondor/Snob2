@@ -38,6 +38,36 @@ namespace Snob2{
       return SnFunction(n,cnine::fill_gaussian(),_dev);}
 
 
+  public: // ---- Copying ------------------------------------------------------------------------------------
+
+
+    SnFunction(const SnFunction& x):
+      rtensor(x),
+      n(x.n),
+      N(x.N),
+      G(x.G){
+      cout<<"SnFunction copied"<<endl;
+    }
+
+    SnFunction(SnFunction&& x):
+      rtensor(std::move(x)),
+      n(x.n),
+      N(x.N),
+      G(x.G){
+      cout<<"SnFunction moved"<<endl;
+    }
+
+
+  public: // ---- Conversions --------------------------------------------------------------------------------
+
+
+    SnFunction(const int _n, const rtensor& M): 
+      rtensor(M),
+      n(_n),
+      N(M.dims(0)),
+      G(_snbank->get_Sn(_n)){}
+
+
   public: // ---- Access -------------------------------------------------------------------------------------
 
 

@@ -34,11 +34,6 @@ namespace Snob2{
     }
 
 
-    SnMultiVec(const SnFunction& f){
-      parts.push_back(new SnMultiPart(f));
-    }
-
-
   public: // ---- Named constructors -------------------------------------------------------------------------
 
 
@@ -86,12 +81,36 @@ namespace Snob2{
   public: // ---- Conversions --------------------------------------------------------------------------------
 
 
-    operator SnVec() const{
+    SnMultiVec(const SnFunction& f){
+      parts.push_back(new SnMultiPart(f));
+    }
+
+    SnFunction as_function(const int _n) const{
+      assert(parts.size()==1);
+      return parts[0]->as_function(_n);
+    }
+
+    SnMultiVec(const SnVec& x){
+      for(auto p:x.parts)
+	parts.push_back(new SnMultiPart(*p));
+    }
+
+
+    operator SnVec() const &{
       SnVec R;
       for(auto p:parts)
 	R.parts.push_back(new SnPart(*p));
       return R;
     }
+
+    operator SnVec()&&{
+      SnVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnPart(std::move(*p)));
+      parts.clear();
+      return R;
+    }
+
 
 
   public: // ---- Access -------------------------------------------------------------------------------------
@@ -141,23 +160,25 @@ namespace Snob2{
 	p->apply_inplace(cyc);
       return *this;
     }
+    */
 
-    SnMultiVec& apply_inplace_inv(const ContiguousCycle& cyc){
+    SnMultiVec& apply_inplace_inv(const ContiguousCycle& cyc, const int o, const int s=1){
       for(auto p:parts)
-	p->apply_inplace_inv(cyc);
+	p->apply_inplace_inv(cyc,o,s);
       return *this;
     }
-    */
     
 
   public: // ---- Cumulative operations ----------------------------------------------------------------------
 
 
+    /*
     void add(const SnMultiVec& y){
       assert(parts.size()==y.parts.size());
       for(int i=0; i<parts.size(); i++)
 	parts[i]->add(*y.parts[i]);
     }
+    */
 
 
   public: // ---- Operations ---------------------------------------------------------------------------------
@@ -167,6 +188,13 @@ namespace Snob2{
       SnMultiVec R;
       for(auto p:parts)
 	R.parts.push_back(new SnMultiPart(p->reduce()));
+      return R;
+    }
+
+    SnMultiVec broadcast(const int _N) const{
+      SnMultiVec R;
+      for(auto p:parts)
+	R.parts.push_back(new SnMultiPart(p->broadcast(_N)));
       return R;
     }
 

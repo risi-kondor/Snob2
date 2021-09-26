@@ -23,9 +23,6 @@ int main(int argc, char** argv){
 
   int n=4;
 
-  //ClausenFFTObj FFT(n);
-  //cout<<FFT<<endl;
-
   ClausenFFT FFT(n); 
 
   SnFunction f(n,cnine::fill::gaussian);

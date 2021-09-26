@@ -10,7 +10,7 @@ using namespace cnine;
 using namespace Snob2;
 
 //typedef CscalarObj cscalar;
-//typedef CtensorObj ctensor;
+typedef RtensorObj rtensor;
 
 
 

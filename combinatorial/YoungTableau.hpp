@@ -44,6 +44,8 @@ namespace Snob2{
   
     int k() const {return rows.size();}
 
+    int getk() const {return rows.size();}
+
     IntegerPartition shape() const{
       IntegerPartition r(k(),cnine::fill_zero());
       for(int i=0; i<r.k; i++) r.add(i,rows[i].size());

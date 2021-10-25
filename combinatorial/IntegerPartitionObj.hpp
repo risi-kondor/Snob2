@@ -24,7 +24,7 @@ namespace Snob2{
   public: // Constructors 
 
     IntegerPartitionObj(const IntegerPartition& _lambda): 
-      lambda(_lambda), n(_lambda.getn()){
+      n(_lambda.getn()), lambda(_lambda){
     }
 
 

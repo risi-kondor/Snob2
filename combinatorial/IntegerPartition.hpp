@@ -1,6 +1,8 @@
 #ifndef _IntegerPartition
 #define _IntegerPartition
 
+#include "Snob2_base.hpp"
+
 
 namespace Snob2{
 
@@ -32,6 +34,11 @@ namespace Snob2{
     }
 
     IntegerPartition(const initializer_list<int> list): 
+      IntegerPartition(list.size(),cnine::fill_raw()){
+      int i=0; for(auto v:list) p[i++]=v;
+    }	
+
+    IntegerPartition(const vector<int> list): 
       IntegerPartition(list.size(),cnine::fill_raw()){
       int i=0; for(auto v:list) p[i++]=v;
     }	
@@ -94,6 +101,10 @@ namespace Snob2{
 
     int operator()(const int r) const{
       return p[r];
+    }
+
+    void set(const int r, const int x){
+      p[r]=x;
     }
 
 

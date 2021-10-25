@@ -20,6 +20,11 @@ namespace Snob2{
   public: // Constructors
 
 
+    Permutation(const int _n): 
+      n(_n){
+      p=new int[n];
+    }
+
     Permutation(const int _n, const cnine::fill_raw& dummy): 
       n(_n){
       p=new int[n];
@@ -87,6 +92,12 @@ namespace Snob2{
 
 
   public: // named constructors
+
+    static Permutation identity(const int _n){
+      Permutation p(_n,cnine::fill_raw()); 
+      for(int i=0; i<_n; i++) p.p[i]=i+1; 
+      return p;
+    }
 
     static Permutation Identity(const int _n){
       Permutation p(_n,cnine::fill_raw()); 

@@ -18,7 +18,8 @@ setup(name='Snob2',
                                                                '-Wno-sign-compare',
                                                                '-Wno-deprecated-declarations',
                                                                '-Wno-unused-variable',
-                                                               '-Wno-reorder-ctor'
+                                                               '-Wno-reorder-ctor',
+                                                               '-Wno-reorder'
                                                                ]},
                                  depends=['setup.py'])], 
       cmdclass={'build_ext': BuildExtension}

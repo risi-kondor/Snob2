@@ -10,6 +10,10 @@
 #include "StandardYoungTableaux.hpp"
 #include "Permutation.hpp"
 
+#include "SnElement.hpp"
+#include "SnIrrep.hpp"
+#include "Sn.hpp"
+
 //std::default_random_engine rndGen;
 //#include "Snob_base.cpp"
 
@@ -33,6 +37,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("__str__",&IntegerPartition::str,py::arg("indent")="");
 
 
+
   pybind11::class_<IntegerPartitions>(m,"IntegerPartitions")
     .def(pybind11::init<int>())
     //.def("height",&IntegerPartition::height)
@@ -40,6 +45,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     //.def("str",&IntegerPartition::str,py::arg("indent")="")
     //.def("__str__",&IntegerPartition::str,py::arg("indent")="")
     ;
+
 
 
   pybind11::class_<YoungTableau>(m,"YoungTableau")
@@ -53,10 +59,12 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("__str__",&YoungTableau::str,py::arg("indent")="");
 
 
+
   pybind11::class_<StandardYoungTableaux>(m,"StandardYoungTableaux")
     .def(pybind11::init<const IntegerPartition&>())
     .def("__getitem__",&StandardYoungTableaux::operator[])
     ;
+
 
 
   pybind11::class_<Permutation>(m,"Permutation")
@@ -66,7 +74,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def(pybind11::init<int,const fill_identity&>())
     .def(pybind11::init<vector<int> >())
 
-    .def_static("identity",static_cast<Permutation (*)(int)>(&Permutation::identity))
+    .def_static("identity",static_cast<Permutation (*)(int)>(&Permutation::Identity))
 
     .def("getn",&Permutation::getn)
     .def("__getitem__",static_cast<int(Permutation::*)(const int) const>(&Permutation::operator()))
@@ -84,6 +92,78 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("__str__",&Permutation::str,py::arg("indent")="");
 
 
+
+  pybind11::class_<SnElement>(m,"SnElement") // can do this with inheritance?
+
+    .def(pybind11::init<int>())
+    .def(pybind11::init<int,const fill_raw&>())
+    .def(pybind11::init<int,const fill_identity&>())
+    //.def(pybind11::init<vector<int> >()) // conflict with below
+    .def(pybind11::init<const Permutation&>())
+
+    .def_static("identity",static_cast<SnElement (*)(int)>(&SnElement::Identity))
+
+    .def("getn",&SnElement::getn)
+    .def("__getitem__",static_cast<int(SnElement::*)(const int) const>(&SnElement::operator()))
+    //.def("__setitem__",&IntegerPartition::set)
+
+    .def("__eq__",&SnElement::operator==)
+
+    .def("__mul__",&SnElement::operator*)
+    .def("__imul__",&SnElement::operator*=)
+
+    .def("inv",&SnElement::inv)
+    .def("__inv__",&SnElement::inv)
+
+    .def("str",&SnElement::str,py::arg("indent")="")
+    .def("__str__",&SnElement::str,py::arg("indent")="");
+
+
+
+  pybind11::class_<SnCharacter>(m,"SnCharacter")
+    .def(pybind11::init<int>())
+    .def(pybind11::init<const IntegerPartition&>())
+
+    .def("str",&SnIrrep::str,py::arg("indent")="")
+    .def("__str__",&SnIrrep::str,py::arg("indent")="");
+        
+
+
+  pybind11::class_<SnIrrep>(m,"SnIrrep")
+    .def(pybind11::init<int>())
+    .def(pybind11::init<const IntegerPartition&>())
+
+    .def("dim",&SnIrrep::dim)
+    .def("__lt__",&SnIrrep::operator<)
+
+    .def("__getitem__",&SnIrrep::operator())
+
+    .def("str",&SnIrrep::str,py::arg("indent")="")
+    .def("__str__",&SnIrrep::str,py::arg("indent")="");
+        
+
+
+  pybind11::class_<Sn>(m,"Sn")
+    .def(pybind11::init<int>())
+
+    .def("getn",&Sn::getn)
+    .def("order",&Sn::size)
+    .def("__len__",&Sn::size)
+    
+    .def("identity",&Sn::identity)
+    .def("element",&Sn::element)
+    .def("index",static_cast<int(Sn::*)(const SnElement&) const>(&Sn::index))
+    .def("random",&Sn::random)
+
+    .def("ncclasses",&Sn::ncclasses)
+    .def("cclass",&Sn::cclass)
+    .def("index",static_cast<int(Sn::*)(const IntegerPartition&) const>(&Sn::index))
+    .def("cclass_size",static_cast<int(Sn::*)(const IntegerPartition&) const>(&Sn::class_size))
+
+    .def("irrep",&Sn::irrep)
+
+    .def("str",&Sn::str,py::arg("indent")="")
+    .def("__str__",&Sn::str,py::arg("indent")="");
 
 
 }

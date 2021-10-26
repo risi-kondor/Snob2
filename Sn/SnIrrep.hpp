@@ -32,6 +32,10 @@ namespace Snob2{
       obj=_snbank->get_Sn(lambda.getn())->get_irrep(lambda);
     }
 
+    SnIrrep(const vector<int> list): lambda(list){
+      obj=_snbank->get_Sn(lambda.getn())->get_irrep(lambda);
+    }
+
 
   public: // Access
 

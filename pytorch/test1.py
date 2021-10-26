@@ -1,6 +1,6 @@
 import numpy
 import torch
-#import cnine
+import cnine
 import Snob2
 
 a=Snob2.IntegerPartition([3,2,1])
@@ -30,4 +30,12 @@ print(sigma,'\n')
 print(sigma.inv(),'\n')
 print(sigma*sigma,'\n')
 
+sn=Snob2.Sn(5)
+print(sn.element(0))
+print(sn.element(1))
+print(sn.element(2))
+print(sigma,'\n')
 
+rho=sn.irrep(Snob2.IntegerPartition([4,1]))
+print(rho,'\n')
+print(rho[Snob2.SnElement(sigma)],'\n')

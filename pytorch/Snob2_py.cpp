@@ -121,11 +121,10 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
 
   pybind11::class_<SnCharacter>(m,"SnCharacter")
-    .def(pybind11::init<int>())
     .def(pybind11::init<const IntegerPartition&>())
 
-    .def("str",&SnIrrep::str,py::arg("indent")="")
-    .def("__str__",&SnIrrep::str,py::arg("indent")="");
+    .def("str",&SnCharacter::str,py::arg("indent")="")
+    .def("__str__",&SnCharacter::str,py::arg("indent")="");
         
 
 

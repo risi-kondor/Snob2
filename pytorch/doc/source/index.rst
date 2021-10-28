@@ -12,6 +12,7 @@ Welcome to Snob's documentation!
 
 .. automodule:: Snob2
    :members:
+   :undoc-members:
 
 
 Indices and tables

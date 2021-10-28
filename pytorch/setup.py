@@ -19,7 +19,8 @@ setup(name='Snob2',
                                                                '-Wno-deprecated-declarations',
                                                                '-Wno-unused-variable',
                                                                '-Wno-reorder-ctor',
-                                                               '-Wno-reorder'
+                                                               '-Wno-reorder',
+#                                                               '-Wl,-rpath,"/Users/risi/opt/anaconda3/lib/python3.8/site-packages/torch/lib"' #this is for sphinx
                                                                ]},
                                  depends=['setup.py'])], 
       cmdclass={'build_ext': BuildExtension}

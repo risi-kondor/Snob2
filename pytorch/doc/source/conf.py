@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Snob'
+project = 'Snob2'
 copyright = '2021, Risi Kondor'
 author = 'Risi Kondor'
 
@@ -68,6 +68,8 @@ html_static_path = ['_static']
 
 intersphinx_mapping = {'https://docs.python.org/': None}
 
+imgmath_image_format = 'svg'
+imgmath_font_size = 14
 
 autodoc_default_options = {
     'members': True,

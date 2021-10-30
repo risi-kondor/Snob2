@@ -27,9 +27,11 @@ author = 'Risi Kondor'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc','sphinx.ext.intersphinx','sphinx.ext.autosummary','sphinx.ext.napoleon',]
+extensions = ['sphinx.ext.autodoc','sphinx.ext.intersphinx','sphinx.ext.autosummary','sphinx.ext.napoleon',
+              'sphinx.ext.imgmath']
 
 autosummary_generate=True
+#autoclass_content='init'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -45,7 +47,19 @@ exclude_patterns = ['_build']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+
+
 html_theme = 'furo'
+#html_theme = 'sphinx_rtd_theme'
+
+#extensions.append("sphinxjp.themes.basicstrap")
+#html_theme = 'basicstrap'
+
+#import kotti_docs_theme
+#html_theme = 'kotti_docs_theme'
+#html_theme_path = [kotti_docs_theme.get_theme_dir()]
+
+#html_theme = 'nature'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -53,3 +67,17 @@ html_theme = 'furo'
 html_static_path = ['_static']
 
 intersphinx_mapping = {'https://docs.python.org/': None}
+
+
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': True, #'__init__',
+    'undoc-members': True,
+    'exclude-members': '__weakref__,__module__,__hash__'
+#    'add_module_names': False
+}
+
+add_module_names = False
+autodoc_member_order = 'bysource'
+

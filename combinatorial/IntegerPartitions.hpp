@@ -45,6 +45,13 @@ namespace Snob2{
       return *(*lambda)[i];
     }
 
+    vector<IntegerPartition> operator()(const int first, const int last) const{
+      vector<IntegerPartition> R;
+      for(int i=first; i<=last; i++)
+	R.push_back(*(*lambda)[i]);
+      return R;
+    }
+
     iterator begin() const{
       return iterator(this);
     }

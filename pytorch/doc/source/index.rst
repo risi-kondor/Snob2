@@ -169,6 +169,35 @@ The characters of :math:`\mathbb{S}_n` can be constructed from the group object 
 Irreducible representations
 ===========================
 
+The irreducible representations (irreps) of :math:`\mathbb{S}_n` are captured by ``SnIrrep`` objects. For a 
+given integer partition :math:`lambda` of n, the corresponding irrep can be constructed from 
+the group object or directly from the integer partition. 
+
+   >>> lambd=Snob2.IntegerPartition([3,1])
+   >>> rho=G.irrep(lambd)
+   >>> print(rho)
+   SnIrrep([3,1])
+
+   >>> lambd=Snob2.IntegerPartition([3,1])
+   >>> rho=Snob2.SnIrrep(lambd)
+   >>> print(rho)
+   SnIrrep([3,1])
+
+The dimension of the irrep is accessible through the `get_dim()` method. 
+
+   >>> print(rho.get_dim())
+   3
+
+All irreps in Snob2 are expressed in Young's orthogonal representation. The representation matrices 
+are easy to access.
+
+  >>> pi=Snob2.SnElement([3,2,1,4])
+  >>> print(rho[pi])
+  [ 1 0 0 ]
+  [ -0 -0.5 -0.866025 ]
+  [ -0 -0.866025 0.5 ]
+
+
 Reference
 =========
 

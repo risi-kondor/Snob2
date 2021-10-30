@@ -127,7 +127,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def(pybind11::init<int>())
     .def(pybind11::init<int,const fill_raw&>())
     .def(pybind11::init<int,const fill_identity&>())
-    //.def(pybind11::init<vector<int> >()) // conflict with below
+    .def(pybind11::init<vector<int> >()) // conflict with below
     .def(pybind11::init<const Permutation&>())
 
     .def_static("identity",static_cast<SnElement (*)(int)>(&SnElement::Identity),"Return the identity element of Sn.")
@@ -144,7 +144,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("inv",&SnElement::inv)
     .def("__inv__",&SnElement::inv)
 
-    .def("str",&SnElement::str,py::arg("indent")="")
+    //.def("str",&SnElement::str,py::arg("indent")="")
     .def("__str__",&SnElement::str,py::arg("indent")="");
 
 
@@ -174,7 +174,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def(pybind11::init<int>())
     .def(pybind11::init<const IntegerPartition&>())
 
-    .def("dim",&SnIrrep::dim)
+    .def("get_dim",&SnIrrep::dim,"Return the dimension of the irrep")
     .def("__lt__",&SnIrrep::operator<)
 
     .def("__getitem__",&SnIrrep::operator())

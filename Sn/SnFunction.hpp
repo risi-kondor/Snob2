@@ -24,6 +24,10 @@ namespace Snob2{
       N=G->order;
     }
 
+    SnFunction(const int _n):
+      SnFunction(_n,cnine::fill_zero()){}
+
+
 
   public: // ---- Named constructors ------------------------------------------------------------------------
 
@@ -34,8 +38,14 @@ namespace Snob2{
     SnFunction static zero(const int n, const int _dev=0){
       return SnFunction(n,cnine::fill_zero(),_dev);}
 
+    SnFunction static ones(const int n, const int _dev=0){
+      return SnFunction(n,cnine::fill_ones(),_dev);}
+
     SnFunction static gaussian(const int n, const int _dev=0){
       return SnFunction(n,cnine::fill_gaussian(),_dev);}
+
+    SnFunction static sequential(const int n, const int _dev=0){
+      return SnFunction(n,cnine::fill_sequential(),_dev);}
 
 
   public: // ---- Copying ------------------------------------------------------------------------------------
@@ -74,9 +84,12 @@ namespace Snob2{
     int size() const{
       return dims(0);
     }
-
     
     float operator()(const int i) const{
+      return rtensor::value(i);
+    }
+
+    float get_value(const int i) const{
       return rtensor::value(i);
     }
 
@@ -86,6 +99,11 @@ namespace Snob2{
     }
 
     float operator()(const SnElement& x) const{
+      const SnObj& G=*_snbank->get_Sn(n);
+      return rtensor::value(G.index(x));
+    }
+
+    float get_value(const SnElement& x) const{
       const SnObj& G=*_snbank->get_Sn(n);
       return rtensor::value(G.index(x));
     }

@@ -24,6 +24,10 @@ namespace Snob2{
       //N=G->order;
     }
 
+    SnOverSmFunction(const int _n, const int _m):
+      SnOverSmFunction(_n,_m,cnine::fill_zero()){}
+
+
 
   public: // ---- Named constructors ------------------------------------------------------------------------
 
@@ -34,8 +38,14 @@ namespace Snob2{
     SnOverSmFunction static zero(const int n, const int m, const int _dev=0){
       return SnOverSmFunction(n,m,cnine::fill_zero(),_dev);}
 
+    SnOverSmFunction static ones(const int n, const int m, const int _dev=0){
+      return SnOverSmFunction(n,m,cnine::fill_ones(),_dev);}
+
     SnOverSmFunction static gaussian(const int n, const int m, const int _dev=0){
       return SnOverSmFunction(n,m,cnine::fill_gaussian(),_dev);}
+
+    SnOverSmFunction static sequential(const int n, const int m, const int _dev=0){
+      return SnOverSmFunction(n,m,cnine::fill_sequential(),_dev);}
 
 
   public: // ---- Conversions --------------------------------------------------------------------------------
@@ -53,6 +63,12 @@ namespace Snob2{
     int getN() const{
       return dims(0);
     }
+
+    int size() const{
+      return dims(0);
+    }
+
+
 
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 

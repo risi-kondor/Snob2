@@ -29,6 +29,14 @@ Classes
 
 |
 
+.. include:: SnFunctions.rst
+
+| 
+
+.. include:: SnFFT.rst
+
+| 
+
 #########
 Reference
 #########

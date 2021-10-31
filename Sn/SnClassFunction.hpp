@@ -18,10 +18,13 @@ namespace Snob2{
 
     int n;
 
+
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnClassFunction(int _n, const FILLTYPE& fill, const int _dev=0):
       rtensor({_snbank->get_Sn(_n)->ncclasses()},fill,_dev), n(_n){}
 
+    SnClassFunction(const int _n):
+      SnClassFunction(_n,cnine::fill_zero()){}
 
     
   public: // ---- Named constructors ------------------------------------------------------------------------
@@ -33,9 +36,14 @@ namespace Snob2{
     SnClassFunction static zero(const int n, const int _dev=0){
       return SnClassFunction(n,cnine::fill_zero(),_dev);}
 
+    SnClassFunction static ones(const int n, const int _dev=0){
+      return SnClassFunction(n,cnine::fill_ones(),_dev);}
+
     SnClassFunction static gaussian(const int n, const int _dev=0){
       return SnClassFunction(n,cnine::fill_gaussian(),_dev);}
 
+    SnClassFunction static sequential(const int n, const int _dev=0){
+      return SnClassFunction(n,cnine::fill_sequential(),_dev);}
 
 
   public: // ---- Access ------------------------------------------------------------------------------------
@@ -51,6 +59,10 @@ namespace Snob2{
 
     float operator()(const int i) const{
       return rtensor::get_value(i);
+    }
+
+    float get_value(const SnCClass& lambda) const{
+      return rtensor::get_value(_snbank->get_Sn(lambda.getn())->index(lambda));
     }
 
     float get_value(const IntegerPartition& lambda) const{

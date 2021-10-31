@@ -14,6 +14,10 @@
 #include "SnIrrep.hpp"
 #include "Sn.hpp"
 
+#include "SnFunction.hpp"
+#include "SnOverSmFunction.hpp"
+#include "SnClassFunction.hpp"
+
 //std::default_random_engine rndGen;
 //#include "Snob_base.cpp"
 
@@ -98,7 +102,8 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
 
 
-  pybind11::class_<Permutation>(m,"Permutation","Class to represent a permutation sigma of (1,2,...,n)")
+  pybind11::class_<Permutation>(m,"Permutation",
+    "Class to represent a permutation sigma of (1,2,...,n)")
 
     .def(pybind11::init<int>())
     .def(pybind11::init<int,const fill_raw&>())
@@ -126,7 +131,8 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
 
 
-  pybind11::class_<SnElement>(m,"SnElement") // can do this with inheritance?
+  pybind11::class_<SnElement>(m,"SnElement",
+    "Class to represent symmetric group elements.") // can do this with inheritance?
 
     .def(pybind11::init<int>())
     .def(pybind11::init<int,const fill_raw&>())
@@ -153,28 +159,31 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
 
   
-  pybind11::class_<SnCClass>(m,"SnCClass")
+  pybind11::class_<SnCClass>(m,"SnCClass",
+    "Conjugacy class of Sn.")
+
     .def(pybind11::init<const IntegerPartition&>())
 
     .def("__str__",&SnCClass::str,py::arg("indent")="");
 
 
 
-  pybind11::class_<SnClassFunction>(m,"SnClassFunction")
-    .def("__str__",&SnClassFunction::str,py::arg("indent")="");
-
 
         
-  pybind11::class_<SnCharacter>(m,"SnCharacter")
+  pybind11::class_<SnCharacter>(m,"SnCharacter",
+    "Class to represent characters of Sn.")
+
     .def(pybind11::init<const IntegerPartition&>(),
       "The character corresponding to the integer partition lambda.")
 
-    .def("str",&SnCharacter::str,py::arg("indent")="")
+    //.def("str",&SnCharacter::str,py::arg("indent")="")
     .def("__str__",&SnCharacter::str,py::arg("indent")="");
         
 
 
-  pybind11::class_<SnIrrep>(m,"SnIrrep")
+  pybind11::class_<SnIrrep>(m,"SnIrrep",
+    "Class to represent the irreps of Sn.")
+
     .def(pybind11::init<int>())
     .def(pybind11::init<const IntegerPartition&>())
 
@@ -219,4 +228,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("__str__",&Sn::str,py::arg("indent")="");
 
 
+#include "SnFunctions_py.cpp"
+
 }
+

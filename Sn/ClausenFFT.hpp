@@ -29,7 +29,7 @@ namespace Snob2{
       return (*obj)(f);
     }
 
-    SnVec operator()(const SnOverSmFunction& f){
+    SnVec operator()(const SnOverSmFunction& f) const{
       return (*obj)(f);
     }
 

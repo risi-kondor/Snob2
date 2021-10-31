@@ -121,3 +121,16 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
     .def("str",&Sn::str,py::arg("indent")="")
     .def("__str__",&Sn::str,py::arg("indent")="");
 
+
+
+pybind11::class_<SnType>(m,"SnType",
+  "Class to store the type of an Sn vector")
+  .def(pybind11::init<const IntegerPartition&, const int>(),"")
+ 
+  .def("set",&SnType::set,"")
+  .def("add",&SnType::add,"")
+
+  .def("__str__",&SnType::str,py::arg("indent")="","Print the SnType to string.");
+
+
+

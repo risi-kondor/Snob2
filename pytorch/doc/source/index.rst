@@ -23,15 +23,9 @@ Classes
 
 .. include:: combinatorial.rst
 
-|
-
 .. include:: Sn.rst
 
-|
-
 .. include:: SnFunctions.rst
-
-| 
 
 .. include:: SnFFT.rst
 

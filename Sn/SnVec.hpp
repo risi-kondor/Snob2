@@ -34,6 +34,10 @@ namespace Snob2{
       SnVec(M.obj,fill,_dev){}
 
 
+    SnVec(const SnType& _type, const int _dev=0):
+      SnVec(_type,cnine::fill_raw(),_dev){}
+
+
     SnVec(SnPart* part){
       parts.insert(part->get_lambda(),part);
       //parts.push_back(part);
@@ -42,6 +46,10 @@ namespace Snob2{
 
   public: // ---- Named constructors -------------------------------------------------------------------------
 
+
+    static SnVec raw(const SnType& _type, const int _dev=0){
+      return SnVec(_type,cnine::fill::raw,_dev);
+    }
 
     static SnVec zero(const SnType& _type, const int _dev=0){
       return SnVec(_type,cnine::fill::zero,_dev);

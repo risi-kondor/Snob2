@@ -147,3 +147,42 @@ by the irreducible representation :math:`\rho_\lambda`. The ``SnPart`` is stored
   [ 0.097221 -0.89237 -0.228782 ]
 
 
+==========
+Sn vectors
+==========
+
+
+An Sn covariant vector or *Sn-vector* for short is a vector that transforms under the action of 
+:math:`\mathbb{S}_n` by a combination of irreducible representations. 
+Sn-vectors are stored as ``SnVec`` objects as a list of ``SnPart``s. 
+
+.. code-block:: python
+
+  >>> tau=Snob2.SnType(Snob2.IntegerPartition([4,1]),2)
+  >>> tau.set(Snob2.IntegerPartition([3,2]),1)
+  >>> tau.set(Snob2.IntegerPartition([3,1,1]),1)
+  >>> v=Snob2.SnVec.gaussian(tau)
+  >>> print(v)
+  Part [4,1]:
+  [ -1.23974 -0.407472 ]
+  [ 1.61201 0.399771 ]
+  [ 1.3828 0.0523187 ]
+  [ -0.904146 1.87065 ]
+
+  Part [3,2]:
+  [ -1.66043 ]
+  [ -0.688081 ]
+  [ 0.0757219 ]
+  [ 1.47339 ]
+  [ 0.097221 ]
+
+  Part [3,1,1]:
+  [ -0.228782 ]
+  [ 1.16493 ]
+  [ 0.584898 ]
+  [ -0.660558 ]
+  [ 0.534755 ]
+  [ -0.607787 ]
+
+
+

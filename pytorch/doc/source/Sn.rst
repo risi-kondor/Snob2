@@ -87,10 +87,25 @@ The ``Sn.index`` method returns the index of a given conjugacy class.
 Characters
 ==========
 
-The characters of :math:`\mathbb{S}_n` are also indexed by the integer partitions of :math:`n`. 
-The corresponding ``SnCharacter`` objects can be constructed from the group object or separately. 
+The characters of :math:`\mathbb{S}_n` are also indexed by the integer partitions of :math:`n` 
+and can be accessed through the ``character`` method of ``Sn``. 
 
+..
+  The corresponding ``SnCharacter`` objects can be constructed from the group object or separately. 
 
+.. code-block:: python
+
+  >>> G=Snob2.Sn(5)
+  >>> lambd=Snob2.IntegerPartition([3,2])
+  >>> chi=G.character(lambd)
+  >>> print(chi)
+  SnCClass[5] : 0
+  SnCClass[4,1] : -1
+  SnCClass[3,2] : 1
+  SnCClass[3,1,1] : -1
+  SnCClass[2,2,1] : 1
+  SnCClass[2,1,1,1] : 1
+  SnCClass[1,1,1,1,1] : 5
 
 
 ===========================
@@ -100,6 +115,8 @@ Irreducible representations
 The irreducible representations (irreps) of :math:`\mathbb{S}_n` are captured by ``SnIrrep`` objects. For a 
 given integer partition :math:`\lambda` of n, the corresponding irrep can be constructed from 
 the group object or directly from the integer partition. 
+
+.. code-block:: python
 
    >>> lambd=Snob2.IntegerPartition([3,1])
    >>> rho=G.irrep(lambd)
@@ -113,15 +130,37 @@ the group object or directly from the integer partition.
 
 The dimension of the irrep is accessible through the `get_dim()` method. 
 
+.. code-block:: python
+
    >>> print(rho.get_dim())
    3
 
 All irreps in Snob2 are expressed in Young's orthogonal representation. The representation matrices 
 are easy to access.
 
+.. code-block:: python
+
   >>> pi=Snob2.SnElement([3,2,1,4])
   >>> print(rho[pi])
   [ 1 0 0 ]
   [ -0 -0.5 -0.866025 ]
   [ -0 -0.866025 0.5 ]
+
+
+==========
+Sn types
+==========
+
+The *type* of a representation is an associative list of integer partitions and associated multiplicities 
+describing what irreps a particular representation is composed of. 
+The following shows how to set up an ``SnType`` object.
+
+.. code-block:: python
+
+  >>> tau=Snob2.SnType(Snob2.IntegerPartition([4,1]),2)
+  >>> tau.set(Snob2.IntegerPartition([3,2]),1)
+  >>> tau.set(Snob2.IntegerPartition([3,1,1]),1)
+  >>> print(tau)
+  ([4,1]:2,[3,2]:1,[3,1,1]:1)
+
 

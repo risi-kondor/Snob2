@@ -13,12 +13,14 @@
 #include "SnElement.hpp"
 #include "SnIrrep.hpp"
 #include "Sn.hpp"
+#include "SnType.hpp"
 
 #include "SnFunction.hpp"
 #include "SnOverSmFunction.hpp"
 #include "SnClassFunction.hpp"
 #include "SnPart.hpp"
 #include "SnVec.hpp"
+#include "ClausenFFT.hpp"
 
 
 //std::default_random_engine rndGen;
@@ -38,6 +40,35 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
   py::options options;
   //options.disable_function_signatures();
+
+
+  pybind11::class_<Permutation>(m,"Permutation",
+    "Class to represent a permutation sigma of (1,2,...,n)")
+
+    .def(pybind11::init<int>())
+    .def(pybind11::init<int,const fill_raw&>())
+    .def(pybind11::init<int,const fill_identity&>(),"Return the identity permutation on n items")
+    .def(pybind11::init<vector<int> >(),"Initialize the permutation from a list.")
+
+    .def_static("identity",static_cast<Permutation (*)(int)>(&Permutation::Identity),
+      "Return the identity permutation of n.")
+
+    .def("getn",&Permutation::getn,"Return n.")
+    .def("__getitem__",static_cast<int(Permutation::*)(const int) const>(&Permutation::operator()),
+      "Return sigma(i)")
+    //.def("__setitem__",&IntegerPartition::set)
+
+    .def("__eq__",&Permutation::operator==)
+
+    .def("__mul__",&Permutation::operator*)
+    .def("__imul__",&Permutation::operator*=)
+
+    .def("inv",&Permutation::inv,"Return the inverse permutation.")
+    .def("__inv__",&Permutation::inv)
+
+    .def("str",&Permutation::str,py::arg("indent")="")
+    .def("__str__",&Permutation::str,py::arg("indent")="");
+
 
 
   pybind11::class_<IntegerPartition>(m,"IntegerPartition",
@@ -105,39 +136,9 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
 
 
-  pybind11::class_<Permutation>(m,"Permutation",
-    "Class to represent a permutation sigma of (1,2,...,n)")
-
-    .def(pybind11::init<int>())
-    .def(pybind11::init<int,const fill_raw&>())
-    .def(pybind11::init<int,const fill_identity&>(),"Return the identity permutation on n items")
-    .def(pybind11::init<vector<int> >(),"Initialize the permutation from a list.")
-
-    .def_static("identity",static_cast<Permutation (*)(int)>(&Permutation::Identity),
-      "Return the identity permutation of n.")
-
-    .def("getn",&Permutation::getn,"Return n.")
-    .def("__getitem__",static_cast<int(Permutation::*)(const int) const>(&Permutation::operator()),
-      "Return sigma(i)")
-    //.def("__setitem__",&IntegerPartition::set)
-
-    .def("__eq__",&Permutation::operator==)
-
-    .def("__mul__",&Permutation::operator*)
-    .def("__imul__",&Permutation::operator*=)
-
-    .def("inv",&Permutation::inv,"Return the inverse permutation.")
-    .def("__inv__",&Permutation::inv)
-
-    .def("str",&Permutation::str,py::arg("indent")="")
-    .def("__str__",&Permutation::str,py::arg("indent")="");
-
-
-
-
-
 #include "SnClasses_py.cpp"
 #include "SnFunctions_py.cpp"
+#include "SnFFT_py.cpp"
 
 }
 

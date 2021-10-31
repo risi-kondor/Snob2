@@ -87,9 +87,13 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
 
   pybind11::class_<StandardYoungTableaux>(m,"StandardYoungTableaux",
-    "Class representing standard Young tableaux.")
+    "Class representing standard Young tableaux of a given shape.")
     .def(pybind11::init<const IntegerPartition&>())
+
+    .def("__len__",&StandardYoungTableaux::size,"Return the number of standard Young tableaux.")
     .def("__getitem__",&StandardYoungTableaux::operator[],"")
+
+    .def("__str__",&StandardYoungTableaux::str,py::arg("indent")="","Print object to string.");
     ;
 
 
@@ -198,9 +202,12 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("random",&Sn::random)
 
     .def("ncclasses",&Sn::ncclasses)
-    .def("cclass",&Sn::cclass)
+    .def("cclass",static_cast<SnCClass(Sn::*)(const int x) const>(&Sn::cclass))
+    .def("cclass",static_cast<SnCClass(Sn::*)(const IntegerPartition&) const>(&Sn::cclass))
     .def("index",static_cast<int(Sn::*)(const IntegerPartition&) const>(&Sn::index))
     .def("cclass_size",static_cast<int(Sn::*)(const IntegerPartition&) const>(&Sn::class_size))
+    .def("index",static_cast<int(Sn::*)(const SnCClass&) const>(&Sn::index))
+    .def("cclass_size",static_cast<int(Sn::*)(const SnCClass&) const>(&Sn::class_size))
 
     .def("nchars",&Sn::nchars)
     .def("character",static_cast<SnClassFunction(Sn::*)(const IntegerPartition&) const>(&Sn::character))

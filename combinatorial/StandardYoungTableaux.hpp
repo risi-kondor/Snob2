@@ -51,6 +51,18 @@ namespace Snob2{
     iterator end() const{
       return iterator(this,size());
     }
+
+
+  public: // I/O
+
+    string str(const string indent="") const{
+      return indent+"StandardYoungTableaux"+p.str();
+    }
+
+    friend ostream& operator<<(ostream& stream, const StandardYoungTableaux& x){
+      stream<<x.str(); return stream;
+    }
+
     
 
   };

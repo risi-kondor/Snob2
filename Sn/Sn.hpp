@@ -3,6 +3,7 @@
 
 #include "SnBank.hpp"
 #include "SnElement.hpp"
+#include "SnCClass.hpp"
 #include "SnIrrep.hpp"
 //#include "SnModule.hpp"
 //#include "SnRepresentation.hpp"
@@ -85,12 +86,24 @@ namespace Snob2{
       return obj->ncclasses(); 
     }
 
-    IntegerPartition cclass(const int i) const{
+    SnCClass cclass(const int i) const{
       return obj->cclass(i);
+    }
+
+    SnCClass cclass(const IntegerPartition& lambda) const{
+      return obj->cclass(obj->index(lambda));
     }
 
     int index(const IntegerPartition& lambda) const{
       return obj->index(lambda);
+    }
+
+    int index(const SnCClass& lambda) const{
+      return obj->index(lambda);
+    }
+
+    int class_size(const SnCClass& cc) const{
+      return class_size(static_cast<const IntegerPartition&>(cc));
     }
 
     int class_size(const IntegerPartition& lambda) const{

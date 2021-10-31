@@ -64,6 +64,33 @@
         
 
 
+pybind11::class_<SnClassFunction>(m,"SnClassFunction",
+  "Class function on Sn.")
+
+  .def(pybind11::init<const int>())
+  .def(pybind11::init<const int, const fill_raw&>())
+  .def(pybind11::init<const int, const fill_zero&>())
+  .def(pybind11::init<const int, const fill_ones&>())
+  .def(pybind11::init<const int, const fill_gaussian&>())
+  .def(pybind11::init<const int, const fill_sequential&>())
+
+  .def_static("raw",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::raw))
+  .def_static("zero",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::zero))
+  .def_static("ones",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::ones))
+  .def_static("gaussian",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::gaussian),
+    py::arg("n"),py::arg("dev")=0)
+  .def_static("sequential",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::sequential))
+
+  .def("__len__",&SnClassFunction::size,"Return the number of classes.")
+
+  .def("__getitem__",static_cast<float(SnClassFunction::*)(const int) const>(&SnClassFunction::get_value))
+  .def("__getitem__",static_cast<float(SnClassFunction::*)(const IntegerPartition&) const>(&SnClassFunction::get_value))
+  .def("__getitem__",static_cast<float(SnClassFunction::*)(const SnCClass&) const>(&SnClassFunction::get_value))
+    
+  .def("__str__",&SnClassFunction::str,py::arg("indent")="");
+
+
+
   pybind11::class_<Sn>(m,"Sn")
     .def(pybind11::init<int>())
 

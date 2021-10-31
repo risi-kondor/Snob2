@@ -71,33 +71,6 @@ pybind11::class_<SnOverSmFunction>(m,"SnOverSmFunction",
 
 
 
-pybind11::class_<SnClassFunction>(m,"SnClassFunction",
-  "Class function on Sn.")
-
-  .def(pybind11::init<const int>())
-  .def(pybind11::init<const int, const fill_raw&>())
-  .def(pybind11::init<const int, const fill_zero&>())
-  .def(pybind11::init<const int, const fill_ones&>())
-  .def(pybind11::init<const int, const fill_gaussian&>())
-  .def(pybind11::init<const int, const fill_sequential&>())
-
-  .def_static("raw",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::raw))
-  .def_static("zero",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::zero))
-  .def_static("ones",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::ones))
-  .def_static("gaussian",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::gaussian),
-    py::arg("n"),py::arg("dev")=0)
-  .def_static("sequential",static_cast<SnClassFunction (*)(const int, const int)>(&SnClassFunction::sequential))
-
-  .def("__len__",&SnClassFunction::size,"Return the number of classes.")
-
-  .def("__getitem__",static_cast<float(SnClassFunction::*)(const int) const>(&SnClassFunction::get_value))
-  .def("__getitem__",static_cast<float(SnClassFunction::*)(const IntegerPartition&) const>(&SnClassFunction::get_value))
-  .def("__getitem__",static_cast<float(SnClassFunction::*)(const SnCClass&) const>(&SnClassFunction::get_value))
-    
-  .def("__str__",&SnClassFunction::str,py::arg("indent")="");
-
-
-
 pybind11::class_<SnPart>(m,"SnPart",
   "Isotypic part of an Sn vector.")
 
@@ -117,8 +90,8 @@ pybind11::class_<SnPart>(m,"SnPart",
   .def_static("gaussian",static_cast<SnPart (*)(const IntegerPartition&, const int, const int)>(&SnPart::gaussian),
     py::arg("lambd"), py::arg("m"),py::arg("dev")=0)
 
-  .def("apply",static_cast<SnPart (*)(const SnElement&) const>(&SnPart::apply))
-  .def("apply_inplace",static_cast<SnPart& (*)(const SnElement&)>(&SnPart::apply_inplace))
+  .def("apply",static_cast<SnPart (SnPart::*)(const SnElement&) const>(&SnPart::apply))
+  .def("apply_inplace",static_cast<SnPart& (SnPart::*)(const SnElement&)>(&SnPart::apply_inplace))
 
   .def("__str__",&SnPart::str,py::arg("indent")="");
 

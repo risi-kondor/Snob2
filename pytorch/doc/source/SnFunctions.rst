@@ -74,6 +74,24 @@ The *inverse* of :math:`f` is defined :math:`f^{-1}(\sigma)=f(\sigma)`.
   [ 3 1 2 ] : 0.399771
   [ 3 2 1 ] : 0.0523187
 
+=================
+Sn/Sm functions
+=================
+
+The class ``SnOverSmFunction`` represents functions on :math:`\mathbb{S}_n/\mathbb{S}_m`. 
+The following initializes a function on :math:`\mathbb{S}_5/\mathbb{S}_4` with random Gaussian entries and 
+prints it out.
+
+.. code-block:: python
+
+  >>> f=Snob2.SnOverSmFunction.gaussian(5,4)
+  >>> print(f)
+  0.74589
+  -1.75177
+  -0.965146
+  -0.474282
+  -0.546571
+
 
 ==================
 Sn class functions
@@ -107,6 +125,25 @@ The value of ``f`` at specific conjugacy classes can be accessed via the corresp
    1.6120094060897827
 
 
+========
+Sn parts
+========
 
+
+An ``SnPart`` of type :math:`\lambda` is a collection of :math:`m` vectors on which acts 
+by the irreducible representation :math:`\rho_\lambda`. The ``SnPart`` is stored as a matrix 
+:math:`\mathbb{R}^{d_\lambda\times m}`.
+
+.. code-block:: python
+
+  >>>lambd=Snob2.IntegerPartition([3,2])
+  >>> p=Snob2.SnPart.gaussian(lambd,3)
+  >>> print(p)
+  Part [3,2]:
+  [ -1.23974 -0.407472 1.61201 ]
+  [ 0.399771 1.3828 0.0523187 ]
+  [ -0.904146 1.87065 -1.66043 ]
+  [ -0.688081 0.0757219 1.47339 ]
+  [ 0.097221 -0.89237 -0.228782 ]
 
 

@@ -37,7 +37,7 @@ pybind11::class_<SnFunction>(m,"SnFunction",
 
 
 pybind11::class_<SnOverSmFunction>(m,"SnOverSmFunction",
-  "Function on Sn.")
+  "Function on Sn/Sm.")
 
   .def(pybind11::init<const int, const int>())
   .def(pybind11::init<const int, const int, const fill_raw&>())
@@ -95,5 +95,32 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
   .def("__getitem__",static_cast<float(SnClassFunction::*)(const SnCClass&) const>(&SnClassFunction::get_value))
     
   .def("__str__",&SnClassFunction::str,py::arg("indent")="");
+
+
+
+pybind11::class_<SnPart>(m,"SnPart",
+  "Isotypic part of an Sn vector.")
+
+  .def(pybind11::init<const IntegerPartition&, const int>())
+  .def(pybind11::init<const IntegerPartition&, const int, const fill_raw&>())
+  .def(pybind11::init<const IntegerPartition&, const int, const fill_zero&>())
+  .def(pybind11::init<const IntegerPartition&, const int, const fill_ones&>())
+  .def(pybind11::init<const IntegerPartition&, const int, const fill_identity&>())
+  .def(pybind11::init<const IntegerPartition&, const int, const fill_gaussian&>())
+
+  .def_static("raw",static_cast<SnPart (*)(const IntegerPartition&, const int, const int)>(&SnPart::raw),
+    py::arg("lambd"), py::arg("m"),py::arg("dev")=0)
+  .def_static("zero",static_cast<SnPart (*)(const IntegerPartition&, const int, const int)>(&SnPart::zero),
+    py::arg("lambd"), py::arg("m"),py::arg("dev")=0)
+  .def_static("ones",static_cast<SnPart (*)(const IntegerPartition&, const int, const int)>(&SnPart::identity),
+    py::arg("lambd"), py::arg("m"),py::arg("dev")=0)
+  .def_static("gaussian",static_cast<SnPart (*)(const IntegerPartition&, const int, const int)>(&SnPart::gaussian),
+    py::arg("lambd"), py::arg("m"),py::arg("dev")=0)
+
+  .def("apply",static_cast<SnPart (*)(const SnElement&) const>(&SnPart::apply))
+  .def("apply_inplace",static_cast<SnPart& (*)(const SnElement&)>(&SnPart::apply_inplace))
+
+  .def("__str__",&SnPart::str,py::arg("indent")="");
+
 
 

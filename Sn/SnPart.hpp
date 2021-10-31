@@ -38,6 +38,9 @@ namespace Snob2{
     }
 
 
+    SnPart(const IntegerPartition& _lambda, const int n, const int _dev=0):
+      SnPart(_lambda,n,cnine::fill_raw(),_dev){}
+
     SnPart(const SnIrrepObj* _irrep, const float val):
       rtensor(cnine::dims(1,1)), irrep(_irrep){
       set_value(0,0,val);
@@ -47,6 +50,9 @@ namespace Snob2{
   public: // ---- named constructors ----
 
 
+    static SnPart raw(const initializer_list<int> list, const int n, const int _dev=0){
+      return SnPart(list,n,cnine::fill_raw(),_dev);}
+    
     static SnPart zero(const initializer_list<int> list, const int n, const int _dev=0){
       return SnPart(list,n,cnine::fill_zero(),_dev);}
     
@@ -57,6 +63,9 @@ namespace Snob2{
       return SnPart(list,n,cnine::fill_gaussian(),_dev);}
 
 
+    static SnPart raw(const IntegerPartition& _lambda, const int n, const int _dev=0){
+      return SnPart(_lambda,n,cnine::fill_raw(),_dev);}
+    
     static SnPart zero(const IntegerPartition& _lambda, const int n, const int _dev=0){
       return SnPart(_lambda,n,cnine::fill_zero(),_dev);}
     
@@ -67,6 +76,9 @@ namespace Snob2{
       return SnPart(_lambda,n,cnine::fill_gaussian(),_dev);}
 
 
+    static SnPart raw(const SnIrrep& _rho, const int n, const int _dev=0){
+      return SnPart(_rho,n,cnine::fill_raw(),_dev);}
+    
     static SnPart zero(const SnIrrep& _rho, const int n, const int _dev=0){
       return SnPart(_rho,n,cnine::fill_zero(),_dev);}
     

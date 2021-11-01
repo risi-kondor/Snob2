@@ -1,7 +1,6 @@
 Snob2 is a C++ package with a Python interface 
 for computing the representations of the symmetric group :math:`\mathbb{S}_n` and 
 computing fast Fourier transforms on :math:`\mathbb{S}_n`.
-
 Snob2 is built on the **cnine** library which can be downloaded from https://github.com/risi-kondor/cnine.
 GPU functionality for the library is not yet available but is under development. 
 

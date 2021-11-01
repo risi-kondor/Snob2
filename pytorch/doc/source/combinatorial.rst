@@ -68,7 +68,7 @@ The ``IntegerPartitions`` class returns an object that contains *all* integer pa
 
 
 ==================
-Young tableau
+Young tableaux
 ==================
 
 A Young tableau is a Young diagram whose cells are filled with integers. The 

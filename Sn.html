@@ -183,7 +183,7 @@
 <h1>Symmetric group classes<a class="headerlink" href="#symmetric-group-classes" title="Permalink to this headline">¶</a></h1>
 <p>The symmetric group <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>, represented by the class <code class="docutils literal notranslate"><span class="pre">Sn</span></code>,
 is the group of all permutations of <img alt="\{1,2,\ldots,n\}" class="math" src="_images/math/0ea06c256d593b7e1b104737ce65ac2aabd95f95.svg"/>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Sn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Sn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span>
 <span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">element</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
 <span class="gp">...</span>
@@ -233,9 +233,20 @@ group element and how to get the index of a particular group element.</p>
 <p>The conjugacy classes of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are in bijection with the integer partitions of <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/>.
 Snob2 has a separate class <code class="docutils literal notranslate"><span class="pre">SnCClass</span></code> to represent conjugacy classes. <code class="docutils literal notranslate"><span class="pre">SnCClass</span></code> objects can
 be constructed either from the group object or directly from an integer partition.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Sn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Sn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span><span class="o">=</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cc</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">cclass</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+<span class="go">SnCClass[3,2]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cc</span><span class="o">=</span><span class="n">SnCClass</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+<span class="go">SnCClass[3,2]</span>
+</pre></div>
+</div>
+<p>An even shorter form is the following.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cc</span><span class="o">=</span><span class="n">SnCClass</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
 <span class="go">SnCClass[3,2]</span>
 </pre></div>
@@ -251,17 +262,29 @@ The <code class="docutils literal notranslate"><span class="pre">Sn.index</span>
 <h2>Characters<a class="headerlink" href="#characters" title="Permalink to this headline">¶</a></h2>
 <p>The characters of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are also indexed by the integer partitions of <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/>
 and can be accessed through the <code class="docutils literal notranslate"><span class="pre">character</span></code> method of <code class="docutils literal notranslate"><span class="pre">Sn</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Sn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">chi</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Sn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chi</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">character</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">chi</span><span class="p">)</span>
-<span class="go">SnCClass[5] : 0</span>
-<span class="go">SnCClass[4,1] : -1</span>
-<span class="go">SnCClass[3,2] : 1</span>
-<span class="go">SnCClass[3,1,1] : -1</span>
-<span class="go">SnCClass[2,2,1] : 1</span>
-<span class="go">SnCClass[2,1,1,1] : 1</span>
-<span class="go">SnCClass[1,1,1,1,1] : 5</span>
+<span class="go">chi[3,2]:</span>
+<span class="go">  SnCClass[5] : 0</span>
+<span class="go">  SnCClass[4,1] : -1</span>
+<span class="go">  SnCClass[3,2] : 1</span>
+<span class="go">  SnCClass[3,1,1] : -1</span>
+<span class="go">  SnCClass[2,2,1] : 1</span>
+<span class="go">  SnCClass[2,1,1,1] : 1</span>
+<span class="go">  SnCClass[1,1,1,1,1] : 5</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chi</span><span class="o">=</span><span class="n">SnCharacter</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">chi</span><span class="p">)</span>
+<span class="go">chi[3,2]:</span>
+<span class="go">  SnCClass[5] : 0</span>
+<span class="go">  SnCClass[4,1] : -1</span>
+<span class="go">  SnCClass[3,2] : 1</span>
+<span class="go">  SnCClass[3,1,1] : -1</span>
+<span class="go">  SnCClass[2,2,1] : 1</span>
+<span class="go">  SnCClass[2,1,1,1] : 1</span>
+<span class="go">  SnCClass[1,1,1,1,1] : 5</span>
 </pre></div>
 </div>
 </section>
@@ -270,13 +293,11 @@ and can be accessed through the <code class="docutils literal notranslate"><span
 <p>The irreducible representations (irreps) of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are captured by <code class="docutils literal notranslate"><span class="pre">SnIrrep</span></code> objects. For a
 given integer partition <img alt="\lambda" class="math" src="_images/math/83d8373d44883a7d479263075ef3877aaabd022a.svg"/> of n, the corresponding irrep can be constructed from
 the group object or directly from the integer partition.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">irrep</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">irrep</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
 <span class="go">SnIrrep([3,1])</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnIrrep</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span><span class="o">=</span><span class="n">SnIrrep</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
 <span class="go">SnIrrep([3,1])</span>
 </pre></div>
@@ -287,9 +308,16 @@ the group object or directly from the integer partition.</p>
 </pre></div>
 </div>
 <p>All irreps in Snob2 are expressed in Young’s orthogonal representation. The representation matrices
-are easy to access.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnElement</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+are easy to access</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">=</span><span class="n">SnElement</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">[</span><span class="n">pi</span><span class="p">])</span>
+<span class="go">[ 1 0 0 ]</span>
+<span class="go">[ -0 -0.5 -0.866025 ]</span>
+<span class="go">[ -0 -0.866025 0.5 ]</span>
+</pre></div>
+</div>
+<p>or just</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 <span class="go">[ 1 0 0 ]</span>
 <span class="go">[ -0 -0.5 -0.866025 ]</span>
 <span class="go">[ -0 -0.866025 0.5 ]</span>
@@ -301,9 +329,9 @@ are easy to access.</p>
 <p>The <em>type</em> of a representation is an associative list of integer partitions and associated multiplicities
 describing what irreps a particular representation is composed of.
 The following shows how to set up an <code class="docutils literal notranslate"><span class="pre">SnType</span></code> object.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnType</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">SnType</span><span class="p">(</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
 <span class="go">([4,1]:2,[3,2]:1,[3,1,1]:1)</span>
 </pre></div>

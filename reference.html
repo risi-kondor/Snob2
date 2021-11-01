@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -173,7 +173,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -181,6 +181,73 @@
         <article role="main">
           <section id="combinatorial-classes">
 <h1>Combinatorial classes<a class="headerlink" href="#combinatorial-classes" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.Permutation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Permutation</span></span><a class="headerlink" href="#Snob2.Permutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a permutation sigma of (1,2,…,n)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return sigma(i)</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__imul__">
+<span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__imul__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Permutation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: Snob2.Permutation, arg0: int) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.Permutation, arg0: int, arg1: cnine::fill_raw) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.Permutation, arg0: int, arg1: cnine::fill_identity) -&gt; None</p></li>
+</ol>
+<p>Return the identity permutation on n items</p>
+<ol class="arabic simple" start="4">
+<li><p>__init__(self: Snob2.Permutation, arg0: List[int]) -&gt; None</p></li>
+</ol>
+<p>Initialize the permutation from a list.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__inv__">
+<span class="sig-name descname"><span class="pre">__inv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__inv__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__mul__">
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.getn">
+<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.getn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.identity">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the identity permutation of n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.inv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the inverse permutation.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.str">
+<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
@@ -282,283 +349,6 @@
 <div class="line-block">
 <div class="line"><br/></div>
 </div>
-<dl class="py class">
-<dt class="sig sig-object py" id="Snob2.Permutation">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Permutation</span></span><a class="headerlink" href="#Snob2.Permutation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent a permutation sigma of (1,2,…,n)</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__eq__">
-<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__eq__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return sigma(i)</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__imul__">
-<span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__imul__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Permutation.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>__init__(self: Snob2.Permutation, arg0: int) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.Permutation, arg0: int, arg1: cnine::fill_raw) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.Permutation, arg0: int, arg1: cnine::fill_identity) -&gt; None</p></li>
-</ol>
-<p>Return the identity permutation on n items</p>
-<ol class="arabic simple" start="4">
-<li><p>__init__(self: Snob2.Permutation, arg0: List[int]) -&gt; None</p></li>
-</ol>
-<p>Initialize the permutation from a list.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__inv__">
-<span class="sig-name descname"><span class="pre">__inv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__inv__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__mul__">
-<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__mul__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.getn">
-<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.getn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return n.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.identity">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.identity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the identity permutation of n.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.inv">
-<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.inv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the inverse permutation.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Permutation.str">
-<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.str" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-</dd></dl>
-<div class="line-block">
-<div class="line"><br/></div>
-</div>
-</section>
-<section id="symmetric-group-classes">
-<h1>Symmetric group classes<a class="headerlink" href="#symmetric-group-classes" title="Permalink to this headline">¶</a></h1>
-<div class="line-block">
-<div class="line"><br/></div>
-</div>
-<dl class="py class">
-<dt class="sig sig-object py" id="Snob2.Sn">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Sn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.__len__">
-<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__len__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.cclass">
-<span class="sig-name descname"><span class="pre">cclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn.cclass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>cclass(self: Snob2.Sn, arg0: int) -&gt; Snob2.SnCClass</p></li>
-<li><p>cclass(self: Snob2.Sn, arg0: Snob2.IntegerPartition) -&gt; Snob2.SnCClass</p></li>
-</ol>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.cclass_size">
-<span class="sig-name descname"><span class="pre">cclass_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn.cclass_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>cclass_size(self: Snob2.Sn, arg0: Snob2.IntegerPartition) -&gt; int</p></li>
-<li><p>cclass_size(self: Snob2.Sn, arg0: Snob2.SnCClass) -&gt; int</p></li>
-</ol>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.character">
-<span class="sig-name descname"><span class="pre">character</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Snob2.SnClassFunction</span></span></span><a class="headerlink" href="#Snob2.Sn.character" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.element">
-<span class="sig-name descname"><span class="pre">element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.element" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.getn">
-<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.getn" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.identity">
-<span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.identity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.index">
-<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>index(self: Snob2.Sn, arg0: Snob2.SnElement) -&gt; int</p></li>
-<li><p>index(self: Snob2.Sn, arg0: Snob2.IntegerPartition) -&gt; int</p></li>
-<li><p>index(self: Snob2.Sn, arg0: Snob2.SnCClass) -&gt; int</p></li>
-</ol>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.irrep">
-<span class="sig-name descname"><span class="pre">irrep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></span><a class="headerlink" href="#Snob2.Sn.irrep" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.ncclasses">
-<span class="sig-name descname"><span class="pre">ncclasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.ncclasses" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.nchars">
-<span class="sig-name descname"><span class="pre">nchars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.nchars" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.order">
-<span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.order" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.random">
-<span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.random" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.Sn.str">
-<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Sn.str" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-</dd></dl>
-<div class="line-block">
-<div class="line"><br/></div>
-<div class="line"><br/></div>
-</div>
-<dl class="py class">
-<dt class="sig sig-object py" id="Snob2.SnElement">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SnElement</span></span><a class="headerlink" href="#Snob2.SnElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent symmetric group elements.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__eq__">
-<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__eq__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__imul__">
-<span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__imul__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.SnElement.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>__init__(self: Snob2.SnElement, arg0: int) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.SnElement, arg0: int, arg1: cnine::fill_raw) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.SnElement, arg0: int, arg1: cnine::fill_identity) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.SnElement, arg0: List[int]) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.SnElement, arg0: Snob2.Permutation) -&gt; None</p></li>
-</ol>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__inv__">
-<span class="sig-name descname"><span class="pre">__inv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__inv__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__mul__">
-<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__mul__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.getn">
-<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.getn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return n.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.identity">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.identity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the identity element of Sn.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnElement.inv">
-<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.inv" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-</dd></dl>
-<div class="line-block">
-<div class="line"><br/></div>
-<div class="line"><br/></div>
-</div>
-<dl class="py class">
-<dt class="sig sig-object py" id="Snob2.SnCharacter">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SnCharacter</span></span><a class="headerlink" href="#Snob2.SnCharacter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent characters of Sn.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnCharacter.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnCharacter" title="Snob2.SnCharacter"><span class="pre">Snob2.SnCharacter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.SnCharacter.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>The character corresponding to the integer partition lambda.</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnCharacter.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnCharacter" title="Snob2.SnCharacter"><span class="pre">Snob2.SnCharacter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnCharacter.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-</dd></dl>
-<div class="line-block">
-<div class="line"><br/></div>
-<div class="line"><br/></div>
-</div>
-<dl class="py class">
-<dt class="sig sig-object py" id="Snob2.SnIrrep">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SnIrrep</span></span><a class="headerlink" href="#Snob2.SnIrrep" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to represent the irreps of Sn.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnIrrep.__getitem__">
-<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">cnine::RtensorObj</span></span></span><a class="headerlink" href="#Snob2.SnIrrep.__getitem__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnIrrep.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.SnIrrep.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overloaded function.</p>
-<ol class="arabic simple">
-<li><p>__init__(self: Snob2.SnIrrep, arg0: int) -&gt; None</p></li>
-<li><p>__init__(self: Snob2.SnIrrep, arg0: Snob2.IntegerPartition) -&gt; None</p></li>
-</ol>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnIrrep.__lt__">
-<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.__lt__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnIrrep.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnIrrep.get_dim">
-<span class="sig-name descname"><span class="pre">get_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.get_dim" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the dimension of the irrep</p>
-</dd></dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="Snob2.SnIrrep.str">
-<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.str" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-</dd></dl>
 </section>
 
         </article>
@@ -584,25 +374,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            Contents
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Combinatorial classes</a></li>
-<li><a class="reference internal" href="#symmetric-group-classes">Symmetric group classes</a></li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

@@ -186,7 +186,7 @@
 <p>The class <code class="docutils literal notranslate"><span class="pre">SnFunction</span></code> represents functions on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.
 The following initializes a function on <img alt="\mathbb{S}_3" class="math" src="_images/math/26234e3fb2bf5c8849113da89187f995357e8d9c.svg"/> with random Gaussian entries and
 prints it out.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">[ 1 2 3 ] : -1.23974</span>
 <span class="go">[ 2 1 3 ] : -0.407472</span>
@@ -197,7 +197,7 @@ prints it out.</p>
 </pre></div>
 </div>
 <p>The value of <code class="docutils literal notranslate"><span class="pre">f</span></code> at specific group elements can be accessed via the <code class="docutils literal notranslate"><span class="pre">SnElement</span></code> object or just its index.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnElement</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="n">SnElement</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
 <span class="go">1.6120094060897827</span>
 <span class="go">0.1949467808008194</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -206,7 +206,6 @@ prints it out.</p>
 </div>
 <p>The <em>left-translate</em> of <img alt="f" class="math" src="_images/math/d6f721b3731c865ea8370cfdbcf50f1d5ba7da8b.svg"/> by a permutation <img alt="\pi" class="math" src="_images/math/3379cf4a59e768016d616d1addc40f6ac935a4a0.svg"/> is defined <img alt="g_1(\sigma)=f(\pi^{-1}\sigma)" class="math" src="_images/math/92d149b281cf3946d85a0a8ecd3e5d70057579af.svg"/>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">left_translate</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
-<span class="go">SnFunction moved</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
 <span class="go">[ 1 2 3 ] : -0.407472</span>
 <span class="go">[ 2 1 3 ] : -1.23974</span>
@@ -218,7 +217,6 @@ prints it out.</p>
 </div>
 <p>The <em>right-translate</em> of <img alt="f" class="math" src="_images/math/d6f721b3731c865ea8370cfdbcf50f1d5ba7da8b.svg"/> by a permutation <img alt="\pi" class="math" src="_images/math/3379cf4a59e768016d616d1addc40f6ac935a4a0.svg"/> is defined <img alt="g_1(\sigma)=f(\sigma \pi^{-1})" class="math" src="_images/math/56e1726fbae216a072099d3c867686e664d01825.svg"/>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">right_translate</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
-<span class="go">SnFunction moved</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span>
 <span class="go">[ 1 2 3 ] : -0.407472</span>
 <span class="go">[ 2 1 3 ] : -1.23974</span>
@@ -229,7 +227,7 @@ prints it out.</p>
 </pre></div>
 </div>
 <p>The <em>inverse</em> of <img alt="f" class="math" src="_images/math/d6f721b3731c865ea8370cfdbcf50f1d5ba7da8b.svg"/> is defined <img alt="f^{-1}(\sigma)=f(\sigma)" class="math" src="_images/math/355926daa9f9d25df19f5ece2fc24e1316144253.svg"/>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">finv</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">finv</span><span class="p">)</span>
 <span class="go">[ 1 2 3 ] : -1.23974</span>
@@ -246,7 +244,7 @@ prints it out.</p>
 <p>The class <code class="docutils literal notranslate"><span class="pre">SnOverSmFunction</span></code> represents functions on <img alt="\mathbb{S}_n/\mathbb{S}_m" class="math" src="_images/math/b5d2559d5c0acce82b2a296a9f67629549fcaa7c.svg"/>.
 The following initializes a function on <img alt="\mathbb{S}_5/\mathbb{S}_4" class="math" src="_images/math/7e38aa7ada5220b2f990c6f06e7ba67f276700ee.svg"/> with random Gaussian entries and
 prints it out.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnOverSmFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">SnOverSmFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">0.74589</span>
 <span class="go">-1.75177</span>
@@ -262,7 +260,7 @@ prints it out.</p>
 An important example of class functions are the characters of the group.
 The following initializes a class function on <img alt="\mathbb{S}_4" class="math" src="_images/math/33a914272f2e88110551daa4c50f91df3d74e93e.svg"/> with random Gaussian entries
 and prints it out.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnClassFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">SnClassFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">SnCClass[4] : -1.23974</span>
 <span class="go">SnCClass[3,1] : -0.407472</span>
@@ -287,8 +285,8 @@ and prints it out.</p>
 <p>An <code class="docutils literal notranslate"><span class="pre">SnPart</span></code> of type <img alt="\lambda" class="math" src="_images/math/83d8373d44883a7d479263075ef3877aaabd022a.svg"/> is a collection of <img alt="m" class="math" src="_images/math/0541bd3ca64424b2b45ab42dc236b934f47bc754.svg"/> vectors on which acts
 by the irreducible representation <img alt="\rho_\lambda" class="math" src="_images/math/a90be66601ff7514cbecd1f1ba8367aaba7cdfc4.svg"/>. The <code class="docutils literal notranslate"><span class="pre">SnPart</span></code> is stored as a matrix
 <img alt="\mathbb{R}^{d_\lambda\times m}" class="math" src="_images/math/f305d4628fab2ade208f16de8125ad6589ff8eca.svg"/>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;lambd=Snob2.IntegerPartition([3,2])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnPart</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">lambd</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;lambd=IntegerPartition([3,2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">=</span><span class="n">SnPart</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">lambd</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="go">Part [3,2]:</span>
 <span class="go">[ -1.23974 -0.407472 1.61201 ]</span>
@@ -304,10 +302,10 @@ by the irreducible representation <img alt="\rho_\lambda" class="math" src="_ima
 <p>An Sn covariant vector or <em>Sn-vector</em> for short is a vector that transforms under the action of
 <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> by a combination of irreducible representations.
 Sn-vectors are stored as <code class="docutils literal notranslate"><span class="pre">SnVec</span></code> objects as a list of <a href="#id1"><span class="problematic" id="id2">``</span></a>SnPart``s.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnType</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">SnType</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnVec</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">=</span><span class="n">SnVec</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="go">Part [4,1]:</span>
 <span class="go">[ -1.23974 -0.407472 ]</span>

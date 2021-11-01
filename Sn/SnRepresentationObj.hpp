@@ -33,7 +33,7 @@ namespace Snob2{
     SnRepresentationObj(){}
 
     SnRepresentationObj(const SnType& _type){
-      for(auto p:_type.map){
+      for(auto p:_type._map){
 	isotypics[p.first]=SnIsotypicObj(_snbank->get_irrep(p.first),p.second);
       }
     }
@@ -45,7 +45,7 @@ namespace Snob2{
     SnType get_type() const{
       SnType R;
       for(auto& p:isotypics)
-	R.map[p.first]=p.second.m;
+	R._map[p.first]=p.second.m;
       return R;
     }
 

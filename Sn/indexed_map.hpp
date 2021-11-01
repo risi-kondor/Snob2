@@ -28,7 +28,7 @@ namespace Snob2{
 
 
     vector<OBJ*> v;
-    mutable map<KEY,OBJ*> map;
+    mutable map<KEY,OBJ*> _map;
     
     ~indexed_map(){
       for(auto p:v) 
@@ -42,8 +42,8 @@ namespace Snob2{
     indexed_map& operator=(indexed_map&& x){
       v=x.v;
       x.v.clear();
-      map=x.map;
-      x.map.clear();
+      _map=x._map;
+      x._map.clear();
     }
 
 
@@ -58,16 +58,16 @@ namespace Snob2{
     }
 
     OBJ* operator[](const KEY& key) const{
-      return map[key];
+      return _map[key];
     }
 
     void insert(const KEY& key, OBJ* obj){
        v.push_back(obj);
-      map[key]=obj;
+      _map[key]=obj;
     }
 
     bool exists(const KEY& key) const{
-      return map.find(key)!=map.end();
+      return _map.find(key)!=_map.end();
     }
 
     iterator begin() const{
@@ -80,14 +80,14 @@ namespace Snob2{
 
     void clear(){
       v.clear();
-      map.clear();
+      _map.clear();
     }
 
     void wipe(){
       for(auto p:v) 
 	delete p;
       v.clear();
-      map.clear();
+      _map.clear();
     }
 
   };
@@ -104,7 +104,7 @@ namespace Snob2{
 
 
     vector<OBJ*> v;
-    mutable map<KEY,OBJ*> map;
+    mutable map<KEY,OBJ*> _map;
     
     ~indexed_mapB(){
       for(auto p:v) 
@@ -125,9 +125,9 @@ namespace Snob2{
 
     indexed_mapB(indexed_mapB&& x){
       v=x.v;
-      map=x.map;
+      _map=x._map;
       x.v.clear();
-      x.map.clear();
+      x._map.clear();
     }
 
     indexed_mapB& operator=(const indexed_mapB& x){
@@ -141,9 +141,9 @@ namespace Snob2{
     indexed_mapB& operator=(indexed_mapB&& x){
       wipe();
       v=x.v;
-      map=x.map;
+      _map=x._map;
       x.v.clear();
-      x.map.clear();
+      x._map.clear();
       return *this;
     }
 
@@ -160,21 +160,21 @@ namespace Snob2{
     }
 
     OBJ* operator[](const KEY& key) const{
-      return map[key];
+      return _map[key];
     }
 
     void insert(const KEY& key, OBJ* obj){
       v.push_back(obj);
-      map[key]=obj;
+      _map[key]=obj;
     }
 
     void push_back(OBJ* obj){
       v.push_back(obj);
-      map[obj->key()]=obj;
+      _map[obj->key()]=obj;
     }
 
     bool exists(const KEY& key) const{
-      return map.find(key)!=map.end();
+      return _map.find(key)!=_map.end();
     }
 
     iterator begin() const{
@@ -187,14 +187,14 @@ namespace Snob2{
 
     void clear(){
       v.clear();
-      map.clear();
+      _map.clear();
     }
 
     void wipe(){
       for(auto p:v) 
 	delete p;
       v.clear();
-      map.clear();
+      _map.clear();
     }
 
   };

@@ -35,7 +35,7 @@ namespace Snob2{
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnMultiVec(const int _N, const SnType& _type, const FILLTYPE& fill, const int _dev=0){
-      for(auto& p:_type.map)
+      for(auto& p:_type._map)
 	parts.insert(p.first,new SnMultiPart(_N,p.first,p.second,fill,_dev));
     }
     

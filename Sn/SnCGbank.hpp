@@ -86,8 +86,8 @@ namespace Snob2{
       SnType ysub=SnType::down(lambda2);
 
       vector<SnType*> subs;
-      for(auto p:xsub.map)
-	for(auto q:ysub.map){
+      for(auto p:xsub._map)
+	for(auto q:ysub._map){
 	  //cout<<"<"<<p->irrep->lambda<<","<<q->irrep->lambda<<">"<<endl;
 	  subs.push_back(get_type(p.first,q.first));
 	}
@@ -104,7 +104,7 @@ namespace Snob2{
 
     rtensor sequester(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       SnType* tau=get_type(lambda1,lambda2);
-      for(auto& p:tau->map){
+      for(auto& p:tau->_map){
 	if(p.second>1){cerr<<"Error: output multiplicity >1"<<endl;}
 
 	

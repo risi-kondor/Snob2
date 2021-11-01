@@ -8,7 +8,7 @@ is the group of all permutations of :math:`\{1,2,\ldots,n\}`.
 
 .. code-block:: python
 
-   >>> G=Snob2.Sn(4)
+   >>> G=Sn(4)
    >>> for i in range(len(G)):
    ...     print(G.element(i))
    ... 
@@ -68,11 +68,26 @@ be constructed either from the group object or directly from an integer partitio
 
 .. code-block:: python
 
-   >>> G=Snob2.Sn(5)
-   >>> mu=Snob2.IntegerPartition([3,2])
+   >>> G=Sn(5)
+   >>> mu=IntegerPartition([3,2])
    >>> cc=G.cclass(mu)
    >>> print(cc)
    SnCClass[3,2]
+
+.. code-block:: python
+
+   >>> cc=SnCClass(mu)
+   >>> print(cc)
+   SnCClass[3,2]
+
+An even shorter form is the following. 
+
+.. code-block:: python
+
+   >>> cc=SnCClass([3,2])
+   >>> print(cc)
+   SnCClass[3,2]
+
 
 The conjugacy classes are ordered according to majorization order of their integer partitions. 
 The ``Sn.index`` method returns the index of a given conjugacy class.
@@ -95,17 +110,31 @@ and can be accessed through the ``character`` method of ``Sn``.
 
 .. code-block:: python
 
-  >>> G=Snob2.Sn(5)
-  >>> lambd=Snob2.IntegerPartition([3,2])
-  >>> chi=G.character(lambd)
+  >>> G=Sn(5)
+  >>> chi=G.character([3,2])
   >>> print(chi)
-  SnCClass[5] : 0
-  SnCClass[4,1] : -1
-  SnCClass[3,2] : 1
-  SnCClass[3,1,1] : -1
-  SnCClass[2,2,1] : 1
-  SnCClass[2,1,1,1] : 1
-  SnCClass[1,1,1,1,1] : 5
+  chi[3,2]:
+    SnCClass[5] : 0
+    SnCClass[4,1] : -1
+    SnCClass[3,2] : 1
+    SnCClass[3,1,1] : -1
+    SnCClass[2,2,1] : 1
+    SnCClass[2,1,1,1] : 1
+    SnCClass[1,1,1,1,1] : 5
+
+.. code-block:: python
+
+  >>> chi=SnCharacter([3,2])
+  >>> print(chi)
+  chi[3,2]:
+    SnCClass[5] : 0
+    SnCClass[4,1] : -1
+    SnCClass[3,2] : 1
+    SnCClass[3,1,1] : -1
+    SnCClass[2,2,1] : 1
+    SnCClass[2,1,1,1] : 1
+    SnCClass[1,1,1,1,1] : 5
+
 
 
 ===========================
@@ -118,13 +147,11 @@ the group object or directly from the integer partition.
 
 .. code-block:: python
 
-   >>> lambd=Snob2.IntegerPartition([3,1])
-   >>> rho=G.irrep(lambd)
+   >>> rho=G.irrep([3,1])
    >>> print(rho)
    SnIrrep([3,1])
 
-   >>> lambd=Snob2.IntegerPartition([3,1])
-   >>> rho=Snob2.SnIrrep(lambd)
+   >>> rho=SnIrrep([3,1])
    >>> print(rho)
    SnIrrep([3,1])
 
@@ -136,15 +163,25 @@ The dimension of the irrep is accessible through the `get_dim()` method.
    3
 
 All irreps in Snob2 are expressed in Young's orthogonal representation. The representation matrices 
-are easy to access.
+are easy to access
 
 .. code-block:: python
 
-  >>> pi=Snob2.SnElement([3,2,1,4])
+  >>> pi=SnElement([3,2,1,4])
   >>> print(rho[pi])
   [ 1 0 0 ]
   [ -0 -0.5 -0.866025 ]
   [ -0 -0.866025 0.5 ]
+
+or just 
+
+.. code-block:: python
+
+  >>> print(rho[3,2,1,4])
+  [ 1 0 0 ]
+  [ -0 -0.5 -0.866025 ]
+  [ -0 -0.866025 0.5 ]
+
 
 
 ==========
@@ -157,9 +194,9 @@ The following shows how to set up an ``SnType`` object.
 
 .. code-block:: python
 
-  >>> tau=Snob2.SnType(Snob2.IntegerPartition([4,1]),2)
-  >>> tau.set(Snob2.IntegerPartition([3,2]),1)
-  >>> tau.set(Snob2.IntegerPartition([3,1,1]),1)
+  >>> tau=SnType(IntegerPartition([4,1]),2)
+  >>> tau.set(IntegerPartition([3,2]),1)
+  >>> tau.set(IntegerPartition([3,1,1]),1)
   >>> print(tau)
   ([4,1]:2,[3,2]:1,[3,1,1]:1)
 

@@ -22,7 +22,7 @@ setup(name='Snob2',
                                                                '-Wno-reorder',
 #                                                               '-Wl,-rpath,"/Users/risi/opt/anaconda3/lib/python3.8/site-packages/torch/lib"' #this is for sphinx
                                                                ]},
-                                 depends=['setup.py'])], 
+                                 depends=['setup.py','Snob2_py.cpp','SnClasses_py.cpp','SnFunctions_py.cpp','SnFFT_py.cpp'])], 
       cmdclass={'build_ext': BuildExtension}
       )
 

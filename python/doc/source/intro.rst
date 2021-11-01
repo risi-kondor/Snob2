@@ -46,8 +46,14 @@ To install Snob2 follow these steps:
 #. Run ``python setup.sty install`` in the ``python`` directory to compile the package and install it on your 
    system.
  
-To use Snob2, issue the command ``import Snob2`` in Python. This loads to the `Snob2` module and initializes 
-the various static datastructures used by the package. 
+To use Snob2 in Python, import the corresponding modules as usual by issuing the commands 
+``import cnine`` and ``import Snob2``. 
+In the following we also assume that ``from Snob2 import *`` has also been issued to avoid having to 
+prefix all classes with ``Snob2.``.
+
+.. 
+   This loads to the `Snob2` module and initializes 
+   the various static datastructures used by the package. 
 
 
 ******

@@ -40,6 +40,9 @@
     "Conjugacy class of Sn.")
 
     .def(pybind11::init<const IntegerPartition&>())
+    .def(pybind11::init([](const vector<int> v){
+	  return std::unique_ptr<SnCClass>(new SnCClass(IntegerPartition(v))); 
+	}))
 
     .def("__str__",&SnCClass::str,py::arg("indent")="");
 
@@ -52,8 +55,10 @@
 
     .def(pybind11::init<const IntegerPartition&>(),
       "The character corresponding to the integer partition lambda.")
+    .def(pybind11::init([](const vector<int> v){
+	  return std::unique_ptr<SnCharacter>(new SnCharacter(IntegerPartition(v))); 
+	}))
 
-    //.def("str",&SnCharacter::str,py::arg("indent")="")
     .def("__str__",&SnCharacter::str,py::arg("indent")="");
         
 
@@ -63,11 +68,16 @@
 
     .def(pybind11::init<int>())
     .def(pybind11::init<const IntegerPartition&>())
+    .def(pybind11::init([](const vector<int> v){
+	  return std::unique_ptr<SnIrrep>(new SnIrrep(IntegerPartition(v))); 
+	}))
 
     .def("get_dim",&SnIrrep::dim,"Return the dimension of the irrep")
     .def("__lt__",&SnIrrep::operator<)
 
-    .def("__getitem__",&SnIrrep::operator())
+    .def("__getitem__",static_cast<rtensor(SnIrrep::*)(const SnElement&)const>(&SnIrrep::operator()))
+    .def("__getitem__",[](const SnIrrep& obj, const vector<int>& v){
+	return obj(SnElement(v));})
 
     .def("str",&SnIrrep::str,py::arg("indent")="")
     .def("__str__",&SnIrrep::str,py::arg("indent")="");
@@ -96,6 +106,8 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
   .def("__getitem__",static_cast<float(SnClassFunction::*)(const int) const>(&SnClassFunction::get_value))
   .def("__getitem__",static_cast<float(SnClassFunction::*)(const IntegerPartition&) const>(&SnClassFunction::get_value))
   .def("__getitem__",static_cast<float(SnClassFunction::*)(const SnCClass&) const>(&SnClassFunction::get_value))
+  .def("__getitem__",[](const SnClassFunction& obj, const vector<int>& v){
+      return obj(IntegerPartition(v));})
     
   .def("__str__",&SnClassFunction::str,py::arg("indent")="");
 
@@ -117,6 +129,8 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
     .def("ncclasses",&Sn::ncclasses)
     .def("cclass",static_cast<SnCClass(Sn::*)(const int x) const>(&Sn::cclass))
     .def("cclass",static_cast<SnCClass(Sn::*)(const IntegerPartition&) const>(&Sn::cclass))
+    .def("cclass",[](const Sn& obj, const vector<int> v){
+	return obj.cclass(IntegerPartition(v));})
     .def("index",static_cast<int(Sn::*)(const IntegerPartition&) const>(&Sn::index))
     .def("cclass_size",static_cast<int(Sn::*)(const IntegerPartition&) const>(&Sn::class_size))
     .def("index",static_cast<int(Sn::*)(const SnCClass&) const>(&Sn::index))
@@ -124,9 +138,13 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
 
     .def("nchars",&Sn::nchars)
     .def("character",static_cast<SnClassFunction(Sn::*)(const IntegerPartition&) const>(&Sn::character))
-    //.def("character",static_cast<SnClassFunction(Sn::*)(int) const>(&Sn::character))
+    .def("character",[](const Sn& obj, const vector<int> v){
+	return obj.character(IntegerPartition(v));})
 
+    .def("nirreps",&Sn::nirreps)
     .def("irrep",&Sn::irrep)
+    .def("irrep",[](const Sn& obj, const vector<int> v){
+	return obj.irrep(IntegerPartition(v));})
 
     .def("str",&Sn::str,py::arg("indent")="")
     .def("__str__",&Sn::str,py::arg("indent")="");

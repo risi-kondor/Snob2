@@ -141,6 +141,10 @@ namespace Snob2{
   public: // ---- Representations ----------------------------------------------------------------------------
 
 
+    int nirreps() const{
+      return obj->ncclasses(); 
+    }
+
     SnIrrep irrep(const IntegerPartition& lambda) const{
       return SnIrrep(obj->get_irrep(lambda));
     }
@@ -159,7 +163,7 @@ namespace Snob2{
 
 
     int nchars() const{
-      return 0;
+      return obj->ncclasses(); 
     }
     
     SnClassFunction character(const int i) const{

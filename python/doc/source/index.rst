@@ -36,6 +36,7 @@ Reference
 #########
 
 .. include:: reference.rst
+.. include:: Sn_ref.rst
 
 |
 

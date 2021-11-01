@@ -12,7 +12,7 @@ prints it out.
 
 .. code-block:: python
 
-  >>> f=Snob2.SnFunction.gaussian(3)
+  >>> f=SnFunction.gaussian(3)
   >>> print(f)
   [ 1 2 3 ] : -1.23974
   [ 2 1 3 ] : -0.407472
@@ -26,7 +26,7 @@ The value of ``f`` at specific group elements can be accessed via the ``SnElemen
 
 .. code-block:: python
 
-  >>> f[Snob2.SnElement([1,3,2])]
+  >>> f[SnElement([1,3,2])]
   1.6120094060897827
   0.1949467808008194
   >>> f[2]
@@ -37,7 +37,6 @@ The *left-translate* of :math:`f` by a permutation :math:`\pi` is defined :math:
 .. code-block:: python
 
   >>> g1=f.left_translate(pi)
-  SnFunction moved
   >>> print(g1)
   [ 1 2 3 ] : -0.407472
   [ 2 1 3 ] : -1.23974
@@ -51,7 +50,6 @@ The *right-translate* of :math:`f` by a permutation :math:`\pi` is defined :math
 .. code-block:: python
 
   >>> g2=f.right_translate(pi)
-  SnFunction moved
   >>> print(g2)
   [ 1 2 3 ] : -0.407472
   [ 2 1 3 ] : -1.23974
@@ -64,7 +62,7 @@ The *inverse* of :math:`f` is defined :math:`f^{-1}(\sigma)=f(\sigma)`.
 
 .. code-block:: python
 
-  >>> f=Snob2.SnFunction.gaussian(3)
+  >>> f=SnFunction.gaussian(3)
   >>> finv=f.inv()
   >>> print(finv)
   [ 1 2 3 ] : -1.23974
@@ -84,7 +82,7 @@ prints it out.
 
 .. code-block:: python
 
-  >>> f=Snob2.SnOverSmFunction.gaussian(5,4)
+  >>> f=SnOverSmFunction.gaussian(5,4)
   >>> print(f)
   0.74589
   -1.75177
@@ -104,7 +102,7 @@ and prints it out.
 
 .. code-block:: python
 
-  >>> f=Snob2.SnClassFunction.gaussian(4)
+  >>> f=SnClassFunction.gaussian(4)
   >>> print(f)
   SnCClass[4] : -1.23974
   SnCClass[3,1] : -0.407472
@@ -136,8 +134,8 @@ by the irreducible representation :math:`\rho_\lambda`. The ``SnPart`` is stored
 
 .. code-block:: python
 
-  >>>lambd=Snob2.IntegerPartition([3,2])
-  >>> p=Snob2.SnPart.gaussian(lambd,3)
+  >>>lambd=IntegerPartition([3,2])
+  >>> p=SnPart.gaussian(lambd,3)
   >>> print(p)
   Part [3,2]:
   [ -1.23974 -0.407472 1.61201 ]
@@ -158,10 +156,10 @@ Sn-vectors are stored as ``SnVec`` objects as a list of ``SnPart``s.
 
 .. code-block:: python
 
-  >>> tau=Snob2.SnType(Snob2.IntegerPartition([4,1]),2)
+  >>> tau=SnType(Snob2.IntegerPartition([4,1]),2)
   >>> tau.set(Snob2.IntegerPartition([3,2]),1)
   >>> tau.set(Snob2.IntegerPartition([3,1,1]),1)
-  >>> v=Snob2.SnVec.gaussian(tau)
+  >>> v=SnVec.gaussian(tau)
   >>> print(v)
   Part [4,1]:
   [ -1.23974 -0.407472 ]

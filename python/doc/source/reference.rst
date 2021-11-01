@@ -6,6 +6,15 @@ Combinatorial classes
 
 ..
   ==================
+  Permutations
+  ==================
+
+.. autoclass:: Snob2.Permutation
+
+|
+
+..
+  ==================
   Integer partitions
   ==================
 
@@ -27,38 +36,4 @@ Combinatorial classes
    :member-order: bysource
 
 |
-
-..
-  ==================
-  Permutations
-  ==================
-
-.. autoclass:: Snob2.Permutation
-
-|
-
-***********************
-Symmetric group classes
-***********************
-
-|
-
-.. autoclass:: Snob2.Sn(n)
-
-|
-|
-
-.. autoclass:: Snob2.SnElement
-
-|
-|
-
-.. autoclass:: Snob2.SnCharacter
-
-|
-|
-
-.. autoclass:: Snob2.SnIrrep
-
-
 

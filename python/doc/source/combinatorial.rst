@@ -116,6 +116,4 @@ of a given shape.
 
 
 
-|
-
 

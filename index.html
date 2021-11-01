@@ -1,0 +1,1276 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <meta name="generator" content="sphinx-4.2.0, furo 2021.10.09"/>
+        <title>Snob2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">Snob2  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">Snob2  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="snob2-symmetric-group-fft-library">
+<h1>Snob2 – Symmetric group FFT library<a class="headerlink" href="#snob2-symmetric-group-fft-library" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<p>Snob2 is a C++ package with a Python interface
+for computing the representations of the symmetric group <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> and
+computing fast Fourier transforms on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.
+Snob2 is built on the <strong>cnine</strong> library which can be downloaded from <a class="reference external" href="https://github.com/risi-kondor/cnine">https://github.com/risi-kondor/cnine</a>.
+GPU functionality in Snob2 is under development but not yet enabled.</p>
+<p>Snob2 is written by Risi Kondor at the University of Chicago and is released under the
+<a class="reference external" href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla public license v.2.0</a>.</p>
+<p>This document provides documentation for Snob2’s Python interface. Not all features in the C++ library
+are available through this interface. The documentation of the C++ API can be found in pdf format
+in the package’s <code class="docutils literal notranslate"><span class="pre">doc</span></code> directory.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Custom classes for combinatorial objects such as integer partitions and Young tableau implemented in C++
+for efficiency.</p></li>
+<li><p>Classes for the symmetric group, conjugacy classes, quotient spaces,
+characters and irreducible representations of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.</p></li>
+<li><p>Classes for functions on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> and quotient spaces of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.</p></li>
+<li><p>Classes implementing Clausen’s FFT algorithm for the forward and backward Fourier transform on
+<img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> and its quotient spaces.</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Installing Snob2 requires the following:</p>
+<ol class="arabic simple">
+<li><p>A C++ installation with C++11 or higher</p></li>
+<li><p>Python</p></li>
+</ol>
+<p>To install Snob2 follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Download the <a class="reference external" href="https://github.com/risi-kondor/cnine">cnine</a> and
+<a class="reference external" href="https://github.com/risi-kondor/Snob2">Snob2</a> packages.</p></li>
+<li><p>Edit the file <code class="docutils literal notranslate"><span class="pre">config.txt</span></code>, in particular, make sure that <code class="docutils literal notranslate"><span class="pre">CNINE_ROOT</span></code> points to the root of
+the <strong>cnine</strong> package on your system.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.sty</span> <span class="pre">install</span></code> in the <code class="docutils literal notranslate"><span class="pre">python</span></code> directory to compile the package and install it on your
+system.</p></li>
+</ol>
+<p>To use Snob2, issue the command <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">Snob2</span></code> in Python. This loads to the <cite>Snob2</cite> module and initializes
+the various static datastructures used by the package.</p>
+</section>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h2>
+<p>The representation theory of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> involves some data structures that are relatively
+expensive to compute but only needed to be computed once. Snob2’s backend automatically caches these data.
+For example, the class <code class="docutils literal notranslate"><span class="pre">IntegerPartitions</span></code> returns all integer partitions of an integer <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/>.
+The first time that an <code class="docutils literal notranslate"><span class="pre">IntegerPartitions</span></code> object is created for a given value of <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/>, Snob2
+constructs the integer partitions from the integer partitions of <img alt="m&lt;n" class="math" src="_images/math/9151ff5b158c817c6ddf87a6b9e56ac3c4e05f82.svg"/> and stores the result
+in a static object so that on subsequent calls the same process does not need to be repeated.</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="classes">
+<h1>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h1>
+<section id="combinatorial-classes">
+<h2>Combinatorial classes<a class="headerlink" href="#combinatorial-classes" title="Permalink to this headline">¶</a></h2>
+<p>Snob provides specialized classes to represent various combinatorial objects involved in the
+representation theory of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.</p>
+<section id="permutations">
+<h3>Permutations<a class="headerlink" href="#permutations" title="Permalink to this headline">¶</a></h3>
+<p>A permutation <img alt="\pi" class="math" src="_images/math/3379cf4a59e768016d616d1addc40f6ac935a4a0.svg"/> of n is a bijective map <img alt="\{1,2,\ldots,n\}\to\{1,2,\ldots,n\}" class="math" src="_images/math/a329848436ef21e65e7ed75c93125a2265a9cf94.svg"/>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Permutation</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">[ 2 3 1 5 4 ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The product of two permutations <img alt="\tau" class="math" src="_images/math/d8fd874c09d72309c81d6a8dd49b26ecc9024567.svg"/> and <img alt="\pi" class="math" src="_images/math/3379cf4a59e768016d616d1addc40f6ac935a4a0.svg"/> is the permutation corresponding
+to the composition of maps <img alt="\tau\circ\pi" class="math" src="_images/math/c5c531fa3c679c381d13ce6c9cf574496fcebb74.svg"/>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Permutation</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tau</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">[ 1 3 2 5 4 ]</span>
+</pre></div>
+</div>
+<p>The <cite>inv</cite> method returns the inverse of a permutation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pi</span><span class="o">.</span><span class="n">inv</span><span class="p">())</span>
+<span class="go">[ 3 1 2 5 4 ]</span>
+</pre></div>
+</div>
+</section>
+<section id="integer-partitions">
+<h3>Integer partitions<a class="headerlink" href="#integer-partitions" title="Permalink to this headline">¶</a></h3>
+<p>An <em>integer partition</em> of a positive integer <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/> is a vector of positive integers
+<img alt="\lambda=(\lambda_1,\ldots,\lambda_k)" class="math" src="_images/math/9fae21cb4eadfd2f2509d1c3f54f5c5f92acf576.svg"/> such that <img alt="\sum_{i=1}^k \lambda_i=n" class="math" src="_images/math/e6bf36dfd4e8307b43334648bab75bb6c01749bc.svg"/> and
+<img alt="\lambda_1\geq \lambda_2\geq \ldots\geq\lambda_k" class="math" src="_images/math/3f4bf031b82db54bab7e135c9bb893e21eaf3538.svg"/>.
+The <code class="docutils literal notranslate"><span class="pre">IntegerPartition</span></code> class represents such vectors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[3,2,1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">IntegerPartitions</span></code> class returns an object that contains <em>all</em> integer partitions of math:<cite>n</cite>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Lambda</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartitions</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Lambda</span><span class="p">)):</span>
+<span class="gp">... </span>     <span class="k">print</span><span class="p">(</span><span class="n">Lambda</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">[5]</span>
+<span class="go">[4,1]</span>
+<span class="go">[3,2]</span>
+<span class="go">[3,1,1]</span>
+<span class="go">[2,2,1]</span>
+<span class="go">[2,1,1,1]</span>
+<span class="go">[1,1,1,1,1]</span>
+</pre></div>
+</div>
+</section>
+<section id="young-tableaux">
+<h3>Young tableaux<a class="headerlink" href="#young-tableaux" title="Permalink to this headline">¶</a></h3>
+<p>A Young tableau is a Young diagram whose cells are filled with integers. The
+default Young tableau of a given shape is the one where the numbers <img alt="1,2,\ldots,n" class="math" src="_images/math/32d9615d1ebb27564835639609b60649e35d3163.svg"/>
+appear sequentially.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">T</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">YoungTableau</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="go">1 2 3</span>
+<span class="go">4 5</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">())</span>
+<span class="go">[3,2,1]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>A <em>standard Young tableau</em> is a Young tableau filled with the numbers <img alt="1,2,\ldots,n" class="math" src="_images/math/32d9615d1ebb27564835639609b60649e35d3163.svg"/>
+in such a way that in any row the numbers increase from left to right and in any
+column the numbers increase top to bottom.
+The <code class="docutils literal notranslate"><span class="pre">StandardYoungTableaux</span></code> class returns an object that contains <em>all</em> standard Young tableaux
+of a given shape.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lamb</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">StandardYoungTableaux</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">1 2 3</span>
+<span class="go">4 5</span>
+
+<span class="go">1 2 4</span>
+<span class="go">3 5</span>
+
+<span class="go">1 3 4</span>
+<span class="go">2 5</span>
+
+<span class="go">1 2 5</span>
+<span class="go">3 4</span>
+
+<span class="go">1 3 5</span>
+<span class="go">2 4</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="symmetric-group-classes">
+<h2>Symmetric group classes<a class="headerlink" href="#symmetric-group-classes" title="Permalink to this headline">¶</a></h2>
+<p>The symmetric group <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>, represented by the class <code class="docutils literal notranslate"><span class="pre">Sn</span></code>,
+is the group of all permutations of <img alt="\{1,2,\ldots,n\}" class="math" src="_images/math/0ea06c256d593b7e1b104737ce65ac2aabd95f95.svg"/>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Sn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">element</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">[ 1 2 3 4 ]</span>
+<span class="go">[ 2 1 3 4 ]</span>
+<span class="go">[ 1 3 2 4 ]</span>
+<span class="go">[ 2 3 1 4 ]</span>
+<span class="go">[ 3 1 2 4 ]</span>
+<span class="go">[ 3 2 1 4 ]</span>
+<span class="go">[ 1 2 4 3 ]</span>
+<span class="go">[ 2 1 4 3 ]</span>
+<span class="go">[ 1 3 4 2 ]</span>
+<span class="go">[ 2 3 4 1 ]</span>
+<span class="go">[ 3 1 4 2 ]</span>
+<span class="go">[ 3 2 4 1 ]</span>
+<span class="go">[ 1 4 2 3 ]</span>
+<span class="go">[ 2 4 1 3 ]</span>
+<span class="go">[ 1 4 3 2 ]</span>
+<span class="go">[ 2 4 3 1 ]</span>
+<span class="go">[ 3 4 1 2 ]</span>
+<span class="go">[ 3 4 2 1 ]</span>
+<span class="go">[ 4 1 2 3 ]</span>
+<span class="go">[ 4 2 1 3 ]</span>
+<span class="go">[ 4 1 3 2 ]</span>
+<span class="go">[ 4 2 3 1 ]</span>
+<span class="go">[ 4 3 1 2 ]</span>
+<span class="go">[ 4 3 2 1 ]</span>
+</pre></div>
+</div>
+<section id="group-elements">
+<h3>Group elements<a class="headerlink" href="#group-elements" title="Permalink to this headline">¶</a></h3>
+<p>The group elements of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are of type <code class="docutils literal notranslate"><span class="pre">SnElement</span></code>, which have the same methods as the
+<code class="docutils literal notranslate"><span class="pre">Permutation</span></code> class. Group elements are listed in a specific reverse insertion sort order that fits
+the structure of <img alt="\sigma\mathbb{S}_m" class="math" src="_images/math/b87af9400262677eb445c2ff01565ace4c55e64a.svg"/> cosets and hence is well adapted to Clausen-type
+fast Fourier transforms on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>. The following shows how to extract the i’th
+group element and how to get the index of a particular group element.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">=</span><span class="n">G</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">[ 3 4 2 1 ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pi</span><span class="p">))</span>
+<span class="go">17</span>
+</pre></div>
+</div>
+</section>
+<section id="conjugacy-classes">
+<h3>Conjugacy classes<a class="headerlink" href="#conjugacy-classes" title="Permalink to this headline">¶</a></h3>
+<p>The conjugacy classes of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are in bijection with the integer partitions of <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/>.
+Snob2 has a separate class <code class="docutils literal notranslate"><span class="pre">SnCClass</span></code> to represent conjugacy classes. <code class="docutils literal notranslate"><span class="pre">SnCClass</span></code> objects can
+be constructed either from the group object or directly from an integer partition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Sn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cc</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">cclass</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+<span class="go">SnCClass[3,2]</span>
+</pre></div>
+</div>
+<p>The conjugacy classes are ordered according to majorization order of their integer partitions.
+The <code class="docutils literal notranslate"><span class="pre">Sn.index</span></code> method returns the index of a given conjugacy class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</section>
+<section id="characters">
+<h3>Characters<a class="headerlink" href="#characters" title="Permalink to this headline">¶</a></h3>
+<p>The characters of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are also indexed by the integer partitions of <img alt="n" class="math" src="_images/math/9eae729219516ffac0f282e62444659aa54ac273.svg"/>
+and can be accessed through the <code class="docutils literal notranslate"><span class="pre">character</span></code> method of <code class="docutils literal notranslate"><span class="pre">Sn</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">Sn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chi</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">character</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">chi</span><span class="p">)</span>
+<span class="go">SnCClass[5] : 0</span>
+<span class="go">SnCClass[4,1] : -1</span>
+<span class="go">SnCClass[3,2] : 1</span>
+<span class="go">SnCClass[3,1,1] : -1</span>
+<span class="go">SnCClass[2,2,1] : 1</span>
+<span class="go">SnCClass[2,1,1,1] : 1</span>
+<span class="go">SnCClass[1,1,1,1,1] : 5</span>
+</pre></div>
+</div>
+</section>
+<section id="irreducible-representations">
+<h3>Irreducible representations<a class="headerlink" href="#irreducible-representations" title="Permalink to this headline">¶</a></h3>
+<p>The irreducible representations (irreps) of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> are captured by <code class="docutils literal notranslate"><span class="pre">SnIrrep</span></code> objects. For a
+given integer partition <img alt="\lambda" class="math" src="_images/math/83d8373d44883a7d479263075ef3877aaabd022a.svg"/> of n, the corresponding irrep can be constructed from
+the group object or directly from the integer partition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">irrep</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+<span class="go">SnIrrep([3,1])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnIrrep</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+<span class="go">SnIrrep([3,1])</span>
+</pre></div>
+</div>
+<p>The dimension of the irrep is accessible through the <cite>get_dim()</cite> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">get_dim</span><span class="p">())</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>All irreps in Snob2 are expressed in Young’s orthogonal representation. The representation matrices
+are easy to access.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pi</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnElement</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">rho</span><span class="p">[</span><span class="n">pi</span><span class="p">])</span>
+<span class="go">[ 1 0 0 ]</span>
+<span class="go">[ -0 -0.5 -0.866025 ]</span>
+<span class="go">[ -0 -0.866025 0.5 ]</span>
+</pre></div>
+</div>
+</section>
+<section id="sn-types">
+<h3>Sn types<a class="headerlink" href="#sn-types" title="Permalink to this headline">¶</a></h3>
+<p>The <em>type</em> of a representation is an associative list of integer partitions and associated multiplicities
+describing what irreps a particular representation is composed of.
+The following shows how to set up an <code class="docutils literal notranslate"><span class="pre">SnType</span></code> object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnType</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+<span class="go">([4,1]:2,[3,2]:1,[3,1,1]:1)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sn-functions-and-sn-vectors">
+<h2>Sn-functions and Sn-vectors<a class="headerlink" href="#sn-functions-and-sn-vectors" title="Permalink to this headline">¶</a></h2>
+<section id="sn-functions">
+<h3>Sn functions<a class="headerlink" href="#sn-functions" title="Permalink to this headline">¶</a></h3>
+<p>The class <code class="docutils literal notranslate"><span class="pre">SnFunction</span></code> represents functions on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.
+The following initializes a function on <img alt="\mathbb{S}_3" class="math" src="_images/math/26234e3fb2bf5c8849113da89187f995357e8d9c.svg"/> with random Gaussian entries and
+prints it out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">[ 1 2 3 ] : -1.23974</span>
+<span class="go">[ 2 1 3 ] : -0.407472</span>
+<span class="go">[ 1 3 2 ] : 1.61201</span>
+<span class="go">[ 2 3 1 ] : 0.399771</span>
+<span class="go">[ 3 1 2 ] : 1.3828</span>
+<span class="go">[ 3 2 1 ] : 0.0523187</span>
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">f</span></code> at specific group elements can be accessed via the <code class="docutils literal notranslate"><span class="pre">SnElement</span></code> object or just its index.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnElement</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
+<span class="go">1.6120094060897827</span>
+<span class="go">0.1949467808008194</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">1.6120094060897827</span>
+</pre></div>
+</div>
+<p>The <em>left-translate</em> of <img alt="f" class="math" src="_images/math/d6f721b3731c865ea8370cfdbcf50f1d5ba7da8b.svg"/> by a permutation <img alt="\pi" class="math" src="_images/math/3379cf4a59e768016d616d1addc40f6ac935a4a0.svg"/> is defined <img alt="g_1(\sigma)=f(\pi^{-1}\sigma)" class="math" src="_images/math/92d149b281cf3946d85a0a8ecd3e5d70057579af.svg"/>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">left_translate</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">SnFunction moved</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
+<span class="go">[ 1 2 3 ] : -0.407472</span>
+<span class="go">[ 2 1 3 ] : -1.23974</span>
+<span class="go">[ 1 3 2 ] : 0.399771</span>
+<span class="go">[ 2 3 1 ] : 1.61201</span>
+<span class="go">[ 3 1 2 ] : 0.0523187</span>
+<span class="go">[ 3 2 1 ] : 1.3828</span>
+</pre></div>
+</div>
+<p>The <em>right-translate</em> of <img alt="f" class="math" src="_images/math/d6f721b3731c865ea8370cfdbcf50f1d5ba7da8b.svg"/> by a permutation <img alt="\pi" class="math" src="_images/math/3379cf4a59e768016d616d1addc40f6ac935a4a0.svg"/> is defined <img alt="g_1(\sigma)=f(\sigma \pi^{-1})" class="math" src="_images/math/56e1726fbae216a072099d3c867686e664d01825.svg"/>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">right_translate</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">SnFunction moved</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span>
+<span class="go">[ 1 2 3 ] : -0.407472</span>
+<span class="go">[ 2 1 3 ] : -1.23974</span>
+<span class="go">[ 1 3 2 ] : 1.3828</span>
+<span class="go">[ 2 3 1 ] : 0.0523187</span>
+<span class="go">[ 3 1 2 ] : 1.61201</span>
+<span class="go">[ 3 2 1 ] : 0.399771</span>
+</pre></div>
+</div>
+<p>The <em>inverse</em> of <img alt="f" class="math" src="_images/math/d6f721b3731c865ea8370cfdbcf50f1d5ba7da8b.svg"/> is defined <img alt="f^{-1}(\sigma)=f(\sigma)" class="math" src="_images/math/355926daa9f9d25df19f5ece2fc24e1316144253.svg"/>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">finv</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">finv</span><span class="p">)</span>
+<span class="go">[ 1 2 3 ] : -1.23974</span>
+<span class="go">[ 2 1 3 ] : -0.407472</span>
+<span class="go">[ 1 3 2 ] : 1.61201</span>
+<span class="go">[ 2 3 1 ] : 1.3828</span>
+<span class="go">[ 3 1 2 ] : 0.399771</span>
+<span class="go">[ 3 2 1 ] : 0.0523187</span>
+</pre></div>
+</div>
+</section>
+<section id="sn-sm-functions">
+<h3>Sn/Sm functions<a class="headerlink" href="#sn-sm-functions" title="Permalink to this headline">¶</a></h3>
+<p>The class <code class="docutils literal notranslate"><span class="pre">SnOverSmFunction</span></code> represents functions on <img alt="\mathbb{S}_n/\mathbb{S}_m" class="math" src="_images/math/b5d2559d5c0acce82b2a296a9f67629549fcaa7c.svg"/>.
+The following initializes a function on <img alt="\mathbb{S}_5/\mathbb{S}_4" class="math" src="_images/math/7e38aa7ada5220b2f990c6f06e7ba67f276700ee.svg"/> with random Gaussian entries and
+prints it out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnOverSmFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">0.74589</span>
+<span class="go">-1.75177</span>
+<span class="go">-0.965146</span>
+<span class="go">-0.474282</span>
+<span class="go">-0.546571</span>
+</pre></div>
+</div>
+</section>
+<section id="sn-class-functions">
+<h3>Sn class functions<a class="headerlink" href="#sn-class-functions" title="Permalink to this headline">¶</a></h3>
+<p>The class <code class="docutils literal notranslate"><span class="pre">SnClassFunction</span></code> represents functions on the conjugacy classes of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>.
+An important example of class functions are the characters of the group.
+The following initializes a class function on <img alt="\mathbb{S}_4" class="math" src="_images/math/33a914272f2e88110551daa4c50f91df3d74e93e.svg"/> with random Gaussian entries
+and prints it out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnClassFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">SnCClass[4] : -1.23974</span>
+<span class="go">SnCClass[3,1] : -0.407472</span>
+<span class="go">SnCClass[2,2] : 1.61201</span>
+<span class="go">SnCClass[2,1,1] : 0.399771</span>
+<span class="go">SnCClass[1,1,1,1] : 1.3828</span>
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">f</span></code> at specific conjugacy classes can be accessed via the corresponding <code class="docutils literal notranslate"><span class="pre">SnCClass</span></code>,
+<code class="docutils literal notranslate"><span class="pre">IntegerPartition</span></code> or just the index.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnCClass</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
+<span class="go">1.6120094060897827</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])]</span>
+<span class="go">1.6120094060897827</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnCClass</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+<span class="go">1.6120094060897827</span>
+</pre></div>
+</div>
+</section>
+<section id="sn-parts">
+<h3>Sn parts<a class="headerlink" href="#sn-parts" title="Permalink to this headline">¶</a></h3>
+<p>An <code class="docutils literal notranslate"><span class="pre">SnPart</span></code> of type <img alt="\lambda" class="math" src="_images/math/83d8373d44883a7d479263075ef3877aaabd022a.svg"/> is a collection of <img alt="m" class="math" src="_images/math/0541bd3ca64424b2b45ab42dc236b934f47bc754.svg"/> vectors on which acts
+by the irreducible representation <img alt="\rho_\lambda" class="math" src="_images/math/a90be66601ff7514cbecd1f1ba8367aaba7cdfc4.svg"/>. The <code class="docutils literal notranslate"><span class="pre">SnPart</span></code> is stored as a matrix
+<img alt="\mathbb{R}^{d_\lambda\times m}" class="math" src="_images/math/f305d4628fab2ade208f16de8125ad6589ff8eca.svg"/>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;lambd=Snob2.IntegerPartition([3,2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnPart</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">lambd</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">Part [3,2]:</span>
+<span class="go">[ -1.23974 -0.407472 1.61201 ]</span>
+<span class="go">[ 0.399771 1.3828 0.0523187 ]</span>
+<span class="go">[ -0.904146 1.87065 -1.66043 ]</span>
+<span class="go">[ -0.688081 0.0757219 1.47339 ]</span>
+<span class="go">[ 0.097221 -0.89237 -0.228782 ]</span>
+</pre></div>
+</div>
+</section>
+<section id="sn-vectors">
+<h3>Sn vectors<a class="headerlink" href="#sn-vectors" title="Permalink to this headline">¶</a></h3>
+<p>An Sn covariant vector or <em>Sn-vector</em> for short is a vector that transforms under the action of
+<img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> by a combination of irreducible representations.
+Sn-vectors are stored as <code class="docutils literal notranslate"><span class="pre">SnVec</span></code> objects as a list of <a href="#id1"><span class="problematic" id="id2">``</span></a>SnPart``s.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnType</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Snob2</span><span class="o">.</span><span class="n">IntegerPartition</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnVec</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="go">Part [4,1]:</span>
+<span class="go">[ -1.23974 -0.407472 ]</span>
+<span class="go">[ 1.61201 0.399771 ]</span>
+<span class="go">[ 1.3828 0.0523187 ]</span>
+<span class="go">[ -0.904146 1.87065 ]</span>
+
+<span class="go">Part [3,2]:</span>
+<span class="go">[ -1.66043 ]</span>
+<span class="go">[ -0.688081 ]</span>
+<span class="go">[ 0.0757219 ]</span>
+<span class="go">[ 1.47339 ]</span>
+<span class="go">[ 0.097221 ]</span>
+
+<span class="go">Part [3,1,1]:</span>
+<span class="go">[ -0.228782 ]</span>
+<span class="go">[ 1.16493 ]</span>
+<span class="go">[ 0.584898 ]</span>
+<span class="go">[ -0.660558 ]</span>
+<span class="go">[ 0.534755 ]</span>
+<span class="go">[ -0.607787 ]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sn-fourier-transforms">
+<h2>Sn Fourier transforms<a class="headerlink" href="#sn-fourier-transforms" title="Permalink to this headline">¶</a></h2>
+<p>The Fourier transform on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> converts a function on <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>
+or a qutient space of <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/> into an <img alt="\mathbb{S}_n" class="math" src="_images/math/abd60d7fc6e7292e35cd14f4841ca0cc510f6196.svg"/>–vector.
+Snob2 uses Clausen’s FFT to compute forward and backward Fourier transforms.
+Fourier transforms employs several internal data structures that can be reused on future transforms.
+Therefore before conducting a Fourier transform a corresponding <code class="docutils literal notranslate"><span class="pre">ClausenFFT</span></code> must be constructed.</p>
+<section id="ffts-on-sn">
+<h3>FFTs on Sn<a class="headerlink" href="#ffts-on-sn" title="Permalink to this headline">¶</a></h3>
+<p>The following sets up an <code class="docutils literal notranslate"><span class="pre">ClausenFFT</span></code> object for Fourier transformation on <img alt="\mathbb{S}_4" class="math" src="_images/math/33a914272f2e88110551daa4c50f91df3d74e93e.svg"/> and
+defines a random function on the group.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fft</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">ClausenFFT</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">[ 1 2 3 4 ] : -1.23974</span>
+<span class="go">[ 2 1 3 4 ] : -0.407472</span>
+<span class="go">[ 1 3 2 4 ] : 1.61201</span>
+<span class="go">[ 2 3 1 4 ] : 0.399771</span>
+<span class="go">[ 3 1 2 4 ] : 1.3828</span>
+<span class="go">[ 3 2 1 4 ] : 0.0523187</span>
+<span class="go">[ 1 2 4 3 ] : -0.904146</span>
+<span class="go">[ 2 1 4 3 ] : 1.87065</span>
+<span class="go">[ 1 3 4 2 ] : -1.66043</span>
+<span class="go">[ 2 3 4 1 ] : -0.688081</span>
+<span class="go">[ 3 1 4 2 ] : 0.0757219</span>
+<span class="go">[ 3 2 4 1 ] : 1.47339</span>
+<span class="go">[ 1 4 2 3 ] : 0.097221</span>
+<span class="go">[ 2 4 1 3 ] : -0.89237</span>
+<span class="go">[ 1 4 3 2 ] : -0.228782</span>
+<span class="go">[ 2 4 3 1 ] : 1.16493</span>
+<span class="go">[ 3 4 1 2 ] : 0.584898</span>
+<span class="go">[ 3 4 2 1 ] : -0.660558</span>
+<span class="go">[ 4 1 2 3 ] : 0.534755</span>
+<span class="go">[ 4 2 1 3 ] : -0.607787</span>
+<span class="go">[ 4 1 3 2 ] : 0.74589</span>
+<span class="go">[ 4 2 3 1 ] : -1.75177</span>
+<span class="go">[ 4 3 1 2 ] : -0.965146</span>
+<span class="go">[ 4 3 2 1 ] : -0.474282</span>
+</pre></div>
+</div>
+<p>We can now use our fft object to take the Fourier transform of f.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">F</span><span class="o">=</span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="go">Part [4]:</span>
+<span class="go">[ -0.486197 ]</span>
+
+<span class="go">Part [3,1]:</span>
+<span class="go">[ 2.56166 1.21663 -0.41762 ]</span>
+<span class="go">[ 1.3139 -1.81861 3.2474 ]</span>
+<span class="go">[ 2.10957 -3.31125 -5.47569 ]</span>
+
+<span class="go">Part [2,2]:</span>
+<span class="go">[ -3.05059 -2.65296 ]</span>
+<span class="go">[ 1.56762 1.53786 ]</span>
+
+<span class="go">Part [2,1,1]:</span>
+<span class="go">[ -5.13609 4.39341 1.45563 ]</span>
+<span class="go">[ 3.59791 2.07342 -0.436283 ]</span>
+<span class="go">[ -3.65454 0.381513 -3.60564 ]</span>
+
+<span class="go">Part [1,1,1,1]:</span>
+<span class="go">[ 7.96084 ]</span>
+</pre></div>
+</div>
+<p>The inverse Fourier transform can be computed with the same FFT object and should return the
+original function <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fd</span><span class="o">=</span><span class="n">fft</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+<span class="go">[ 1 2 3 4 ] : -1.23974</span>
+<span class="go">[ 2 1 3 4 ] : -0.407472</span>
+<span class="go">[ 1 3 2 4 ] : 1.61201</span>
+<span class="go">[ 2 3 1 4 ] : 0.399771</span>
+<span class="go">[ 3 1 2 4 ] : 1.3828</span>
+<span class="go">[ 3 2 1 4 ] : 0.0523185</span>
+<span class="go">[ 1 2 4 3 ] : -0.904147</span>
+<span class="go">[ 2 1 4 3 ] : 1.87065</span>
+<span class="go">[ 1 3 4 2 ] : -1.66043</span>
+<span class="go">[ 2 3 4 1 ] : -0.688081</span>
+<span class="go">[ 3 1 4 2 ] : 0.0757219</span>
+<span class="go">[ 3 2 4 1 ] : 1.47339</span>
+<span class="go">[ 1 4 2 3 ] : 0.097221</span>
+<span class="go">[ 2 4 1 3 ] : -0.89237</span>
+<span class="go">[ 1 4 3 2 ] : -0.228782</span>
+<span class="go">[ 2 4 3 1 ] : 1.16493</span>
+<span class="go">[ 3 4 1 2 ] : 0.584898</span>
+<span class="go">[ 3 4 2 1 ] : -0.660558</span>
+<span class="go">[ 4 1 2 3 ] : 0.534755</span>
+<span class="go">[ 4 2 1 3 ] : -0.607787</span>
+<span class="go">[ 4 1 3 2 ] : 0.74589</span>
+<span class="go">[ 4 2 3 1 ] : -1.75177</span>
+<span class="go">[ 4 3 1 2 ] : -0.965146</span>
+<span class="go">[ 4 3 2 1 ] : -0.474282</span>
+</pre></div>
+</div>
+</section>
+<section id="ffts-on-sn-sm">
+<h3>FFTs on Sn/Sm<a class="headerlink" href="#ffts-on-sn-sm" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ClausenFFT</span></code> can also be used to compute FFTs on <img alt="\mathbb{S}_n/\mathbb{S}_m" class="math" src="_images/math/b5d2559d5c0acce82b2a296a9f67629549fcaa7c.svg"/>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fft</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">ClausenFFT</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">=</span><span class="n">Snob2</span><span class="o">.</span><span class="n">SnOverSmFunction</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="go">-0.546571</span>
+<span class="go">-0.0384917</span>
+<span class="go">0.194947</span>
+<span class="go">-0.485144</span>
+<span class="go">-0.370271</span>
+<span class="go">-1.12408</span>
+<span class="go">1.73664</span>
+<span class="go">0.882195</span>
+<span class="go">-1.50279</span>
+<span class="go">0.570759</span>
+<span class="go">-0.929941</span>
+<span class="go">-0.934988</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span><span class="o">=</span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="go">Part [4]:</span>
+<span class="go">[ -2.54774 ]</span>
+
+<span class="go">Part [3,1]:</span>
+<span class="go">[ 0.329091 3.59416 ]</span>
+<span class="go">[ -1.78231 0.663375 ]</span>
+<span class="go">[ 1.96793 1.63815 ]</span>
+
+<span class="go">Part [2,2]:</span>
+<span class="go">[ -3.93037 ]</span>
+<span class="go">[ -1.41466 ]</span>
+
+<span class="go">Part [2,1,1]:</span>
+<span class="go">[ 0.290743 ]</span>
+<span class="go">[ -1.23415 ]</span>
+<span class="go">[ -1.32773 ]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fd</span><span class="o">=</span><span class="n">fft</span><span class="o">.</span><span class="n">inv_snsm</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="go">SnFunction moved</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+<span class="go">[ 1 2 3 ] : -0.546571</span>
+<span class="go">[ 2 1 3 ] : -0.0384917</span>
+<span class="go">[ 1 3 2 ] : 0.194947</span>
+<span class="go">[ 2 3 1 ] : -0.485144</span>
+<span class="go">[ 3 1 2 ] : -0.37027</span>
+<span class="go">[ 3 2 1 ] : -1.12408</span>
+<span class="go">[ 32705 1 2 ] : 1.73664</span>
+<span class="go">[ 3 2 1 ] : 0.882195</span>
+<span class="go">[ 3 1 2 ] : -1.50279</span>
+<span class="go">[ 519242688 2 1 ] : 0.570759</span>
+<span class="go">[ 3 1 2 ] : -0.929941</span>
+<span class="go">[ 3 2 1 ] : -0.934988</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</section>
+<section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
+<section id="id3">
+<h2>Combinatorial classes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">IntegerPartition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.IntegerPartition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent an integer partition (p_1,p_2,…,p_k) of n.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartition.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the the i’th part, p_i.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartition.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize from a list of integers.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartition.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the i’th part to x</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartition.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the integer partition to string.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition.getn">
+<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartition.getn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartition.height">
+<span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartition.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of parts, k.</p>
+</dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.IntegerPartitions">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">IntegerPartitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.IntegerPartitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>This object represents all integer partitions of a given integer n.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartitions.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartitions" title="Snob2.IntegerPartitions"><span class="pre">Snob2.IntegerPartitions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartitions.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the i’th integer partition.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartitions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartitions" title="Snob2.IntegerPartitions"><span class="pre">Snob2.IntegerPartitions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartitions.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an object to represent all integer partitions of n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartitions.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartitions" title="Snob2.IntegerPartitions"><span class="pre">Snob2.IntegerPartitions</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartitions.__len__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of integer partition.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.IntegerPartitions.at">
+<span class="sig-name descname"><span class="pre">at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartitions" title="Snob2.IntegerPartitions"><span class="pre">Snob2.IntegerPartitions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></span><a class="headerlink" href="#Snob2.IntegerPartitions.at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the i’th integer partition.</p>
+</dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.YoungTableau">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">YoungTableau</span></span><a class="headerlink" href="#Snob2.YoungTableau" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="Snob2.YoungTableau.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.YoungTableau" title="Snob2.YoungTableau"><span class="pre">Snob2.YoungTableau</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.YoungTableau.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tableau of the given shape filled with 1,…,n</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.YoungTableau.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.YoungTableau" title="Snob2.YoungTableau"><span class="pre">Snob2.YoungTableau</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.YoungTableau.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the tableau to string.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.YoungTableau.at">
+<span class="sig-name descname"><span class="pre">at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.YoungTableau" title="Snob2.YoungTableau"><span class="pre">Snob2.YoungTableau</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.YoungTableau.at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the integer at position (i,j) in the tableau.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.YoungTableau.getk">
+<span class="sig-name descname"><span class="pre">getk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.YoungTableau" title="Snob2.YoungTableau"><span class="pre">Snob2.YoungTableau</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.YoungTableau.getk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of rows.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.YoungTableau.shape">
+<span class="sig-name descname"><span class="pre">shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.YoungTableau" title="Snob2.YoungTableau"><span class="pre">Snob2.YoungTableau</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></span><a class="headerlink" href="#Snob2.YoungTableau.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the integer partition describing the shape of this tableau.</p>
+</dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.Permutation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Permutation</span></span><a class="headerlink" href="#Snob2.Permutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a permutation sigma of (1,2,…,n)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return sigma(i)</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__imul__">
+<span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__imul__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Permutation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: Snob2.Permutation, arg0: int) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.Permutation, arg0: int, arg1: cnine::fill_raw) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.Permutation, arg0: int, arg1: cnine::fill_identity) -&gt; None</p></li>
+</ol>
+<p>Return the identity permutation on n items</p>
+<ol class="arabic simple" start="4">
+<li><p>__init__(self: Snob2.Permutation, arg0: List[int]) -&gt; None</p></li>
+</ol>
+<p>Initialize the permutation from a list.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__inv__">
+<span class="sig-name descname"><span class="pre">__inv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__inv__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__mul__">
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.getn">
+<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.getn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.identity">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the identity permutation of n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.inv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the inverse permutation.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Permutation.str">
+<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation.str" title="Snob2.Permutation.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Permutation.str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+<section id="id4">
+<h2>Symmetric group classes<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.Sn">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Sn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Sn.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.cclass">
+<span class="sig-name descname"><span class="pre">cclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn.cclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>cclass(self: Snob2.Sn, arg0: int) -&gt; Snob2.SnCClass</p></li>
+<li><p>cclass(self: Snob2.Sn, arg0: Snob2.IntegerPartition) -&gt; Snob2.SnCClass</p></li>
+</ol>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.cclass_size">
+<span class="sig-name descname"><span class="pre">cclass_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn.cclass_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>cclass_size(self: Snob2.Sn, arg0: Snob2.IntegerPartition) -&gt; int</p></li>
+<li><p>cclass_size(self: Snob2.Sn, arg0: Snob2.SnCClass) -&gt; int</p></li>
+</ol>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.character">
+<span class="sig-name descname"><span class="pre">character</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Snob2.SnClassFunction</span></span></span><a class="headerlink" href="#Snob2.Sn.character" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.element">
+<span class="sig-name descname"><span class="pre">element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.element" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.getn">
+<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.getn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.identity">
+<span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.identity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.index">
+<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.Sn.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>index(self: Snob2.Sn, arg0: Snob2.SnElement) -&gt; int</p></li>
+<li><p>index(self: Snob2.Sn, arg0: Snob2.IntegerPartition) -&gt; int</p></li>
+<li><p>index(self: Snob2.Sn, arg0: Snob2.SnCClass) -&gt; int</p></li>
+</ol>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.irrep">
+<span class="sig-name descname"><span class="pre">irrep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></span><a class="headerlink" href="#Snob2.Sn.irrep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.ncclasses">
+<span class="sig-name descname"><span class="pre">ncclasses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.ncclasses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.nchars">
+<span class="sig-name descname"><span class="pre">nchars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.nchars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.order">
+<span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.Sn.order" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.random">
+<span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.Sn.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.Sn.str">
+<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn" title="Snob2.Sn"><span class="pre">Snob2.Sn</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Sn.str" title="Snob2.Sn.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.Sn.str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.SnElement">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SnElement</span></span><a class="headerlink" href="#Snob2.SnElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent symmetric group elements.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__imul__">
+<span class="sig-name descname"><span class="pre">__imul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.Permutation" title="Snob2.Permutation"><span class="pre">Snob2.Permutation</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__imul__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.SnElement.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: Snob2.SnElement, arg0: int) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.SnElement, arg0: int, arg1: cnine::fill_raw) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.SnElement, arg0: int, arg1: cnine::fill_identity) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.SnElement, arg0: List[int]) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.SnElement, arg0: Snob2.Permutation) -&gt; None</p></li>
+</ol>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__inv__">
+<span class="sig-name descname"><span class="pre">__inv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__inv__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__mul__">
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.getn">
+<span class="sig-name descname"><span class="pre">getn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.getn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return n.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.identity">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the identity element of Sn.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnElement.inv">
+<span class="sig-name descname"><span class="pre">inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></span><a class="headerlink" href="#Snob2.SnElement.inv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.SnCharacter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SnCharacter</span></span><a class="headerlink" href="#Snob2.SnCharacter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent characters of Sn.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnCharacter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnCharacter" title="Snob2.SnCharacter"><span class="pre">Snob2.SnCharacter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.IntegerPartition" title="Snob2.IntegerPartition"><span class="pre">Snob2.IntegerPartition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#Snob2.SnCharacter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The character corresponding to the integer partition lambda.</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnCharacter.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnCharacter" title="Snob2.SnCharacter"><span class="pre">Snob2.SnCharacter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnCharacter.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line"><br/></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="Snob2.SnIrrep">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SnIrrep</span></span><a class="headerlink" href="#Snob2.SnIrrep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent the irreps of Sn.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnIrrep.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnElement" title="Snob2.SnElement"><span class="pre">Snob2.SnElement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">cnine::RtensorObj</span></span></span><a class="headerlink" href="#Snob2.SnIrrep.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnIrrep.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Snob2.SnIrrep.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: Snob2.SnIrrep, arg0: int) -&gt; None</p></li>
+<li><p>__init__(self: Snob2.SnIrrep, arg0: Snob2.IntegerPartition) -&gt; None</p></li>
+</ol>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnIrrep.__lt__">
+<span class="sig-name descname"><span class="pre">__lt__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnIrrep.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnIrrep.get_dim">
+<span class="sig-name descname"><span class="pre">get_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.get_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the dimension of the irrep</p>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Snob2.SnIrrep.str">
+<span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep" title="Snob2.SnIrrep"><span class="pre">Snob2.SnIrrep</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="reference.html#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="reference.html#Snob2.SnIrrep.str" title="Snob2.SnIrrep.str"><span class="pre">str</span></a></span></span><a class="headerlink" href="#Snob2.SnIrrep.str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Risi Kondor |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>. |
+            <a class="muted-link" href="_sources/index.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Snob2 – Symmetric group FFT library</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#design">Design</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#combinatorial-classes">Combinatorial classes</a><ul>
+<li><a class="reference internal" href="#permutations">Permutations</a></li>
+<li><a class="reference internal" href="#integer-partitions">Integer partitions</a></li>
+<li><a class="reference internal" href="#young-tableaux">Young tableaux</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#symmetric-group-classes">Symmetric group classes</a><ul>
+<li><a class="reference internal" href="#group-elements">Group elements</a></li>
+<li><a class="reference internal" href="#conjugacy-classes">Conjugacy classes</a></li>
+<li><a class="reference internal" href="#characters">Characters</a></li>
+<li><a class="reference internal" href="#irreducible-representations">Irreducible representations</a></li>
+<li><a class="reference internal" href="#sn-types">Sn types</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sn-functions-and-sn-vectors">Sn-functions and Sn-vectors</a><ul>
+<li><a class="reference internal" href="#sn-functions">Sn functions</a></li>
+<li><a class="reference internal" href="#sn-sm-functions">Sn/Sm functions</a></li>
+<li><a class="reference internal" href="#sn-class-functions">Sn class functions</a></li>
+<li><a class="reference internal" href="#sn-parts">Sn parts</a></li>
+<li><a class="reference internal" href="#sn-vectors">Sn vectors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sn-fourier-transforms">Sn Fourier transforms</a><ul>
+<li><a class="reference internal" href="#ffts-on-sn">FFTs on Sn</a></li>
+<li><a class="reference internal" href="#ffts-on-sn-sm">FFTs on Sn/Sm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#id3">Combinatorial classes</a></li>
+<li><a class="reference internal" href="#id4">Symmetric group classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js"></script>
+    </body>
+</html>

@@ -2,7 +2,7 @@ Snob2 is a C++ package with a Python interface
 for computing the representations of the symmetric group :math:`\mathbb{S}_n` and 
 computing fast Fourier transforms on :math:`\mathbb{S}_n`.
 Snob2 is built on the **cnine** library which can be downloaded from https://github.com/risi-kondor/cnine.
-GPU functionality for the library is not yet available but is under development. 
+GPU functionality in Snob2 is under development but not yet enabled. 
 
 ..
   Snob2 is designed to eventually allow GPU functionality, but the GPU routines are currently not enabled.
@@ -11,7 +11,7 @@ Snob2 is written by Risi Kondor at the University of Chicago and is released und
 `Mozilla public license v.2.0 <https://www.mozilla.org/en-US/MPL/2.0/>`_.   
 
 This document provides documentation for Snob2's Python interface. Not all features in the C++ library 
-are available through this interface. The documentation of the C++ API can be found in pfd format 
+are available through this interface. The documentation of the C++ API can be found in pdf format 
 in the package's ``doc`` directory.
 
 
@@ -41,9 +41,9 @@ To install Snob2 follow these steps:
 
 #. Download the `cnine <https://github.com/risi-kondor/cnine>`_ and 
    `Snob2 <https://github.com/risi-kondor/Snob2>`_ packages. 
-#. Edit the file ``options.txt``, in particular, make sure that ``CNINE_ROOT`` points to the root of 
+#. Edit the file ``config.txt``, in particular, make sure that ``CNINE_ROOT`` points to the root of 
    the **cnine** package on your system. 
-#. Run ``python setup.sty install`` in the ``pytorch`` directory to compile the package and install it on your 
+#. Run ``python setup.sty install`` in the ``python`` directory to compile the package and install it on your 
    system.
  
 To use Snob2, issue the command ``import Snob2`` in Python. This loads to the `Snob2` module and initializes 

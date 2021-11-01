@@ -19,7 +19,7 @@ defines a random function on the group.
 
 .. code-block:: python
 
-  >>> fft=Snob2.ClausenFFT(4)
+  >>> fft=ClausenFFT(4)
   >>> f=Snob2.SnFunction.gaussian(4)
   >>> print(f)
   [ 1 2 3 4 ] : -1.23974
@@ -114,7 +114,7 @@ The ``ClausenFFT`` can also be used to compute FFTs on :math:`\mathbb{S}_n/\math
 
 .. code-block:: python
 
-  >>> fft=Snob2.ClausenFFT(4,2)
+  >>> fft=ClausenFFT(4,2)
   >>> f=Snob2.SnOverSmFunction.gaussian(4,2)
   >>> print(f)
   -0.546571

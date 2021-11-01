@@ -134,7 +134,7 @@ by the irreducible representation :math:`\rho_\lambda`. The ``SnPart`` is stored
 
 .. code-block:: python
 
-  >>>lambd=IntegerPartition([3,2])
+  >>> lambd=IntegerPartition([3,2])
   >>> p=SnPart.gaussian(lambd,3)
   >>> print(p)
   Part [3,2]:

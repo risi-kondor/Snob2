@@ -12,7 +12,7 @@ Permutations
 A permutation :math:`\pi` of n is a bijective map :math:`\{1,2,\ldots,n\}\to\{1,2,\ldots,n\}`. 
 
 
->>> pi=Snob2.Permutation([2,3,1,5,4])
+>>> pi=Permutation([2,3,1,5,4])
 >>> print(pi)
 [ 2 3 1 5 4 ]
 >>> pi[3]
@@ -21,7 +21,7 @@ A permutation :math:`\pi` of n is a bijective map :math:`\{1,2,\ldots,n\}\to\{1,
 The product of two permutations :math:`\tau` and :math:`\pi` is the permutation corresponding 
 to the composition of maps :math:`\tau\circ\pi`. 
 
->>> tau=Snob2.Permutation([2,1,3,4,5])
+>>> tau=Permutation([2,1,3,4,5])
 >>> print(tau*pi)
 [ 1 3 2 5 4 ]
 
@@ -43,7 +43,7 @@ The ``IntegerPartition`` class represents such vectors.
  
 .. code-block:: python
 
-   >>> a=Snob2.IntegerPartition([3,2,1])
+   >>> a=IntegerPartition([3,2,1])
    >>> print(a)
    [3,2,1]
    >>> print(a[1])
@@ -54,7 +54,7 @@ The ``IntegerPartitions`` class returns an object that contains *all* integer pa
 
 .. code-block:: python
 
-   >>> Lambda=Snob2.IntegerPartitions(5)
+   >>> Lambda=IntegerPartitions(5)
    >>> for i in range(len(Lambda)):
    ...      print(Lambda[i])
    ... 
@@ -77,7 +77,7 @@ appear sequentially.
 
 .. code-block:: python
 
-   >>> T=Snob2.YoungTableau(Snob2.IntegerPartition([3,2,1]))
+   >>> T=YoungTableau(Snob2.IntegerPartition([3,2,1]))
    >>> print(T)
    1 2 3 
    4 5 
@@ -94,7 +94,7 @@ of a given shape.
 
 .. code-block:: python
 
-   >>> lamb=Snob2.IntegerPartition([3,2])
+   >>> lamb=IntegerPartition([3,2])
    >>> T=Snob2.StandardYoungTableaux(lamb)
    >>> for i in range(len(T)):
    ...     print(T[i])

@@ -66,6 +66,14 @@ namespace Snob2{
       return R;
     }
 
+    rtensor transp(const int i, const int j) const{
+      rtensor R(cnine::dims(obj->d,obj->d),cnine::fill::identity);
+      obj->apply_left(R,ContiguousCycle(i,j));
+      obj->apply_left_inv(R,ContiguousCycle(i+1,j));
+      return R;
+    }
+
+
 
   public:
 

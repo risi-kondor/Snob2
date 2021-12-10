@@ -79,6 +79,8 @@
     .def("__getitem__",[](const SnIrrep& obj, const vector<int>& v){
 	return obj(SnElement(v));})
 
+    .def("transp",&SnIrrep::transp)
+
     .def("str",&SnIrrep::str,py::arg("indent")="")
     .def("__str__",&SnIrrep::str,py::arg("indent")="");
         

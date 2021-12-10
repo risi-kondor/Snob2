@@ -66,7 +66,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("getn",&Permutation::getn,"Return n.")
     .def("__getitem__",static_cast<int(Permutation::*)(const int) const>(&Permutation::operator()),
       "Return sigma(i)")
-    //.def("__setitem__",&IntegerPartition::set)
+    .def("__setitem__",&Permutation::set_value)
 
     .def("__eq__",&Permutation::operator==)
 
@@ -123,10 +123,20 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
 
   pybind11::class_<YoungTableau>(m,"YoungTableau")
     .def(pybind11::init<const IntegerPartition&>(),"Return a tableau of the given shape filled with 1,...,n")
+    .def(pybind11::init([](const vector<int> v){
+	  return std::unique_ptr<YoungTableau>(new YoungTableau(IntegerPartition(v))); 
+	}))
+
     .def("getk",&YoungTableau::getk,"Return the number of rows.")
     .def("shape",&YoungTableau::shape,"Return the integer partition describing the shape of this tableau.")
-    .def("at",static_cast<int(YoungTableau::*)(const int, const int) const>(&YoungTableau::at),
+
+    .def("__call__",static_cast<int(YoungTableau::*)(const int, const int) const>(&YoungTableau::at),
 	 "Return the integer at position (i,j) in the tableau.")
+    .def("__getitem__",[](const YoungTableau& obj, vector<int> v){
+	assert(v.size()==2); return obj.at(v[0],v[1]);})
+    .def("__setitem__",[](YoungTableau& obj, vector<int> v, int x){
+	assert(v.size()==2); return obj.set_value(v[0],v[1],x);})
+
     //.def("__getitem__",static_cast<int(IntegerPartition::*)(const int)const>(&IntegerPartition::operator()))
     //.def("__setitem__",&IntegerPartition::set)
     //.def("str",&YoungTableau::str,py::arg("indent")="")

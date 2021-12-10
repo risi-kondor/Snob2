@@ -5,14 +5,19 @@ from torch.utils.cpp_extension import CppExtension, BuildExtension, CUDAExtensio
 
 #os.environ['CUDA_HOME']='/usr/local/cuda'
 os.environ["CC"] = "clang"
+cwd = os.getcwd()
 
 #CUDA_HOME='/usr/local/cuda'
 #print(torch.cuda.is_available())
 
 setup(name='Snob2',
       ext_modules=[CppExtension('Snob2', ['Snob2_py.cpp'],
-                                include_dirs=['../../cnine/include','../../cnine/objects/scalar','../../cnine/objects/tensor',
-                                              '../include','../combinatorial','../Sn'],
+                                include_dirs=[cwd+'/../../cnine/include',
+                                              cwd+'/../../cnine/objects/scalar',
+                                              cwd+'/../../cnine/objects/tensor',
+                                              cwd+'/../include',
+                                              cwd+'/../combinatorial',
+                                              cwd+'/../Sn'],
                                  extra_compile_args = {
                                                        'cxx': ['-std=c++14',
                                                                '-Wno-sign-compare',

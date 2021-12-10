@@ -74,6 +74,14 @@ namespace Snob2{
       return rows.at(r).at(c);
     }
 
+    int get_value(const int r, const int c) const{
+      return rows.at(r).at(c);
+    }
+
+    int set_value(const int r, const int c, const int x){
+      return rows.at(r)[c]=x;
+    }
+
     pair<int,int> index(const int m) const{
       for(int i=0; i<=k()-1; i++) {
 	for(int j=0; j<rows.at(i).size(); j++)

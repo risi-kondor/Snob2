@@ -36,7 +36,10 @@ Reference
 #########
 
 .. include:: reference.rst
+.. include:: combinatorial_ref.rst
 .. include:: Sn_ref.rst
+.. include:: SnFunctions_ref.rst
+.. include:: SnFFT_ref.rst
 
 |
 

@@ -140,6 +140,10 @@ namespace Snob2{
       return p[i];
     }
 
+    void set_value(const int i, const int j){
+      p[i-1]=j;
+    }
+
     bool operator==(const Permutation& x) const{
       if(n!=x.n) return false;
       for(int i=0; i<n; i++) if(p[i]!=x.p[i]) return false;

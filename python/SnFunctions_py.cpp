@@ -38,6 +38,10 @@ pybind11::class_<SnFunction>(m,"SnFunction",
   .def("__getitem__",static_cast<float(SnFunction::*)(const SnElement&) const>(&SnFunction::get_value))
   .def("__getitem__",[](const SnFunction& obj, const vector<int>& v){
       return obj.get_value(SnElement(v));})
+  .def("__setitem__",static_cast<SnFunction&(SnFunction::*)(const int, const float x)>(&SnFunction::set_value))
+  .def("__setitem__",static_cast<SnFunction&(SnFunction::*)(const SnElement&, const float x)>(&SnFunction::set_value))
+  .def("__setitem__",[](SnFunction& obj, const vector<int>& v, const float x){
+      return obj.set_value(SnElement(v),x);})
 
   .def("left_translate",&SnFunction::left_translate)
   .def("right_translate",&SnFunction::right_translate)

@@ -21,7 +21,7 @@
 
     .def("getn",&SnElement::getn,"Return n.")
     .def("__getitem__",static_cast<int(SnElement::*)(const int) const>(&SnElement::operator()))
-    //.def("__setitem__",&IntegerPartition::set)
+    .def("__setitem__",&SnElement::set_value)
 
     .def("__eq__",&SnElement::operator==)
 
@@ -153,11 +153,15 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
 
 pybind11::class_<SnType>(m,"SnType",
   "Class to store the type of an Sn vector")
+  .def(pybind11::init<>(),"")
   .def(pybind11::init<const IntegerPartition&, const int>(),"")
  
   .def("set",&SnType::set,"")
   .def("add",&SnType::add,"")
-
+  .def("__setitem__",&SnType::set,"")
+  .def("__setitem__",[](SnType& obj, const vector<int>& v,const int x){
+      obj.set(IntegerPartition(v),x);},"")
+  
   .def("__str__",&SnType::str,py::arg("indent")="","Print the SnType to string.");
 
 

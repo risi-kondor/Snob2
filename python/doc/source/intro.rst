@@ -34,8 +34,10 @@ Installation
 
 Installing Snob2 requires the following:
 
-#. A C++ installation with C++11 or higher
+#. C++11 or higher
 #. Python
+#. pybind11 (available with any PyTorch installation) 
+#. PyTorch if PyTorch support is required
 
 To install Snob2 follow these steps:
 
@@ -46,14 +48,9 @@ To install Snob2 follow these steps:
 #. Run ``python setup.sty install`` in the ``python`` directory to compile the package and install it on your 
    system.
  
-To use Snob2 in Python, import the corresponding modules as usual by issuing the commands 
-``import cnine`` and ``import Snob2``. 
+To use Snob2 in Python, import the corresponding modules as usual by ``import Snob2``. 
 In the following we also assume that ``from Snob2 import *`` has also been issued to avoid having to 
 prefix all classes with ``Snob2.``.
-
-.. 
-   This loads to the `Snob2` module and initializes 
-   the various static datastructures used by the package. 
 
 
 ******

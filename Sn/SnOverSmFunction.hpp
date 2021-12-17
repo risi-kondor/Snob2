@@ -87,8 +87,8 @@ namespace Snob2{
     string str(const string indent="") const{
       ostringstream oss;
       for(int i=0; i<dims(0); i++){
-	//oss<<G.element(i)<<" : ";  // Fix this!
-	oss<<RtensorObj::get_value(i)<<endl;
+	      oss<<_snbank->get_SnOverSm(n,m)->element(i)<<" : ";
+	      oss<<RtensorObj::get_value(i)<<endl;
       }
       return oss.str();
     }

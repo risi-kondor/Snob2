@@ -56,7 +56,7 @@ namespace Snob2{
 
       e*=factorial(m);
       vector<int> s(n);
-      for(int i=n; i>m; i--){
+      for(int i=n; i>m-1; i--){
 	s[i-1]=i-e/factorial(i-1);
 	e=e%factorial(i-1);
       }

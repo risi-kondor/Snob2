@@ -78,7 +78,25 @@ namespace Snob2{
       return dims(0);
     }
 
+    float get_value(const int i) const{
+      return rtensor::value(i);
+    }
 
+    float get_value(const SnElement& x) const{
+      const SnOverSmObj& G=*_snbank->get_SnOverSm(n,m);
+      return rtensor::value(G.index(x));
+    }
+
+    SnOverSmFunction& set_value(const int i, const float v){
+      rtensor::set_value(i,v);
+      return *this;
+    }
+
+    SnOverSmFunction& set_value(const SnElement& x, const float v){
+      int index = _snbank->get_SnOverSm(n,m)->index(x);
+      rtensor::set_value(index,v);
+      return *this;
+    }
 
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 

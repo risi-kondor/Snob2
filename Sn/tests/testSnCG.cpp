@@ -19,14 +19,15 @@
 //class SnCGbank
 //SnCGbank* _sncgbank=nullptr;
 
-#include "SnPartProduct.hpp"
+//#include "SnPartProduct.hpp"
+#include "SnCGproduct.hpp"
 
 
 using namespace cnine;
 using namespace Snob2;
 
 //typedef CscalarObj cscalar;
-//typedef CtensorObj ctensor;
+typedef RtensorObj rtensor;
 
 
 
@@ -34,22 +35,29 @@ int main(int argc, char** argv){
 
   Snob2_session session;
 
-  int n=3;
+  int n=4;
   Sn G(n);
   IntegerPartition lambda({n-1,1});
 
-  cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
+  rtensor A=rtensor::sequential({5,5});
+  cout<<A<<endl;
+  cout<<A.view2D_block(0,1,2,3)<<endl;
 
-  SnPart A=SnPart::gaussian({n-1,1},1);
-  printl("A",A);
+  //cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
 
-  SnPart B=SnPart::gaussian({n-1,1},1);
-  printl("B",B);
+  //cout<<*_sncgbank->get_CGfactors(lambda,lambda)<<endl;
 
 
+  //SnPart A=SnPart::gaussian({n-1,1},1);
+  //printl("A",A);
+
+  //SnPart B=SnPart::gaussian({n-1,1},1);
+  //printl("B",B);
+
+
+  /*
   SnVec C=SnPartProduct(A,B);
   printl("C",C);
-  cout<<"pppppppppppppp"<<endl;
 
   SnElement sigma=G.random();
   auto Ad=sigma*A;
@@ -59,5 +67,6 @@ int main(int argc, char** argv){
   
   auto Cdd=sigma*C;
   printl("Cdd",Cdd);
+  */
 
 }

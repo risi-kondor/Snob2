@@ -34,7 +34,7 @@ namespace Snob2{
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVec(const SnType& _type, const FILLTYPE& fill, const int _dev=0){
-      for(auto& p:_type._map)
+      for(auto& p:_type)
 	parts.insert(p.first,new SnPart(p.first,p.second,fill,_dev));
     }
 
@@ -112,6 +112,13 @@ namespace Snob2{
       return -1;
     }
 
+    SnType get_type() const{
+      SnType R;
+      for(auto p: parts)
+	R.set(p->get_lambda(),p->getn());
+      return R;
+    }
+
 
   public: // ---- Operations ---------------------------------------------------------------------------------
 
@@ -156,6 +163,7 @@ namespace Snob2{
     }
 
 
+
   public: // ---- Operations ---------------------------------------------------------------------------------
 
 
@@ -181,7 +189,7 @@ namespace Snob2{
       SnVec R(tau,cnine::fill_zero());
       vector<int> offs(v.parts.size(),0);
       //cout<<tau<<endl;
-      for(auto& p:tau._map){
+      for(auto& p:tau){
 	SnPart& dest=*R.parts[R.index(p.first)];
 	int m=dest.dims(1);
 	int voffs=0;

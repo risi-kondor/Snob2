@@ -49,6 +49,7 @@ namespace Snob2{
       //cout<<xsub<<endl; 
       //return SnVec();
 
+      SnVec sub=SnVec::zero(_sncgbank->CGproduct(xsub.get_type(),ysub.get_type()));
       vector<SnVec> subs;
       for(auto p:xsub.parts)
 	for(auto q:ysub.parts){
@@ -60,6 +61,8 @@ namespace Snob2{
       SnType* tau=_sncgbank->get_type(x.get_lambda(),y.get_lambda());
       SnWeights* W=_sncgbank->getW(x.get_lambda(),y.get_lambda());
       return SnVec::up(*tau,(*W)*sub);
+      */
+      return xsub;
     }
  
 

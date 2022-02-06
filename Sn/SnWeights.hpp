@@ -33,10 +33,12 @@ namespace Snob2{
   public: // ---- Constructors -------------------------------------------------------------------------------
 
 
+    SnWeights(){}
+
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnWeights(const SnType& x, const SnType& y, const FILLTYPE& fill){
-      for(auto& p: x._map){
-	rtensor* mx=new rtensor(cnine::dims(p.second,y._map[p.first]),fill);
+      for(auto& p:x){
+	rtensor* mx=new rtensor(cnine::dims(p.second,y(p.first)),fill);
 	weights[p.first]=mx;
       }
     }

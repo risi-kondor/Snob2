@@ -15,10 +15,10 @@
 
 namespace Snob2{
 
-  class SnType{
+  class SnType: public map<IntegerPartition,int>{
   public:
 
-    mutable map<IntegerPartition,int> _map;
+    //mutable map<IntegerPartition,int> _map;
     
 
   public:
@@ -26,37 +26,47 @@ namespace Snob2{
     SnType(){}
 
     SnType(const IntegerPartition& lambda, const int n){
-      _map[lambda]=n;
+      (*this)[lambda]=n;
+      //_map[lambda]=n;
     }
 
     SnType(const initializer_list<tuple<IntegerPartition,int>> list){
-      for(auto p: list) _map[std::get<0>(p)]=std::get<1>(p);
+      for(auto p: list) (*this)[std::get<0>(p)]=std::get<1>(p);
+      //for(auto p: list) _map[std::get<0>(p)]=std::get<1>(p);
     }
 
 
   public: // ---- Access ------------------------------------------------------------------------------------
 
 
+    int operator()(const IntegerPartition& lambda) const{
+      return const_cast<SnType&>(*this)[lambda];//map<IntegerPartition,int>::operator[](lambda);
+    }
+
     void set(const IntegerPartition& lambda, const int m){
-      _map[lambda]=m;
+      (*this)[lambda]=m;
+      //_map[lambda]=m;
     }
 
     void add(const IntegerPartition& lambda, const int m){
-      if(_map.find(lambda)==_map.end()) _map[lambda]=m;
-      else _map[lambda]=_map[lambda]+m;
+      (*this)[lambda]+=m;
+      //if(_map.find(lambda)==_map.end()) _map[lambda]=m;
+      //else _map[lambda]=_map[lambda]+m;
     }
 
 
   public:
 
 
-    bool operator==(const SnType& x) const{
-      return _map==x._map;
-    }
+    //bool operator==(const SnType& x) const{
+    //return map<IntegerPartition,int>::operator==(x);
+      //return _map==x._map;
+    //}
 
-    bool operator<(const SnType& x) const{
-      return _map<x._map;
-    }
+    //bool operator<(const SnType& x) const{
+    //return map<IntegerPartition,int>::operator<(x);
+      //return _map<x._map;
+    //}
 
 
   public:  // ---- Operations -------------------------------------------------------------------------------
@@ -65,7 +75,8 @@ namespace Snob2{
     SnType static down(const IntegerPartition& lambda){
       SnType tau;
       lambda.foreach_sub([&](const IntegerPartition& mu){
-	  tau._map[mu]++;
+	  tau[mu]++;
+	  //tau._map[mu]++;
 	});
       return tau;
     }
@@ -73,7 +84,7 @@ namespace Snob2{
     SnType static cat(const vector<SnType*>& v){
       SnType tau;
       for(auto q:v)
-	for(auto& p:q->_map)
+	for(auto& p:*q)
 	  tau.add(p.first,p.second);
       return tau;
    }
@@ -86,9 +97,9 @@ namespace Snob2{
       ostringstream oss;
       int i=0; 
       oss<<"(";
-      for(auto& p:_map){
+      for(auto& p:*this){
 	oss<<""<<p.first.str()<<":"<<p.second<<"";
-	if(++i<_map.size()) oss<<",";
+	if(++i<size()) oss<<",";
       }
       oss<<")";
       return oss.str();

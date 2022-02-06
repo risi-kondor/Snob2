@@ -13,20 +13,36 @@
 
 #include "SnWeights.hpp"
 #include "SnCharacter.hpp"
+#include "associative_container.hpp"
+
 
 namespace Snob2{
+
+  typedef cnine::RtensorObj rtensor;
+
+  class SnCGfactors: 
+    public associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >{
+    
+    //using associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >::
+    //associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >;
+
+  };
+
 
   class SnCGbank{
   public:
 
     unordered_map<tuple<IntegerPartition,IntegerPartition,IntegerPartition>,int> coeffs;
     unordered_map<pair<IntegerPartition,IntegerPartition>,SnType*> taus;
-    unordered_map<pair<IntegerPartition,IntegerPartition>,SnWeights*> tables;
+    //unordered_map<pair<IntegerPartition,IntegerPartition>,SnWeights*> tables;
+    unordered_map<pair<IntegerPartition,IntegerPartition>,SnCGfactors*> factors;
 
     ~SnCGbank(){
       for(auto& p:taus)
 	delete p.second;
-      for(auto& p:tables)
+      //for(auto& p:tables)
+      //delete p.second;
+      for(auto& p:factors)
 	delete p.second;
       }
     
@@ -58,6 +74,7 @@ namespace Snob2{
       return t;
     }
 
+
     SnType* get_type(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
       auto it=taus.find(lambdas);
@@ -71,12 +88,55 @@ namespace Snob2{
 	if((*p)[0]>=n-limit){
 	  int m=coeff(lambda1,lambda2,*p);
 	  if(m>0) tau->add(*p,m);
-	}
-      
+	}    
       taus[lambdas]=tau;
       return tau;
     }
 
+
+    SnType* CGproductp(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+      return get_type(lambda1,lambda2);
+    }
+
+
+    SnType CGproduct(const SnType& tau1, const SnType& tau2){
+      SnType R;
+      for(auto& p:tau1)
+	for(auto& q:tau1){
+	  SnType* x=CGproductp(p.first,q.first);
+	  //R._map*CGproductp(p
+	}
+      return R;
+    }
+
+    //SnType get_type(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+    //return SnType(*get_typep(lambda1,lambda2));
+    //}
+    
+    SnCGfactors* get_CGfactors(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+      pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
+      auto it=factors.find(lambdas);
+      if(it!=factors.end()) return it->second;
+      
+      SnCGfactors* R=new SnCGfactors();
+
+      factors[lambdas]=R;
+      SnType* prod=get_type(lambda1,lambda2);
+      for(auto& p:*prod){
+	typedef associative_container<IntegerPartition,rtensor> subfact;
+	subfact* sub=new subfact();
+	p.first.foreach_sub([&](const IntegerPartition& mu){
+	    int d=p.second;
+	    sub->insert(mu,rtensor::identity({d,d}));
+	  });
+	R->insert(p.first,sub);
+      }
+      return R;
+    }
+    
+
+
+    /*
     SnWeights* getW(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
       auto it=tables.find(lambdas);
@@ -99,12 +159,13 @@ namespace Snob2{
 
       auto M=sequester(lambda1,lambda2);
       return table;
+      return new SnWeights();
     }
-
+    */
 
     rtensor sequester(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       SnType* tau=get_type(lambda1,lambda2);
-      for(auto& p:tau->_map){
+      for(auto& p:*tau){
 	if(p.second>1){cerr<<"Error: output multiplicity >1"<<endl;}
 
 	
@@ -125,6 +186,9 @@ namespace Snob2{
       SnVec xsub=SnVec::down(x);
       SnVec ysub=SnVec::down(y);
 
+      //SnVec sub=SnVec::zeros()
+
+      /*
       vector<SnVec> subs;
       for(auto p:xsub.parts)
 	for(auto q:ysub.parts){
@@ -136,6 +200,8 @@ namespace Snob2{
       SnType* tau=get_type(x.get_lambda(),y.get_lambda());
       SnWeights* W=getW(x.get_lambda(),y.get_lambda());
       return SnVec::up(*tau,(*W)*sub);
+      */
+      return SnVec();
     }
 
 
@@ -143,6 +209,7 @@ namespace Snob2{
 
 
   };
+
 
 }
 

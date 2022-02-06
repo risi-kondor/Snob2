@@ -124,9 +124,13 @@ namespace Snob2{
     }
 
     void apply_left(rtensor& A, const ContiguousCycle& cyc) const{
-      //cout<<cyc.a<<cyc.b<<endl;
-      for(int i=cyc.b-1; i>=cyc.a; i--)
-	apply_left(A,i);
+      if(cyc.a<cyc.b){
+	for(int i=cyc.b-1; i>=cyc.a; i--)
+	  apply_left(A,i);
+      }else{
+	for(int i=cyc.b; i<cyc.a; i++)
+	  apply_left(A,i);
+      }
     }
 
     void apply_left_inv(rtensor& A, const ContiguousCycle& cyc) const{
@@ -156,6 +160,49 @@ namespace Snob2{
 	    A.set_value(i,j,c1*t+c2*A.get_value(i2,j));
 	    A.set_value(i2,j,-c1*A.get_value(i2,j)+c2*t);
 	  }
+	  done[i2]=true;
+	}
+      }
+    }
+
+
+  public: // ---- apply to view ------------------------------------------------------------------------------
+    // Each transformation is applied to the middle index
+
+    void apply(const cnine::Rtensor3_view& A, const ContiguousCycle& cyc) const{
+      if(cyc.a<cyc.b){
+	for(int i=cyc.b-1; i>=cyc.a; i--)
+	  apply_transp(A,i);
+      }else{
+	for(int i=cyc.b; i<cyc.a; i++)
+	  apply_transp(A,i);
+      }
+    }
+
+
+    void apply_transp(const cnine::Rtensor3_view& T, const int tau) const{
+      SNOB2_ASSERT(T.n1==d,"View wrong size");
+      const int A=T.n0;
+      const int B=T.n2;
+      computeYOR();
+      bool done[d];
+      //cout<<"---"<<lambda<<endl<<endl;
+      for(int i=0; i<d; i++) done[i]=false;
+      for(int i=0; i<d; i++){
+	if(done[i]) continue; 
+	double c1,c2;
+	const int i2=YOR(tau,i,c1,c2);
+	if(i2==-1){
+	  for(int a=0; a<A; a++)
+	    for(int b=0; b<B; b++)
+	      T.set(a,i,b,c1*T(a,i,b));
+	}else{
+	  for(int a=0; a<A; a++)
+	    for(int b=0; b<B; b++){
+	      float t=T(a,i,b);
+	      T.set(a,i,b,c1*t+c2*T(a,i2,b));
+	      T.set(a,i2,b,-c1*T(a,i2,b)+c2*t);
+	    }
 	  done[i2]=true;
 	}
       }
@@ -286,3 +333,42 @@ namespace Snob2{
 }
 
 #endif
+    /*
+    void apply_transposition(Rtensor2_view& T, const int tau) const{ // Applied to the first index 
+      SNOB2_ASSERT(T.n0==d,"View wrong size");
+      const int B=T.n1;
+      computeYOR();
+      bool done[d];
+      //cout<<"---"<<lambda<<endl<<endl;
+      for(int i=0; i<d; i++) done[i]=false;
+      for(int i=0; i<d; i++){
+	if(done[i]) continue; 
+	double c1,c2;
+	const int i2=YOR(tau,i,c1,c2);
+	if(i2==-1){
+	    for(int b=0; b<B; b++)
+	      T.set(i,b,c1*T(i,b));
+	}else{
+	    for(int b=0; b<B; b++){
+	      float t=T(i,b);
+	      T.set(i,b,c1*t+c2*T(i2,b));
+	      T.set(i2,b,-c1*T(i2,b)+c2*t);
+	    }
+	  done[i2]=true;
+	}
+      }
+    }
+    */
+
+    /*
+    void apply(Rtensor2_view& A, const ContiguousCycle& cyc) const{
+      if(cyc.a<cyc.b){
+	for(int i=cyc.b-1; i>=cyc.a; i--)
+	  apply_left(A,i);
+      }else{
+	for(int i=cyc.b; i<cyc.a; i++)
+	  apply_left(A,i);
+      }
+    }
+    */
+

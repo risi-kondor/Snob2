@@ -76,6 +76,10 @@ namespace Snob2{
       return SnElement(n,cnine::fill_identity());
     }
 
+    SnElement transposition(const int i, const int j) const{
+      return SnElement::transposition(n,i,j);
+    }
+
     SnElement element(const int i) const{
       return obj->element(i);
     }

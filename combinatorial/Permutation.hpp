@@ -115,6 +115,30 @@ namespace Snob2{
       return p;
     }
 
+    static Permutation transposition(const int _n, const int i, const int j){
+      Permutation p(_n,cnine::fill_raw()); 
+      for(int i=0; i<_n; i++) p.p[i]=i+1; 
+      p.p[i-1]=j;
+      p.p[j-1]=i;
+      return p;
+    }
+      
+    static Permutation contiguous_cycle(const int _n, const int a, const int b){
+      Permutation p(_n,cnine::fill_raw());
+      if(a<b){
+	for(int i=1; i<a; i++) p.p[i-1]=i; 
+	for(int i=b+1; i<=_n; i++) p.p[i-1]=i;
+	for(int i=a; i<=b-1; i++) p.p[i-1]=i+1;
+	p.p[b-1]=a;
+      }else{
+	for(int i=1; i<b; i++) p.p[i-1]=i; 
+	for(int i=a+1; i<=_n; i++) p.p[i-1]=i;
+	for(int i=b+1; i<=a; i++) p.p[i-1]=i-1;
+	p.p[b-1]=a;
+      }
+      return p;
+    }
+
     //static Permutation Random(const int n);
 
   

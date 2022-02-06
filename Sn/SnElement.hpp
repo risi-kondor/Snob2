@@ -34,6 +34,14 @@ namespace Snob2{
       return Permutation(n,cnine::fill_identity());
     }
 
+    static SnElement transposition(const int n, const int i, const int j){
+      return Permutation::transposition(n,i,j);
+    }
+
+    static SnElement contiguous_cycle(const int n, const int i, const int j){
+      return Permutation::contiguous_cycle(n,i,j);
+    }
+
 
   public: // operations
 

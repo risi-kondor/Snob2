@@ -27,6 +27,13 @@ namespace Snob2{
     ContiguousCycle(const int _a, const int _b): a(_a), b(_b){}
 
 
+  public: 
+
+    ContiguousCycle inv() const{
+      return ContiguousCycle(b,a);
+    }
+
+
   public: // I/O
 
     string str(const string indent="") const{

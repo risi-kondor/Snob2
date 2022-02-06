@@ -73,6 +73,30 @@ namespace Snob2{
       return R;
     }
 
+    rtensor JucysMurphy(const int k){
+      rtensor R(cnine::dims(obj->d,obj->d),cnine::fill::zero);
+      rtensor A(cnine::dims(obj->d,obj->d),cnine::fill::identity);
+      for(int i=k-1; i>=1; i--){
+	obj->apply_left(A,i);
+	rtensor B(A);
+	obj->apply_left_inv(B,ContiguousCycle(i+1,k));
+	R+=B;
+      }
+      return R;
+    }
+
+
+  public: // ---- In-place operations ------------------------------------------------------------------------
+
+
+    void apply_transp(const cnine::Rtensor3_view& T, const int tau) const{
+      obj->apply_transp(T,tau);
+    }
+
+
+    void apply(const cnine::Rtensor3_view& A, const ContiguousCycle& cyc) const{
+      obj->apply(A,cyc);
+    }
 
 
   public:

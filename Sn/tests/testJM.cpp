@@ -12,9 +12,7 @@
 #include "CombinatorialClasses.hpp"
 #include "SnClasses.hpp"
 #include "SnPart.hpp"
-
 #include "SnProductRepresentation.hpp"
-
 #include "associative_container.hpp"
 
 using namespace cnine;
@@ -34,21 +32,19 @@ int main(int argc, char** argv){
   IntegerPartition lamb({n-2,2});
   SnIrrep rho(lamb);
 
-  rtensor A=rho(SnElement::transposition(n,1,k));
+  rtensor A=rho(Transposition(1,k));
   for(int i=2; i<=k-1; i++)
-    A+=rho(SnElement::transposition(n,i,k));
+    A+=rho(Transposition(i,k));
   cout<<A<<endl;
+  cout<<rho.JucysMurphy(k)<<endl;
 
-
-  //auto rho2=SnProductRepresentation<SnIrrep,SnIrrep>(rho,rho);
-  auto rho2=rho*rho;
-  rtensor B=rho2.JucysMurphy(k);
-  cout<<B<<endl;
+  //  auto rho2=rho*rho;
+  //rtensor B=rho2.JucysMurphy(k);
+  //cout<<B<<endl;
 
 }
 
   /*
-  cout<<rho.JucysMurphy(k)<<endl;
 
   rtensor D=rho(SnElement::transposition(n,n-1,n));
   rtensor E=rho(SnElement::transposition(n,1,2));

@@ -27,6 +27,9 @@ namespace Snob2{
     SnElement(const Permutation& x):
       Permutation(x){}
 
+    SnElement(const int n, const Transposition& x):
+      Permutation(n,x){}
+
 
   public: // named constructors 
 

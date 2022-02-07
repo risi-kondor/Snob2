@@ -21,7 +21,9 @@ namespace Snob2{
   typedef cnine::RtensorObj rtensor;
 
   class SnCGfactors: 
-    public associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >{
+    public associative_container<IntegerPartition,rtensor>{
+
+    //public associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >{
     
     //using associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >::
     //associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >;
@@ -75,10 +77,10 @@ namespace Snob2{
     }
 
 
-    SnType* get_type(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+    const SnType& CGproduct(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
       auto it=taus.find(lambdas);
-      if(it!=taus.end()) return it->second;
+      if(it!=taus.end()) return *it->second;
 
       int n=lambda1.getn();
       int limit=2*n-lambda1[0]-lambda2[0];
@@ -90,52 +92,128 @@ namespace Snob2{
 	  if(m>0) tau->add(*p,m);
 	}    
       taus[lambdas]=tau;
-      return tau;
-    }
-
-
-    SnType* CGproductp(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
-      return get_type(lambda1,lambda2);
+      return *tau;
     }
 
 
     SnType CGproduct(const SnType& tau1, const SnType& tau2){
       SnType R;
       for(auto& p:tau1)
-	for(auto& q:tau1){
-	  SnType* x=CGproductp(p.first,q.first);
-	  //R._map*CGproductp(p
-	}
+	for(auto& q:tau1)
+	  R.add(CGproduct(p.first,q.first),p.second*q.second);
       return R;
     }
 
-    //SnType get_type(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
-    //return SnType(*get_typep(lambda1,lambda2));
-    //}
-    
-    SnCGfactors* get_CGfactors(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+
+    const SnCGfactors& get_CGfactors(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
       auto it=factors.find(lambdas);
-      if(it!=factors.end()) return it->second;
+      if(it!=factors.end()) return *it->second;
       
       SnCGfactors* R=new SnCGfactors();
-
-      factors[lambdas]=R;
-      SnType* prod=get_type(lambda1,lambda2);
-      for(auto& p:*prod){
-	typedef associative_container<IntegerPartition,rtensor> subfact;
-	subfact* sub=new subfact();
-	p.first.foreach_sub([&](const IntegerPartition& mu){
-	    int d=p.second;
-	    sub->insert(mu,rtensor::identity({d,d}));
-	  });
-	R->insert(p.first,sub);
+      SnType sub=SnType::down(CGproduct(lambda1,lambda2));
+      for(auto& p:sub){
+	R->insert(p.first,rtensor::identity({p.second,p.second}));
       }
-      return R;
+      //learn(lambda1,lambda2,*R);
+      factors[lambdas]=R;
+      return *R;
     }
     
 
+    void learn(const IntegerPartition& lambda1, const IntegerPartition& lambda2, SnCGfactors& R){
 
+      auto Lambda1=StandardYoungTableaux(lambda1);
+      auto Lambda2=StandardYoungTableaux(lambda2);
+
+      for(int i1=0; i1<Lambda1.size(); i1++){
+	auto t1=Lambda1[i1];
+	int sign=(t1.nrows()>1 && t1(1,0)==2);
+
+	SnPart p1=SnPart::zero(lambda1,1);
+	p1.set(i1,0,1);
+
+	for(int i2=0; i2<Lambda2.size(); i2++){
+	  auto t2=Lambda2[i2];
+	  if(t2.nrows()>1 && t2(1,0)==2) sign=1-sign;
+	  if(sign==1) continue;
+
+	  SnPart p2=SnPart::zero(lambda2,1);
+	  p2.set(i2,0,1);
+
+	  //auto q=transf(p1,p2);
+
+	}
+      }
+    }
+
+
+    SnVec CGproduct(const SnVec& x, const SnVec& y, const string indent=""){
+      SnVec R=SnVec::zero(CGproduct(x.get_type(),y.get_type()));
+      SnType offs;
+      add_CGprod(R,x,y,indent);
+      return R;
+    }
+
+    SnVec CGproduct(const SnPart& x, const SnPart& y){
+      SnVec R=SnVec::zero(CGproduct(x.get_lambda(),y.get_lambda()));
+      SnType offs;
+      accumulate_CGprod(R,offs,x,y);
+      return R;
+    }
+
+    void add_CGprod(SnVec& R, const SnVec& x, const SnVec& y, const string indent=""){
+      cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;
+      SnType offs;
+      for(auto p:x.parts)
+	for(auto q:y.parts){
+	  accumulate_CGprod(R,offs,*p,*q,indent+"  ");
+	}
+    }
+
+    void accumulate_CGprod(SnVec& R, SnType& offs, const SnPart& x, const SnPart& y, const string indent=""){
+      cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;
+      const int n=x.getn();
+      assert(y.getn()==n);
+
+      if(n==1){
+	int I=x.getm();
+	int J=y.getm();
+	for(int i=0; i<I; i++)
+	  for(int j=0; j<J; j++)
+	    R.parts[0]->inc(0,i*J+j,x(0,i)*y(0,j));
+	offs[IntegerPartition({1})]+=I*J;
+	return;
+      }
+    
+      SnVec xsub=SnVec::downB(x);
+      SnVec ysub=SnVec::downB(y);
+      SnVec sub=CGproduct(xsub,ysub,indent+"  ");
+
+      SnVec sub_tilde;
+      for(auto p: get_CGfactors(x.get_lambda(),y.get_lambda())){
+	IntegerPartition mu=p.first;
+	assert(sub.parts.exists(mu));
+	sub_tilde.parts.insert(mu, new SnPart(SnIrrep(mu),(*sub.parts[mu])*p.second));
+      }
+      
+      R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));
+    }
+
+
+
+
+ 
+
+  public:
+
+
+  };
+
+
+}
+
+#endif
     /*
     SnWeights* getW(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
@@ -163,20 +241,40 @@ namespace Snob2{
     }
     */
 
+    /*
     rtensor sequester(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
       SnType* tau=get_type(lambda1,lambda2);
       for(auto& p:*tau){
 	if(p.second>1){cerr<<"Error: output multiplicity >1"<<endl;}
-
-	
-
       }
 
       return rtensor(cnine::dims(1,1),cnine::fill::zero);
 
     }
+    */
 
 
+    //SnType* CGproductp(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+    //return get_type(lambda1,lambda2);
+    //}
+
+
+    //SnType get_type(const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+    //return SnType(*get_typep(lambda1,lambda2));
+    //}
+    
+      /*
+      for(auto& p:sub){
+	typedef associative_container<IntegerPartition,rtensor> subfact;
+	subfact* sub=new subfact();
+	p.first.foreach_sub([&](const IntegerPartition& mu){
+	    int d=p.second;
+	    sub->insert(mu,rtensor::identity({d,d}));
+	  });
+	R->insert(p.first,sub);
+      }
+      */
+   /*
     SnVec CGprod(const SnPart& x, const SnPart& y){
       int n=x.getn();
       if(n==1){
@@ -188,7 +286,6 @@ namespace Snob2{
 
       //SnVec sub=SnVec::zeros()
 
-      /*
       vector<SnVec> subs;
       for(auto p:xsub.parts)
 	for(auto q:ysub.parts){
@@ -200,17 +297,6 @@ namespace Snob2{
       SnType* tau=get_type(x.get_lambda(),y.get_lambda());
       SnWeights* W=getW(x.get_lambda(),y.get_lambda());
       return SnVec::up(*tau,(*W)*sub);
-      */
       return SnVec();
     }
-
-
-  public:
-
-
-  };
-
-
-}
-
-#endif
+    */

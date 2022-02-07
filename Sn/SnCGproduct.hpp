@@ -12,6 +12,7 @@
 
 #include "SnVec.hpp"
 #include "SnWeights.hpp"
+#include "SnCGbank.hpp"
 
 
 namespace Snob2{

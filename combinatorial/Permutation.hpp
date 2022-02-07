@@ -14,6 +14,8 @@
 //#include "CyclicShifts.hpp"
 
 #include "Snob2_base.hpp"
+#include "Transposition.hpp"
+
 
 namespace Snob2{
 
@@ -141,8 +143,17 @@ namespace Snob2{
 
     //static Permutation Random(const int n);
 
-  
-  public: // Access
+  public: // ---- Conversions -------------------------------------------------------------------------------
+
+    
+    Permutation(const int n, const Transposition& x):
+      Permutation(n,cnine::fill_identity()){
+      p[x.i-1]=x.j;
+      p[x.j-1]=x.i;
+    }
+
+
+  public: // ---- Access ------------------------------------------------------------------------------------
 
     int getn() const{
       return n;

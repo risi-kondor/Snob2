@@ -72,6 +72,20 @@ namespace Snob2{
   public:  // ---- Operations -------------------------------------------------------------------------------
 
 
+    void add(const SnType& x, const int m=1){
+      for(auto p:x)
+	(*this)[p.first]+=m*p.second;
+    }
+
+    SnType static down(const SnType& tau){
+      SnType R;
+      for(auto& p:tau)
+	p.first.foreach_sub([&](const IntegerPartition& mu){
+	    R[mu]+=p.second;
+	  });
+      return R;
+    }
+
     SnType static down(const IntegerPartition& lambda){
       SnType tau;
       lambda.foreach_sub([&](const IntegerPartition& mu){

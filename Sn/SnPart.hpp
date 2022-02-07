@@ -150,6 +150,10 @@ namespace Snob2{
       return irrep->lambda.getn();
     }
 
+    SnIrrep get_rho() const{
+      return irrep;
+    }
+
     IntegerPartition get_lambda() const{
       return irrep->lambda;
     }

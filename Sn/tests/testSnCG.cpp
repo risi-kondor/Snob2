@@ -20,7 +20,7 @@
 //SnCGbank* _sncgbank=nullptr;
 
 //#include "SnPartProduct.hpp"
-#include "SnCGproduct.hpp"
+//#include "SnCGproduct.hpp"
 
 
 using namespace cnine;
@@ -35,24 +35,20 @@ int main(int argc, char** argv){
 
   Snob2_session session;
 
-  int n=4;
+  int n=3;
   Sn G(n);
   IntegerPartition lambda({n-1,1});
 
-  rtensor A=rtensor::sequential({5,5});
-  cout<<A<<endl;
-  cout<<A.view2D_block(0,1,2,3)<<endl;
+  cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
 
-  //cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
+  SnPart x=SnPart::gaussian({n-1,1},1);
+  printl("x",x);
 
-  //cout<<*_sncgbank->get_CGfactors(lambda,lambda)<<endl;
+  SnPart y=SnPart::gaussian({n-1,1},1);
+  printl("y",y);
 
-
-  //SnPart A=SnPart::gaussian({n-1,1},1);
-  //printl("A",A);
-
-  //SnPart B=SnPart::gaussian({n-1,1},1);
-  //printl("B",B);
+  SnVec z=_sncgbank->CGproduct(x,y);
+  printl("z",z);
 
 
   /*
@@ -70,3 +66,4 @@ int main(int argc, char** argv){
   */
 
 }
+  //cout<<*_sncgbank->get_CGfactors(lambda,lambda)<<endl;

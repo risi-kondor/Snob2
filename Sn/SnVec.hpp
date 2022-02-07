@@ -115,7 +115,7 @@ namespace Snob2{
     SnType get_type() const{
       SnType R;
       for(auto p: parts)
-	R.set(p->get_lambda(),p->getn());
+	R.set(p->get_lambda(),p->getm());
       return R;
     }
 
@@ -150,7 +150,6 @@ namespace Snob2{
 	p->apply_inplace_inv(cyc);
       return *this;
     }
-
     
 
   public: // ---- Cumulative operations ----------------------------------------------------------------------
@@ -162,6 +161,29 @@ namespace Snob2{
 	parts[i]->add(*y.parts[i]);
     }
 
+    void accumulate_up(SnType& offs, const SnVec& sub, const SnType& tau){
+      //cout<<get_type()<<endl;
+      //cout<<sub.get_type()<<endl;
+      //cout<<tau<<endl<<endl;
+      SnType sub_offs;
+      for(auto& p:tau){
+	IntegerPartition lamb=p.first;
+	assert(parts.exists(lamb));
+	SnPart& target=*parts[lamb];
+	int ncols=p.second;
+	int roffs=0;
+	int coffs=offs[lamb];
+	lamb.foreach_sub([&](const IntegerPartition& mu){
+	    assert(sub.parts.exists(mu));
+	    SnPart& source=*sub.parts[mu];
+	    int nrows=source.dims(0);
+	    target.view2D_block(roffs,coffs,nrows,ncols).add(source.view2D_block(0,sub_offs[mu],nrows,ncols));
+	    sub_offs[mu]+=ncols;
+	    roffs+=nrows;
+	  });
+	offs[lamb]+=ncols;
+      }
+    }
 
 
   public: // ---- Operations ---------------------------------------------------------------------------------
@@ -172,11 +194,28 @@ namespace Snob2{
     //return *this;
     //}
 
+    /*
     SnVec static down(const SnPart& v){
       SnVec R;
       int offs=0;
       v.get_lambda().foreach_sub([&](const IntegerPartition& lambda){
 	  auto P=new SnPart(lambda,1,cnine::fill::zero);
+	  v.add_block_to(offs,0,*P);
+	  R.parts.insert(lambda,P);
+	  offs+=P->getd();
+	});
+      //cout<<R<<endl;
+      return R;
+    }
+    */
+
+    SnVec static downB(const SnPart& v){
+      SnVec R;
+      int offs=0;
+      int m=v.dims(1);
+      v.get_lambda().foreach_sub([&](const IntegerPartition& lambda){
+	  //cout<<"sub="<<lambda<<" "<<m<<endl;
+	  auto P=new SnPart(lambda,m,cnine::fill::zero);
 	  v.add_block_to(offs,0,*P);
 	  R.parts.insert(lambda,P);
 	  offs+=P->getd();

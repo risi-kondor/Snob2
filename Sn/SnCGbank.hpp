@@ -109,27 +109,27 @@ namespace Snob2{
       pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2);
       auto it=factors.find(lambdas);
       if(it!=factors.end()) return *it->second;
-      
+
       SnCGfactors* R=new SnCGfactors();
       SnType sub=SnType::down(CGproduct(lambda1,lambda2));
       for(auto& p:sub){
 	R->insert(p.first,rtensor::identity({p.second,p.second}));
       }
-      //learn(lambda1,lambda2,*R);
+      learn(*R, lambda1,lambda2);
       factors[lambdas]=R;
       return *R;
     }
     
 
-    void learn(const IntegerPartition& lambda1, const IntegerPartition& lambda2, SnCGfactors& R){
-
+    void learn(SnCGfactors& R, const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+      cout<<"Learning transformation for "<<lambda1<<"*"<<lambda2<<endl;
+      
       auto Lambda1=StandardYoungTableaux(lambda1);
       auto Lambda2=StandardYoungTableaux(lambda2);
 
       for(int i1=0; i1<Lambda1.size(); i1++){
 	auto t1=Lambda1[i1];
 	int sign=(t1.nrows()>1 && t1(1,0)==2);
-
 	SnPart p1=SnPart::zero(lambda1,1);
 	p1.set(i1,0,1);
 
@@ -137,12 +137,14 @@ namespace Snob2{
 	  auto t2=Lambda2[i2];
 	  if(t2.nrows()>1 && t2(1,0)==2) sign=1-sign;
 	  if(sign==1) continue;
-
 	  SnPart p2=SnPart::zero(lambda2,1);
 	  p2.set(i2,0,1);
 
-	  //auto q=transf(p1,p2);
+	  SnVec xsub=SnVec::downB(p1);
+	  SnVec ysub=SnVec::downB(p2);
+	  SnVec sub=CGproduct(xsub,ysub);
 
+	  
 	}
       }
     }
@@ -155,12 +157,14 @@ namespace Snob2{
       return R;
     }
 
+
     SnVec CGproduct(const SnPart& x, const SnPart& y){
       SnVec R=SnVec::zero(CGproduct(x.get_lambda(),y.get_lambda()));
       SnType offs;
       accumulate_CGprod(R,offs,x,y);
       return R;
     }
+
 
     void add_CGprod(SnVec& R, const SnVec& x, const SnVec& y, const string indent=""){
       cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;
@@ -170,6 +174,7 @@ namespace Snob2{
 	  accumulate_CGprod(R,offs,*p,*q,indent+"  ");
 	}
     }
+
 
     void accumulate_CGprod(SnVec& R, SnType& offs, const SnPart& x, const SnPart& y, const string indent=""){
       cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;
@@ -192,9 +197,9 @@ namespace Snob2{
 
       SnVec sub_tilde;
       for(auto p: get_CGfactors(x.get_lambda(),y.get_lambda())){
-	IntegerPartition mu=p.first;
+	IntegerPartition mu=p.key();
 	assert(sub.parts.exists(mu));
-	sub_tilde.parts.insert(mu, new SnPart(SnIrrep(mu),(*sub.parts[mu])*p.second));
+	sub_tilde.parts.insert(mu, new SnPart(SnIrrep(mu),(*sub.parts[mu])*(p)));
       }
       
       R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));

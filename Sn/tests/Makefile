@@ -8,7 +8,8 @@ testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCh
 testSn_IrrepHelper \
 testKronCoeff \
 testAssociativeContainer \
-testJM
+testJM \
+testSnVecB
 
 #testSnMultiVec testFourierTransform
 
@@ -200,6 +201,15 @@ ifdef WITH_CUDA
 else
 	$(CC) -o testJM testJM.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
+
+
+testSnVecB: testSnVecB.cpp $(DEPS) 
+ifdef WITH_CUDA
+	$(NVCC) $(NVCCFLAGS) -o testSnVecB testSnVecB.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+else
+	$(CC) -o testSnVecB testSnVecB.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+endif
+
 
 
 

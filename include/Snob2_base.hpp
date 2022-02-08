@@ -24,6 +24,31 @@ using namespace std;
 #define SNOB2_ERROR(cmd) {CoutLock lk; cerr<<"Snob2 error in function '"<<__PRETTY_FUNCTION__<<"' : "<<cmd<<endl;} exit(1);
 
 
+#ifdef SNOB2_COPY_WARNINGS
+#define SNOB2_COPY_WARNING() cout<<"\e[1mcnine:\e[0m "<<classname()<<" copied."<<endl;
+#else 
+#define SNOB2_COPY_WARNING()
+#endif 
+
+#ifdef SNOB2_ASSIGN_WARNINGS
+#define SNOB2_ASSIGN_WARNING() cout<<"\e[1mWarning:\e[0m "<<classname()<<" assigned."<<endl;
+#else
+#define SNOB2_ASSIGN_WARNING() 
+#endif
+
+#ifdef SNOB2_MOVE_WARNINGS
+#define SNOB2_MOVE_WARNING() cout<<"\e[1mcnine:\e[0m "<<classname()<<" moved."<<endl;
+#else 
+#define SNOB2_MOVE_WARNING()
+#endif 
+
+#ifdef SNOB2_MOVEASSIGN_WARNINGS
+#define SNOB2_MOVEASSIGN_WARNING() cout<<"\e[1mcnine:\e[0m "<<classname()<<" move assigned."<<endl;
+#else 
+#define SNOB2_MOVEASSIGN_WARNING()
+#endif 
+
+
 
 namespace Snob2{
 

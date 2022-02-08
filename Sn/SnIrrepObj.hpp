@@ -169,18 +169,34 @@ namespace Snob2{
   public: // ---- apply to view ------------------------------------------------------------------------------
     // Each transformation is applied to the middle index
 
-    void apply(const cnine::Rtensor3_view& A, const ContiguousCycle& cyc) const{
-      if(cyc.a<cyc.b){
-	for(int i=cyc.b-1; i>=cyc.a; i--)
-	  apply_transp(A,i);
-      }else{
-	for(int i=cyc.b; i<cyc.a; i++)
-	  apply_transp(A,i);
+
+    void apply(const cnine::Rtensor3_view& A, const SnElement sigma) const{
+      SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
+      vector<int> shifts(n);
+      for(int i=n; i>0; i--){
+	int a=sigma(i);
+	shifts[i-1]=a;
+	for(int j=1; j<i; j++) if(sigma.p[j-1]>a) sigma.p[j-1]--;
+      }
+      for(int i=2; i<=n; i++){
+	for(int a=i-1; a>=shifts[i-1]; a--)
+	  apply(A,a);
       }
     }
 
 
-    void apply_transp(const cnine::Rtensor3_view& T, const int tau) const{
+    void apply(const cnine::Rtensor3_view& A, const ContiguousCycle& cyc) const{
+      if(cyc.a<cyc.b){
+	for(int i=cyc.b-1; i>=cyc.a; i--)
+	  apply(A,i);
+      }else{
+	for(int i=cyc.b; i<cyc.a; i++)
+	  apply(A,i);
+      }
+    }
+
+
+    void apply(const cnine::Rtensor3_view& T, const int tau) const{
       SNOB2_ASSERT(T.n1==d,"View wrong size");
       const int A=T.n0;
       const int B=T.n2;
@@ -207,6 +223,12 @@ namespace Snob2{
 	}
       }
     }
+
+
+    void apply_transp(const cnine::Rtensor3_view& T, const int tau) const{
+      apply(T,tau);
+    }
+
 
 
   public: // ---- apply_left to block ------------------------------------------------------------------------

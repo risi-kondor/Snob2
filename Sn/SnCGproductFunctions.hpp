@@ -22,7 +22,7 @@ namespace Snob2{
   }
 
   SnType CGproduct(const IntegerPartition& mu1, const IntegerPartition& mu2){
-    return SnType(*_sncgbank->get_type(mu1,mu2));
+    return SnType(_sncgbank->CGproduct(mu1,mu2));
   }
 
 

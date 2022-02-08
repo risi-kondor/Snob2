@@ -27,20 +27,20 @@ int main(int argc, char** argv){
 
   Snob2_session session;
 
-  int n=5;
-  int k=3;
+  int n=5; // (3,2) (2,2)+(3,1)
+  int k=5;
   IntegerPartition lamb({n-2,2});
   SnIrrep rho(lamb);
 
   rtensor A=rho(Transposition(1,k));
   for(int i=2; i<=k-1; i++)
     A+=rho(Transposition(i,k));
-  cout<<A<<endl;
-  cout<<rho.JucysMurphy(k)<<endl;
+  cout<<A.str("",0.0001)<<endl;
+  cout<<rho.JucysMurphy(k).str("",0.0001)<<endl;
 
-  //  auto rho2=rho*rho;
-  //rtensor B=rho2.JucysMurphy(k);
-  //cout<<B<<endl;
+  auto rho2=rho*rho;
+  rtensor B=rho2.JucysMurphy(k);
+  cout<<B.str("",0.0001)<<endl;
 
 }
 

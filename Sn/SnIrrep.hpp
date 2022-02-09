@@ -49,6 +49,14 @@ namespace Snob2{
 
   public: // Access
 
+    int getn() const{
+      return obj->d;
+    }
+
+    int getd() const{
+      return obj->d;
+    }
+
     int dim() const{
       return obj->d;
     }

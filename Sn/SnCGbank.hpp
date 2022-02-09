@@ -15,7 +15,7 @@
 #include "SnCharacter.hpp"
 #include "associative_container.hpp"
 #include "SnVecB.hpp"
-
+#include "SnProductRepresentation.hpp"
 
 namespace Snob2{
 
@@ -121,32 +121,41 @@ namespace Snob2{
     }
     
 
-    void learn(SnCGfactors& R, const IntegerPartition& lambda1, const IntegerPartition& lambda2){
+    void learn(SnCGfactors& R, const IntegerPartition& lamb1, const IntegerPartition& lamb2){
       //cout<<"Learning transformation for "<<lambda1<<"*"<<lambda2<<endl;
+
+      SnIrrep rho1(lamb1);
+      SnIrrep rho2(lamb2);
+      int d1=rho1.getd();
+      int d2=rho2.getd();
+      int d=d1*d2;
+      int n=rho1.getn();
+
+      SnProductRepresentation<SnIrrep,SnIrrep> rho(rho1,rho2);
+      rtensor JM=rho.JucysMurphy(n);
+
+      SnPartB p1=SnPartB::zero(d,lamb1,1);
+      for(int i=0; i<d1; i++)
+	for(int j=0; j<d2; j++)
+	  for(int k=0; k<d1; k++)
+	    p1(i*d2+j,k,0)=1;
+
+      SnPartB p2=SnPartB::zero(d,lamb2,1);
+      for(int i=0; i<d1; i++)
+	for(int j=0; j<d2; j++)
+	  for(int k=0; k<d2; k++)
+	    p2(i*d2+j,k,0)=1;
       
-      auto Lambda1=StandardYoungTableaux(lambda1);
-      auto Lambda2=StandardYoungTableaux(lambda2);
+      SnVecB xsub=SnVecB::down(p1);
+      SnVecB ysub=SnVecB::down(p2);
+      SnVecB sub=CGproduct(xsub,ysub);
 
-      for(int i1=0; i1<Lambda1.size(); i1++){
-	auto t1=Lambda1[i1];
-	int sign=(t1.nrows()>1 && t1(1,0)==2);
-	SnPart p1=SnPart::zero(lambda1,1);
-	p1.set(i1,0,1);
-
-	for(int i2=0; i2<Lambda2.size(); i2++){
-	  auto t2=Lambda2[i2];
-	  if(t2.nrows()>1 && t2(1,0)==2) sign=1-sign;
-	  if(sign==1) continue;
-	  SnPart p2=SnPart::zero(lambda2,1);
-	  p2.set(i2,0,1);
-
-	  SnVec xsub=SnVec::downB(p1);
-	  SnVec ysub=SnVec::downB(p2);
-	  SnVec sub=CGproduct(xsub,ysub);
-
-	  
-	}
+      for(auto p: sub){
+	cnine::Rtensor2_view V=p.view3().slice1(0);
+	rtensor M=V.transp()*(JM.view2())*V;
+	cout<<M<<endl;
       }
+
     }
 
 
@@ -361,3 +370,28 @@ namespace Snob2{
       return SnVec();
     }
     */
+      /*
+      auto Lambda1=StandardYoungTableaux(lambda1);
+      auto Lambda2=StandardYoungTableaux(lambda2);
+
+      for(int i1=0; i1<Lambda1.size(); i1++){
+	auto t1=Lambda1[i1];
+	int sign=(t1.nrows()>1 && t1(1,0)==2);
+	SnPart p1=SnPart::zero(lambda1,1);
+	p1.set(i1,0,1);
+
+	for(int i2=0; i2<Lambda2.size(); i2++){
+	  auto t2=Lambda2[i2];
+	  if(t2.nrows()>1 && t2(1,0)==2) sign=1-sign;
+	  if(sign==1) continue;
+	  SnPart p2=SnPart::zero(lambda2,1);
+	  p2.set(i2,0,1);
+
+	  SnVec xsub=SnVec::downB(p1);
+	  SnVec ysub=SnVec::downB(p2);
+	  SnVec sub=CGproduct(xsub,ysub);
+
+	  
+	}
+      }
+      */

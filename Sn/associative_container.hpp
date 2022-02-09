@@ -19,6 +19,38 @@ namespace Snob2{
 
 
   template<typename KEY, typename OBJ>
+  class associative_container_val_iterator{
+  public:
+    
+    typename map<KEY,OBJ*>::iterator it;
+
+    associative_container_val_iterator(const typename map<KEY,OBJ*>::iterator& _it):
+      it(_it){}
+
+    void operator++(){++it;}
+
+    void  operator++(int a){++it;}
+
+    OBJ& operator*(){
+      return *it->second; 
+    }
+
+    const OBJ& operator*() const{
+      return *it->second; 
+    }
+
+    bool operator==(const associative_container_val_iterator& x) const{
+      return it==x.it;
+    }
+
+    bool operator!=(const associative_container_val_iterator& x) const{
+      return it!=x.it;
+    }
+
+  };
+
+
+  template<typename KEY, typename OBJ>
   class associative_container_temporary{
   public:
 
@@ -29,7 +61,15 @@ namespace Snob2{
       
   public:
 
-    operator OBJ&(){
+    //operator OBJ&(){
+    //return *_val;
+    //}
+
+    OBJ& operator*(){
+      return *_val;
+    }
+
+    OBJ& operator->(){
       return *_val;
     }
 
@@ -43,6 +83,8 @@ namespace Snob2{
 
   };
 
+
+
   
   template<typename KEY, typename OBJ>
   class associative_container_iterator{
@@ -50,7 +92,6 @@ namespace Snob2{
     
     typedef typename map<KEY,OBJ*>::iterator _iterator;
     typedef associative_container_temporary<KEY,OBJ> temp;
-    
 
     _iterator it;
 
@@ -71,6 +112,22 @@ namespace Snob2{
       return temp(it->first,it->second); 
     }
       
+    temp operator->() const{
+      return temp(it->first,it->second); 
+    }
+      
+    //OBJ& operator->() const{
+    //return it->second; 
+    //}
+      
+    const KEY key() const{
+      return it->first;
+    }
+
+    OBJ& val(){
+      return *it->second;
+    }
+
     //const KEY& key() const{
     //return it->second;
     //}
@@ -86,12 +143,38 @@ namespace Snob2{
   };
 
 
+  template<typename KEY,typename OBJ>
+  class associative_container_keyval{
+  public:
+
+    typedef associative_container_iterator<KEY,OBJ> iterator;
+
+    map<KEY,OBJ*>& _map;
+
+    associative_container_keyval(map<KEY,OBJ*>& __map):
+      _map(__map){}
+
+    int size() const{
+      return _map.size();
+    }
+
+    iterator begin() const{
+      return iterator(_map.begin());
+    }
+
+    iterator end() const{
+      return iterator(_map.end());
+    }
+
+  };
+
 
   template<typename KEY,typename OBJ>
   class associative_container{
   public:
 
-    typedef associative_container_iterator<KEY,OBJ> iterator;
+    typedef associative_container_val_iterator<KEY,OBJ> viterator;
+    typedef associative_container_keyval<KEY,OBJ> _keyval;
 
     //vector<OBJ*> v;
     mutable map<KEY,OBJ*> _map;
@@ -139,14 +222,27 @@ namespace Snob2{
       return _map.size();
     }
 
-    OBJ* pointer_to(const KEY& key) const{
-      if(!exists(key)) insert(new OBJ());
+    OBJ* pointer_to(const KEY& key){
+      if(!exists(key)) insert(key,new OBJ());
       return _map[key];
     }
 
-    OBJ& operator[](const KEY& key) const{
-      if(!exists(key)) insert(new OBJ());
+    OBJ& operator[](const KEY& key){
+      if(!exists(key)) insert(key,new OBJ());
       return *_map[key];
+    }
+
+    const OBJ& operator[](const KEY& key) const{
+      assert(exists(key));
+      return *_map[key];
+    }
+
+    OBJ& first(){
+      return *_map.begin()->second;
+    }
+
+    const OBJ& first() const{
+      return *_map.begin()->second;
     }
 
     void insert(const KEY& key, OBJ* obj){
@@ -168,12 +264,16 @@ namespace Snob2{
       return _map.find(key)!=_map.end();
     }
 
-    iterator begin() const{
-      return iterator(_map.begin());
+    viterator begin() const{
+      return viterator(_map.begin());
     }
 
-    iterator end() const{
-      return iterator(_map.end());
+    viterator end() const{
+      return viterator(_map.end());
+    }
+
+    _keyval keyval() const{
+      return _keyval(_map);
     }
 
     void clear(){
@@ -181,6 +281,7 @@ namespace Snob2{
 	delete _map.second;
       _map.clear();
     }
+
 
   public: // ---- I/O -----------------------------------------------------------------------------------------
 
@@ -203,3 +304,4 @@ namespace Snob2{
 }
 
 #endif
+

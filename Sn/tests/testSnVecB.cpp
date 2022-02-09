@@ -12,7 +12,7 @@
 #include "Snob2_session.hpp"
 #include "CombinatorialClasses.hpp"
 #include "SnClasses.hpp"
-#include "SnVec.hpp"
+#include "SnVecB.hpp"
 
 using namespace cnine;
 using namespace Snob2;
@@ -33,7 +33,7 @@ int main(int argc, char** argv){
   mu.set({4,2},1);
   mu.set({5,1},2);
 
-  SnElement sigma({1,2,4,3}); 
+  SnElement sigma({1,2,4,3,5,6}); 
 
   SnVecB V(mu,cnine::fill::gaussian);
   printl("V",V);

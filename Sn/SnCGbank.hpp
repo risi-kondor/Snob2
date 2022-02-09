@@ -14,6 +14,7 @@
 #include "SnWeights.hpp"
 #include "SnCharacter.hpp"
 #include "associative_container.hpp"
+#include "SnVecB.hpp"
 
 
 namespace Snob2{
@@ -52,7 +53,6 @@ namespace Snob2{
   public:
 
     int coeff(const IntegerPartition& _mu1, const IntegerPartition& _mu2, const IntegerPartition& _mu3){
-
       auto mus=order(_mu1,_mu2,_mu3);
       auto it=coeffs.find(mus);
       if(it!=coeffs.end()) return it->second;
@@ -122,7 +122,7 @@ namespace Snob2{
     
 
     void learn(SnCGfactors& R, const IntegerPartition& lambda1, const IntegerPartition& lambda2){
-      cout<<"Learning transformation for "<<lambda1<<"*"<<lambda2<<endl;
+      //cout<<"Learning transformation for "<<lambda1<<"*"<<lambda2<<endl;
       
       auto Lambda1=StandardYoungTableaux(lambda1);
       auto Lambda2=StandardYoungTableaux(lambda2);
@@ -152,7 +152,6 @@ namespace Snob2{
 
     SnVec CGproduct(const SnVec& x, const SnVec& y, const string indent=""){
       SnVec R=SnVec::zero(CGproduct(x.get_type(),y.get_type()));
-      SnType offs;
       add_CGprod(R,x,y,indent);
       return R;
     }
@@ -196,10 +195,10 @@ namespace Snob2{
       SnVec sub=CGproduct(xsub,ysub,indent+"  ");
 
       SnVec sub_tilde;
-      for(auto p: get_CGfactors(x.get_lambda(),y.get_lambda())){
+      for(auto p: get_CGfactors(x.get_lambda(),y.get_lambda()).keyval()){
 	IntegerPartition mu=p.key();
 	assert(sub.parts.exists(mu));
-	sub_tilde.parts.insert(mu, new SnPart(SnIrrep(mu),(*sub.parts[mu])*(p)));
+	sub_tilde.parts.insert(mu, new SnPart(SnIrrep(mu),(*sub.parts[mu])*(*p)));
       }
       
       R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));
@@ -210,7 +209,64 @@ namespace Snob2{
 
  
 
-  public:
+  public: // ---- SnVecB functions ---------------------------------------------------------------------------
+
+
+    SnVecB CGproduct(const SnVecB& x, const SnVecB& y, const string indent=""){
+      SnVecB R=SnVecB::zero(sameb(x,y),CGproduct(x.get_type(),y.get_type()));
+      add_CGprod(R,x,y,indent);
+      return R;
+    }
+
+
+    SnVecB CGproduct(const SnPartB& x, const SnPartB& y){
+      SnVecB R=SnVecB::zero(sameb(x,y),CGproduct(x.get_lambda(),y.get_lambda()));
+      SnType offs;
+      accumulate_CGprod(R,offs,x,y);
+      return R;
+    }
+
+
+    void add_CGprod(SnVecB& R, const SnVecB& x, const SnVecB& y, const string indent=""){
+      cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;
+      SnType offs;
+      for(auto p:x)
+	for(auto q:y){
+	  accumulate_CGprod(R,offs,p,q,indent+"  ");
+	}
+    }
+
+
+    void accumulate_CGprod(SnVecB& R, SnType& offs, const SnPartB& x, const SnPartB& y, const string indent=""){
+      cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;
+      const int nb=sameb(R,x,y);
+      const int n=x.getn();
+      assert(y.getn()==n);
+
+      if(n==1){
+	int I=x.getm();
+	int J=y.getm();
+	for(int b=0; b<nb; b++)
+	  for(int i=0; i<I; i++)
+	    for(int j=0; j<J; j++)
+	      R.first().inc(0,0,i*J+j,x(0,i)*y(0,j));
+	offs[IntegerPartition({1})]+=I*J;
+	return;
+      }
+    
+      SnVecB xsub=SnVecB::down(x);
+      SnVecB ysub=SnVecB::down(y);
+      SnVecB sub=CGproduct(xsub,ysub,indent+"  ");
+
+      SnVecB sub_tilde;
+      for(auto p: get_CGfactors(x.get_lambda(),y.get_lambda()).keyval()){
+	IntegerPartition mu=p.key();
+	assert(sub.exists(mu));
+	sub_tilde.insert(mu, new SnPartB(SnIrrep(mu),sub[mu]*(*p)));
+      }
+      
+      R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));
+    }
 
 
   };

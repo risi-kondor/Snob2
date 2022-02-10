@@ -35,7 +35,7 @@ int main(int argc, char** argv){
 
   Snob2_session session;
 
-  int n=3;
+  int n=4;
   Sn G(n);
   IntegerPartition lambda({n-1,1});
 

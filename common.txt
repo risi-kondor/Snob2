@@ -4,6 +4,8 @@ CNINE_INCLUDES=-I$(CNINE_ROOT)/include -I$(CNINE_ROOT)/include/cmaps \
 -I$(CNINE_ROOT)/objects/scalar -I$(CNINE_ROOT)/objects/tensor -I$(CNINE_ROOT)/objects/tensor_views \
 -I$(CNINE_ROOT)/objects/tensor_array -I$(CNINE_ROOT)/objects/tensor_array/cell_ops 
 
+CNINE_CUDADIR=$(CNINE_ROOT)/cuda
+
 SNOB2_INCLUDEDIR=$(ROOTDIR)/include
 SNOB2_CUDADIR=$(ROOTDIR)/cuda
 
@@ -17,11 +19,17 @@ LIBS= -lstdc++ -lm -lpthread
 
 MACROS=
 
+MACROS+=-DCNINE_RANGE_CHECKING
+
 ifdef WITH_CUDA
 MACROS+=-D_WITH_CUDA
 endif 
 
 ifdef WITH_CUBLAS
 MACROS+=-D_WITH_CUBLAS
+endif 
+
+ifdef EIGENDIR
+MACROS+=-D_WITH_EIGEN
 endif 
 

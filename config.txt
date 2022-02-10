@@ -3,6 +3,11 @@ CC=clang
 CNINE_ROOT=$(ROOTDIR)/../cnine/
 
 
+# ---- EIGEN OPTIONS ------------------------------------
+
+EIGENDIR=/usr/local/include
+
+
 # ---- CUDA OPTIONS ----------------------------------
 
 #WITH_CUDA=t

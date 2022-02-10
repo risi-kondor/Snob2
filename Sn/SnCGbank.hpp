@@ -17,6 +17,9 @@
 #include "SnVecB.hpp"
 #include "SnProductRepresentation.hpp"
 
+#include "SymmetricEigendecomp.hpp"
+
+
 namespace Snob2{
 
   typedef cnine::RtensorObj rtensor;
@@ -122,7 +125,7 @@ namespace Snob2{
     
 
     void learn(SnCGfactors& R, const IntegerPartition& lamb1, const IntegerPartition& lamb2){
-      //cout<<"Learning transformation for "<<lambda1<<"*"<<lambda2<<endl;
+      cout<<"Learning transformation for "<<lamb1<<"*"<<lamb2<<endl;
 
       SnIrrep rho1(lamb1);
       SnIrrep rho2(lamb2);
@@ -153,7 +156,10 @@ namespace Snob2{
       for(auto p: sub){
 	cnine::Rtensor2_view V=p.view3().slice1(0);
 	rtensor M=V.transp()*(JM.view2())*V;
-	cout<<M<<endl;
+	cnine::SymmetricEigendecomp eig1(M.view2());
+	cout<<eig1.U<<endl;
+	cout<<eig1.D<<endl;
+	//cout<<p.get_rho().JucysMurphy(n-1)<<endl;
       }
 
     }
@@ -255,10 +261,11 @@ namespace Snob2{
       if(n==1){
 	int I=x.getm();
 	int J=y.getm();
-	for(int b=0; b<nb; b++)
+	for(int b=0; b<nb; b++){
 	  for(int i=0; i<I; i++)
 	    for(int j=0; j<J; j++)
-	      R.first().inc(0,0,i*J+j,x(0,i)*y(0,j));
+	      R.first().inc(b,0,i*J+j,x(b,0,i)*y(b,0,j));
+	}
 	offs[IntegerPartition({1})]+=I*J;
 	return;
       }
@@ -273,7 +280,7 @@ namespace Snob2{
 	assert(sub.exists(mu));
 	sub_tilde.insert(mu, new SnPartB(SnIrrep(mu),sub[mu]*(*p)));
       }
-      
+
       R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));
     }
 

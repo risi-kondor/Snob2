@@ -20,6 +20,8 @@ DEPS=$(SNDIR)/*.hpp $(COMBINATORIALDIR)/*.hpp
 
 EXECS= 
 
+CNINE_OBJECTS=$(CNINE_CUDADIR)/EigenRoutines.o
+
 CUDA_OBJECTS=  
 CUDA_EXTERNS=
 
@@ -150,7 +152,7 @@ testSnCG: testSnCG.cpp $(DEPS)
 ifdef WITH_CUDA
 	$(NVCC) $(NVCCFLAGS) -o testSnCG testSnCG.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
-	$(CC) -o testSnCG testSnCG.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+	$(CC) -o testSnCG testSnCG.cpp $(CNINE_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 endif
 
 

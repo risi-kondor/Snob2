@@ -41,7 +41,7 @@ namespace Snob2{
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnVecB(const int b, const SnType& _type, const FILLTYPE& fill, const int _dev=0){
       for(auto& p:_type)
-	insert(p.first,new SnPartB(p.first,p.second,fill,_dev));
+	insert(p.first,new SnPartB(b,p.first,p.second,fill,_dev));
     }
     
     //template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
@@ -197,7 +197,7 @@ namespace Snob2{
 	    assert(sub.exists(mu));
 	    const SnPartB& source=sub[mu];
 	    int nrows=source.dims(0);
-	    target.view2D_block(roffs,coffs,nrows,ncols).add(source.view2D_block(0,sub_offs[mu],nrows,ncols));
+	    target.block3(0,roffs,coffs,-1,nrows,ncols).add(source.block3(0,0,sub_offs[mu],-1,nrows,ncols));
 	    sub_offs[mu]+=ncols;
 	    roffs+=nrows;
 	  });

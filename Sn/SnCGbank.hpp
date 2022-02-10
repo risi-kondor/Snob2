@@ -157,6 +157,8 @@ namespace Snob2{
 	cnine::Rtensor2_view V=p.view3().slice1(0);
 	rtensor M=V.transp()*(JM.view2())*V;
 	cnine::SymmetricEigendecomp eig1(M.view2());
+	cout<<V<<endl;
+	cout<<JM<<endl;
 	cout<<eig1.U<<endl;
 	cout<<eig1.D<<endl;
 	//cout<<p.get_rho().JucysMurphy(n-1)<<endl;

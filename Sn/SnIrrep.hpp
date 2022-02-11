@@ -50,7 +50,7 @@ namespace Snob2{
   public: // Access
 
     int getn() const{
-      return obj->d;
+      return obj->n;
     }
 
     int getd() const{
@@ -88,6 +88,7 @@ namespace Snob2{
       return R;
     }
 
+    /*
     rtensor JucysMurphy(const int k){
       rtensor R(cnine::dims(obj->d,obj->d),cnine::fill::zero);
       rtensor A(cnine::dims(obj->d,obj->d),cnine::fill::identity);
@@ -98,6 +99,11 @@ namespace Snob2{
 	R+=B;
       }
       return R;
+    }
+    */
+
+    rtensor JucysMurphy(const int k){
+      return obj->JucysMurphy(k);
     }
 
 

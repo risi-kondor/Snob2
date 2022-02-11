@@ -102,7 +102,7 @@ namespace Snob2{
     SnType CGproduct(const SnType& tau1, const SnType& tau2){
       SnType R;
       for(auto& p:tau1)
-	for(auto& q:tau1)
+	for(auto& q:tau2)
 	  R.add(CGproduct(p.first,q.first),p.second*q.second);
       return R;
     }
@@ -125,7 +125,7 @@ namespace Snob2{
     
 
     void learn(SnCGfactors& R, const IntegerPartition& lamb1, const IntegerPartition& lamb2){
-      cout<<"Learning transformation for "<<lamb1<<"*"<<lamb2<<endl;
+      cout<<"---- Learning transformation for "<<lamb1<<" * "<<lamb2<<" -> "<<CGproduct(lamb1,lamb2)<<endl;
 
       SnIrrep rho1(lamb1);
       SnIrrep rho2(lamb2);
@@ -136,39 +136,81 @@ namespace Snob2{
 
       SnProductRepresentation<SnIrrep,SnIrrep> rho(rho1,rho2);
       rtensor JM=rho.JucysMurphy(n);
+      printl("JM",JM);
+      //for(auto p: CGproduct(lamb1,lamb2)){
+      //cout<<"JM for "<<p.first<<":"<<endl;
+      //cout<<SnIrrep(p.first).JucysMurphy(p.first.getn())<<endl;
+      //}
 
       SnPartB p1=SnPartB::zero(d,lamb1,1);
       for(int i=0; i<d1; i++)
 	for(int j=0; j<d2; j++)
-	  for(int k=0; k<d1; k++)
-	    p1(i*d2+j,k,0)=1;
+	  //for(int k=0; k<d1; k++)
+	    p1(i*d2+j,i,0)=1;
 
       SnPartB p2=SnPartB::zero(d,lamb2,1);
       for(int i=0; i<d1; i++)
 	for(int j=0; j<d2; j++)
-	  for(int k=0; k<d2; k++)
-	    p2(i*d2+j,k,0)=1;
+	  //for(int k=0; k<d2; k++)
+	    p2(i*d2+j,j,0)=1;
       
       SnVecB xsub=SnVecB::down(p1);
       SnVecB ysub=SnVecB::down(p2);
       SnVecB sub=CGproduct(xsub,ysub);
+      cout<<sub.get_type()<<endl;
 
+      associative_container<IntegerPartition,rtensor> evectors;
+      associative_container<IntegerPartition,rtensor> evalues;
       for(auto p: sub){
 	cnine::Rtensor2_view V=p.view3().slice1(0);
 	rtensor M=V.transp()*(JM.view2())*V;
-	cnine::SymmetricEigendecomp eig1(M.view2());
-	cout<<V<<endl;
-	cout<<JM<<endl;
-	cout<<eig1.U<<endl;
-	cout<<eig1.D<<endl;
+	cnine::SymmetricEigendecomp eig(M.view2());
+	cout<<"Part "<<p.get_lambda()<<" "<<endl;
+	printl("V",V);
+	printl("M",M);
+	printl("U",eig.U);
+	printl("D",eig.D);
 	//cout<<p.get_rho().JucysMurphy(n-1)<<endl;
+	//cout<<p.get_rho().JucysMurphy(n-1)<<endl;
+	evectors.insert(p.get_lambda(),eig.U);
+	evalues.insert(p.get_lambda(),eig.D);
       }
 
+      SnType tau=CGproduct(lamb1,lamb2);
+      SnType taken;
+      for(auto p:tau){
+	cout<<"  "<<"Pulling to "<<p.first<<" with multiplicity "<<p.second<<endl;
+	rtensor JMlamb=SnIrrep(p.first).JucysMurphy(p.first.getn());
+	printl("JMlamb",JMlamb);
+	int offs=0;
+	p.first.foreach_sub([&](const IntegerPartition& mu){
+	    cout<<"    Source "<<mu<<endl;
+	    float target_eval=JMlamb.get_value(offs);
+	    SnPartB& _sub=sub[mu];
+	    rtensor& evals=evalues[mu];
+	    //cout<<evals<<endl;
+	    int dmu=_sub.getm();
+	    //cout<<"dmu="<<dmu<<endl;
+	    for(int k=0; k<p.second; k++){
+	      cout<<"Looking for eigenvalue "<<target_eval<<endl;
+	      int i=0; while(i<dmu && abs(evals.get_value(i)-target_eval)>0.001){i++;}
+	      if(i==dmu){cout<<"Panic: eigenvalue not found!"<<endl; exit(-1);}
+	      cout<<"Found."<<endl;
+	      R[mu].view2().slice0(taken[mu]).set(evectors[mu].view2().slice0(i)); // or slice1??
+	      evals.set(i,1234567);
+	      taken[mu]++;
+	    }
+	    offs+=_sub.getd();
+	  });
+      }
+
+      cout<<"---- end learning"<<endl;
     }
 
 
     SnVec CGproduct(const SnVec& x, const SnVec& y, const string indent=""){
       SnVec R=SnVec::zero(CGproduct(x.get_type(),y.get_type()));
+      //cout<<indent<<x.get_type()<<"*"<<y.get_type()<<"="<<CGproduct(x.get_type(),y.get_type())<<endl;
       add_CGprod(R,x,y,indent);
       return R;
     }
@@ -183,17 +225,18 @@ namespace Snob2{
 
 
     void add_CGprod(SnVec& R, const SnVec& x, const SnVec& y, const string indent=""){
-      cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;)
       SnType offs;
       for(auto p:x.parts)
 	for(auto q:y.parts){
 	  accumulate_CGprod(R,offs,*p,*q,indent+"  ");
 	}
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"."<<endl;)
     }
 
 
     void accumulate_CGprod(SnVec& R, SnType& offs, const SnPart& x, const SnPart& y, const string indent=""){
-      cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;)
       const int n=x.getn();
       assert(y.getn()==n);
 
@@ -204,6 +247,7 @@ namespace Snob2{
 	  for(int j=0; j<J; j++)
 	    R.parts[0]->inc(0,i*J+j,x(0,i)*y(0,j));
 	offs[IntegerPartition({1})]+=I*J;
+	SNOB2_CGBANK_DEBUG(cout<<indent<<"."<<endl;)
 	return;
       }
     
@@ -218,7 +262,8 @@ namespace Snob2{
 	sub_tilde.parts.insert(mu, new SnPart(SnIrrep(mu),(*sub.parts[mu])*(*p)));
       }
       
-      R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));
+      R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()),indent+"  ");
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"."<<endl;)
     }
 
 
@@ -245,17 +290,18 @@ namespace Snob2{
 
 
     void add_CGprod(SnVecB& R, const SnVecB& x, const SnVecB& y, const string indent=""){
-      cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"Multiply("<<x.get_type()<<","<<y.get_type()<<") into "<<R.get_type()<<endl;)
       SnType offs;
       for(auto p:x)
 	for(auto q:y){
 	  accumulate_CGprod(R,offs,p,q,indent+"  ");
 	}
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"."<<endl;)
     }
 
 
     void accumulate_CGprod(SnVecB& R, SnType& offs, const SnPartB& x, const SnPartB& y, const string indent=""){
-      cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"Accumulate("<<x.get_lambda()<<","<<y.get_lambda()<<") into "<<R.get_type()<<" with offset "<<offs<<endl;)
       const int nb=sameb(R,x,y);
       const int n=x.getn();
       assert(y.getn()==n);
@@ -269,6 +315,7 @@ namespace Snob2{
 	      R.first().inc(b,0,i*J+j,x(b,0,i)*y(b,0,j));
 	}
 	offs[IntegerPartition({1})]+=I*J;
+	SNOB2_CGBANK_DEBUG(cout<<indent<<"."<<endl;)
 	return;
       }
     
@@ -283,7 +330,8 @@ namespace Snob2{
 	sub_tilde.insert(mu, new SnPartB(SnIrrep(mu),sub[mu]*(*p)));
       }
 
-      R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()));
+      R.accumulate_up(offs,sub_tilde,CGproduct(x.get_lambda(),y.get_lambda()),indent+"  ");
+      SNOB2_CGBANK_DEBUG(cout<<indent<<"."<<endl;)
     }
 
 

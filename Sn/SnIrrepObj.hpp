@@ -11,6 +11,8 @@
 #ifndef _SnIrrepObj
 #define _SnIrrepObj
 
+#include "associative_container.hpp"
+
 #include "IntegerPartition.hpp"
 #include "ContiguousCycle.hpp"
 #include "RtensorObj.hpp"
@@ -31,8 +33,9 @@ namespace Snob2{
     int d;
     IntegerPartition lambda;
     vector<YoungTableau*> tableaux;
-    vector<SnIrrepObj*> ancestors;
-    vector<SnIrrepObj*> descendents;
+    mutable associative_container<int,rtensor> YJM;
+    //vector<SnIrrepObj*> ancestors; 
+    //vector<SnIrrepObj*> descendents;
     //SnClassFunction chi;
 
     mutable int* YORt=nullptr;
@@ -340,7 +343,27 @@ namespace Snob2{
     }
 
 
-  public:
+  public: // ---- YJM ----------------------------------------------------------------------------------------
+
+
+    const rtensor& JucysMurphy(const int k) const{
+      assert(k<=n);
+      if(YJM.exists(k)) return YJM[k];
+      rtensor R(cnine::dims(d,d),cnine::fill::zero);
+      rtensor A(cnine::dims(d,d),cnine::fill::identity);
+      for(int i=k-1; i>=1; i--){
+	apply_left(A,i);
+	rtensor B(A);
+	apply_left_inv(B,ContiguousCycle(i+1,k));
+	R+=B;
+      }
+      YJM.insert(k,new rtensor(R.view2().diag()));
+      return YJM[k];
+    }
+
+
+  public: // ---- I/O ----------------------------------------------------------------------------------------
+
 
     string str(const string indent="") const{
       return "SnIrrepObj("+lambda.str()+")";

@@ -39,7 +39,7 @@ int main(int argc, char** argv){
   Sn G(n);
   IntegerPartition lambda({n-1,1});
 
-  cout<<SnCGcoefficient(lambda,lambda,{n-2,2})<<endl<<endl;
+  cout<<SnCGcoefficient(lambda,lambda,{n-1,1})<<endl<<endl;
 
   SnPart x=SnPart::gaussian({n-1,1},1);
   printl("x",x);

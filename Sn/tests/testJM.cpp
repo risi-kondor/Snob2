@@ -42,6 +42,14 @@ int main(int argc, char** argv){
   rtensor B=rho2.JucysMurphy(k);
   cout<<B.str("",0.0001)<<endl;
 
+  /*
+  SnIrrep rho3({3,1});
+  rtensor A3=rho3(Transposition(1,4));
+  for(int i=2; i<=3; i++)
+    A3+=rho3(Transposition(i,4));
+  cout<<A3<<endl;
+  */
+
 }
 
   /*

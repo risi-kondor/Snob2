@@ -49,6 +49,8 @@ using namespace std;
 #endif 
 
 
+#define SNOB2_CGBANK_DEBUG(cmd)
+//#define SNOB2_CGBANK_DEBUG(cmd) cmd;
 
 namespace Snob2{
 

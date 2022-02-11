@@ -53,8 +53,6 @@ namespace Snob2{
   public:
 
     rtensor JucysMurphy(const int k){
-      //int d0=rho0.dim();
-      //int d1=rho1.dim();
       rtensor R(cnine::dims(d,d),cnine::fill::zero);
       rtensor A(cnine::dims(d,d),cnine::fill::identity);
       for(int i=k-1; i>=1; i--){

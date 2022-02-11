@@ -184,7 +184,8 @@ namespace Snob2{
     }
     */
 
-    void accumulate_up(SnType& offs, const SnVecB& sub, const SnType& tau){
+    void accumulate_up(SnType& offs, const SnVecB& sub, const SnType& tau, const string indent=""){
+      //cout<<indent<<"Accumulate up "<<sub.get_type()<<" into "<<get_type()<<endl;
       SnType sub_offs;
       for(auto& p:tau){
 	IntegerPartition lamb=p.first;
@@ -196,13 +197,14 @@ namespace Snob2{
 	lamb.foreach_sub([&](const IntegerPartition& mu){
 	    assert(sub.exists(mu));
 	    const SnPartB& source=sub[mu];
-	    int nrows=source.dims(0);
+	    int nrows=source.getd();
 	    target.block3(0,roffs,coffs,-1,nrows,ncols).add(source.block3(0,0,sub_offs[mu],-1,nrows,ncols));
 	    sub_offs[mu]+=ncols;
 	    roffs+=nrows;
 	  });
 	offs[lamb]+=ncols;
       }
+      //cout<<indent<<"."<<endl;
     }
 
 

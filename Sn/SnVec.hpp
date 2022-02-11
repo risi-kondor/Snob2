@@ -161,10 +161,8 @@ namespace Snob2{
 	parts[i]->add(*y.parts[i]);
     }
 
-    void accumulate_up(SnType& offs, const SnVec& sub, const SnType& tau){
-      //cout<<get_type()<<endl;
-      //cout<<sub.get_type()<<endl;
-      //cout<<tau<<endl<<endl;
+    void accumulate_up(SnType& offs, const SnVec& sub, const SnType& tau, const string indent=""){
+      //cout<<indent<<"Accumulate up SnVec of type "<<sub.get_type()<<" into "<<get_type()<<" with mask "<<tau<<endl;
       SnType sub_offs;
       for(auto& p:tau){
 	IntegerPartition lamb=p.first;
@@ -177,12 +175,13 @@ namespace Snob2{
 	    assert(sub.parts.exists(mu));
 	    SnPart& source=*sub.parts[mu];
 	    int nrows=source.dims(0);
-	    target.view2D_block(roffs,coffs,nrows,ncols).add(source.view2D_block(0,sub_offs[mu],nrows,ncols));
+	    target.block2(roffs,coffs,nrows,ncols).add(source.block2(0,sub_offs[mu],nrows,ncols));
 	    sub_offs[mu]+=ncols;
 	    roffs+=nrows;
 	  });
 	offs[lamb]+=ncols;
       }
+      //cout<<indent<<"."<<endl;
     }
 
 

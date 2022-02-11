@@ -178,6 +178,7 @@ namespace Snob2{
       return irreps;
     }
 
+    /* depricated 
     void make_ancestors(SnIrrepObj& irrep) const{
       if(irrep.ancestors.size()>0) return;
       assert(Snminus1);
@@ -193,6 +194,7 @@ namespace Snob2{
       if(lamb.k>0)
 	irrep.ancestors.push_back(Snminus1->get_irrep(lamb));
     }
+    */ 
 
     /*
     SnModule get_module(){

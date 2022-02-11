@@ -68,6 +68,11 @@ namespace Snob2{
   public: // ---- In-place operations ------------------------------------------------------------------------
 
 
+    void apply(const cnine::Rtensor3_view& A, const int tau) const{
+      rho0.apply_transp(split1(A,d0,d1).fuse23(),tau);
+      rho1.apply_transp(split1(A,d0,d1).fuse01(),tau);
+    }
+
     void apply_transp(const cnine::Rtensor3_view& A, const int tau) const{
       rho0.apply_transp(split1(A,d0,d1).fuse23(),tau);
       rho1.apply_transp(split1(A,d0,d1).fuse01(),tau);

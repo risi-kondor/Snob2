@@ -172,6 +172,13 @@ namespace Snob2{
       return *this;
     }
 
+    SnVecB apply(const Transposition& x){
+      SnVecB R;
+      for(auto p: *this)
+	R.insert(p.get_lambda(),p.apply(x));
+      return R;
+    }
+
 
   public: // ---- Cumulative operations ----------------------------------------------------------------------
 

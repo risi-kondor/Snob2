@@ -301,13 +301,19 @@ namespace Snob2{
 
     SnPartB apply(const ContiguousCycle& cyc) const{
       SnPartB R(*this);
-      irrep->apply(view3(),cyc);
+      irrep->apply(R.view3(),cyc);
       return R;
     }
 
     SnPartB& apply_inplace(const ContiguousCycle& cyc){
       irrep->apply(view3(),cyc);
       return *this;
+    }
+
+    SnPartB apply(const Transposition& x) const{
+      SnPartB R(*this);
+      irrep->apply(R.view3(),x);
+      return R;
     }
 
 

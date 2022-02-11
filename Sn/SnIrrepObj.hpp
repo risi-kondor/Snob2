@@ -199,6 +199,16 @@ namespace Snob2{
     }
 
 
+    void apply(const cnine::Rtensor3_view& A, const Transposition& x) const{
+      int a=std::min(x.i,x.j);
+      int b=std::max(x.i,x.j);
+      for(int i=b-1; i>=a; i--)
+	  apply(A,i);
+      for(int i=a+1; i<b; i++)
+	  apply(A,i);
+    }
+
+
     void apply(const cnine::Rtensor3_view& T, const int tau) const{
       SNOB2_ASSERT(T.n1==d,"View wrong size");
       const int A=T.n0;

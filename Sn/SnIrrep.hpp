@@ -119,6 +119,10 @@ namespace Snob2{
       obj->apply(A,cyc);
     }
 
+    void apply(const cnine::Rtensor3_view& A, const Transposition& x) const{
+      obj->apply(A,x);
+    }
+
 
   public:
 

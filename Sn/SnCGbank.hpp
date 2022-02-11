@@ -120,6 +120,7 @@ namespace Snob2{
       }
       learn(*R, lambda1,lambda2);
       factors[lambdas]=R;
+      CheckCG(lambda1,lambda2);
       return *R;
     }
     
@@ -137,10 +138,12 @@ namespace Snob2{
       SnProductRepresentation<SnIrrep,SnIrrep> rho(rho1,rho2);
       rtensor JM=rho.JucysMurphy(n);
       printl("JM",JM);
-      //for(auto p: CGproduct(lamb1,lamb2)){
-      //cout<<"JM for "<<p.first<<":"<<endl;
-      //cout<<SnIrrep(p.first).JucysMurphy(p.first.getn())<<endl;
-      //}
+      cnine::SymmetricEigendecomp eig(JM.view2());
+      cout<<"evals: "<<eig.D<<endl;
+      for(auto p: CGproduct(lamb1,lamb2)){
+	cout<<"JM for "<<p.first<<":"<<endl;
+	cout<<SnIrrep(p.first).JucysMurphy(p.first.getn())<<endl;
+      }
 
       SnPartB p1=SnPartB::zero(d,lamb1,1);
       for(int i=0; i<d1; i++)
@@ -182,7 +185,12 @@ namespace Snob2{
 	cout<<"  "<<"Pulling to "<<p.first<<" with multiplicity "<<p.second<<endl;
 	rtensor JMlamb=SnIrrep(p.first).JucysMurphy(p.first.getn());
 	printl("JMlamb",JMlamb);
+	int dlamb=SnIrrep(p.first).getd();
+	//associative_container<IntegerPartition,rtensor> retractor;
+	rtensor pullback;
+
 	int offs=0;
+	bool first_mu=true;
 	p.first.foreach_sub([&](const IntegerPartition& mu){
 	    cout<<"    Source "<<mu<<endl;
 	    float target_eval=JMlamb.get_value(offs);
@@ -196,10 +204,31 @@ namespace Snob2{
 	      int i=0; while(i<dmu && abs(evals.get_value(i)-target_eval)>0.001){i++;}
 	      if(i==dmu){cout<<"Panic: eigenvalue not found!"<<endl; exit(-1);}
 	      cout<<"Found."<<endl;
-	      R[mu].view2().slice0(taken[mu]).set(evectors[mu].view2().slice0(i)); // or slice1??
+	      R[mu].view2().slice1(taken[mu]).set(evectors[mu].view2().slice1(i));
 	      evals.set(i,1234567);
 	      taken[mu]++;
 	    }
+
+	    if(first_mu){
+	      pullback=(sub[mu].view3().slice1(0))*(R[mu].block2(0,taken[mu]-p.second,-1,p.second));
+	      rho.apply(split0(pullback.view2(),1,d),n-1);
+	      first_mu=false;
+	    }else{
+	      rtensor M=(sub[mu].view3().slice1(0).transp())*(pullback.view2());
+	      rtensor B=(R[mu].block2(0,taken[mu]-p.second,-1,p.second).transp())*M;
+	      cout<<"-----> "<<B<<endl;
+	      rtensor A=rtensor::zero({1,dlamb,p.second});
+	      for(int i=0; i<p.second; i++) A.set(0,0,i,1);
+	      SnIrrep(p.first).apply(A.view3(),n-1);
+	      cout<<"======> "<<A.view3().slice0(0).slice0(offs)<<endl;
+	      //cout<<R[mu].block2(0,taken[mu]-p.second,-1,p.second)<<endl<<endl;
+	      //cout<<(B.view2().transp()*(1.0/A.get_value(0,offs,0))).view2()<<endl;
+	      if(abs(A.get_value(0,offs,0))>0.0001){
+		rtensor C=R[mu].block2(0,taken[mu]-p.second,-1,p.second)*(B.view2().transp()*(1.0/A.get_value(0,offs,0)));
+		R[mu].block2(0,taken[mu]-p.second,-1,p.second).set(C.view2());
+	      }
+	    }
+
 	    offs+=_sub.getd();
 	  });
       }
@@ -267,7 +296,21 @@ namespace Snob2{
     }
 
 
+    void CheckCG(const IntegerPartition& lamb1, const IntegerPartition& lamb2){
+      cout<<endl<<"---- Checking "<<lamb1<<" * "<<lamb2<<endl<<endl;
+      int n=lamb1.getn();
+      SnPartB x=SnPartB::gaussian(1,lamb1,1);
+      SnPartB y=SnPartB::gaussian(1,lamb2,1);
+      
+      for(int i=1; i<n; i++){
+	cout<<">>>>>>>>"<<Transposition(i)<<endl;
+	//cout<<x<<y<<x.apply(Transposition(i))<<y.apply(Transposition(i))<<endl<<endl;
+	//cout<<CGproduct(x,y)<<endl;
+	cout<<CGproduct(x.apply(Transposition(i)),y.apply(Transposition(i)));
+	cout<<CGproduct(x,y).apply(Transposition(i))<<endl;
+      }
 
+    }
 
  
 

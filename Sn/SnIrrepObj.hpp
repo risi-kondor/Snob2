@@ -141,6 +141,15 @@ namespace Snob2{
 	apply_left(A,i);
     }
 
+    void apply_left(rtensor& A, const Transposition& x) const{
+      int a=std::min(x.i,x.j);
+      int b=std::max(x.i,x.j);
+      for(int i=b-1; i>=a; i--)
+	  apply_left(A,i);
+      for(int i=a+1; i<b; i++)
+	  apply_left(A,i);
+    }
+
     void apply_left(rtensor& A, const int tau) const{
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       const int J=A.get_dim(1);

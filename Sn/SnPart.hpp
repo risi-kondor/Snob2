@@ -236,6 +236,12 @@ namespace Snob2{
       return *this;
     }
 
+    SnPart apply(const Transposition& x) const{
+      SnPart R(*this);
+      irrep->apply_left(R,x);
+      return R;
+    }
+
 
   public:
 

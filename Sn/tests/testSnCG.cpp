@@ -35,21 +35,30 @@ int main(int argc, char** argv){
 
   Snob2_session session;
 
-  int n=4;
+  int n=6;
   Sn G(n);
-  IntegerPartition lambda({n-1,1});
+  IntegerPartition lambda({n-2,2});
 
   cout<<SnCGcoefficient(lambda,lambda,{n-1,1})<<endl<<endl;
 
-  SnPart x=SnPart::gaussian({n-1,1},1);
+  SnPart x=SnPart::gaussian(lambda,1);
   printl("x",x);
 
-  SnPart y=SnPart::gaussian({n-1,1},1);
+  SnPart y=SnPart::gaussian(lambda,1);
   printl("y",y);
 
   SnVec z=_sncgbank->CGproduct(x,y);
+
+  cout<<"-----------------------------------------------------"<<endl;
   printl("z",z);
 
+  Transposition tau(n-1);
+
+  SnPart xr=x.apply(tau);
+  SnPart yr=y.apply(tau);
+  printl("zr",_sncgbank->CGproduct(xr,yr));
+  printl("zrr",z.apply(tau));
+  
 
   /*
   SnVec C=SnPartProduct(A,B);

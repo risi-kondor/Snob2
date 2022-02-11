@@ -133,6 +133,14 @@ namespace Snob2{
       return R;
     }
 
+    SnVec apply(const Transposition& x) const{
+      SnVec R;
+      for(auto p: parts){
+	R.parts.push_back(new SnPart(p->apply(x)));
+      }
+      return R;
+    }
+
     SnVec& apply_inplace(const SnElement& sigma){
       for(auto p:parts)
 	p->apply_inplace(sigma);

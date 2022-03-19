@@ -39,7 +39,7 @@ using namespace Snob2;
 int main(int argc, char** argv){
   Snob2_session session;
 
-  const int n=5;
+  const int n=4;
   IntegerPartitions Lambda(n);
 
   for(auto p: Lambda) 

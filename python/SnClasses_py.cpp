@@ -151,7 +151,21 @@ pybind11::class_<SnClassFunction>(m,"SnClassFunction",
     .def("str",&Sn::str,py::arg("indent")="")
     .def("__str__",&Sn::str,py::arg("indent")="");
 
+  pybind11::class_<SnOverSm>(m,"SnOverSm")
+    .def(pybind11::init<int, int>())
 
+    .def("getn",&SnOverSm::getn)
+    .def("getm",&SnOverSm::getm)
+    .def("order",&SnOverSm::get_order)
+    .def("__len__",&SnOverSm::size)
+    
+    .def("identity",&SnOverSm::identity)
+    .def("element",&SnOverSm::element)
+    .def("__getitem__",&SnOverSm::element)
+    .def("index",&SnOverSm::index)
+
+    .def("str",&SnOverSm::str,py::arg("indent")="")
+    .def("__str__",&SnOverSm::str,py::arg("indent")="");
 
 pybind11::class_<SnType>(m,"SnType",
   "Class to store the type of an Sn vector")

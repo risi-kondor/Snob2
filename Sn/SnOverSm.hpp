@@ -94,6 +94,12 @@ namespace Snob2{
       return t/factorial(m);
     }
 
+  public:
+
+    string str(const string indent="") const{
+      return "SnOverSm("+to_string(n)+"," + to_string(m) + ")";
+    }
+
   };
 
 }

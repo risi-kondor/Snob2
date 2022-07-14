@@ -13,6 +13,8 @@ cwd = os.getcwd()
 setup(name='Snob2',
       ext_modules=[CppExtension('Snob2', ['Snob2_py.cpp'],
                                 include_dirs=[cwd+'/../../cnine/include',
+                                              cwd+'/../../cnine/objects/backendA',
+                                              cwd+'/../../cnine/objects/backendB',
                                               cwd+'/../../cnine/objects/scalar',
                                               cwd+'/../../cnine/objects/tensor',
                                               cwd+'/../../cnine/objects/tensor_views',

@@ -3,7 +3,9 @@ include $(ROOTDIR)/common.txt
 
 INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR) 
 
-TESTS= testIntegerPartition testYoungTableau
+#TESTS= testIntegerPartition testYoungTableau
+
+TESTS=$(patsubst %.cpp,%,$(wildcard *.cpp))
 
 ifdef WITH_CUDA
 endif 
@@ -23,26 +25,12 @@ endif
 
 
 
-# -------------------------------------------------------------------------------------------------------------
-
-
-testIntegerPartition: testIntegerPartition.cpp $(DEPS) 
+$(TESTS): %: %.cpp
 ifdef WITH_CUDA
-	$(NVCC) $(NVCCFLAGS) -o testIntegerPartition testIntegerPartition.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+	$(NVCC) $(NVCCFLAGS) -o $@ $@.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
 else
-	$(CC) -o testIntegerPartition testIntegerPartition.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+	$(CC) -o $@ $@.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
 endif
-
-
-testYoungTableau: testYoungTableau.cpp $(DEPS) 
-ifdef WITH_CUDA
-	$(NVCC) $(NVCCFLAGS) -o testYoungTableau testYoungTableau.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
-else
-	$(CC) -o testYoungTableau testYoungTableau.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
-endif
-
-
-# -------------------------------------------------------------------------------------------------------------
 
 
 objects: $(OBJECTS) $(CUDA_OBJECTS)
@@ -59,5 +47,29 @@ anew: clean all
 
 
 
+
+
+
+
+# -------------------------------------------------------------------------------------------------------------
+
+
+#testIntegerPartition: testIntegerPartition.cpp $(DEPS) 
+#ifdef WITH_CUDA
+#	$(NVCC) $(NVCCFLAGS) -o testIntegerPartition testIntegerPartition.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+#else
+#	$(CC) -o testIntegerPartition testIntegerPartition.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+#endif
+
+
+#testYoungTableau: testYoungTableau.cpp $(DEPS) 
+#ifdef WITH_CUDA
+#	$(NVCC) $(NVCCFLAGS) -o testYoungTableau testYoungTableau.cpp $(CUDA_EXTERNS) $(CUDA_OBJECTS) $(CFLAGS) $(MACROS) $(INCLUDE) $(LIBS) 
+#else
+#	$(CC) -o testYoungTableau testYoungTableau.cpp $(CFLAGS) $(INCLUDE) $(LIBS) 
+#endif
+
+
+# -------------------------------------------------------------------------------------------------------------
 
 

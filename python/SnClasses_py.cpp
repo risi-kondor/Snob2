@@ -159,7 +159,7 @@ pybind11::class_<SnType>(m,"SnType",
   .def(pybind11::init<const IntegerPartition&, const int>(),"")
  
   .def("set",&SnType::set,"")
-  .def("add",&SnType::add,"")
+//.def("add",&SnType::add,"")
   .def("__setitem__",&SnType::set,"")
   .def("__setitem__",[](SnType& obj, const vector<int>& v,const int x){
       obj.set(IntegerPartition(v),x);},"")

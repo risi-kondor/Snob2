@@ -282,7 +282,7 @@ namespace Snob2{
 	apply_left(A,i,beg,end);
     }
 
-    void apply_left(rtensor& A, const int tau, int beg, int end) const{
+    void apply_left(rtensor& A, const int tau, int beg, int end) const{ // GPU
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       //const int J=A.get_dim(1);
       computeYOR();

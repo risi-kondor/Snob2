@@ -56,9 +56,9 @@ namespace Snob2{
       rtensor R(cnine::dims(d,d),cnine::fill::zero);
       rtensor A(cnine::dims(d,d),cnine::fill::identity);
       for(int i=k-1; i>=1; i--){
-	apply_transp(split0(A.view2D(),1,d),i);
+	apply_transp(split0(A.view2(),1,d),i);
 	rtensor B(A);
-	apply(split0(B.view2D(),1,d),ContiguousCycle(k,i+1));
+	apply(split0(B.view2(),1,d),ContiguousCycle(k,i+1));
 	R+=B;
       }
       return R;

@@ -7,6 +7,7 @@ CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendB
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/scalar 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_views 
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_views/functions 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array/cell_ops 
 

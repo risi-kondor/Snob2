@@ -160,8 +160,12 @@ namespace Snob2{
       return dims(2);
     }
 
-   int getd() const{
+    int getd() const{
       return dims(0);
+    }
+
+    cnine::Rtensor3_view view3() const{
+      return RtensorA::view3();
     }
 
     IntegerPartition get_lambda() const{

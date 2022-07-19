@@ -91,16 +91,3 @@ namespace Snob2{
 
 #endif
 
-
-    /*
-    SnPart uptransform(const SnVec& v) const{
-      SnPart P(irrep,m,cnine::fill::zero);
-      for(auto p:blocks){
-	ClausenFFTblockTmplt& b=*p;
-	P.add_to_block(b.ioffs,b.joffs,*v.parts[b.subix]);
-      }
-      //cout<<P<<endl;
-      return P;
-    }
-    */
-

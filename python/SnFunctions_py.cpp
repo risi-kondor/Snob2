@@ -75,8 +75,14 @@ pybind11::class_<SnOverSmFunction>(m,"SnOverSmFunction",
   
   .def("__len__",&SnOverSmFunction::size,"Return the size of the function, i.e., the number of group elements.")
   
-//.def("__getitem__",static_cast<float(SnOverSmFunction::*)(const int) const>(&SnOverSmFunction::get_value))
-//.def("__getitem__",static_cast<float(SnOverSmFunction::*)(const SnElement&) const>(&SnOverSmFunction::get_value))
+  .def("__getitem__",static_cast<float(SnOverSmFunction::*)(const int) const>(&SnOverSmFunction::get_value))
+  .def("__getitem__",static_cast<float(SnOverSmFunction::*)(const SnElement&) const>(&SnOverSmFunction::get_value))
+  .def("__getitem__",[](const SnOverSmFunction& obj, const vector<int>& v){
+      return obj.get_value(SnElement(v));})
+  .def("__setitem__",static_cast<SnOverSmFunction&(SnOverSmFunction::*)(const int, const float x)>(&SnOverSmFunction::set_value))
+  .def("__setitem__",static_cast<SnOverSmFunction&(SnOverSmFunction::*)(const SnElement&, const float x)>(&SnOverSmFunction::set_value))
+  .def("__setitem__",[](SnOverSmFunction& obj, const vector<int>& v, const float x){
+      return obj.set_value(SnElement(v),x);})
 
 //  .def("left_translate",&SnOverSmFunction::left_translate)
 //  .def("right_translate",&SnOverSmFunction::right_translate)

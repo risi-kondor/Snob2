@@ -20,6 +20,7 @@
     .def_static("identity",static_cast<SnElement (*)(int)>(&SnElement::Identity),"Return the identity element of Sn.")
 
     .def("getn",&SnElement::getn,"Return n.")
+    .def("__len__",&SnElement::getn,"Return n.")
     .def("__getitem__",static_cast<int(SnElement::*)(const int) const>(&SnElement::operator()))
     .def("__setitem__",&SnElement::set_value)
 

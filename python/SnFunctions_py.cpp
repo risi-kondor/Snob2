@@ -132,6 +132,12 @@ pybind11::class_<SnVec>(m,"SnVec",
   .def_static("gaussian",static_cast<SnVec (*)(const SnType&, const int)>(&SnVec::gaussian),
     py::arg("lambd"), py::arg("dev")=0)
 
+  .def("__getitem__",[](const SnVec& vec, const IntegerPartition& lambda){
+    return *vec.parts[lambda];})
+
+  .def("__setitem__",[](const SnVec& vec, const IntegerPartition& lambda, const SnPart& part){
+    return *vec.parts[lambda]=part;})
+
   .def("apply",static_cast<SnVec (SnVec::*)(const SnElement&) const>(&SnVec::apply))
   .def("apply_inplace",static_cast<SnVec& (SnVec::*)(const SnElement&)>(&SnVec::apply_inplace))
 

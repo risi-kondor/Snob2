@@ -164,6 +164,8 @@ pybind11::class_<SnType>(m,"SnType",
   .def("__setitem__",&SnType::set,"")
   .def("__setitem__",[](SnType& obj, const vector<int>& v,const int x){
       obj.set(IntegerPartition(v),x);},"")
+  .def("__getitem__",static_cast<int(SnType::*)(const IntegerPartition&) const>(&SnType::operator()),"")
+  .def("get_map",static_cast<map<IntegerPartition,int> &(SnType::*)()>(&SnType::get_map),"")
   
   .def("__str__",&SnType::str,py::arg("indent")="","Print the SnType to string.");
 

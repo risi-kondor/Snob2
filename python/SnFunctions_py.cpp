@@ -134,9 +134,10 @@ pybind11::class_<SnVec>(m,"SnVec",
 
   .def("__getitem__",[](const SnVec& vec, const IntegerPartition& lambda){
     return *vec.parts[lambda];})
-
   .def("__setitem__",[](const SnVec& vec, const IntegerPartition& lambda, const SnPart& part){
     return *vec.parts[lambda]=part;})
+  .def("get_type",static_cast<SnType (SnVec::*)() const>(&SnVec::get_type))
+  .def("get_n",static_cast<int (SnVec::*)() const>(&SnVec::getn))
 
   .def("apply",static_cast<SnVec (SnVec::*)(const SnElement&) const>(&SnVec::apply))
   .def("apply_inplace",static_cast<SnVec& (SnVec::*)(const SnElement&)>(&SnVec::apply_inplace))

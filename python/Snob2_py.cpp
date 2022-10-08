@@ -89,6 +89,7 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
     .def("__getitem__",static_cast<int(IntegerPartition::*)(const int)const>(&IntegerPartition::operator()),
       "Return the the i'th part, p_i.")
     .def("__setitem__",&IntegerPartition::set, "Set the i'th part to x")
+    .def("__eq__",&IntegerPartition::operator==)
     //.def("str",&IntegerPartition::str,py::arg("indent")="")
     .def("__str__",&IntegerPartition::str,py::arg("indent")="",
       "Print the integer partition to string.");

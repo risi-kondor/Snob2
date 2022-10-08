@@ -90,6 +90,9 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
       "Return the the i'th part, p_i.")
     .def("__setitem__",&IntegerPartition::set, "Set the i'th part to x")
     .def("__eq__",&IntegerPartition::operator==)
+    .def("__hash__",[](const IntegerPartition& p){
+      hash<Snob2::IntegerPartition> h;
+      return h(p);})
     //.def("str",&IntegerPartition::str,py::arg("indent")="")
     .def("__str__",&IntegerPartition::str,py::arg("indent")="",
       "Print the integer partition to string.");

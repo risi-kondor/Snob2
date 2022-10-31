@@ -109,6 +109,12 @@ pybind11::class_<SnPart>(m,"SnPart",
   .def("apply",static_cast<SnPart (SnPart::*)(const SnElement&) const>(&SnPart::apply))
   .def("apply_inplace",static_cast<SnPart& (SnPart::*)(const SnElement&)>(&SnPart::apply_inplace))
 
+  .def("__getitem__",static_cast<float(SnPart::*)(const Gindex& )const>(&SnPart::get_value))
+  .def("__getitem__",[](const SnPart& obj, const vector<int> v){return obj.get_value(Gindex(v));})
+  
+  .def("__setitem__",[](SnPart& obj, const Gindex& ix, const float x){obj.set_value(ix,x);})
+  .def("__setitem__",[](SnPart& obj, const vector<int> v, const float x){obj.set_value(Gindex(v),x);})
+
   .def("__str__",&SnPart::str,py::arg("indent")="");
 
 

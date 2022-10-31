@@ -75,6 +75,9 @@
 
     .def("get_dim",&SnIrrep::dim,"Return the dimension of the irrep")
     .def("getn",&SnIrrep::getn,"Return the number of elements of each permutation")
+    .def("get_lambda",[](const SnIrrep& obj){
+      return obj.lambda;
+    })
     .def("__lt__",&SnIrrep::operator<)
 
     .def("__getitem__",static_cast<rtensor(SnIrrep::*)(const SnElement&)const>(&SnIrrep::operator()))

@@ -25,13 +25,13 @@ namespace Snob2{
 
     const int n;
     int N;
-    SnObj* G;
+    // SnObj* G;
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnFunction(int _n, const FILLTYPE& fill, const int _dev=0):
       rtensor({_snbank->get_Sn(_n)->order},fill,_dev), n(_n){
-      G=_snbank->get_Sn(n);
-      N=G->order;
+      //G=_snbank->get_Sn(n);
+      N=_snbank->get_Sn(n)->order;
     }
 
     SnFunction(const int _n):
@@ -64,16 +64,18 @@ namespace Snob2{
     SnFunction(const SnFunction& x):
       rtensor(x),
       n(x.n),
-      N(x.N),
-      G(x.G){
+      N(x.N)
+	      //,G(x.G)
+    {
       cout<<"SnFunction copied"<<endl;
     }
 
     SnFunction(SnFunction&& x):
       rtensor(std::move(x)),
       n(x.n),
-      N(x.N),
-      G(x.G){
+      N(x.N)
+	      //,G(x.G)
+    {
       cout<<"SnFunction moved"<<endl;
     }
 
@@ -84,8 +86,8 @@ namespace Snob2{
     SnFunction(const int _n, const rtensor& M): 
       rtensor(M),
       n(_n),
-      N(M.dims(0)),
-      G(_snbank->get_Sn(_n)){}
+      N(M.dims(0))//,G(_snbank->get_Sn(_n))
+    {}
 
 
   public: // ---- Access -------------------------------------------------------------------------------------

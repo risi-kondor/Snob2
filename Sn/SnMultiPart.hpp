@@ -160,8 +160,12 @@ namespace Snob2{
       return dims(2);
     }
 
-   int getd() const{
+    int getd() const{
       return dims(0);
+    }
+
+    cnine::Rtensor3_view view3() const{
+      return RtensorA::view3();
     }
 
     IntegerPartition get_lambda() const{
@@ -176,7 +180,14 @@ namespace Snob2{
   public: // ---- Operations ---------------------------------------------------------------------------------
 
 
+    void set_block_multi(const int ioffs, const int joffs, const SnMultiPart& M){
+      view3().fuse01().block(ioffs*N,joffs,M.dim(0)*M.dim(1),M.dim(2)).set(M.view3().fuse01());
+    }
+
     void add_to_block_multi(const int ioffs, const int joffs, const SnMultiPart& M){
+      //block3(ioffs,0,joffs,M.dim(0),M.dim(1),M.dim(2)).set(M.view3());
+      view3().fuse01().block(ioffs*N,joffs,M.dim(0)*M.dim(1),M.dim(2)).add(M.view3().fuse01());
+      /*
       int m=getm();
       int subm=M.getm();
       int I=M.dim(0);
@@ -184,17 +195,20 @@ namespace Snob2{
 	for(int i=0; i<I; i++)
 	  for(int j=0; j<subm; j++)
 	    inc(i+ioffs,s,j+joffs,M.get_value(i,s,j));
-      //inc(i+ioffs,s*m+j+joffs,M.get_value(i,s*subm+j));
+      */
     }
 
     void add_block_to_multi(const int ioffs, const int joffs, SnMultiPart& M, float c=1.0) const{
       assert(getN()==M.getN());
       int I=M.dim(0);
       int J=M.getm();
+      M.view3().fuse01().add(view3().fuse01().block(ioffs*N,joffs,M.dim(0)*N,M.dim(2)),c);
+      /*
       for(int s=0; s<N; s++)
 	for(int i=0; i<I; i++)
 	  for(int j=0; j<J; j++)
 	    M.inc(i,s,j,get_value(i+ioffs,s,j+joffs)*c);
+      */
     }
  
     /*
@@ -214,11 +228,14 @@ namespace Snob2{
       //cout<<"Reducing "<<endl<<*this<<"."<<endl;
       //cout<<n<<newN<<m<<endl;
       SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
+      split1(view3(),newN,n).reduce2_destructively_into(R.view3());
+      /*
       for(int s=0; s<newN; s++)
 	for(int t=0; t<n; t++)
 	  for(int i=0; i<I; i++)
 	    for(int j=0; j<m; j++)
 	      R.inc(i,s,j,get_value(i,(s*n+t),j));
+      */
       return R;
     }
 
@@ -228,11 +245,14 @@ namespace Snob2{
       int m=getm();
       int I=dim(0);
       SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
+      split1(R.view3(),N,_N).broadcast2(view3());
+      /*
       for(int s=0; s<N; s++)
 	for(int t=0; t<_N; t++)
 	  for(int i=0; i<I; i++)
 	    for(int j=0; j<m; j++)
 	      R.inc(i,s*_N+t,j,get_value(i,s,j));
+      */
       return R;
     }
 

@@ -102,11 +102,16 @@ namespace Snob2{
       SnMultiVec w;
       for(auto p: parts){
 	auto q=new SnMultiPart(p->uptransform(v));
+	for(int j=0; j<n; j++){
+	  q->irrep->apply_left(split1(q->view3(),newN,n).slice2(j),ContiguousCycle(n-j,n));
+	}
+	/* 
 	for(int i=0; i<newN; i++)
 	  for(int j=0; j<n; j++){
 	    //cout<<i<<j<<endl;
 	    q->apply_inplace(ContiguousCycle(n-j,n),i*n+j);
 	  }
+	*/
 	w.parts.push_back(q);
       }
       return w.reduce();
@@ -119,10 +124,17 @@ namespace Snob2{
 
       SnMultiVec VV=V.broadcast(n+1);
 
+      for(auto q: VV.parts){
+	for(int j=0; j<n+1; j++)
+	  q->irrep->apply_left(split1(q->view3(),N,n+1).slice2(j),ContiguousCycle(n+1,n+1-j));
+      }
+
+      /*
       for(int c=0; c<N; c++)
 	for(int i=0; i<n+1; i++)
 	  VV.apply_inplace_inv(ContiguousCycle(n+1-i,n+1),c*(n+1)+i);
-      
+      */
+
       SnMultiVec R;
       for(int i=0; i<parts.size(); i++)
 	R.parts.push_back(new SnMultiPart(newN,parts[i]->irrep,parts[i]->m,cnine::fill::zero,0));

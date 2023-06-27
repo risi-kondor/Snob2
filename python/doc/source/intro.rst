@@ -1,6 +1,7 @@
-Snob2 is a C++ package with a Python interface 
+Snob2 is a C++ package 
 for computing the representations of the symmetric group :math:`\mathbb{S}_n` and 
-computing fast Fourier transforms on :math:`\mathbb{S}_n`.
+fast Fourier transforms on :math:`\mathbb{S}_n`.
+This document provides documentation for Snob2's PyTorch interface. 
 Snob2 is built on the **cnine** library which can be downloaded from https://github.com/risi-kondor/cnine.
 GPU functionality in Snob2 is under development but not yet enabled. 
 
@@ -10,8 +11,8 @@ GPU functionality in Snob2 is under development but not yet enabled.
 Snob2 is written by Risi Kondor at the University of Chicago and is released under the 
 `Mozilla public license v.2.0 <https://www.mozilla.org/en-US/MPL/2.0/>`_.   
 
-This document provides documentation for Snob2's Python interface. Not all features in the C++ library 
-are available through this interface. The documentation of the C++ API can be found in pdf format 
+Not all the features of Snob2  are accessible via the PyTorch interface. 
+The documentation of the C++ API can be found in pdf format 
 in the package's ``doc`` directory.
 
 
@@ -19,7 +20,7 @@ in the package's ``doc`` directory.
 Features
 ********
 
-* Custom classes for combinatorial objects such as integer partitions and Young tableau implemented in C++ 
+* Classes for combinatorial objects such as integer partitions and Young tableau implemented in C++ 
   for efficiency.
 * Classes for the symmetric group, conjugacy classes, quotient spaces,
   characters and irreducible representations of :math:`\mathbb{S}_n`.
@@ -32,25 +33,22 @@ Features
 Installation
 ************
 
-Installing Snob2 requires the following:
+Installing Snob2 as PyTorch module requires the following:
 
 #. C++11 or higher
-#. Python
+#. Python and PyTorch
 #. pybind11 (available with any PyTorch installation) 
-#. PyTorch if PyTorch support is required
 
-To install Snob2 follow these steps:
+To install the module follow these steps:
 
 #. Download the `cnine <https://github.com/risi-kondor/cnine>`_ and 
    `Snob2 <https://github.com/risi-kondor/Snob2>`_ packages. 
-#. Edit the file ``config.txt``, in particular, make sure that ``CNINE_ROOT`` points to the root of 
+#. Edit the file ``setup.py`` in Snob2's ``python`` directory as needed. 
+   In particular, make sure that ``cnine_root`` points to the root of 
    the **cnine** package on your system. 
-#. Run ``python setup.sty install`` in the ``python`` directory to compile the package and install it on your 
-   system.
+#. Run ``pip install -e .`` in the ``python`` directory to compile the package and install it on your system.
  
-To use Snob2 in Python, import the corresponding modules as usual by ``import Snob2``. 
-In the following we also assume that ``from Snob2 import *`` has also been issued to avoid having to 
-prefix all classes with ``Snob2.``.
+To use Snob2, import the module with the command ``import Snob2``. 
 
 
 ******

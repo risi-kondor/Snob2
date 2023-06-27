@@ -149,9 +149,8 @@ by the irreducible representation :math:`\rho_\lambda`. The ``SnPart`` is stored
 Sn vectors
 ==========
 
-
-An Sn covariant vector or *Sn-vector* for short is a vector that transforms under the action of 
-:math:`\mathbb{S}_n` by a combination of irreducible representations. 
+An Sn covariant vector or *Sn-vector* for short is a vector that transforms under the action
+of :math:`\mathbb{S}_n` by a combination of irreducible representations. 
 Sn-vectors are stored as ``SnVec`` objects as a list of ``SnPart``s. 
 
 .. code-block:: python

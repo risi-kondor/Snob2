@@ -17,10 +17,13 @@
 
 namespace Snob2{
 
+  extern CombinatorialBank* _combibank;
+
+
   class IntegerPartitions{
   public:
 
-    class iterator: public GenericIterator<IntegerPartitions,IntegerPartition>{
+    class iterator: public cnine::GenericIterator<IntegerPartitions,IntegerPartition>{
     public:
       using GenericIterator::GenericIterator;
     };
@@ -39,9 +42,20 @@ namespace Snob2{
 
   public: // Constructors 
 
+    IntegerPartitions(const int _n, const vector<IntegerPartition*>* _lambda, bool _is_view):
+      n(_n),lambda(_lambda),is_view(_is_view){}
+
     IntegerPartitions(const int _n): n(_n){
       lambda=&_combibank->get_IntegerPartitions(n);
       is_view=true;
+    }
+
+
+  public: // Named constructors
+
+
+    static IntegerPartitions RestrictionOrdered(const int _n){
+      return IntegerPartitions(_n, &_combibank->get_ROpartitions(_n), true);
     }
 
 
@@ -70,6 +84,11 @@ namespace Snob2{
       return iterator(this,size());
     }
     
+
+    //vector<IntegerPartition> restriction_poset_ordered(){
+    //return _combibank->restriction_post_ordered_partitions();
+    //}
+
     
 
   };

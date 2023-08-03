@@ -2,7 +2,7 @@
 Combinatorial classes
 *********************
 
-Snob provides specialized classes to represent various combinatorial objects involved in the 
+`Snob` provides specialized classes to represent various combinatorial objects involved in the 
 representation theory of :math:`\mathbb{S}_n`.
 
 ============
@@ -25,7 +25,7 @@ to the composition of maps :math:`\tau\circ\pi`.
 >>> print(tau*pi)
 [ 1 3 2 5 4 ]
 
-The `inv` method returns the inverse of a permutation.
+The `inv` method returns the inverse of the permutation.
 
 >>> print(pi.inv())
 [ 3 1 2 5 4 ]

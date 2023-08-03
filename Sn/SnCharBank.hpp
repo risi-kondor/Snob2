@@ -24,7 +24,7 @@ namespace Snob2{
     int n;
 
     //unordered_map<IntegerPartition,SnClassFunction*> characters;
-    indexed_map<IntegerPartition,SnClassFunction> chars;
+    cnine::indexed_map<IntegerPartition,SnClassFunction> chars;
     
 
   public:

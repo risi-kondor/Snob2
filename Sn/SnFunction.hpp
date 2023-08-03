@@ -14,18 +14,27 @@
 #include "SnObj.hpp"
 #include "RtensorObj.hpp"
 //#include "FunctionOnGroup.hpp"
+#include "diff_class.hpp"
 
 
 namespace Snob2{
 
-  class SnFunction: public cnine::RtensorObj{
+  class SnFunction: public cnine::RtensorObj,
+		    public cnine::diff_class<SnFunction>{
   public:
 
     typedef cnine::RtensorObj rtensor;
+    typedef cnine::diff_class<SnFunction> diff;
 
     const int n;
     int N;
     // SnObj* G;
+
+    ~SnFunction(){
+#ifdef WITH_FAKE_GRAD
+      if(diff::grad) delete diff::grad;
+#endif 
+    }
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnFunction(int _n, const FILLTYPE& fill, const int _dev=0):
@@ -56,6 +65,10 @@ namespace Snob2{
 
     SnFunction static sequential(const int n, const int _dev=0){
       return SnFunction(n,cnine::fill_sequential(),_dev);}
+
+    static SnFunction* new_zeros_like(const SnFunction& x){
+      return new SnFunction(x.getn(),cnine::fill_zero(),x.get_device());
+    }
 
 
   public: // ---- Copying ------------------------------------------------------------------------------------
@@ -95,6 +108,10 @@ namespace Snob2{
 
     int size() const{
       return dims(0);
+    }
+    
+    int getn() const{
+      return n;
     }
     
     float operator()(const int i) const{
@@ -171,6 +188,10 @@ namespace Snob2{
 
   public: // ---- I/O --------------------------------------------------------------------------------------- 
 
+
+    string repr(const string indent="") const{
+      return indent+"<SnFunction n="+to_string(n)+">";
+    }
 
     string str(const string indent="") const{
       ostringstream oss;

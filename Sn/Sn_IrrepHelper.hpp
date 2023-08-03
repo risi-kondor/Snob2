@@ -20,7 +20,7 @@ namespace Snob2{
   class Sn_IrrepHelper{
   public:
 
-    class iterator: public GenericIterator<Sn_IrrepHelper,SnIrrep>{
+    class iterator: public cnine::GenericIterator<Sn_IrrepHelper,SnIrrep>{
     public:
       using GenericIterator::GenericIterator;
     };

@@ -19,7 +19,7 @@ namespace Snob2{
   class YoungTableaux{
   public:
 
-    class iterator: public GenericIterator<YoungTableaux,YoungTableau>{
+    class iterator: public cnine::GenericIterator<YoungTableaux,YoungTableau>{
     public:
       using GenericIterator::GenericIterator;
     };

@@ -22,7 +22,7 @@ namespace Snob2{
   class SnMultiVec{
   public:
 
-    indexed_mapB<IntegerPartition,SnMultiPart> parts;
+    cnine::indexed_mapB<IntegerPartition,SnMultiPart> parts;
 
     ~SnMultiVec(){
     }

@@ -38,6 +38,11 @@ namespace Snob2{
       return l.get_YoungTableaux(lambda);
     }
 
+    const vector<IntegerPartition*>& get_ROpartitions(const int n){
+      CombinatorialBankLevel& l=level(n);
+      return l.get_ROpartitions();
+    }
+
 
   private:
 

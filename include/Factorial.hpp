@@ -8,8 +8,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-#ifndef _Factorial
-#define _Factorial 
+#ifndef _Snob2Factorial
+#define _Snob2Factorial 
 
 #include "Snob2_base.hpp"
 

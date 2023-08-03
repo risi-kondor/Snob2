@@ -5,16 +5,6 @@ INCLUDE= $(CNINE_INCLUDES) -I$(SNOB2_INCLUDEDIR) -I$(COMBINATORIALDIR) -I$(SNDIR
 
 TESTS=$(patsubst %.cpp,%,$(wildcard *.cpp))
 
-#TESTS= testSn testSnFunction testSnOverSm testSnOverSmFunction testSnIrrep testSnType testSnRepresentation \
-#testSnPart testSnVec testClausenFFT testClausenFFT2 testSnClassFunction testSnCharacter testSnCG \
-#testSn_IrrepHelper \
-#testKronCoeff \
-#testAssociativeContainer \
-#testJM \
-#testSnVecB
-
-#testSnMultiVec testFourierTransform
-
 ifdef WITH_CUDA
 endif 
 

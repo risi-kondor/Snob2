@@ -128,13 +128,13 @@ namespace Snob2{
       for(int i=1; i<lambda.k; i++){
 	if(lambda.p[i]==prev) count++;
 	else{
-	  t*=pow(prev,count)*factorial(count);
+	  t*=pow(prev,count)*cnine::factorial(count);
 	  prev=lambda.p[i];
 	  count=1;
 	}
       }
-      t*=pow(prev,count)*factorial(count);
-      return factorial(getn())/t;
+      t*=pow(prev,count)*cnine::factorial(count);
+      return cnine::factorial(getn())/t;
     }
 
     int class_size(const int i) const{

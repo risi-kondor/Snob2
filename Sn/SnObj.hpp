@@ -25,6 +25,8 @@
 //#include "SnModule.hpp"
 //#include "SnRepresentation.hpp"
 
+extern cnine::Factorial cnine::factorial;
+
 
 namespace Snob2{
 
@@ -57,7 +59,7 @@ namespace Snob2{
 
 
     SnObj(const int _n): n(_n){
-      order=factorial(n);
+      order=cnine::factorial(n);
       //cout<<"Creating Sn("<<n<<")"<<endl;
     }
 
@@ -86,8 +88,8 @@ namespace Snob2{
 
       vector<int> s(n);
       for(int i=n; i>0; i--){
-	s[i-1]=i-e/factorial(i-1);
-	e=e%factorial(i-1);
+	s[i-1]=i-e/cnine::factorial(i-1);
+	e=e%cnine::factorial(i-1);
       }
 
       for(int i=2; i<=n; i++){
@@ -113,7 +115,7 @@ namespace Snob2{
       i++;
       for(;i<n;i++) tau[i-1]=sigma[i];
       //cout<<" "<<a<<" "<<tau<<endl;
-      return Snminus1->index(tau)+a*factorial(n-1);
+      return Snminus1->index(tau)+a*cnine::factorial(n-1);
     }
 
     SnElement random() const{

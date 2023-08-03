@@ -25,7 +25,7 @@
 //#include "SnCGbank.hpp"
 
 
-vector<int> Snob2::factorial::fact;
+//vector<int> Snob2::factorial::fact;
 
 
 namespace Snob2{

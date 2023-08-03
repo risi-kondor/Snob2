@@ -15,6 +15,9 @@
 #include "SnElement.hpp"
 
 
+extern cnine::Factorial cnine::factorial;
+
+
 namespace Snob2{
 
 
@@ -36,7 +39,7 @@ namespace Snob2{
 
 
     int size() const{
-      return factorial(n)/factorial(m);
+      return cnine::factorial(n)/cnine::factorial(m);
     }
 
     int order() const{
@@ -54,11 +57,11 @@ namespace Snob2{
     SnElement element(int e) const{
       SnElement p(n,cnine::fill_identity());
 
-      e*=factorial(m);
+      e*=cnine::factorial(m);
       vector<int> s(n);
       for(int i=n; i>m; i--){
-	s[i-1]=i-e/factorial(i-1);
-	e=e%factorial(i-1);
+	s[i-1]=i-e/cnine::factorial(i-1);
+	e=e%cnine::factorial(i-1);
       }
 
       for(int i=m+1; i<=n; i++){
@@ -81,13 +84,13 @@ namespace Snob2{
 	int a=0;
 	int i=0;
 	for(; i<_n; i++){
-	  if(s[i]==_n){t+=(_n-i-1)*factorial(_n-1); break;}
+	  if(s[i]==_n){t+=(_n-i-1)*cnine::factorial(_n-1); break;}
 	  //else tau[i]=sigma[i];
 	}
 	i++;
 	for(;i<_n;i++) s[i-1]=s[i];
       }
-      return t/factorial(m);
+      return t/cnine::factorial(m);
     }
 
   };

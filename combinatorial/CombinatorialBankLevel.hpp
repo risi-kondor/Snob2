@@ -29,9 +29,11 @@ namespace Snob2{
     unordered_map<IntegerPartition,IntegerPartitionObj*> ip_map;
 
     vector<IntegerPartition*> partitions;
+    vector<IntegerPartition*> ROpartitions;
 
     ~CombinatorialBankLevel(){
       for(auto p: partitions) delete p;
+      for(auto p: ROpartitions) delete p;
       for(auto p: ip) delete p;
     }
 
@@ -56,6 +58,11 @@ namespace Snob2{
     const vector<YoungTableau*>& get_YoungTableaux(const IntegerPartition& lambda){
       IntegerPartitionObj& obj=get_IntegerPartitionObj(lambda);
       return obj.get_YoungTableaux();
+    }
+
+    const vector<IntegerPartition*>& get_ROpartitions(){
+      if(ROpartitions.size()==0) make_ROpartitions();
+      return ROpartitions;
     }
 
 
@@ -105,9 +112,32 @@ namespace Snob2{
       }
     }
 
+    void make_ROpartitions(){
+      if(partitions.size()==0) make_partitions();
+      int N=partitions.size();
+      vector<bool> used(N,0);
+      for(int i=0; i<N; i++)
+	if(!used[i]) proposeRO(used,N,i);
+    }
+
+    void proposeRO(vector<bool>& used, const int N, const int i){
+      used[i]=true;
+      const vector<IntegerPartitionObj*>& subs=get_IntegerPartitionObj(*partitions[i]).parents;
+      for(int j=i+1; j<N; j++){
+	if(used[j]) continue;
+	const vector<IntegerPartitionObj*>& jsubs=get_IntegerPartitionObj(*partitions[j]).parents;
+	bool failed=false;
+	for(auto jsub: jsubs)
+	  if(find(subs.begin(),subs.end(),jsub)==subs.end()){failed=true; break;}
+	if(!failed) proposeRO(used,N,j);
+      }
+      ROpartitions.push_back(new IntegerPartition(*partitions[i]));
+    }
+    
   };
 
 }
 
 #endif 
 
+      //vector<IntegerPartition> subs=partitions[i]->get_parents();

@@ -1,6 +1,11 @@
 include $(ROOTDIR)/config.txt
 
 CNINE_INCLUDES=-I$(CNINE_ROOT)/include 
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/algorithms
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/combinatorial
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/containers
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/math
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/wrappers
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/include/cmaps
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendA
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendB

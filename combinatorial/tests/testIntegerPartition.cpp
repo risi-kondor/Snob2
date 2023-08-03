@@ -27,6 +27,11 @@ int main(int argc, char** argv){
 
   for(auto p:IP)
     cout<<p<<endl;
+  cout<<endl;
+
+  auto IPR=IntegerPartitions::RestrictionOrdered(6);
+  for(auto p:IPR)
+    cout<<p<<endl;
 
 }
 

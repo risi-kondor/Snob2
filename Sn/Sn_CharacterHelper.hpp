@@ -21,7 +21,7 @@ namespace Snob2{
   class Sn_CharacterHelper{
   public:
 
-    class iterator: public GenericIterator<Sn_CharacterHelper,SnCharacter>{
+    class iterator: public cnine::GenericIterator<Sn_CharacterHelper,SnCharacter>{
     public:
       using GenericIterator::GenericIterator;
     };

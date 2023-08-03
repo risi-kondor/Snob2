@@ -20,7 +20,7 @@ namespace Snob2{
   class Sn_CClassHelper{
   public:
 
-    class iterator: public GenericIterator<Sn_CClassHelper,SnCClass>{
+    class iterator: public cnine::GenericIterator<Sn_CClassHelper,SnCClass>{
     public:
       using GenericIterator::GenericIterator;
     };

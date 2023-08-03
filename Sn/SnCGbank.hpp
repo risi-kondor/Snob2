@@ -25,7 +25,7 @@ namespace Snob2{
   typedef cnine::RtensorObj rtensor;
 
   class SnCGfactors: 
-    public associative_container<IntegerPartition,rtensor>{
+    public cnine::associative_container<IntegerPartition,rtensor>{
 
     //public associative_container<IntegerPartition,associative_container<IntegerPartition,rtensor> >{
     
@@ -162,8 +162,8 @@ namespace Snob2{
       SnVecB sub=CGproduct(xsub,ysub);
       cout<<sub.get_type()<<endl;
 
-      associative_container<IntegerPartition,rtensor> evectors;
-      associative_container<IntegerPartition,rtensor> evalues;
+      cnine::associative_container<IntegerPartition,rtensor> evectors;
+      cnine::associative_container<IntegerPartition,rtensor> evalues;
       for(auto p: sub){
 	cnine::Rtensor2_view V=p.view3().slice1(0);
 	rtensor M=V.transp()*(JM.view2())*V;

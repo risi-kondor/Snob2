@@ -7,27 +7,20 @@
 Snob2 -- Symmetric group FFT library
 ####################################
 
+.. include:: abstract.rst 
+
 |
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-.. include:: intro.rst
-
-|
-
-#######
-Classes
-#######
-
-.. include:: combinatorial.rst
-
-.. include:: Sn.rst
-
-.. include:: SnFunctions.rst
-
-.. include:: SnFFT.rst
+   installation.rst
+   design.rst
+   combinatorial.rst
+   Sn.rst
+   SnFunctions.rst
+   SnFFT.rst
 
 | 
 

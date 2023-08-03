@@ -19,7 +19,7 @@
 
 namespace Snob2{
 
-  class SnVecB: public associative_container<IntegerPartition,SnPartB>{
+  class SnVecB: public cnine::associative_container<IntegerPartition,SnPartB>{
   public:
 
     //indexed_mapB<IntegerPartition,SnPart> parts;
@@ -98,12 +98,12 @@ namespace Snob2{
 
 
     SnVecB(const SnVecB& x):
-      associative_container<IntegerPartition,SnPartB>(x){
+      cnine::associative_container<IntegerPartition,SnPartB>(x){
       SNOB2_COPY_WARNING()
     }
     
     SnVecB(SnVecB&& x):
-      associative_container<IntegerPartition,SnPartB>(std::move(x)){
+      cnine::associative_container<IntegerPartition,SnPartB>(std::move(x)){
       SNOB2_MOVE_WARNING()
     }
 

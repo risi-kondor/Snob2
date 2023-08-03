@@ -165,6 +165,10 @@ namespace Snob2{
       return* this; 
     }
 
+    void for_each_sub(std::function<void(const IntegerPartition&)> fun) const{
+      return foreach_sub(fun);
+    }
+
     void foreach_sub(std::function<void(const IntegerPartition&)> fun) const{
       IntegerPartition lambda(*this);
       int k=lambda.k;
@@ -208,6 +212,17 @@ namespace Snob2{
       //if(k<y.k) return true;
       return false;
     }
+
+  public:
+
+
+    vector<IntegerPartition> parents(){
+      vector<IntegerPartition> R;
+      for_each_sub([&](const IntegerPartition& mu){
+	  R.push_back(mu);});
+      return R;
+    }
+
 
   public: // I/O
 
@@ -271,3 +286,5 @@ namespace std{
 
 
 #endif
+    /*
+    */

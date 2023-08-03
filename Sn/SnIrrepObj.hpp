@@ -37,7 +37,7 @@ namespace Snob2{
     int d;
     IntegerPartition lambda;
     vector<YoungTableau*> tableaux;
-    mutable associative_container<int,rtensor> YJM;
+    mutable cnine::associative_container<int,rtensor> YJM;
     //vector<SnIrrepObj*> ancestors; 
     //vector<SnIrrepObj*> descendents;
     //SnClassFunction chi;

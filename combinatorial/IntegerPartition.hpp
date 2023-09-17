@@ -62,7 +62,7 @@ namespace Snob2{
     }
 
     IntegerPartition& operator=(const IntegerPartition& x){
-      k=x.k; delete[] p; p=new int[k]; 
+      k=x.k; if(p) delete[] p; p=new int[k]; 
       for(int i=0; i<k; i++) p[i]=x.p[i]; 
       return *this;
     }
@@ -71,11 +71,11 @@ namespace Snob2{
       p=x.p; x.p=nullptr;}
   
     IntegerPartition& operator=(IntegerPartition&& x){
-      if (this!=&x) {k=x.k; delete[] p; p=x.p; x.p=nullptr;}
+      if (this!=&x) {k=x.k; if(p) delete[] p; p=x.p; x.p=nullptr;}
       return *this;
     }
   
-    ~IntegerPartition(){delete[] p;}
+    ~IntegerPartition(){if(p) delete[] p;}
 
 
   private:
@@ -147,6 +147,18 @@ namespace Snob2{
       return false;
     }
 
+    int content_of_difference(const IntegerPartition& mu) const{
+      SNOB2_ASSRT(getn()==mu.getn()+1);
+      SNOB2_ASSRT(height()>=mu.height());
+      int rowix=mu.height();
+      for(int i=0; i<mu.height(); i++)
+	if(mu[i]==p[i]-1){
+	  rowix=i;
+	  break;
+	}
+      return p[rowix]-1-rowix;
+    }
+
     IntegerPartition& add(const int r, const int m=1){
       if(r<k){p[r]+=m; return *this;}
       int* newp=new int[k+1]; 
@@ -172,7 +184,6 @@ namespace Snob2{
     void foreach_sub(std::function<void(const IntegerPartition&)> fun) const{
       IntegerPartition lambda(*this);
       int k=lambda.k;
-      //cout<<"  "<<lambda<<endl;
       assert(lambda.k>0);
 
       lambda.p[k-1]--;
@@ -186,10 +197,8 @@ namespace Snob2{
       lambda.p[k-1]++;
 
       for(int i=k-2; i>=0; i--){
-	//cout<<"i="<<i<<endl;
 	if(lambda.p[i+1]<lambda.p[i]){
 	  lambda.p[i]--;
-	  //cout<<lambda.p[i]<<endl;
 	  fun(lambda);
 	  lambda.p[i]++;
 	}
@@ -216,7 +225,7 @@ namespace Snob2{
   public:
 
 
-    vector<IntegerPartition> parents(){
+    vector<IntegerPartition> parents() const{
       vector<IntegerPartition> R;
       for_each_sub([&](const IntegerPartition& mu){
 	  R.push_back(mu);});

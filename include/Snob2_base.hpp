@@ -18,6 +18,8 @@ using namespace std;
 
 
 #define SNOB2_ASSERT(condition, message) if (!(condition)) {cout<<message<<endl; assert ((condition)); exit(-1); }
+#define SNOB2_ASSRT(condition) \
+  if(!(condition)) throw std::runtime_error("Snob2 error in "+string(__PRETTY_FUNCTION__)+" : failed assertion "+#condition+".");
 
 #define SNOB2_UNIMPL() printf("Snob2 error: function \"%s\" not implemented.\n",__PRETTY_FUNCTION__);
 

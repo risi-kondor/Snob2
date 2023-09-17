@@ -13,6 +13,14 @@ from snob_base import SnIrrep
 from snob_base import Sn
 from snob_base import SnType
 
+from snob_base import SnFunction
+from snob_base import SnOverSmFunction
+from snob_base import SnPart
+from snob_base import SnVec
+
+from snob_base import ClausenFFT
+
+
 def device_id(device):
     if device==0:
         return 0

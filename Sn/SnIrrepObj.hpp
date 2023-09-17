@@ -19,7 +19,6 @@
 #include "IntTensor.hpp"
 #include "YoungTableau.hpp"
 #include "SnElement.hpp"
-//#include "SnClassFunction"
 
 #include "ScaleSomeSlicesFn.hpp"
 #include "GivensSomeSlicesFn.hpp"
@@ -58,7 +57,6 @@ namespace Snob2{
     SnIrrepObj(const IntegerPartition& _lambda):
       lambda(_lambda){
       tableaux=_combibank->get_YoungTableaux(lambda);
-      //for(auto p:tableaux) cout<<*p<<endl;
       d=tableaux.size();
       n=_lambda.getn();
     }
@@ -104,7 +102,6 @@ namespace Snob2{
       for(int i=0; i<mu.k; i++){
 	apply_left(R,ContiguousCycle(a,a+mu.p[i]-1));
 	a+=mu.p[i];
-	//cout<<R<<endl;
       }
       float t=0;
       for(int i=0; i<d; i++){

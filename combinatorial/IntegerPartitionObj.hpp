@@ -49,7 +49,6 @@ namespace Snob2{
   public: 
 
     void make_tableaux(){
-      //cout<<"Making tableaux for "<<lambda<<endl;
       if(n==1){
 	tableaux.push_back(new YoungTableau(1,cnine::fill_identity()));
 	return;

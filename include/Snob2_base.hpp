@@ -14,7 +14,6 @@
 #include "Cnine_base.hpp"
 
 using namespace std; 
-//using namespace Cnine; 
 
 
 #define SNOB2_ASSERT(condition, message) if (!(condition)) {cout<<message<<endl; assert ((condition)); exit(-1); }

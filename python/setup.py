@@ -15,8 +15,9 @@ from glob import glob
 # --- User settings ------------------------------------------------------------------------------------------
 
 
-cnine_root = os.getcwd()+"/../../cnine"
-
+#cnine_root = os.getcwd()+"/../../cnine"
+cnine_root ="../../cnine"
+snob2_root=".."
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -38,20 +39,23 @@ _cxx_compile_args = ['-std=c++14',
 		     ]
 
 ext_modules=[CppExtension('snob_base', ['bindings/Snob2_bindings.cpp'],
-			  include_dirs=[cnine_root+'/include',
-					cnine_root + '/combinatorial',
-					cnine_root + '/containers',
-					cnine_root + '/math',
-					cnine_root + '/wrappers',
+			  include_dirs=[cnine_root,
+					cnine_root+'/include',
+					cnine_root+'/modules',
+					cnine_root+'/combinatorial',
+					cnine_root+'/containers',
+					cnine_root+'/math',
+					#cnine_root+'/wrappers',
 					cnine_root+'/objects/backendA',
 					cnine_root+'/objects/backendB',
 					cnine_root+'/objects/scalar',
 					cnine_root+'/objects/tensor',
 					cnine_root+'/objects/tensor_views',
 					cnine_root+'/objects/tensor_views/functions',
-					cwd+'/../include',
-					cwd+'/../combinatorial',
-					cwd+'/../Sn'],
+
+					snob2_root+'/include',
+					snob2_root+'/combinatorial',
+					snob2_root+'/Sn'],
 			  extra_compile_args = {'cxx': _cxx_compile_args},
 			  depends=['setup.py',
 				   'bindings/Snob2_bindings.cpp',

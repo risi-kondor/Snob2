@@ -11,7 +11,8 @@
 #ifndef _SnIrrepObj
 #define _SnIrrepObj
 
-#include "associative_container.hpp"
+#include <cnine/containers>
+//#include "associative_container.hpp"
 
 #include "IntegerPartition.hpp"
 #include "ContiguousCycle.hpp"

@@ -49,13 +49,4 @@ int main(int argc, char** argv){
     cout<<p<<endl;
   cout<<endl;
 
-
-  //SnModule M=G.module();
-  //cout<<M<<endl;
-
 }
-
-
-  //auto irreps=G.all_irreps();
-  //for(auto p:irreps) cout<<p<<" "<<p.dim()<<endl;
-

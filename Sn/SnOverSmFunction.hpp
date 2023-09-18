@@ -12,15 +12,15 @@
 #define _SnOverSmFunction
 
 #include "SnOverSm.hpp"
-#include "RtensorObj.hpp"
+//#include "RtensorObj.hpp"
 
 
 namespace Snob2{
 
-  class SnOverSmFunction: public cnine::RtensorObj{ 
+  class SnOverSmFunction: public rtensor{ 
   public:
 
-    typedef cnine::RtensorObj rtensor;
+    //typedef cnine::RtensorObj rtensor;
 
     const int n;
     const int m;
@@ -88,7 +88,7 @@ namespace Snob2{
       ostringstream oss;
       for(int i=0; i<dims(0); i++){
 	//oss<<G.element(i)<<" : ";  // Fix this!
-	oss<<RtensorObj::get_value(i)<<endl;
+	oss<<rtensor::get_value(i)<<endl;
       }
       return oss.str();
     }

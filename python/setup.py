@@ -24,7 +24,7 @@ snob2_root=".."
 
 cwd = os.getcwd()
 
-_cxx_compile_args = ['-std=c++14',
+_cxx_compile_args = ['-std=c++17',
 		     '-Wno-sign-compare',
 		     '-Wno-deprecated-declarations',
 		     '-Wno-unused-variable',
@@ -47,9 +47,9 @@ ext_modules=[CppExtension('snob_base', ['bindings/Snob2_bindings.cpp'],
 					cnine_root+'/math',
 					#cnine_root+'/wrappers',
 					cnine_root+'/objects/backendA',
-					cnine_root+'/objects/backendB',
-					cnine_root+'/objects/scalar',
-					cnine_root+'/objects/tensor',
+					#cnine_root+'/objects/backendB',
+					#cnine_root+'/objects/scalar',
+					#cnine_root+'/objects/tensor',
 					cnine_root+'/objects/tensor_views',
 					cnine_root+'/objects/tensor_views/functions',
 

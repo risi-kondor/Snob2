@@ -13,13 +13,13 @@
 #include "SnClasses.hpp"
 #include "SnPart.hpp"
 #include "SnProductRepresentation.hpp"
-#include "associative_container.hpp"
+//#include "associative_container.hpp"
 
 using namespace cnine;
 using namespace Snob2;
 
 //typedef CscalarObj cscalar;
-typedef RtensorObj rtensor;
+//typedef RtensorObj rtensor;
 
 
 
@@ -35,12 +35,15 @@ int main(int argc, char** argv){
   rtensor A=rho(Transposition(1,k));
   for(int i=2; i<=k-1; i++)
     A+=rho(Transposition(i,k));
-  cout<<A.str("",0.0001)<<endl;
-  cout<<rho.JucysMurphy(k).str("",0.0001)<<endl;
+  cout<<A<<endl;
+  //cout<<A.str("",0.0001)<<endl;
+  cout<<rho.JucysMurphy(k)<<endl;
+  //cout<<rho.JucysMurphy(k).str("",0.0001)<<endl;
 
   auto rho2=rho*rho;
   rtensor B=rho2.JucysMurphy(k);
-  cout<<B.str("",0.0001)<<endl;
+  cout<<B<<endl;
+  //cout<<B.str("",0.0001)<<endl;
 
   /*
   SnIrrep rho3({3,1});

@@ -11,13 +11,14 @@
 #ifndef _SnIrrepObj
 #define _SnIrrepObj
 
+#include <cnine/tensors>
 #include <cnine/containers>
 //#include "associative_container.hpp"
 
 #include "IntegerPartition.hpp"
 #include "ContiguousCycle.hpp"
-#include "RtensorObj.hpp"
-#include "IntTensor.hpp"
+//#include "RtensorObj.hpp"
+//#include "IntTensor.hpp"
 #include "YoungTableau.hpp"
 #include "SnElement.hpp"
 
@@ -26,8 +27,9 @@
 
 namespace Snob2{
 
-  typedef cnine::RtensorObj rtensor;
-  typedef cnine::IntTensor itensor;
+  //typedef cnine::RtensorObj rtensor;
+  //typedef cnine::IntTensor itensor;
+  typedef cnine::Tensor<int> itensor;
 
 
   class SnIrrepObj{
@@ -106,7 +108,7 @@ namespace Snob2{
       }
       float t=0;
       for(int i=0; i<d; i++){
-	t+=R.get_value(i,i);
+	t+=R(i,i);
 	//cout<<"t="<<t<<" "<<R.get_value(i,i)<<endl;
       }
       //cout<<" "<<t<<endl;
@@ -164,8 +166,8 @@ namespace Snob2{
     }
 
     void apply_left(rtensor& A, const int tau) const{
-      SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
-      const int J=A.get_dim(1);
+      SNOB2_ASSERT(A.dim(0)==d,"Matrix wrong size");
+      const int J=A.dim(1);
       computeYOR();
       bool done[d];
       //cout<<"---"<<lambda<<endl<<endl;
@@ -177,7 +179,7 @@ namespace Snob2{
 	if(i2==-1){
 	  //cout<<"c1="<<c1<<endl;
 	  for(int j=0; j<J; j++)
-	    A.set_value(i,j,c1*A.get_value(i,j));
+	    A.set(i,j,c1*A.get_value(i,j));
 	}else{
 	  //cout<<"c1="<<c1<<" c2="<<c2<<endl;
 	  for(int j=0; j<J; j++){
@@ -237,10 +239,12 @@ namespace Snob2{
       const int B=T.n2;
       computeYORtensors();
       int ndiags=YORndiags->get(tau-1);
-      cnine::ScaleSomeSlicesFn()(T,YORdiagIndices->view2().slice0(tau-1).block(0,ndiags),
-	YORdiagCoeffs->view2().slice0(tau-1).block(0,ndiags));
-      cnine::GivensSomeSlicesFn()(T,YORgivensIndices->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2),
-	YORgivensCoeffs->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2));
+
+      CNINE_UNIMPL();
+      //cnine::ScaleSomeSlicesFn()(T,YORdiagIndices->view2().slice0(tau-1).block(0,ndiags),
+      //YORdiagCoeffs->view2().slice0(tau-1).block(0,ndiags));
+      //cnine::GivensSomeSlicesFn()(T,YORgivensIndices->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2),
+      //YORgivensCoeffs->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2));
 
       /*
       computeYOR();

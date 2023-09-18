@@ -19,7 +19,7 @@
 
 namespace Snob2{
 
-  typedef cnine::RtensorObj rtensor;
+  //typedef cnine::RtensorObj rtensor;
 
 
   class ClausenFFTObj{

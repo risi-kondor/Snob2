@@ -12,18 +12,18 @@
 #define _SnFunction
 
 #include "SnObj.hpp"
-#include "RtensorObj.hpp"
+//#include "RtensorObj.hpp"
 //#include "FunctionOnGroup.hpp"
 #include "diff_class.hpp"
 
 
 namespace Snob2{
 
-  class SnFunction: public cnine::RtensorObj,
+  class SnFunction: public rtensor,
 		    public cnine::diff_class<SnFunction>{
   public:
 
-    typedef cnine::RtensorObj rtensor;
+    //typedef cnine::RtensorObj rtensor;
     typedef cnine::diff_class<SnFunction> diff;
 
     const int n;
@@ -115,11 +115,11 @@ namespace Snob2{
     }
     
     float operator()(const int i) const{
-      return rtensor::value(i);
+      return rtensor::get_value(i);
     }
 
     float get_value(const int i) const{
-      return rtensor::value(i);
+      return rtensor::get_value(i);
     }
 
     SnFunction& set_value(const int i, const float v){
@@ -129,12 +129,12 @@ namespace Snob2{
 
     float operator()(const SnElement& x) const{
       const SnObj& G=*_snbank->get_Sn(n);
-      return rtensor::value(G.index(x));
+      return rtensor::get_value(G.index(x));
     }
 
     float get_value(const SnElement& x) const{
       const SnObj& G=*_snbank->get_Sn(n);
-      return rtensor::value(G.index(x));
+      return rtensor::get_value(G.index(x));
     }
 
     SnFunction& set_value(const SnElement& x, const float v){
@@ -151,7 +151,7 @@ namespace Snob2{
       SnFunction R(n,cnine::fill_raw());
       const SnObj& G=*_snbank->get_Sn(n);
       for(int i=0; i<N; i++)
-	R.set_value(t*G.element(i),rtensor::value(i));
+	R.set_value(t*G.element(i),rtensor::get_value(i));
       return R;
     }
 
@@ -159,7 +159,7 @@ namespace Snob2{
       SnFunction R(n,cnine::fill_raw());
       const SnObj& G=*_snbank->get_Sn(n);
       for(int i=0; i<N; i++)
-	R.set_value(G.element(i)*t,rtensor::value(i));
+	R.set_value(G.element(i)*t,rtensor::get_value(i));
       return R;
     }
 
@@ -181,7 +181,7 @@ namespace Snob2{
       SnFunction R(n,cnine::fill_raw());
       const SnObj& G=*_snbank->get_Sn(n);
       for(int i=0; i<N; i++)
-	R.set_value(G.element(i).inverse(),rtensor::value(i));
+	R.set_value(G.element(i).inverse(),rtensor::get_value(i));
       return R;
     }
 

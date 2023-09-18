@@ -13,7 +13,7 @@
 
 #include "SnClassFunction.hpp"
 #include "SnObj.hpp"
-#include "indexed_map.hpp"
+//#include "indexed_map.hpp"
 
 
 namespace Snob2{

@@ -12,7 +12,6 @@
 #include "Snob2_session.hpp"
 #include "SnClasses.hpp"
 #include "FunctionOnGroup.hpp"
-#include "RtensorObj.hpp"
 #include "Gdims.hpp"
 #include "SnFunction.hpp"
 
@@ -20,7 +19,7 @@ using namespace cnine;
 using namespace Snob2;
 
 //typedef CscalarObj cscalar;
-typedef RtensorObj rtensor;
+//typedef RtensorObj rtensor;
 
 
 

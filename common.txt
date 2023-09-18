@@ -3,20 +3,20 @@ include $(ROOTDIR)/config.txt
 CNINE_INCLUDES=-I$(CNINE_ROOT)
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/include 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/modules 
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/algorithms
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/algorithms
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/combinatorial
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/containers
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/containers
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/math
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/wrappers
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/include/cmaps
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendA
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendB
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/scalar 
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor 
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/wrappers
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/include/cmaps
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendA
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/backendB
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/scalar 
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_views 
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_views/functions 
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array 
-CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array/cell_ops 
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array 
+#CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array/cell_ops 
 
 CNINE_CUDADIR=$(CNINE_ROOT)/cuda
 
@@ -27,7 +27,7 @@ COMBINATORIALDIR=$(ROOTDIR)/combinatorial
 GROUPSDIR=$(ROOTDIR)/groups
 SNDIR=$(ROOTDIR)/Sn
 
-CFLAGS= -std=c++11 -O3 -ferror-limit=1  
+CFLAGS= -std=c++17 -O3 -ferror-limit=1  
 INCLUDE= -I $(ROOTDIR)/include 
 LIBS= -lstdc++ -lm -lpthread 
 

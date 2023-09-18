@@ -14,7 +14,7 @@
 #include "SnPart.hpp"
 #include "SnType.hpp"
 #include "SnMultiPart.hpp"
-#include "indexed_map.hpp"
+//#include "indexed_map.hpp"
 
 
 namespace Snob2{

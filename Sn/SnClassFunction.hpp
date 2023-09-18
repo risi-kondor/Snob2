@@ -11,16 +11,16 @@
 #ifndef _SnClassFunction
 #define _SnClassFunction
 
-#include "RtensorObj.hpp"
+//#include "RtensorObj.hpp"
 #include "SnObj.hpp"
 
 
 namespace Snob2{
 
-  class SnClassFunction: public cnine::RtensorObj{
+  class SnClassFunction: public rtensor{
   public:
 
-    typedef cnine::RtensorObj rtensor;
+    //typedef cnine::RtensorObj rtensor;
 
     using rtensor::rtensor;
     using rtensor::get_value;
@@ -100,7 +100,7 @@ namespace Snob2{
       SnObj* Gobj=_snbank->get_Sn(n);
       for(int i=0; i<dims(0); i++){
 	oss<<indent<<Gobj->cclass(i)<<" : ";
-	oss<<RtensorObj::get_value(i)<<endl;
+	oss<<rtensor::get_value(i)<<endl;
       }
       return oss.str();
     }

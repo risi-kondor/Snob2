@@ -19,7 +19,7 @@
 
 namespace Snob2{
 
-  typedef cnine::RtensorObj rtensor;
+  //typedef cnine::RtensorObj rtensor;
 
 
   class SnMultiPart: private rtensor{
@@ -165,7 +165,7 @@ namespace Snob2{
     }
 
     cnine::Rtensor3_view view3() const{
-      return RtensorA::view3();
+      return rtensor::view3();
     }
 
     IntegerPartition get_lambda() const{
@@ -228,7 +228,8 @@ namespace Snob2{
       //cout<<"Reducing "<<endl<<*this<<"."<<endl;
       //cout<<n<<newN<<m<<endl;
       SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
-      split1(view3(),newN,n).reduce2_destructively_into(R.view3());
+      CNINE_UNIMPL();
+      // split1(view3(),newN,n).reduce2_destructively_into(R.view3()); // restore!!
       /*
       for(int s=0; s<newN; s++)
 	for(int t=0; t<n; t++)
@@ -245,7 +246,8 @@ namespace Snob2{
       int m=getm();
       int I=dim(0);
       SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
-      split1(R.view3(),N,_N).broadcast2(view3());
+      CNINE_UNIMPL();
+      //split1(R.view3(),N,_N).broadcast2(view3()); //restore!!
       /*
       for(int s=0; s<N; s++)
 	for(int t=0; t<_N; t++)

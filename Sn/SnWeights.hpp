@@ -12,7 +12,7 @@
 #define _SnWeights
 
 #include "SnVec.hpp"
-#include "RtensorObj_funs.hpp"
+//#include "RtensorObj_funs.hpp"
 
 
 namespace Snob2{
@@ -20,7 +20,7 @@ namespace Snob2{
   class SnWeights{
   public:
 
-    typedef cnine::RtensorObj rtensor;
+    //typedef cnine::RtensorObj rtensor;
 
     unordered_map<IntegerPartition,rtensor*> weights;
 

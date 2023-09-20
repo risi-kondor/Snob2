@@ -19,8 +19,6 @@
 
 namespace Snob2{
 
-  //typedef cnine::RtensorObj rtensor;
-
 
   class SnMultiPart: private rtensor{
   public:
@@ -86,31 +84,31 @@ namespace Snob2{
     SnMultiPart(const SnFunction& f): 
       rtensor(f){
       N=f.N;
-      reshape({1,N,1});
+      inplace_reshape({1,N,1});
       irrep=_snbank->get_irrep({1});
     }
 
     SnMultiPart(const SnOverSmFunction& f): 
       rtensor(f){
       N=f.getN();
-      reshape({1,N,1});
+      inplace_reshape({1,N,1});
       irrep=_snbank->get_irrep({1});
     }
 
     SnFunction as_function(const int _n) const{
       int m=getm();
-      const_cast<SnMultiPart&>(*this).reshape({dims(0)*N*getm()});
+      const_cast<SnMultiPart&>(*this).inplace_reshape({dims(0)*N*getm()});
       SnFunction f(_n,*this);
-      const_cast<SnMultiPart&>(*this).reshape({1,N,m});
+      const_cast<SnMultiPart&>(*this).inplace_reshape({1,N,m});
       return f;
     }
 
     SnOverSmFunction as_function(const int _n, const int _m) const{
       int m=getm();
       int N=getN();
-      const_cast<SnMultiPart&>(*this).reshape({dims(0)*N*m});
+      const_cast<SnMultiPart&>(*this).inplace_reshape({dims(0)*N*m});
       SnOverSmFunction f(_n,_m,*this);
-      const_cast<SnMultiPart&>(*this).reshape({1,N,m});
+      const_cast<SnMultiPart&>(*this).inplace_reshape({1,N,m});
       return f;
     }
 
@@ -127,20 +125,20 @@ namespace Snob2{
     SnMultiPart(const SnPart& x): rtensor(x){
       N=1;
       irrep=x.irrep;
-      reshape({dims(0),1,dims(1)});
+      inplace_reshape({dims(0),1,dims(1)});
     }
 
 
     operator SnPart() const &{
       assert(N==1);
       rtensor M(*this);
-      M.reshape({dims(0),N*getm()});
+      M.inplace_reshape({dims(0),N*getm()});
       return SnPart(irrep,std::move(M));
     }
 
     operator SnPart() &&{
       assert(N==1);
-      reshape({dims(0),N*getm()});
+      inplace_reshape({dims(0),N*getm()});
       return SnPart(irrep,std::move(*this));
     }
 
@@ -225,11 +223,8 @@ namespace Snob2{
       int newN=N/n;
       int m=getm();
       int I=dim(0);
-      //cout<<"Reducing "<<endl<<*this<<"."<<endl;
-      //cout<<n<<newN<<m<<endl;
       SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
-      CNINE_UNIMPL();
-      // split1(view3(),newN,n).reduce2_destructively_into(R.view3()); // restore!!
+      cnine::split1(view3(),newN,n).reduce2_destructively_into(R.view3());
       /*
       for(int s=0; s<newN; s++)
 	for(int t=0; t<n; t++)
@@ -246,8 +241,7 @@ namespace Snob2{
       int m=getm();
       int I=dim(0);
       SnMultiPart R(newN,irrep,getm(),cnine::fill::zero,dev);
-      CNINE_UNIMPL();
-      //split1(R.view3(),N,_N).broadcast2(view3()); //restore!!
+      cnine::split1(R.view3(),N,_N).broadcast2(view3());
       /*
       for(int s=0; s<N; s++)
 	for(int t=0; t<_N; t++)
@@ -265,42 +259,46 @@ namespace Snob2{
     SnMultiPart apply(const SnElement& sigma, const int o, const int s=1){
       SnMultiPart R(*this);
       int m=getm();
-      reshape({dims(0),N*m});
-      irrep->apply_left(R,sigma,o*m,(o+s)*m);
-      reshape({dims(0),N,m});
+      //reshape({dims(0),N*m});
+      irrep->apply_left(R.reshape({dims(0),N*m}),sigma,o*m,(o+s)*m);
+      //reshape({dims(0),N,m});
       return R;
     }
 
     SnMultiPart& apply_inplace(const SnElement& sigma, const int o, const int s=1){
       int m=getm();
-      reshape({dims(0),N*m});
-      irrep->apply_left(*this,sigma,o*m,(o+s)*m);
-      reshape({dims(0),N,m});
+      //reshape({dims(0),N*m});
+      //irrep->apply_left(*this,sigma,o*m,(o+s)*m);
+      irrep->apply_left(reshape({dims(0),N*m}),sigma,o*m,(o+s)*m);
+      //reshape({dims(0),N,m});
       return *this;
     }
 
     SnMultiPart apply(const ContiguousCycle& cyc, const int o, const int s=1){
       SnMultiPart R(*this);
       int m=getm();
-      reshape({dims(0),N*m});
-      irrep->apply_left(R,cyc,o*m,(o+s)*m);
-      reshape({dims(0),N,m});
+      //reshape({dims(0),N*m});
+      //irrep->apply_left(R,cyc,o*m,(o+s)*m);
+      irrep->apply_left(R.reshape({dims(0),N*m}),cyc,o*m,(o+s)*m);
+      //reshape({dims(0),N,m});
       return R;
     }
 
     SnMultiPart& apply_inplace(const ContiguousCycle& cyc, const int o, const int s=1){
       int m=getm();
-      reshape({dims(0),N*m});
-      irrep->apply_left(*this,cyc,o*m,(o+s)*m);
-      reshape({dims(0),N,m});
+      //reshape({dims(0),N*m});
+      //irrep->apply_left(*this,cyc,o*m,(o+s)*m);
+      irrep->apply_left(reshape({dims(0),N*m}),cyc,o*m,(o+s)*m);
+      //reshape({dims(0),N,m});
       return *this;
     }
     
     SnMultiPart& apply_inplace_inv(const ContiguousCycle& cyc, const int o, const int s=1){
       int m=getm();
-      reshape({dims(0),N*m});
-      irrep->apply_left_inv(*this,cyc,o*m,(o+s)*m);
-      reshape({dims(0),N,m});
+      //reshape({dims(0),N*m});
+      //irrep->apply_left_inv(*this,cyc,o*m,(o+s)*m);
+      irrep->apply_left_inv(reshape({dims(0),N*m}),cyc,o*m,(o+s)*m);
+      //reshape({dims(0),N,m});
       return *this;
     }
 
@@ -328,41 +326,3 @@ namespace Snob2{
 }
 
 #endif
-    /*
-    static SnMultiPart zero(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
-      return SnMultiPart(_N,list,n,cnine::fill_zero(),_dev);}
-    
-    static SnMultiPart identity(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
-      return SnMultiPart(_N,list,n,cnine::fill_identity(),_dev);}
-    
-    static SnMultiPart gaussian(const int _N, const initializer_list<int> list, const int n, const int _dev=0){
-      return SnMultiPart(_N,list,n,cnine::fill_gaussian(),_dev);}
-    */
-      
-    /*
-    template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
-    SnMultiPart(const int _N, const initializer_list<int> list, const int _m, const FILLTYPE& fill, const int _dev=0):
-      N(_N),
-      rtensor(cnine::dims(_snbank->get_irrep(list)->d,_m*_N),fill,_dev), 
-      irrep(_snbank->get_irrep(list)){}
-    */
-
-    /*
-    SnMultiPart(const int _N, const SnIrrepObj* _irrep, const float val):
-      N(_N),
-      rtensor(cnine::dims(1,1)), irrep(_irrep){
-      set_value(0,0,val);
-    }
-    */
-    
-    /*
-    SnMultiPart(const SnIrrep& _irrep, const rtensor& x): 
-      rtensor(x), irrep(_irrep.obj){}
-
-    SnMultiPart(const SnIrrep& _irrep, rtensor&& x): 
-      rtensor(std::move(x)), irrep(_irrep.obj){}
-
-    SnMultiPart(const SnIrrepObj* _irrep, rtensor&& x): 
-      rtensor(std::move(x)), irrep(_irrep){}
-    */
-

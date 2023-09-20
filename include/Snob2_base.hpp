@@ -19,6 +19,7 @@
 namespace Snob2{
   //typedef cnine::RtensorObj rtensor;
   typedef cnine::Tensor<float> rtensor;
+  typedef cnine::TensorView<float> rtensorv;
 }
 
 using namespace std; 

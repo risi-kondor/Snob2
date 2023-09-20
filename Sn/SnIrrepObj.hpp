@@ -240,11 +240,10 @@ namespace Snob2{
       computeYORtensors();
       int ndiags=YORndiags->get(tau-1);
 
-      CNINE_UNIMPL();
-      //cnine::ScaleSomeSlicesFn()(T,YORdiagIndices->view2().slice0(tau-1).block(0,ndiags),
-      //YORdiagCoeffs->view2().slice0(tau-1).block(0,ndiags));
-      //cnine::GivensSomeSlicesFn()(T,YORgivensIndices->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2),
-      //YORgivensCoeffs->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2));
+      cnine::ScaleSomeSlicesFn()(T,YORdiagIndices->view2().slice0(tau-1).block(0,ndiags),
+	YORdiagCoeffs->view2().slice0(tau-1).block(0,ndiags));
+      cnine::GivensSomeSlicesFn()(T,YORgivensIndices->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2),
+	YORgivensCoeffs->view3().slice0(tau-1).block(0,0,(d-ndiags)/2,2));
 
       /*
       computeYOR();
@@ -350,7 +349,7 @@ namespace Snob2{
   public: // ---- apply_left to block ------------------------------------------------------------------------
 
 
-    void apply_left(rtensor& A, const SnElement sigma, int beg, int end) const{
+    void apply_left(const rtensorv& A, const SnElement sigma, int beg, int end) const{
       SNOB2_ASSERT(sigma.getn()==n,"Permutation wrong size");
       vector<int> shifts(n);
       for(int i=n; i>0; i--){
@@ -366,17 +365,17 @@ namespace Snob2{
       }
     }
 
-    void apply_left(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end) const{
+    void apply_left(const rtensorv& A, const ContiguousCycle& cyc, const int beg, const int end) const{
       for(int i=cyc.b-1; i>=cyc.a; i--)
 	apply_left(A,i,beg,end);
     }
 
-    void apply_left_inv(rtensor& A, const ContiguousCycle& cyc, const int beg, const int end) const{
+    void apply_left_inv(const rtensorv& A, const ContiguousCycle& cyc, const int beg, const int end) const{
       for(int i=cyc.a; i<cyc.b; i++)
 	apply_left(A,i,beg,end);
     }
 
-    void apply_left(rtensor& A, const int tau, int beg, int end) const{ // GPU
+    void apply_left(const rtensorv& A, const int tau, int beg, int end) const{ // GPU
       SNOB2_ASSERT(A.get_dim(0)==d,"Matrix wrong size");
       //const int J=A.get_dim(1);
       computeYOR();

@@ -22,9 +22,9 @@ snob2_root=".."
 # ------------------------------------------------------------------------------------------------------------
 
 
-cwd = os.getcwd()
+cwd = os.getcwd()+"/"
 
-_cxx_compile_args = ['-std=c++14',
+_cxx_compile_args = ['-std=c++17',
 		     '-Wno-sign-compare',
 		     '-Wno-deprecated-declarations',
 		     '-Wno-unused-variable',
@@ -39,23 +39,22 @@ _cxx_compile_args = ['-std=c++14',
 		     ]
 
 ext_modules=[CppExtension('snob_base', ['bindings/Snob2_bindings.cpp'],
-			  include_dirs=[cnine_root,
-					cnine_root+'/include',
-					cnine_root+'/modules',
-					cnine_root+'/combinatorial',
-					cnine_root+'/containers',
-					cnine_root+'/math',
-					#cnine_root+'/wrappers',
-					cnine_root+'/objects/backendA',
-					cnine_root+'/objects/backendB',
-					cnine_root+'/objects/scalar',
-					cnine_root+'/objects/tensor',
-					cnine_root+'/objects/tensor_views',
-					cnine_root+'/objects/tensor_views/functions',
+			  include_dirs=[cwd+cnine_root,
+					cwd+cnine_root+'/include',
+					cwd+cnine_root+'/modules',
+					cwd+cnine_root+'/combinatorial',
+					cwd+cnine_root+'/containers',
+					cwd+cnine_root+'/math',
+                                        cwd+cnine_root+'/objects/backendA',
+                                        cwd+cnine_root+'/objects/backendB',
+					cwd+cnine_root+'/objects/scalar',
+					cwd+cnine_root+'/objects/tensor',
+					cwd+cnine_root+'/objects/tensor_views',
+                                        cwd+cnine_root+'/objects/tensor_views/functions',
 
-					snob2_root+'/include',
-					snob2_root+'/combinatorial',
-					snob2_root+'/Sn'],
+					cwd+snob2_root+'/include',
+					cwd+snob2_root+'/combinatorial',
+					cwd+snob2_root+'/Sn'],
 			  extra_compile_args = {'cxx': _cxx_compile_args},
 			  depends=['setup.py',
 				   'bindings/Snob2_bindings.cpp',

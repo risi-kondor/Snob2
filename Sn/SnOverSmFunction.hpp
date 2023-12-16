@@ -21,6 +21,7 @@ namespace Snob2{
   public:
 
     //typedef cnine::RtensorObj rtensor;
+    typedef cnine::Tensor<float> rtensor;
 
     const int n;
     const int m;

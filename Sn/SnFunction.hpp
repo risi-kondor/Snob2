@@ -24,6 +24,7 @@ namespace Snob2{
   public:
 
     //typedef cnine::RtensorObj rtensor;
+    typedef cnine::Tensor<float> rtensor;
     typedef cnine::diff_class<SnFunction> diff;
 
     const int n;

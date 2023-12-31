@@ -1,15 +1,13 @@
 
-// This file is part of Snob2, a symmetric group FFT library. 
-// 
+// This file is part of Snob2, a symmetric group FFT library.
+//
 // Copyright (c) 2021, Imre Risi Kondor
 //
 // This Source Code Form is subject to the terms of the Mozilla
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-
-#ifndef _Sn
-#define _Sn
+#pragma once
 
 #include "SnBank.hpp"
 #include "SnElement.hpp"
@@ -24,199 +22,152 @@
 #include "Sn_IrrepHelper.hpp"
 #include "Sn_CharacterHelper.hpp"
 
-namespace Snob2{
+namespace Snob2 {
 
-  class Sn{
-  public:
+class Sn {
+public:
+  const int n;
+  const SnObj *obj;
 
-    const int n;
-    const SnObj* obj;
+  Sn_ElementHelper elements;
+  Sn_CClassHelper cclasses;
+  Sn_IrrepHelper irreps;
+  Sn_CharacterHelper characters;
 
-    Sn_ElementHelper elements;
-    Sn_CClassHelper cclasses;
-    Sn_IrrepHelper irreps;
-    Sn_CharacterHelper characters;
+public:
+  Sn(const SnObj *_obj)
+      : n(_obj->n), obj(_obj), elements(_obj), cclasses(_obj), irreps(_obj),
+        characters(_obj) {}
 
-  public:
+  Sn(const int _n) : Sn(_snbank->get_Sn(_n)) {}
 
-    Sn(const SnObj* _obj): 
-      n(_obj->n),
-      obj(_obj),
-      elements(_obj),
-      cclasses(_obj),
-      irreps(_obj),
-      characters(_obj){}
+  static SnElement dummy_element() { return SnElement::Identity(1); }
+  static SnIrrep dummy_irrep() { return SnIrrep({1}); }
 
-    Sn(const int _n): 
-      Sn(_snbank->get_Sn(_n)){}
+public: // Access
+  int getn() const { return n; }
 
-    static SnElement dummy_element(){return SnElement::Identity(1);}
-    static SnIrrep dummy_irrep(){return SnIrrep({1});}
+  int size() const { return obj->order; }
 
+  int get_order() const { return obj->order; }
 
-  public: // Access
+public
+    : // ---- Elements
+      // -----------------------------------------------------------------------------------
+  SnElement identity() const { return SnElement(n, cnine::fill_identity()); }
 
-    int getn() const{
-      return n;
-    }
+  SnElement transposition(const int i, const int j) const {
+    return SnElement::transposition(n, i, j);
+  }
 
-    int size() const{
-      return obj->order;
-    }
+  SnElement element(const int i) const { return obj->element(i); }
 
-    int get_order() const{
-      return obj->order;
-    }
+  int index(const SnElement &sigma) const { return obj->index(sigma); }
 
+  SnElement random() const { return obj->random(); }
 
-  public: // ---- Elements -----------------------------------------------------------------------------------
+public
+    : // ---- Conjugacy classes
+      // --------------------------------------------------------------------------
+  int ncclasses() const { return obj->ncclasses(); }
 
-   
-    SnElement identity() const{
-      return SnElement(n,cnine::fill_identity());
-    }
+  SnCClass cclass(const int i) const { return obj->cclass(i); }
 
-    SnElement transposition(const int i, const int j) const{
-      return SnElement::transposition(n,i,j);
-    }
+  SnCClass cclass(const IntegerPartition &lambda) const {
+    return obj->cclass(obj->index(lambda));
+  }
 
-    SnElement element(const int i) const{
-      return obj->element(i);
-    }
+  int index(const IntegerPartition &lambda) const { return obj->index(lambda); }
 
-    int index(const SnElement& sigma) const{
-      return obj->index(sigma);
-    }
+  int index(const SnCClass &lambda) const { return obj->index(lambda); }
 
-    SnElement random() const{
-      return obj->random();
-    }
+  int class_size(const SnCClass &cc) const {
+    return class_size(static_cast<const IntegerPartition &>(cc));
+  }
 
-
-  public: // ---- Conjugacy classes --------------------------------------------------------------------------
-
-
-    int ncclasses() const{
-      return obj->ncclasses(); 
-    }
-
-    SnCClass cclass(const int i) const{
-      return obj->cclass(i);
-    }
-
-    SnCClass cclass(const IntegerPartition& lambda) const{
-      return obj->cclass(obj->index(lambda));
-    }
-
-    int index(const IntegerPartition& lambda) const{
-      return obj->index(lambda);
-    }
-
-    int index(const SnCClass& lambda) const{
-      return obj->index(lambda);
-    }
-
-    int class_size(const SnCClass& cc) const{
-      return class_size(static_cast<const IntegerPartition&>(cc));
-    }
-
-    int class_size(const IntegerPartition& lambda) const{
-      if(lambda.k==0) return 0;
-      int prev=lambda.p[0];
-      int count=1;
-      int t=1;
-      for(int i=1; i<lambda.k; i++){
-	if(lambda.p[i]==prev) count++;
-	else{
-	  t*=pow(prev,count)*cnine::factorial(count);
-	  prev=lambda.p[i];
-	  count=1;
-	}
+  int class_size(const IntegerPartition &lambda) const {
+    if (lambda.k == 0)
+      return 0;
+    int prev = lambda.p[0];
+    int count = 1;
+    int t = 1;
+    for (int i = 1; i < lambda.k; i++) {
+      if (lambda.p[i] == prev)
+        count++;
+      else {
+        t *= pow(prev, count) * cnine::factorial(count);
+        prev = lambda.p[i];
+        count = 1;
       }
-      t*=pow(prev,count)*cnine::factorial(count);
-      return cnine::factorial(getn())/t;
     }
+    t *= pow(prev, count) * cnine::factorial(count);
+    return cnine::factorial(getn()) / t;
+  }
 
-    int class_size(const int i) const{
-      return class_size(cclass(i));
-    }
+  int class_size(const int i) const { return class_size(cclass(i)); }
 
+public
+    : // ---- Representations
+      // ----------------------------------------------------------------------------
+  int nirreps() const { return obj->ncclasses(); }
 
-  public: // ---- Representations ----------------------------------------------------------------------------
+  SnIrrep irrep(const IntegerPartition &lambda) const {
+    return SnIrrep(obj->get_irrep(lambda));
+  }
 
+  vector<SnIrrep> all_irreps() const {
+    vector<SnIrrepObj *> objs = obj->get_all_irreps();
+    vector<SnIrrep> R(objs.size());
+    for (int i = 0; i < objs.size(); i++)
+      R[i] = SnIrrep(objs[i]);
+    return R;
+  }
 
-    int nirreps() const{
-      return obj->ncclasses(); 
-    }
+public
+    : // ---- Characters
+      // ---------------------------------------------------------------------------------
+  int nchars() const { return obj->ncclasses(); }
 
-    SnIrrep irrep(const IntegerPartition& lambda) const{
-      return SnIrrep(obj->get_irrep(lambda));
-    }
+  SnClassFunction character(const int i) const {
+    return SnClassFunction(*_sncharbank->get_character({n}));
+  }
 
-    vector<SnIrrep> all_irreps() const{
-      vector<SnIrrepObj*> objs=obj->get_all_irreps();
-      vector<SnIrrep> R(objs.size());
-      for(int i=0; i<objs.size(); i++)
-	R[i]=SnIrrep(objs[i]);
-      return R;
-    }
+  SnClassFunction character(const IntegerPartition &lambda) const {
+    return SnClassFunction(*_sncharbank->get_character(lambda));
+  }
 
-    
+  void make_all_chars() {}
 
-  public: // ---- Characters ---------------------------------------------------------------------------------
+public:
+  string str(const string indent = "") const {
+    return "Sn(" + to_string(n) + ")";
+  }
 
+  friend ostream &operator<<(ostream &stream, const Sn &x) {
+    stream << x.str();
+    return stream;
+  }
+};
 
-    int nchars() const{
-      return obj->ncclasses(); 
-    }
-    
-    SnClassFunction character(const int i) const{
-      return SnClassFunction(*_sncharbank->get_character({n}));
-    }
-
-
-    SnClassFunction character(const IntegerPartition& lambda) const{
-      return SnClassFunction(*_sncharbank->get_character(lambda));
-    }
-
-    void make_all_chars(){}
-
-
-  public:
-
-    string str(const string indent="") const{
-      return "Sn("+to_string(n)+")";
-    }
-
-    friend ostream& operator<<(ostream& stream, const Sn& x){
-      stream<<x.str(); return stream;
-    }
-
-
-  };
-
+} // namespace Snob2
+/*
+SnModule module() const{
+  return obj->get_module();
 }
+*/
 
-#endif 
-    /*
-    SnModule module() const{
-      return obj->get_module();
-    }
-    */
-    
-    //SnModule rep() const{
-    //return obj->get_rep();
-    //}
+// SnModule rep() const{
+// return obj->get_rep();
+// }
 
-    /*
-    SnRepresentation repr() const{
-      obj->make_all_irreps();
-      SnRepresentation R;
-      for(auto p:obj->irreps){
-	//cout<<p->lambda<<endl;
-	R.set(p->lambda,p->d);
-      }
-      return R;
-    }
-    */
-
+/*
+SnRepresentation repr() const{
+  obj->make_all_irreps();
+  SnRepresentation R;
+  for(auto p:obj->irreps){
+    //cout<<p->lambda<<endl;
+    R.set(p->lambda,p->d);
+  }
+  return R;
+}
+*/

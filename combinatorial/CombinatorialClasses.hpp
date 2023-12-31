@@ -1,15 +1,13 @@
 
-// This file is part of Snob2, a symmetric group FFT library. 
-// 
+// This file is part of Snob2, a symmetric group FFT library.
+//
 // Copyright (c) 2021, Imre Risi Kondor
 //
 // This Source Code Form is subject to the terms of the Mozilla
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-
-#ifndef _CombinatorialClasses
-#define _CombinatorialClasses
+#pragma once
 
 #include "Snob2_base.hpp"
 #include "CombinatorialBank.hpp"
@@ -22,23 +20,19 @@
 #include "YoungTableaux.hpp"
 #include "StandardYoungTableaux.hpp"
 
+namespace Snob2 {
 
-namespace Snob2{
-
-  class CombinatorialClasses{
-  public:
-
-    CombinatorialClasses(){
-      if(_combibank){cout<<"Only one CombinatorialClasses object can be defined."<<endl; return;}
-      _combibank=new CombinatorialBank();
+class CombinatorialClasses {
+public:
+  CombinatorialClasses() {
+    if (_combibank) {
+      cout << "Only one CombinatorialClasses object can be defined." << endl;
+      return;
     }
-    
-    ~CombinatorialClasses(){
-      delete _combibank;
-    }
+    _combibank = new CombinatorialBank();
+  }
 
-  };
+  ~CombinatorialClasses() { delete _combibank; }
+};
 
-}
-
-#endif 
+} // namespace Snob2

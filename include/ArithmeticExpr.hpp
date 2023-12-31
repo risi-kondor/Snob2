@@ -1,124 +1,102 @@
 
-// This file is part of Snob2, a symmetric group FFT library. 
-// 
+// This file is part of Snob2, a symmetric group FFT library.
+//
 // Copyright (c) 2021, Imre Risi Kondor
 //
 // This Source Code Form is subject to the terms of the Mozilla
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+#pragma once
 
-#ifndef _ArithmeticExpr
-#define _ArithmeticExpr
+namespace Snob2 {
 
-namespace Snob2{
+template <typename ROBJ, typename XOBJ, typename YOBJ, typename ACT>
+class ArithmeticBinaryExpr {
+public:
+  const XOBJ &x;
+  const YOBJ &y;
 
+  ArithmeticBinaryExpr(const XOBJ &_x, const YOBJ &_y) : x(_x), y(_y) {}
 
-  template<typename ROBJ, typename XOBJ, typename YOBJ, typename ACT>
-  class ArithmeticBinaryExpr{
-  public:
+  operator ROBJ() const { return ACT()(x, y); }
 
-    const XOBJ& x;
-    const YOBJ& y;
+public:
+  ROBJ operator*(float c) const {
+    ROBJ z = ACT()(x, y);
+    ROBJ R(z, cnine::fill::zero);
+    R.add(z, c);
+    return R;
+  }
 
-    ArithmeticBinaryExpr(const XOBJ& _x, const YOBJ& _y): x(_x), y(_y){}
+  ROBJ operator*(double c) const {
+    ROBJ z = ACT()(x, y);
+    ROBJ R(z, cnine::fill::zero);
+    R.add(z, c);
+    return R;
+  }
 
-    operator ROBJ() const{
-      return ACT()(x,y);
-    }
+  ROBJ operator*(complex<float> c) const {
+    ROBJ z = ACT()(x, y);
+    ROBJ R(z, cnine::fill::zero);
+    R.add(z, c);
+    return R;
+  }
 
-  public:
+public:
+  string str() const { return ROBJ(*this).str(); }
 
-    ROBJ operator*(float c) const{
-      ROBJ z=ACT()(x,y);
-      ROBJ R(z,cnine::fill::zero);
-      R.add(z,c);
-      return R;
-    }
+  friend ostream &operator<<(ostream &stream, const ArithmeticBinaryExpr &x) {
+    stream << x.str();
+    return stream;
+  }
+};
 
-    ROBJ operator*(double c) const{
-      ROBJ z=ACT()(x,y);
-      ROBJ R(z,cnine::fill::zero);
-      R.add(z,c);
-      return R;
-    }
+template <typename XOBJ, typename YOBJ, typename ROBJ, typename P1,
+          typename ACT>
+class ArithmeticBinaryExpr1 {
+public:
+  const P1 p1;
 
-    ROBJ operator*(complex<float> c) const{
-      ROBJ z=ACT()(x,y);
-      ROBJ R(z,cnine::fill::zero);
-      R.add(z,c);
-      return R;
-    }
+  const XOBJ &x;
+  const YOBJ &y;
 
+  ArithmeticBinaryExpr1(const XOBJ &_x, const YOBJ &_y) : x(_x), y(_y) {}
 
-  public:
+  ArithmeticBinaryExpr1(const XOBJ &_x, const YOBJ &_y, const P1 &_p1)
+      : x(_x), y(_y), p1(_p1) {}
 
-    string str() const{
-      return ROBJ(*this).str();
-    }
+  operator ROBJ() const { return ACT()(x, y, p1); }
 
-    friend ostream& operator<<(ostream& stream, const ArithmeticBinaryExpr& x){
-      stream<<x.str(); return stream;
-    }
+public:
+  ROBJ operator*(float c) const {
+    ROBJ z = ACT()(x, y, p1);
+    ROBJ R(z, cnine::fill::zero);
+    R.add(z, c);
+    return R;
+  }
 
-  };
+  ROBJ operator*(double c) const {
+    ROBJ z = ACT()(x, y, p1);
+    ROBJ R(z, cnine::fill::zero);
+    R.add(z, c);
+    return R;
+  }
 
+  ROBJ operator*(complex<float> c) const {
+    ROBJ z = ACT()(x, y, p1);
+    ROBJ R(z, cnine::fill::zero);
+    R.add(z, c);
+    return R;
+  }
 
-  template<typename XOBJ, typename YOBJ, typename ROBJ, typename P1, typename ACT>
-  class ArithmeticBinaryExpr1{
-  public:
+public:
+  string str() const { return ROBJ(*this).str(); }
 
-    const P1 p1;
+  friend ostream &operator<<(ostream &stream, const ArithmeticBinaryExpr1 &x) {
+    stream << x.str();
+    return stream;
+  }
+};
 
-    const XOBJ& x;
-    const YOBJ& y;
-
-    ArithmeticBinaryExpr1(const XOBJ& _x, const YOBJ& _y): x(_x), y(_y){}
-
-    ArithmeticBinaryExpr1(const XOBJ& _x, const YOBJ& _y, const P1& _p1): x(_x), y(_y), p1(_p1){}
-
-    operator ROBJ() const{
-      return ACT()(x,y,p1);
-    }
-
-
-  public:
-
-    ROBJ operator*(float c) const{
-      ROBJ z=ACT()(x,y,p1);
-      ROBJ R(z,cnine::fill::zero);
-      R.add(z,c);
-      return R;
-    }
-
-    ROBJ operator*(double c) const{
-      ROBJ z=ACT()(x,y,p1);
-      ROBJ R(z,cnine::fill::zero);
-      R.add(z,c);
-      return R;
-    }
-
-    ROBJ operator*(complex<float> c) const{
-      ROBJ z=ACT()(x,y,p1);
-      ROBJ R(z,cnine::fill::zero);
-      R.add(z,c);
-      return R;
-    }
-
-
-  public:
-
-    string str() const{
-      return ROBJ(*this).str();
-    }
-
-    friend ostream& operator<<(ostream& stream, const ArithmeticBinaryExpr1& x){
-      stream<<x.str(); return stream;
-    }
-
-  };
-
-
-}
-
-#endif 
+} // namespace Snob2

@@ -1,90 +1,77 @@
 
-// This file is part of Snob2, a symmetric group FFT library. 
-// 
+// This file is part of Snob2, a symmetric group FFT library.
+//
 // Copyright (c) 2021, Imre Risi Kondor
 //
 // This Source Code Form is subject to the terms of the Mozilla
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-
-#ifndef _DihedralGroup
-#define _DihedralGroup
+#pragma once
 
 #include "Group.hpp"
 #include "DihedralGroupElement.hpp"
 #include "DihedralGroupIrrep.hpp"
 
+namespace Snob2 {
 
-namespace Snob2{
+class DihedralGroup : public Group {
+public:
+  int n;
 
-  class DihedralGroup: public Group{
-  public:
+  static DihedralGroupElement dummy_element() {
+    return DihedralGroupElement(1, 0);
+  }
+  static DihedralGroupIrrep dummy_irrep() { return DihedralGroupIrrep(1, 0); }
 
-    int n;
+public:
+  DihedralGroup(const int _n) : n(_n) {}
 
-    static DihedralGroupElement dummy_element(){return DihedralGroupElement(1,0);}
-    static DihedralGroupIrrep dummy_irrep(){return DihedralGroupIrrep(1,0);}
+public:
+  int size() const { return 2 * n; }
 
+  DihedralGroupElement identity() const {
+    return DihedralGroupElement(n, 0, 1);
+  }
 
-  public:
+  DihedralGroupElement element(const int i) const {
+    if (i < n)
+      return DihedralGroupElement(n, i, 1);
+    else
+      return DihedralGroupElement(n, i - n, -1);
+  }
 
-    DihedralGroup(const int _n): n(_n){}
+  DihedralGroupElement r(const int i) const {
+    return DihedralGroupElement(n, i, 1);
+  }
 
-  public:
+  DihedralGroupElement s() const { return DihedralGroupElement(n, 1, -1); }
 
-    int size() const{
-      return 2*n;
-    }
+  int index(const DihedralGroupElement &x) const {
+    return x.i + n * (x.s == -1);
+  }
 
-    DihedralGroupElement identity() const{
-      return DihedralGroupElement(n,0,1);
-    }
+public:
+  int n_irreps() const {
+    if (n % 2 == 0)
+      return n / 2 + 3;
+    else
+      return (n - 1) / 2 + 2;
+  }
 
-    DihedralGroupElement element(const int i) const{
-      if(i<n) return DihedralGroupElement(n,i,1);
-      else return DihedralGroupElement(n,i-n,-1);
-    }
+  DihedralGroupIrrep irrep(const int i) const {
+    return DihedralGroupIrrep(n, i);
+  }
 
-    DihedralGroupElement r(const int i) const{
-      return DihedralGroupElement(n,i,1);
-    }
+public: // I/O
+  string str(const string indent = "") const {
+    return "DihedralGroup(" + to_string(n) + ")";
+  }
 
-    DihedralGroupElement s() const{
-      return DihedralGroupElement(n,1,-1);
-    }
+  friend ostream &operator<<(ostream &stream, const DihedralGroup &x) {
+    stream << x.str();
+    return stream;
+  }
+};
 
-    int index(const DihedralGroupElement& x) const{
-      return x.i+n*(x.s==-1);
-    }
-
-
-
-  public:
-
-    int n_irreps() const{
-      if(n%2==0) return n/2+3; 
-      else return (n-1)/2+2;
-    }
-
-    DihedralGroupIrrep irrep(const int i) const{
-      return DihedralGroupIrrep(n,i);
-    }
-
-
-  public: // I/O
-
-    string str(const string indent="") const{
-      return "DihedralGroup("+to_string(n)+")";
-    }
-
-    friend ostream& operator<<(ostream& stream, const DihedralGroup& x){
-      stream<<x.str(); return stream;
-    }
-
-
-  };
-
-}
-
-#endif
+} // namespace Snob2

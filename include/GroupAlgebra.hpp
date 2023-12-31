@@ -1,52 +1,39 @@
 
-// This file is part of Snob2, a symmetric group FFT library. 
-// 
+// This file is part of Snob2, a symmetric group FFT library.
+//
 // Copyright (c) 2021, Imre Risi Kondor
 //
 // This Source Code Form is subject to the terms of the Mozilla
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-
-#ifndef _GroupAlgebra
-#define _GroupAlgebra
+#pragma once
 
 #include "Group.hpp"
 
-namespace Snob2{
+namespace Snob2 {
 
-  template<typename GROUP, typename TENSOR>
-  class GroupAlgebra{
-  public:
+template <typename GROUP, typename TENSOR> class GroupAlgebra {
+public:
+  typedef cnine::Gdims Gdims;
 
-    typedef cnine::Gdims Gdims;
+  const GROUP &G;
+  Gdims dims;
 
-    const GROUP& G; 
-    Gdims dims;
+public:
+  GroupAlgebra(const GROUP &_G, const Gdims &_dims)
+      : // TENSOR(_dims.prepend(_G.size(),dummy)),
+        G(_G), dims(_dims) {}
 
-  public:
+public: // I/O
+  string str(const string indent = "") const {
+    return "Algebra<" + G.str() + ">[" + dims.str() + "]";
+  }
 
-    
-    GroupAlgebra(const GROUP& _G, const Gdims& _dims):
-      //TENSOR(_dims.prepend(_G.size(),dummy)),
-      G(_G),
-      dims(_dims){
-    }
+  friend ostream &operator<<(ostream &stream, const GroupAlgebra &x) {
+    stream << x.str();
+    return stream;
+  }
+};
 
-
-  public: // I/O
-
-    string str(const string indent="") const{
-      return "Algebra<"+G.str()+">["+dims.str()+"]";
-    }
-
-    friend ostream& operator<<(ostream& stream, const GroupAlgebra& x){
-      stream<<x.str(); return stream;
-    }
-
-
-  };
-
-}
-
-#endif
+} // namespace Snob2

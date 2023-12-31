@@ -1,12 +1,11 @@
 
-// This file is part of Snob2, a symmetric group FFT library. 
-// 
+// This file is part of Snob2, a symmetric group FFT library.
+//
 // Copyright (c) 2021, Imre Risi Kondor
 //
 // This Source Code Form is subject to the terms of the Mozilla
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
 
 #include "GElib_base.cpp"
 #include "GElibSession.hpp"
@@ -18,25 +17,24 @@
 using namespace cnine;
 using namespace GElib;
 
-//typedef CscalarObj cscalar;
+// typedef CscalarObj cscalar;
 typedef RtensorObj rtensor;
 typedef CtensorObj ctensor;
 
-
-int main(int argc, char** argv){
+int main(int argc, char **argv) {
   GElibSession session;
-  cout<<endl;
+  cout << endl;
 
   DihedralGroup G(5);
-  DihedralGroupElement g=G.element(2);
-  FunctionOnGroup<DihedralGroup,ctensor> f(G,cnine::fill::gaussian);
-  cout<<f<<endl;
+  DihedralGroupElement g = G.element(2);
+  FunctionOnGroup<DihedralGroup, ctensor> f(G, cnine::fill::gaussian);
+  cout << f << endl;
 
-  auto F=Fourier(f);
-  cout<<F<<endl;
+  auto F = Fourier(f);
+  cout << F << endl;
 
-  auto fd=iFourier(F);
-  cout<<fd<<endl;
+  auto fd = iFourier(F);
+  cout << fd << endl;
 
   /*
   auto F2=F.left(g);
@@ -47,6 +45,4 @@ int main(int argc, char** argv){
   auto f3d=iFourier(F3);
   cout<<f3d<<endl;
   */
-
 }
-

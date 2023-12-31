@@ -22,10 +22,9 @@ public:
   SnCClass(const IntegerPartition &_mu) : IntegerPartition(_mu) {}
 
 public: // named constructors
-  // static SnCClass Identity(const int n){
-  // return Permutation(n,cnine::fill_identity());
-  // }
-
+        // static SnCClass Identity(const int n){
+        // return Permutation(n,cnine::fill_identity());
+        // }
 public: // operations
   string str(const string indent = "") const {
     return indent + "SnCClass" + IntegerPartition::str();

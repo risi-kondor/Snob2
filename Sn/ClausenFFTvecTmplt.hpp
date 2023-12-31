@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _ClausenFFTvecTmplt
-#define _ClausenFFTvecTmplt
+#pragma once
 
 #include "ClausenFFTpartTmplt.hpp"
 #include "SnFunction.hpp"
@@ -168,8 +167,6 @@ public
 };
 
 } // namespace Snob2
-
-#endif
 /*
  SnMultiVec* mpack(const SnVec& v){
    SnMultiVec* R=new SnMultiVec();

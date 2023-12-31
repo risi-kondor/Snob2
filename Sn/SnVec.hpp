@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnVec
-#define _SnVec
+#pragma once
 
 #include "SnPart.hpp"
 #include "SnType.hpp"
@@ -349,8 +348,6 @@ inline SnVec operator*(const SnElement &sigma, const SnVec &v) {
 }
 
 } // namespace Snob2
-
-#endif
 /*
 template<typename FILLTYPE>
 SnVec(const SnModule& M, const FILLTYPE& fill, const int _dev=0){

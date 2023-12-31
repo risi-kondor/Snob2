@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnIrrepObj
-#define _SnIrrepObj
+#pragma once
 
 #include <cnine/containers>
 //#include "associative_container.hpp"
@@ -535,8 +534,6 @@ public
 };
 
 } // namespace Snob2
-
-#endif
 /*
 void apply_transposition(Rtensor2_view& T, const int tau) const{ // Applied to
 the first index SNOB2_ASSERT(T.n0==d,"View wrong size"); const int B=T.n1;

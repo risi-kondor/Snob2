@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnCGbank
-#define _SnCGbank
+#pragma once
 
 #include "SnWeights.hpp"
 #include "SnCharacter.hpp"
@@ -403,8 +402,6 @@ public
 };
 
 } // namespace Snob2
-
-#endif
 /*
 SnWeights* getW(const IntegerPartition& lambda1, const IntegerPartition&
 lambda2){ pair<IntegerPartition,IntegerPartition> lambdas(lambda1,lambda2); auto

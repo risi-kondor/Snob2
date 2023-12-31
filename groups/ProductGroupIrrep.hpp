@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _ProductGroupIrrep
-#define _ProductGroupIrrep
+#pragma once
 
 #include "CtensorObj.hpp"
 
@@ -64,5 +63,3 @@ ProductGroupIrrep<R1, R2> operator*(const R1 &r1, const R2 &r2) {
 }
 
 } // namespace Snob2
-
-#endif

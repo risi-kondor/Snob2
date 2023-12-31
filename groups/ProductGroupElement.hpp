@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _ProductGroupElement
-#define _ProductGroupElement
+#pragma once
 
 #include "Snob2_base.hpp"
 #include "Group.hpp"
@@ -59,5 +58,3 @@ inline ProductGroupElement<E1, E2> gpair(const E1 &e1, const E2 &e2) {
 }
 
 } // namespace Snob2
-
-#endif

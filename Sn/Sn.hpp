@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _Sn
-#define _Sn
+#pragma once
 
 #include "SnBank.hpp"
 #include "SnElement.hpp"
@@ -151,8 +150,6 @@ public:
 };
 
 } // namespace Snob2
-
-#endif
 /*
 SnModule module() const{
   return obj->get_module();

@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _CombinatorialBankLevel
-#define _CombinatorialBankLevel
+#pragma once
 
 #include <unordered_map>
 
@@ -142,7 +141,5 @@ private:
 };
 
 } // namespace Snob2
-
-#endif
 
 // vector<IntegerPartition> subs=partitions[i]->get_parents();

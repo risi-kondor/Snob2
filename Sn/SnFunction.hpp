@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnFunction
-#define _SnFunction
+#pragma once
 
 #include "SnObj.hpp"
 #include "RtensorObj.hpp"
@@ -194,5 +193,3 @@ public
 };
 
 } // namespace Snob2
-
-#endif

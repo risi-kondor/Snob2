@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _Snob2_base
-#define _Snob2_base
+#pragma once
 
 #include "Cnine_base.hpp"
 
@@ -104,5 +103,3 @@ tuple<TYPE, TYPE, TYPE> order(const TYPE &x0, const TYPE &x1, const TYPE &x2) {
 }
 
 } // namespace Snob2
-
-#endif

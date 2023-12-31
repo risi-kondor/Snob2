@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnVecB
-#define _SnVecB
+#pragma once
 
 #include "SnPartB.hpp"
 #include "SnType.hpp"
@@ -292,8 +291,6 @@ inline int sameb(const SnVecB &x, const SnPartB &y, const SnPartB &z) {
 }
 
 } // namespace Snob2
-
-#endif
 
 /*
 SnVecB static cat(const vector<SnVecB>& v){

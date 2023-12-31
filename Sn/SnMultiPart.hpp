@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnMultiPart
-#define _SnMultiPart
+#pragma once
 
 #include "SnIrrep.hpp"
 #include "SnPart.hpp"
@@ -315,8 +314,6 @@ public
 // }
 
 } // namespace Snob2
-
-#endif
 /*
 static SnMultiPart zero(const int _N, const initializer_list<int> list, const
 int n, const int _dev=0){ return

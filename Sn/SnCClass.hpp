@@ -7,8 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef _SnCClass
-#define _SnCClass
+#pragma once
 
 #include "IntegerPartition.hpp"
 
@@ -37,5 +36,3 @@ public: // operations
 };
 
 } // namespace Snob2
-
-#endif

@@ -54,6 +54,9 @@ namespace Snob2{
       //else _map[lambda]=_map[lambda]+m;
     }
 
+    map<IntegerPartition, int>& get_map(){
+      return *this;
+    }
 
   public:
 

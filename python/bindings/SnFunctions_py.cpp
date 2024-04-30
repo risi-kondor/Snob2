@@ -34,7 +34,7 @@ pybind11::class_<SnFunction>(m,"SnFunction",
 
   .def("add_to_grad",[](SnFunction& r, const SnFunction& x){r.diff_class<SnFunction>::add_to_grad(x);})
   .def("set_grad",[](SnFunction& r, SnFunction& x){r.diff_class<SnFunction>::set_grad(&x);})
-  .def("get_grad",&SnFunction::diff_class<SnFunction>::get_grad)
+  .def("get_grad",[](SnFunction& x){x.diff_class<SnFunction>::get_grad();})
 
   .def("__len__",&SnFunction::size,"Return the size of the function, i.e., the number of group elements.")
   .def("device",&SnFunction::get_device)

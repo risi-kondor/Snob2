@@ -16,13 +16,13 @@
 
 namespace Snob2{
 
-  typedef cnine::Tensor<float> rtensor;
+  //typedef cnine::Tensor<float> rtensor;
 
 
   class SnPart: public rtensor{
   public:
 
-    typedef cnine::Tensor<float> rtensor;
+    //typedef cnine::Tensor<float> rtensor;
 
     SnIrrepObj const* irrep;
 

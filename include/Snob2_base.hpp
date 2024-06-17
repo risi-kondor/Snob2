@@ -12,14 +12,18 @@
 #define _Snob2_base
 
 #include "Cnine_base.hpp"
-//#include "RtensorObj.hpp"
 #include <cnine/tensors>
 #include <cnine/containers>
 
+#include "Ltensor.hpp"
+
+
 namespace Snob2{
-  //typedef cnine::RtensorObj rtensor;
-  typedef cnine::Tensor<float> rtensor;
+
+  typedef cnine::Ltensor<float> rtensor;
   typedef cnine::TensorView<float> rtensorv;
+  typedef cnine::Tensor<int> itensor;
+
 }
 
 using namespace std; 

@@ -18,9 +18,8 @@
 using namespace cnine;
 using namespace Snob2;
 
-//typedef CscalarObj cscalar;
-typedef RtensorObj rtensor;
-typedef CtensorObj ctensor;
+//typedef RtensorObj rtensor;
+//typedef CtensorObj ctensor;
 
 
 int main(int argc, char** argv){

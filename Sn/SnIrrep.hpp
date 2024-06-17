@@ -17,8 +17,6 @@
 
 namespace Snob2{
 
-  //typedef cnine::RtensorObj rtensor;
-
 
   class SnIrrep{
   public:

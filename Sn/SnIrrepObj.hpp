@@ -13,12 +13,9 @@
 
 #include <cnine/tensors>
 #include <cnine/containers>
-//#include "associative_container.hpp"
 
 #include "IntegerPartition.hpp"
 #include "ContiguousCycle.hpp"
-//#include "RtensorObj.hpp"
-//#include "IntTensor.hpp"
 #include "YoungTableau.hpp"
 #include "SnElement.hpp"
 
@@ -26,10 +23,6 @@
 #include "GivensSomeSlicesFn.hpp"
 
 namespace Snob2{
-
-  //typedef cnine::RtensorObj rtensor;
-  //typedef cnine::IntTensor itensor;
-  typedef cnine::Tensor<int> itensor;
 
 
   class SnIrrepObj{

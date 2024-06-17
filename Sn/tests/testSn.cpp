@@ -17,10 +17,6 @@
 using namespace cnine;
 using namespace Snob2;
 
-//typedef CscalarObj cscalar;
-//typedef CtensorObj ctensor;
-
-
 
 int main(int argc, char** argv){
 

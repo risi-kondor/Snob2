@@ -22,7 +22,6 @@
 
 namespace Snob2{
 
-  //typedef cnine::RtensorObj rtensor;
 
   class SnCGfactors: 
     public cnine::associative_container<IntegerPartition,rtensor>{

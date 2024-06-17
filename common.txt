@@ -5,7 +5,7 @@ CNINE_INCLUDES+=-I$(CNINE_ROOT)/include
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/modules 
 #CNINE_INCLUDES+=-I$(CNINE_ROOT)/algorithms
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/combinatorial
-#CNINE_INCLUDES+=-I$(CNINE_ROOT)/containers
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/containers
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/math
 #CNINE_INCLUDES+=-I$(CNINE_ROOT)/wrappers
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/utility 
@@ -18,6 +18,9 @@ CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_views
 CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_views/functions 
 #CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array 
 #CNINE_INCLUDES+=-I$(CNINE_ROOT)/objects/tensor_array/cell_ops 
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/tensors  
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/tensor_views 
+CNINE_INCLUDES+=-I$(CNINE_ROOT)/tensor_views/functions  
 
 CNINE_CUDADIR=$(CNINE_ROOT)/cuda
 

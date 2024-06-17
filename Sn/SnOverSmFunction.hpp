@@ -12,7 +12,6 @@
 #define _SnOverSmFunction
 
 #include "SnOverSm.hpp"
-//#include "RtensorObj.hpp"
 
 
 namespace Snob2{
@@ -20,8 +19,7 @@ namespace Snob2{
   class SnOverSmFunction: public rtensor{ 
   public:
 
-    //typedef cnine::RtensorObj rtensor;
-    typedef cnine::Tensor<float> rtensor;
+    //typedef cnine::Tensor<float> rtensor;
 
     const int n;
     const int m;
@@ -103,7 +101,6 @@ namespace Snob2{
 
 
 }
-    //:public FunctionOnGroup<SnOverSmObj,cnine::RtensorObj>{
 
 
 #endif 

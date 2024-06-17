@@ -11,19 +11,16 @@
 #ifndef _SnClassFunction
 #define _SnClassFunction
 
-//#include "RtensorObj.hpp"
 #include "SnObj.hpp"
 #include "Snob2_base.hpp"
 
 
 namespace Snob2{
 
-  typedef cnine::Tensor<float> rtensor;
 
   class SnClassFunction: public rtensor{
   public:
 
-    //typedef cnine::RtensorObj rtensor;
 
     using rtensor::rtensor;
     using rtensor::get_value;
@@ -34,7 +31,7 @@ namespace Snob2{
 
     template<typename FILLTYPE, typename = typename std::enable_if<std::is_base_of<cnine::fill_pattern, FILLTYPE>::value, FILLTYPE>::type>
     SnClassFunction(int _n, const FILLTYPE& fill, const int _dev=0):
-      cnine::Tensor<float>({_snbank->get_Sn(_n)->ncclasses()},fill,_dev), n(_n){}
+      rtensor({_snbank->get_Sn(_n)->ncclasses()},fill,_dev), n(_n){}
 
     SnClassFunction(const int _n):
       SnClassFunction(_n,cnine::fill_zero()){}

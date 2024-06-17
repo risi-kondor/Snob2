@@ -12,7 +12,6 @@
 #include "Snob2_session.hpp"
 #include "CombinatorialClasses.hpp"
 #include "SnClasses.hpp"
-//#include "RtensorObj_funs.hpp"
 
 using namespace cnine;
 using namespace Snob2;

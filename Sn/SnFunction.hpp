@@ -12,8 +12,6 @@
 #define _SnFunction
 
 #include "SnObj.hpp"
-//#include "RtensorObj.hpp"
-//#include "FunctionOnGroup.hpp"
 #include "diff_class.hpp"
 
 
@@ -23,8 +21,7 @@ namespace Snob2{
 		    public cnine::diff_class<SnFunction>{
   public:
 
-    //typedef cnine::RtensorObj rtensor;
-    typedef cnine::Tensor<float> rtensor;
+    //typedef cnine::Tensor<float> rtensor;
     typedef cnine::diff_class<SnFunction> diff;
 
     const int n;

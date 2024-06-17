@@ -23,7 +23,6 @@ namespace Snob2{
   class SnMultiPart: private rtensor{
   public:
 
-    typedef cnine::Tensor<float> rtensor;
 
     int N;
     SnIrrepObj const* irrep;

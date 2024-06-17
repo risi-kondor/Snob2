@@ -21,8 +21,6 @@ namespace Snob2{
   class SnCharacter: public SnClassFunction{
   public:
 
-    //typedef cnine::RtensorObj rtensor;
-
     using SnClassFunction::get_value;
 
 

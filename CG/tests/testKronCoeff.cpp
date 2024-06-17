@@ -27,15 +27,6 @@ using namespace cnine;
 using namespace Snob2;
 
 
-//int KroneckerCoefficient(const IntegerPartition& _mu1, const IntegerPartition& _mu2, const IntegerPartition& _mu3){
-//return _sncgbank->coeff(_mu1,_mu2,_mu3);
-//}
-
-//typedef CscalarObj cscalar;
-//typedef CtensorObj ctensor;
-
-
-
 int main(int argc, char** argv){
   Snob2_session session;
 

@@ -20,6 +20,7 @@
     .def_static("identity",static_cast<SnElement (*)(int)>(&SnElement::Identity),"Return the identity element of Sn.")
 
     .def("getn",&SnElement::getn,"Return n.")
+    .def("__len__",&SnElement::getn,"Return n.")
     .def("__getitem__",static_cast<int(SnElement::*)(const int) const>(&SnElement::operator()))
     .def("__setitem__",&SnElement::set_value)
 
@@ -73,6 +74,10 @@
 	}))
 
     .def("get_dim",&SnIrrep::dim,"Return the dimension of the irrep")
+    .def("getn",&SnIrrep::getn,"Return the number of elements of each permutation")
+    .def("get_lambda",[](const SnIrrep& obj){
+      return obj.lambda;
+    })
     .def("__lt__",&SnIrrep::operator<)
 
     .def("__getitem__",static_cast<rtensor(SnIrrep::*)(const SnElement&)const>(&SnIrrep::operator()))
@@ -163,6 +168,8 @@ pybind11::class_<SnType>(m,"SnType",
   .def("__setitem__",&SnType::set,"")
   .def("__setitem__",[](SnType& obj, const vector<int>& v,const int x){
       obj.set(IntegerPartition(v),x);},"")
+  .def("__getitem__",static_cast<int(SnType::*)(const IntegerPartition&) const>(&SnType::operator()),"")
+  .def("get_map",static_cast<map<IntegerPartition,int> &(SnType::*)()>(&SnType::get_map),"")
   
   .def("__str__",&SnType::str,py::arg("indent")="","Print the SnType to string.");
 
